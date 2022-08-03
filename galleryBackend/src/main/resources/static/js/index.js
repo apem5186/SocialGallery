@@ -14,6 +14,33 @@ const toggle = () => {
 signIn.addEventListener("click", toggle);
 signUp.addEventListener("click", toggle);
 
+const signUpClick = document.getElementById("btnClick")
+signUpClick.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log("signUp button clicked..");
+
+  var data = {
+    "nickname": $(".text").val(),
+    "email": $(".email").val(),
+    "password": $(".password").val(),
+  }
+
+  $.ajax({
+    url: '/signUp',
+    processData: false,
+    contentType: 'application/json',
+    data: JSON.stringify(data),
+    type: 'POST',
+    dataType: 'json',
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    }
+  });
+});
+
 
 
 

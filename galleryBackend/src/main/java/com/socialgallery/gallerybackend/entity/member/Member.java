@@ -15,20 +15,23 @@ import javax.persistence.*;
 public class Member extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+    @GeneratedValue(strategy = GenerationType.AUTO)         // GenerationType : JPA에서 기본키의 생성 전략 타입
+    private Long id;                                        // GenerationType.AUTO : GenerationType을 자동으로 설정
+    
+    @Column(nullable = false)
     private String nickname;
-
+    
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private String picture;
+    private String picture; // 구글이나 네이버 로그인 api 기능 사용시 필요
 
     private String phone;
 
-    private boolean fromSocial;
+    private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
 
     public Member update(String nickname, String picture) {
         this.nickname = nickname;

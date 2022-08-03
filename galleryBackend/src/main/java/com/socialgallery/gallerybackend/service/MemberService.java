@@ -5,10 +5,13 @@ import com.socialgallery.gallerybackend.entity.member.Member;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public interface MemberService {
 
     Long signUp(MemberDTO memberDTO);
+
+    MemberDTO findMember(String email);
 
     default MemberDTO entitiesToDTO(Member member) {
         MemberDTO memberDTO = MemberDTO.builder()

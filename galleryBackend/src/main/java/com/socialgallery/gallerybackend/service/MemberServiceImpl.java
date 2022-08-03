@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @Log4j2
@@ -24,9 +25,33 @@ public class MemberServiceImpl implements MemberService {
 
         Member member = (Member) entityMap.get("user");
 
+        // 이메일이나 네임을 안적었을 때 예외 발생
+        if (member.getEmail() == null || member.getNickname() == null) {
+            throw new RuntimeException("Invalid argument");
+        }
+        final String email = member.getEmail();
+        final String nickname = member.getNickname();
+        
+        // 이메일이 이미 존재할 시 예외 발생
+        if (memberRepository.existsByEmail(email)) {
+            log.warn("Email already exists {}", email);
+            throw new RuntimeException("Email already exists");
+        }
+        // 네임이 이미 존재할 시 예외 발생
+        if (memberRepository.existsByNickname(nickname)) {
+            log.warn("Nickname already exists {}", nickname);
+            throw new RuntimeException("Nickname already exists");
+        }
         memberRepository.save(member);
         log.info("member = " + member);
         return member.getId();
+    }
+
+    @Override
+    public MemberDTO findMember(String email) {
+        Optional<Member> result = memberRepository.findByEmail(email);
+
+        return result.isPresent() ? entitiesToDTO(result.get()) : null;
     }
 
 }
