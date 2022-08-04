@@ -26,11 +26,11 @@ public class MemberServiceImpl implements MemberService {
         Member member = (Member) entityMap.get("user");
 
         // 이메일이나 네임을 안적었을 때 예외 발생
-        if (member.getEmail() == null || member.getNickname() == null) {
+        if (member.getEmail() == null || member.getUsername() == null) {
             throw new RuntimeException("Invalid argument");
         }
         final String email = member.getEmail();
-        final String nickname = member.getNickname();
+        final String username = member.getUsername();
         
         // 이메일이 이미 존재할 시 예외 발생
         if (memberRepository.existsByEmail(email)) {
@@ -38,9 +38,9 @@ public class MemberServiceImpl implements MemberService {
             throw new RuntimeException("Email already exists");
         }
         // 네임이 이미 존재할 시 예외 발생
-        if (memberRepository.existsByNickname(nickname)) {
-            log.warn("Nickname already exists {}", nickname);
-            throw new RuntimeException("Nickname already exists");
+        if (memberRepository.existsByUsername(username)) {
+            log.warn("Username already exists {}", username);
+            throw new RuntimeException("Username already exists");
         }
         memberRepository.save(member);
         log.info("member = " + member);

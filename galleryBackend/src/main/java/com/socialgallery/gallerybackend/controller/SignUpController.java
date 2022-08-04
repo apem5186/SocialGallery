@@ -22,7 +22,7 @@ public class SignUpController {
 
         System.out.println("signUp");
         System.out.println(dto.getEmail());
-        System.out.println(dto.getNickname());
+        System.out.println(dto.getUsername());
         System.out.println(dto.getPassword());
         memberService.signUp(dto);
         MemberDTO result = memberService.findMember(dto.getEmail());

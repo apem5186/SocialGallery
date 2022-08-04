@@ -18,7 +18,7 @@ public class MemberServiceTest {
     @Test
     public void signUpTest() {
         MemberDTO memberDTO = MemberDTO.builder()
-                .nickname("user1")
+                .username("user1")
                 .email("user01@social.com")
                 .password("1111")
                 .build();

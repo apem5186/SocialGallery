@@ -4,6 +4,10 @@ import com.socialgallery.gallerybackend.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Builder
@@ -15,13 +19,14 @@ import javax.persistence.*;
 public class Member extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)         // GenerationType : JPA에서 기본키의 생성 전략 타입
+    @GeneratedValue(strategy = GenerationType.IDENTITY)         // GenerationType : JPA에서 기본키의 생성 전략 타입
     private Long id;                                        // GenerationType.AUTO : GenerationType을 자동으로 설정
+
+    @Size(min = 4, max = 255, message = "Minimum username length: 4")
+    @Column(nullable = false, unique = true)
+    private String username;
     
-    @Column(nullable = false)
-    private String nickname;
-    
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -33,8 +38,14 @@ public class Member extends BaseEntity {
 
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
 
-    public Member update(String nickname, String picture) {
-        this.nickname = nickname;
+    @ElementCollection(fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<MemberRole> roleSet = new HashSet<>();
+
+    public void addMemberRole(MemberRole memberRole) { roleSet.add(memberRole); }
+
+    public Member update(String username, String picture) {
+        this.username = username;
         this.picture = picture;
 
         return this;

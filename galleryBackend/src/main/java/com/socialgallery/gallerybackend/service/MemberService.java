@@ -2,10 +2,12 @@ package com.socialgallery.gallerybackend.service;
 
 import com.socialgallery.gallerybackend.dto.MemberDTO;
 import com.socialgallery.gallerybackend.entity.member.Member;
+import com.socialgallery.gallerybackend.entity.member.MemberRole;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface MemberService {
 
@@ -15,7 +17,7 @@ public interface MemberService {
 
     default MemberDTO entitiesToDTO(Member member) {
         MemberDTO memberDTO = MemberDTO.builder()
-                .nickname(member.getNickname())
+                .username(member.getUsername())
                 .email(member.getEmail())
                 .password(member.getPassword())
                 .picture(member.getPicture())
@@ -31,13 +33,13 @@ public interface MemberService {
         Map<String, Object> entityMap = new HashMap<>();
 
         Member member = Member.builder()
-                .nickname(memberDTO.getNickname())
+                .username(memberDTO.getUsername())
                 .email(memberDTO.getEmail())
                 .password(memberDTO.getPassword())
                 .picture(memberDTO.getPicture())
                 .phone(memberDTO.getPhone())
                 .build();
-
+        member.addMemberRole(MemberRole.ROLE_MEMBER);
         entityMap.put("user", member);
 
         return entityMap;
