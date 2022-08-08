@@ -55,13 +55,13 @@ function Login() {
 
   // 회원가입 fetch
   const signUp = () => {
-    fetch('', {
+    fetch('/user/signUp', {
       method: 'POST',
       body: JSON.stringify({
         email: rgEmail,
         password: rgPw,
-        name : rgName,
-        tel : rgTel
+        username : rgName,
+        phone : rgTel
       }),
     })
       .then(res => res.json())

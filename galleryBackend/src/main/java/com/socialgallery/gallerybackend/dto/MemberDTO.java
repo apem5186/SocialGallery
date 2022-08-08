@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 @Data
@@ -12,11 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberDTO {
-
+    @NotBlank(message = "Id를 입력해주세요.")
     private String username;
 
+    @NotBlank(message = "Email을 입력해주세요.")
     private String email;
 
+    @NotBlank(message = "Password를 입력해주세요.")
     private String password;
 
     private String picture;

@@ -50,10 +50,10 @@ public class MemberTest {
     @Test
     public void testRead() {
 
-        Optional<Member> result = memberRepository.findByEmail("user95@social.com");
+       Member result = memberRepository.findByEmail("user95@social.com");
         System.out.println(result);
 
-        Member member = result.get();
+        Member member = result;
 
         System.out.println(member);
     }

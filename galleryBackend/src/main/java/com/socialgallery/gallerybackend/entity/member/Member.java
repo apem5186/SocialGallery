@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +38,10 @@ public class Member extends BaseEntity {
     private String phone;
 
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
+
+    private String authToken; // jwt 인증 토큰
+
+    private String refreshToken; // authToken 갱신을 위한 토큰
 
     @ElementCollection(fetch = FetchType.LAZY)
     @Builder.Default

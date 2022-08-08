@@ -4,16 +4,17 @@ import com.socialgallery.gallerybackend.dto.MemberDTO;
 import com.socialgallery.gallerybackend.entity.member.Member;
 import com.socialgallery.gallerybackend.entity.member.MemberRole;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public interface MemberService {
 
     Long signUp(MemberDTO memberDTO);
 
+    Member signIn(String email, String password);
+
     MemberDTO findMember(String email);
+
+    public String getServerInfo();
 
     default MemberDTO entitiesToDTO(Member member) {
         MemberDTO memberDTO = MemberDTO.builder()
@@ -29,8 +30,7 @@ public interface MemberService {
         return memberDTO;
     }
 
-    default Map<String, Object> dtoToEntity(MemberDTO memberDTO) {
-        Map<String, Object> entityMap = new HashMap<>();
+    default Member dtoToEntity(MemberDTO memberDTO) {
 
         Member member = Member.builder()
                 .username(memberDTO.getUsername())
@@ -40,8 +40,8 @@ public interface MemberService {
                 .phone(memberDTO.getPhone())
                 .build();
         member.addMemberRole(MemberRole.ROLE_MEMBER);
-        entityMap.put("user", member);
 
-        return entityMap;
+        return member;
     }
+
 }
