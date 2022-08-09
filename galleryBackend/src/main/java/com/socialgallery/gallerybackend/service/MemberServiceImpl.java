@@ -2,6 +2,7 @@ package com.socialgallery.gallerybackend.service;
 
 import com.socialgallery.gallerybackend.dto.MemberDTO;
 import com.socialgallery.gallerybackend.entity.member.Member;
+import com.socialgallery.gallerybackend.entity.member.MemberRole;
 import com.socialgallery.gallerybackend.repository.MemberRepository;
 import com.socialgallery.gallerybackend.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -24,12 +25,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member signIn(String email, String password) {
+        log.info("signIn 실행");
 
         if (memberRepository.findByEmail(email) != null) {
             Member member = memberRepository.findByEmail(email);
             if (member.getPassword().equals(password)) {
                 String authToken = jwtUtil.createAuthToken(email);
-                entitiesToDTO(member);
                 log.info("authToken : " + authToken);
                 Member.builder().authToken(email);
                 log.info("Member : " + member);
@@ -45,9 +46,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     @Override
-    public Long signUp(MemberDTO memberDTO) {
+    public Member signUp(MemberDTO memberDTO) {
 
         Member member = dtoToEntity(memberDTO);
+        member.addMemberRole(MemberRole.ROLE_MEMBER);
 
         // 이메일이나 네임을 안적었을 때 예외 발생
         if (member.getEmail() == null || member.getUsername() == null) {
@@ -66,9 +68,9 @@ public class MemberServiceImpl implements MemberService {
             log.warn("Username already exists {}", username);
             throw new RuntimeException("Username already exists");
         }
-        memberRepository.save(member);
-        log.info("member = " + member);
-        return member.getId();
+        log.info(member.getRoleSet());
+        log.info(member);
+        return memberRepository.save(member);
     }
 
     @Override

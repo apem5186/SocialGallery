@@ -6,7 +6,9 @@ import com.socialgallery.gallerybackend.security.JwtUtil;
 import com.socialgallery.gallerybackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,16 +29,22 @@ public class MemberController {
     private final JwtUtil jwtUtil;
 
     @GetMapping("/index")
-    public void index() {
+    public String index() {
+        return "Hello!";
     }
 
-    @PostMapping("user/signIn")
+    @ResponseBody
+    @PostMapping(value = "user/signIn", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, Object>> signIn(@RequestBody Member member,
         HttpServletRequest req, HttpServletResponse res) {
+
+        System.out.println("Sign In");
+        System.out.println(member);
 
         Map<String, Object> resultMap = new HashMap<>();
 
         Member loginMember = memberService.signIn(member.getEmail(), member.getPassword());
+            log.info("loginMember authToken : " + loginMember.getAuthToken());
             // 생성된 토큰 정보를 클라이언트에게 전달한다.
             resultMap.put("jwt-auth-token", loginMember.getAuthToken());
 
@@ -47,16 +55,17 @@ public class MemberController {
             return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("user/signUp")
     @ResponseBody
-    public MemberDTO signUp(@RequestBody MemberDTO dto) {
+    @PostMapping(value = "user/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> signUp(@RequestBody MemberDTO dto) {
 
         System.out.println("Sign Up");
         System.out.println(dto);
-        memberService.signUp(dto);
-        MemberDTO result = memberService.findMember(dto.getEmail());
+        Member registeredMember = memberService.signUp(dto);
 
-        return result;
+        MemberDTO memberDTO = memberService.entitiesToDTO(registeredMember);
+
+        return ResponseEntity.ok().body(memberDTO);
     }
 
     @GetMapping("/info")

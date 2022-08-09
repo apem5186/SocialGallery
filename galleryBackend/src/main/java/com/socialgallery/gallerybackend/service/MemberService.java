@@ -3,12 +3,14 @@ package com.socialgallery.gallerybackend.service;
 import com.socialgallery.gallerybackend.dto.MemberDTO;
 import com.socialgallery.gallerybackend.entity.member.Member;
 import com.socialgallery.gallerybackend.entity.member.MemberRole;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public interface MemberService {
 
-    Long signUp(MemberDTO memberDTO);
+    Member signUp(MemberDTO memberDTO);
 
     Member signIn(String email, String password);
 

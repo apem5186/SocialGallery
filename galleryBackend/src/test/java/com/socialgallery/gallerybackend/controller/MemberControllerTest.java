@@ -95,11 +95,11 @@ public class MemberControllerTest {
     @DisplayName("정상적인 토큰을 전달했을 때 원하는 정보를 잘 얻을 수 있는지 확인한다.")
     public void testGetInfoSuccess() throws Exception {
         // given
-        String token = util.createAuthToken("member@quietjun.xyz");
+        String token = util.createAuthToken("user01@social.com");
 
         // when
         MockHttpServletRequestBuilder reqBuilder
-                = get("/api/info").header("jwt-auth-token", token);
+                = get("/info").header("jwt-auth-token", token);
         ResultActions action = mock.perform(reqBuilder);
 
         // then
@@ -115,7 +115,7 @@ public class MemberControllerTest {
 
         // when
         MockHttpServletRequestBuilder reqBuilder
-                = get("/api/info").header("jwt-auth-token", token);
+                = get("/info").header("jwt-auth-token", token);
 
         // then
         assertThrows(Exception.class, () -> {
