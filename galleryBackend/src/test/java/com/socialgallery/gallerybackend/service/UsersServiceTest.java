@@ -1,33 +1,33 @@
 package com.socialgallery.gallerybackend.service;
 
-import com.socialgallery.gallerybackend.dto.MemberDTO;
-import com.socialgallery.gallerybackend.repository.MemberRepository;
+import com.socialgallery.gallerybackend.dto.UserDTO;
+import com.socialgallery.gallerybackend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class MemberServiceTest {
+public class UsersServiceTest {
 
     @Autowired
-    private MemberRepository memberRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    private MemberService memberService;
+    private UserService userService;
 
     @Test
     public void signUpTest() {
-        MemberDTO memberDTO = MemberDTO.builder()
+        UserDTO userDTO = UserDTO.builder()
                 .username("user1")
                 .email("user01@social.com")
                 .password("1111")
                 .build();
 
-        System.out.println(memberService.signUp(memberDTO));
+        System.out.println(userService.signUp(userDTO));
     }
 
     @Test
-    public void getMemberTest() {
-        System.out.println(memberService.findMember("user01@social.com"));
+    public void getUserTest() {
+        System.out.println(userService.findUser("user01@social.com"));
     }
 }

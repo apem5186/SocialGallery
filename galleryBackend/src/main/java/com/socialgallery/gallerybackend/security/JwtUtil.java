@@ -1,17 +1,11 @@
 package com.socialgallery.gallerybackend.security;
 
-import com.socialgallery.gallerybackend.entity.member.Member;
-import com.socialgallery.gallerybackend.entity.member.MemberRole;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /*
  * @Reference https://goodteacher.tistory.com/98?category=857269

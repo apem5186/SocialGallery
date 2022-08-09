@@ -1,17 +1,13 @@
 package com.socialgallery.gallerybackend.security;
 
-import com.socialgallery.gallerybackend.entity.member.MemberRole;
-import com.socialgallery.gallerybackend.exception.CustomException;
 import io.jsonwebtoken.*;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -19,61 +15,60 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
+
+/*
+ * @Reference https://webfirewood.tistory.com/115
+ */
+@RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     // THIS IS NOT A SECURE PRACTICE
-    @Value("${security.jwt.token.secret-key:secret-key}")
-    private String SECRET_KEY;
+    private String SECRET_KEY = "socialgallerysecret";
 
-    @Value("${security.jwt.token.expire-length:3600000}")
-    private long validityInMilliseconds = 3600000; // 1h
+    private long tokenValidTime = 30 * 60 * 1000L;  // 30분
 
-    @Autowired
-    private MyMemberDetails myMemberDetails;
+    private final UserDetailsService userDetailsService;
 
+    private final CustomUserDetailService customUserDetailService;
+
+    //객체 초기화, SECRET_KEY를 Base64로 인코딩
     @PostConstruct
     protected void init() {
         SECRET_KEY = Base64.getEncoder().encodeToString(SECRET_KEY.getBytes());
     }
 
-    public String createToken(String username, List<MemberRole> memberRoles) {
+    public String createToken(String email, List<String> roles) {
 
-        Claims claims = Jwts.claims().setSubject(username);
-        claims.put("auth", memberRoles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority()))
-                .filter(Objects::nonNull).collect(Collectors.toList()));
+        Claims claims = Jwts.claims().setSubject(email); // JWT payload에 저장되는 정보단위
+        claims.put("roles", roles); // 정보는 key / value 쌍으로 저장된다.
 
         Date now = new Date();
-        Date validity = new Date(now.getTime() + validityInMilliseconds);
-
         return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .setClaims(claims)  // 정보 저장
+                .setIssuedAt(now)   // 토큰 발행 시간 정보
+                .setExpiration(new Date(now.getTime() + tokenValidTime))    // set Expire Time
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY) // 사용할 암호화 알고리즘과 signature에 들어갈 secret 값 세팅
                 .compact();
     }
 
+    // JWT 토큰에서 인증 정보 조회
     public Authentication getAuthentication(String token) {
-        UserDetails userDetails = myMemberDetails.loadUserByUsername(getUsername(token));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
+    // 토큰에서 회원 정보 추출
     public String getUsername(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
     }
 
-    public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
+    // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
+    public String resolveToken(HttpServletRequest request) {
+        return request.getHeader("X-AUTH-TOKEN");
     }
 
     // 토큰 검증

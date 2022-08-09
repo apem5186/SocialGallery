@@ -1,6 +1,7 @@
 package com.socialgallery.gallerybackend.config;
 
 import com.socialgallery.gallerybackend.security.JwtTokenProvider;
+import com.socialgallery.gallerybackend.security.filter.JwtAuthenticationFilter;
 import com.socialgallery.gallerybackend.security.filter.JwtTokenFilter;
 import com.socialgallery.gallerybackend.security.handler.JwtAccessDeniedHandler;
 import com.socialgallery.gallerybackend.security.handler.JwtAuthenticationEntryPoint;
@@ -17,6 +18,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -26,16 +30,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     // 인증되지 않은 사용자 접근에 대한 handler
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+    // 암호화에 필요한 PasswordEncoder 를 Bean 등록합니다.
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    // authenticationManager를 Bean 등록합니다.
     @Bean
-    public AuthenticationManager authenticationManager(
-            AuthenticationConfiguration authenticationConfiguration
-    ) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Override
@@ -53,28 +58,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //                .httpBasic();
         http.cors()
                 .and()
-                .csrf()
-                .disable()
-                .httpBasic()
-                .disable()
+                .csrf().disable()   // csrf 보안 토큰 disable 처리
+                .httpBasic().disable()  // 기본 설정 해제
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 해제
                 .and()
-                .authorizeRequests()
-                .antMatchers("/", "/user/**").permitAll()
+                .authorizeRequests() // 요청에 대한 사용권한 체크
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/**").permitAll()
                 .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/**").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/**").permitAll()
                 .mvcMatchers(HttpMethod.DELETE, "/**").permitAll()
                 .mvcMatchers(HttpMethod.PUT, "/**").permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class);
+                // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
     }
 
 
     // Security 무시하기
     public void configure(WebSecurity web)throws Exception{
-        web.ignoring().antMatchers("/h2-console/**");
+        web.ignoring().antMatchers("/h2-console/**", "/favicon.ico");
     }
 
 }

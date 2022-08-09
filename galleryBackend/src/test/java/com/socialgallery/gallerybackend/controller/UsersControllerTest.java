@@ -1,12 +1,12 @@
 package com.socialgallery.gallerybackend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialgallery.gallerybackend.dto.MemberDTO;
-import com.socialgallery.gallerybackend.entity.member.Member;
-import com.socialgallery.gallerybackend.entity.member.MemberRole;
-import com.socialgallery.gallerybackend.repository.MemberRepository;
+import com.socialgallery.gallerybackend.dto.UserDTO;
+import com.socialgallery.gallerybackend.entity.user.Users;
+import com.socialgallery.gallerybackend.entity.user.UserRole;
+import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.security.JwtUtil;
-import com.socialgallery.gallerybackend.service.MemberService;
+import com.socialgallery.gallerybackend.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 
-import javax.transaction.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,19 +32,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Slf4j
-public class MemberControllerTest {
+public class UsersControllerTest {
 
     @Autowired
     MockMvc mock;
 
     @Autowired
-    MemberService memberService;
+    UserService userService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired
-    MemberRepository memberRepository;
+    UserRepository userRepository;
 
     @Autowired
     JwtUtil util;
@@ -53,18 +52,16 @@ public class MemberControllerTest {
     @Test
     @DisplayName("SignUp 테스트")
     public void testSignUp() throws Exception {
-        Member member = Member.builder()
+        Users users = Users.builder()
                 .username("user01")
                 .email("user01@social.com")
                 .password(passwordEncoder.encode("1111"))
                 .fromSocial(false)
                 .build();
-        member.addMemberRole(MemberRole.ROLE_USER);
 
+        UserDTO userDTO = userService.entitiesToDTO(users);
 
-        MemberDTO memberDTO = memberService.entitiesToDTO(member);
-
-        memberService.signUp(memberDTO);
+        userService.signUp(userDTO);
 
 
 
