@@ -1,12 +1,8 @@
 package com.socialgallery.gallerybackend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.socialgallery.gallerybackend.dto.UserDTO;
-import com.socialgallery.gallerybackend.entity.user.Users;
-import com.socialgallery.gallerybackend.entity.user.UserRole;
 import com.socialgallery.gallerybackend.repository.UserRepository;
-import com.socialgallery.gallerybackend.security.JwtUtil;
-import com.socialgallery.gallerybackend.service.UserService;
+import com.socialgallery.gallerybackend.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,7 +34,7 @@ public class UsersControllerTest {
     MockMvc mock;
 
     @Autowired
-    UserService userService;
+    UsersService usersService;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -49,23 +45,23 @@ public class UsersControllerTest {
     @Autowired
     JwtUtil util;
 
-    @Test
-    @DisplayName("SignUp 테스트")
-    public void testSignUp() throws Exception {
-        Users users = Users.builder()
-                .username("user01")
-                .email("user01@social.com")
-                .password(passwordEncoder.encode("1111"))
-                .fromSocial(false)
-                .build();
-
-        UserDTO userDTO = userService.entitiesToDTO(users);
-
-        userService.signUp(userDTO);
-
-
-
-    }
+//    @Test
+//    @DisplayName("SignUp 테스트")
+//    public void testSignUp() throws Exception {
+//        Users users = Users.builder()
+//                .username("user01")
+//                .email("user01@social.com")
+//                .password(passwordEncoder.encode("1111"))
+//                .fromSocial(false)
+//                .build();
+//
+//        UserDTO userDTO = usersService.(users);
+//
+//        usersService.signUp(userDTO);
+//
+//
+//
+//    }
 
     @Test
     @DisplayName("정보를 전달해서 로그인 후 토큰을 잘 얻을 수 있는지 확인한다.")

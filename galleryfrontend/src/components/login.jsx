@@ -45,10 +45,9 @@ function Login() {
   };
   // 로그인 fetch
   const signIn = () => {
-    fetch(baseUrl+"/api/signIn", {
+    fetch(baseUrl+"/v1/login", {
       method: "POST",
       headers: {
-        "jwt-auth-token": sessionStorage.getItem("jwt-auth-token"),
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
@@ -72,12 +71,11 @@ function Login() {
 
   // 회원가입 fetch
   const signUp = () => {
-    fetch(baseUrl+"/api/signUp", {
+    fetch(baseUrl+"/v1/signUp", {
       method: "POST",
       mode: "cors",
       headers: {
         "Content-Type": "application/json",
-        "X-AUTH-TOKEN": token
       },
       body: JSON.stringify({
         email: rgEmail,

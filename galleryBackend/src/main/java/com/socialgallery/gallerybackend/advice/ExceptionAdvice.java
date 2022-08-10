@@ -1,0 +1,99 @@
+package com.socialgallery.gallerybackend.advice;
+
+import com.socialgallery.gallerybackend.advice.exception.AuthenticationEntryPointCException;
+import com.socialgallery.gallerybackend.advice.exception.EmailLoginFailedCException;
+import com.socialgallery.gallerybackend.advice.exception.EmailSignUpFailedCException;
+import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
+import com.socialgallery.gallerybackend.model.response.CommonResult;
+import com.socialgallery.gallerybackend.service.ResponseService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.servlet.http.HttpServletRequest;
+
+/*
+ * @Reference https://ws-pace.tistory.com/71?category=964036
+ */
+
+@Slf4j
+@RequiredArgsConstructor
+@RestControllerAdvice
+public class ExceptionAdvice {
+
+    private final ResponseService responseService;
+    private final MessageSource messageSource;
+
+    /***
+     * -9999
+     * default Exception
+     */
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)   // Http Response Code를 500으로 설정한다.
+    protected CommonResult defaultException(HttpServletRequest request, Exception e) {
+        log.info(String.valueOf(e));
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("unKnown.code")), getMessage("unKnown.msg")
+        ); // 실패 시 응답 데이터 반환
+    }
+
+    /***
+     * -1000
+     * 유저를 찾지 못했을 때 발생하는 예외
+     */
+    @ExceptionHandler(UserNotFoundCException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult userNotFoundException(HttpServletRequest request, UserNotFoundCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
+    }
+
+    /***
+     * -1001
+     * 유저 이메일 로그인 실패 시 발생시키는 예외
+     */
+    @ExceptionHandler(EmailLoginFailedCException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    protected CommonResult emailLoginFailedException(HttpServletRequest request, EmailLoginFailedCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("emailLoginFailed.code")), getMessage("emailLoginFailed.msg")
+        );
+    }
+
+    /***
+     * -1002
+     * 회원 가입 시 이미 로그인 된 이메일인 경우 발생 시키는 예외
+     */
+    @ExceptionHandler(EmailSignUpFailedCException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    protected CommonResult emailSignupFailedException(HttpServletRequest request, EmailSignUpFailedCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("emailSignupFailed.code")), getMessage("emailSignupFailed.msg")
+        );
+    }
+
+    /**
+     * -1003
+     * 전달한 Jwt 이 정상적이지 않은 경우 발생 시키는 예외
+     */
+    @ExceptionHandler(AuthenticationEntryPointCException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    protected CommonResult authenticationEntrypointException(HttpServletRequest request, AuthenticationEntryPointCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("authenticationEntrypoint.code")), getMessage("authenticationEntrypoint.msg")
+        );
+    }
+
+    private String getMessage(String code) {
+        return getMessage(code, null);
+    }
+
+    private String getMessage(String code, Object[] args) {
+        return messageSource.getMessage(code, args, LocaleContextHolder.getLocale());
+    }
+}

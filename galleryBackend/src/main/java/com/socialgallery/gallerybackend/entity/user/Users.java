@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.entity.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.socialgallery.gallerybackend.entity.BaseEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,13 +26,14 @@ public class Users extends BaseEntity implements UserDetails {
     private Long id;                                        // GenerationType.AUTO : GenerationType을 자동으로 설정
 
     @Size(min = 4, max = 255, message = "Minimum username length: 4")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String username;
     
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)  // read 불가능 Json 결과로 출력 x
+    @Column(nullable = false, length = 100)
     private String password;
 
     private String picture; // 구글이나 네이버 로그인 api 기능 사용시 필요
@@ -44,15 +46,28 @@ public class Users extends BaseEntity implements UserDetails {
 
     private String refreshToken; // authToken 갱신을 위한 토큰
 
+    /*
+     * User 객체의 권한이 담긴 컬렉션 객체를 User 조회시 EAGER로 즉시로딩하지 않는다면,
+     * Porxy객체가 담겨서 반환되므로 제대로 "ROLE_USER"를 확인할 수 없다.
+     */
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public String getUsername() {
         return email;
     }
 
+    @Override
+    public String getPassword() {return this.password;}
+
+    public void updateUsername(String username) {
+        this.username = username;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.roles.stream()
@@ -60,21 +75,25 @@ public class Users extends BaseEntity implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isAccountNonExpired() {
         return false;
     }
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isAccountNonLocked() {
         return false;
     }
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
     }
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public boolean isEnabled() {
         return false;
