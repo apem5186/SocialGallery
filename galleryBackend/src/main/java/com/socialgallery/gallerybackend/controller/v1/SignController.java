@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
  * @Reference https://ws-pace.tistory.com/87?category=964036
  * 로그인, 회원가입, 재발급 요청은 모두 RequestBody로 이뤄진다.
  * 검증 로직은 SignService에서 한다.
+ * 응답 부분에서 refresh Token은 안보이게 조정 필요
  */
 
 @Api(tags = "1. SignUp / Login")
@@ -32,12 +33,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1")
 public class SignController {
 
-    private final UsersService usersService;
-    private final JwtProvider jwtProvider;
-
     private final SignService signService;
     private final ResponseService responseService;
-    private final PasswordEncoder passwordEncoder;
 
     @ApiOperation(value = "로그인", notes = "이메일로 로그인을 합니다.")
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -46,7 +43,8 @@ public class SignController {
             @RequestBody UserLoginRequestDTO userLoginRequestDTO) {
 
         TokenDTO tokenDTO = signService.login(userLoginRequestDTO);
-        log.info("LOGIN 요청, 토큰 발행 : " + tokenDTO.getAccessToken());
+        log.info("LOGIN 요청, Access 토큰 발행 : " + tokenDTO.getAccessToken());
+        log.info("LOGIN 요청, Refresh 토큰 발행 : " + tokenDTO.getAccessToken());
         return responseService.getSingleResult(tokenDTO);
     }
 
