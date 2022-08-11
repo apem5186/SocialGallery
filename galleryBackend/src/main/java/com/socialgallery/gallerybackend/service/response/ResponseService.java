@@ -1,4 +1,4 @@
-package com.socialgallery.gallerybackend.service;
+package com.socialgallery.gallerybackend.service.response;
 
 import com.socialgallery.gallerybackend.model.response.CommonResult;
 import com.socialgallery.gallerybackend.model.response.ListResult;

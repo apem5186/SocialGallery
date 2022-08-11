@@ -1,11 +1,8 @@
 package com.socialgallery.gallerybackend.advice;
 
-import com.socialgallery.gallerybackend.advice.exception.AuthenticationEntryPointCException;
-import com.socialgallery.gallerybackend.advice.exception.EmailLoginFailedCException;
-import com.socialgallery.gallerybackend.advice.exception.EmailSignUpFailedCException;
-import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
+import com.socialgallery.gallerybackend.advice.exception.*;
 import com.socialgallery.gallerybackend.model.response.CommonResult;
-import com.socialgallery.gallerybackend.service.ResponseService;
+import com.socialgallery.gallerybackend.service.response.ResponseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -86,6 +83,42 @@ public class ExceptionAdvice {
     protected CommonResult authenticationEntrypointException(HttpServletRequest request, AuthenticationEntryPointCException e) {
         return responseService.getFailResult(
                 Integer.parseInt(getMessage("authenticationEntrypoint.code")), getMessage("authenticationEntrypoint.msg")
+        );
+    }
+
+    /**
+     * -1004
+     * 권한이 없는 리소스를 요청한 경우 발생 시키는 예외
+     */
+    @ExceptionHandler(AccessDeniedCException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    protected CommonResult accessDeniedException(HttpServletRequest request, AccessDeniedCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("accessDenied.code")), getMessage("accessDenied.msg")
+        );
+    }
+
+    /**
+     * -1005
+     * refresh token 에러시 발생 시키는 에러
+     */
+    @ExceptionHandler(RefreshTokenCException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    protected CommonResult refreshTokenException(HttpServletRequest request, RefreshTokenCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("refreshTokenInValid.code")), getMessage("refreshTokenInValid.msg")
+        );
+    }
+
+    /**
+     * -1006
+     * 액세스 토큰 만료시 발생하는 에러
+     */
+    @ExceptionHandler(ExpiredAccessTokenCException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    protected CommonResult expiredAccessTokenException(HttpServletRequest request, ExpiredAccessTokenCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("expiredAccessToken.code")), getMessage("expiredAccessToken.msg")
         );
     }
 

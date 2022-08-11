@@ -1,4 +1,4 @@
-package com.socialgallery.gallerybackend.service;
+package com.socialgallery.gallerybackend.service.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

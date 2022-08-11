@@ -5,12 +5,11 @@ import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.model.response.CommonResult;
 import com.socialgallery.gallerybackend.model.response.ListResult;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
-import com.socialgallery.gallerybackend.service.ResponseService;
-import com.socialgallery.gallerybackend.service.UsersService;
+import com.socialgallery.gallerybackend.service.response.ResponseService;
+import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

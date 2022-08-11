@@ -1,4 +1,4 @@
-package com.socialgallery.gallerybackend.service;
+package com.socialgallery.gallerybackend.service.user;
 
 import com.socialgallery.gallerybackend.advice.exception.EmailLoginFailedCException;
 import com.socialgallery.gallerybackend.advice.exception.EmailSignUpFailedCException;

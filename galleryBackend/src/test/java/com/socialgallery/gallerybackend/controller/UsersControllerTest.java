@@ -2,7 +2,7 @@ package com.socialgallery.gallerybackend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialgallery.gallerybackend.repository.UserRepository;
-import com.socialgallery.gallerybackend.service.UsersService;
+import com.socialgallery.gallerybackend.service.user.UsersService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

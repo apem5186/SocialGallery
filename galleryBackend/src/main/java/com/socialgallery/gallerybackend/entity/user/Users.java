@@ -42,9 +42,8 @@ public class Users extends BaseEntity implements UserDetails {
 
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
 
-    private String authToken; // jwt 인증 토큰
-
-    private String refreshToken; // authToken 갱신을 위한 토큰
+    @Column(length = 100)
+    private String provider;
 
     /*
      * User 객체의 권한이 담긴 컬렉션 객체를 User 조회시 EAGER로 즉시로딩하지 않는다면,
@@ -57,7 +56,7 @@ public class Users extends BaseEntity implements UserDetails {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override

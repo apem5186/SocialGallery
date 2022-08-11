@@ -1,9 +1,12 @@
 package com.socialgallery.gallerybackend.config;
 
+import com.socialgallery.gallerybackend.config.security.CustomAccessDeniedHandler;
+import com.socialgallery.gallerybackend.config.security.CustomAuthenticationEntryPoint;
 import com.socialgallery.gallerybackend.config.security.JwtAuthenticationFilter;
 import com.socialgallery.gallerybackend.config.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,11 +16,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/*
+ * @Reference https://ws-pace.tistory.com/87?category=964036
+ * Spring Security를 위한 설정, Jwt를 위한 설정, Cors설정 등이 이루어진다.
+ */
+
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtProvider jwtProvider;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     // authenticationManager를 Bean 등록합니다.
     @Bean
@@ -37,6 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 해제
                 .and()
                 .authorizeRequests() // 요청에 대한 사용권한 체크 antMatchers를 작성하기 위해 먼저 써야함
+
+                .antMatchers("/h2-console/**").permitAll()
                 /****
                  * anyRequest.hasRole("USER")와 anyRequest.authenticated() 는 동일한 효과를 낸다.
                  * 로그인, 회원가입 기능 누구나 이용 가능
@@ -47,6 +60,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         "/swagger-ui.html",
                         "/webjars/**" ,
                         /*Probably not needed*/ "/swagger.json").permitAll()
+                .antMatchers(HttpMethod.GET, "/exception/**").permitAll()
+
                 .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/**").permitAll()
                 .mvcMatchers(HttpMethod.POST, "/**").permitAll()
@@ -56,6 +71,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  * 그 외는 인증된 회원만 가능
                  */
                 .anyRequest().hasRole("USER")
+
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(customAuthenticationEntryPoint)
+                .accessDeniedHandler(customAccessDeniedHandler)
+
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider),
                         UsernamePasswordAuthenticationFilter.class);
@@ -71,7 +92,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 "/swagger-resources/**",
                 "/configuration/security",
                 "/swagger-ui.html",
-                "/webjars/**");
+                "/webjars/**",
+                "/h2-console/**");
     }
 
 
