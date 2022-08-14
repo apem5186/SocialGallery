@@ -17,6 +17,5 @@ function Toggle(){
         signUp.addEventListener("click", toggle);
     }
 }
-
 Toggle()
 export default Toggle;

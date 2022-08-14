@@ -12,25 +12,7 @@
   }
   
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap");
-  
-  *,
-  *::after,
-  *::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-  }
-  
-  html {
-    box-sizing: border-box;
-  }
-  
-  body {
-    font-family: "Poppins", sans-serif;
-    height: 100vh;
-    overflow: hidden;
-    font-weight: 400;
-  }
+
   
   
   /* Container */

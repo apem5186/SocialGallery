@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Toggle from "../js/toggle";
+import Toggle from "./toggle";
 
 function Login() {
 	// 로그인 Form
@@ -37,11 +37,9 @@ function Login() {
     setRgTel(e.currentTarget.value)
   }
 
-  const onRgSubmit = (event) => {
-    event.preventDefault()
-  }
   // 로그인 fetch
-  const signIn = () => {
+  const signIn = (e) => {
+    e.preventDefault()
     fetch('', { 
       method: 'POST',
       body: JSON.stringify({
@@ -54,8 +52,9 @@ function Login() {
   };
 
   // 회원가입 fetch
-  const signUp = () => {
-    fetch('', {
+  const signUp = (e) => {
+    e.preventDefault()
+    fetch('/user/signUp', {
       method: 'POST',
       body: JSON.stringify({
         email: rgEmail,
@@ -127,7 +126,6 @@ function Login() {
 
               <button
                 type="submit"
-                onSubmit={onRgSubmit}
                 onClick={signUp}
                 >Sign up</button>
               <p>
