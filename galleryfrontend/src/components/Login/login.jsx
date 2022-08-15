@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Toggle from "./toggle";
+import  {Link} from 'react-router-dom'
+
 
 function Login() {
 	// 로그인 Form
@@ -71,7 +73,6 @@ function Login() {
 	return ( 
 		<>
     <div className="container" id="container" onLoad={Toggle}>
-			{/* Background Img */}
 			<img src="/assets/Login/bg1.jpg"></img>
 
 	    {/* 회원가입 */}
@@ -190,22 +191,6 @@ function Login() {
           </div>
         </div>
       </div>
-
-{/*	  여백 Text 
-      <div className="row content-row">
-        <div className="col align-items flex-col">
-          <div className="text sign-in">
-            <h2></h2>
-            <p></p>
-          </div>
-        </div>
-        <div className="col align-items fl ex-col">
-          <div className="text sign-up">
-            <h2></h2>
-          </div>
-        </div>
-      </div>
-*/}
     </div>
 		</>
 	)
@@ -213,7 +198,10 @@ function Login() {
 
 function Icons(){
 	return(
-		<>              
+		<>
+    <div className="align-center home-bg">
+    <i className='bx bxs-home' ></i>
+    </div>   
 		<div className="align-center facebook-bg">
 			<i className="bx bxl-facebook"></i>
 		</div>

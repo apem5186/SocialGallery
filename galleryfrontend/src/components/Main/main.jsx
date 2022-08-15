@@ -1,6 +1,7 @@
 import sideToggle from './sideToggle';
 import { useState } from 'react';
 import footerData from '../../Data/footerData';
+import  {Link} from 'react-router-dom'
 import postCommentInFeed from './comment';
 
 function Main(){
@@ -15,11 +16,6 @@ return (
       <div className="header__buttons">
         <p>Social Gallery</p>
       </div>
-      {/* SearchBox */}
-      {/* <div className="header__search">
-        <input type="text" placeholder="Search" />
-        <i className='bx bx-search-alt-2'></i>
-      </div> */}
 
       <div className="header__buttons header__buttons--desktop">
         <a href="#">
@@ -33,7 +29,7 @@ return (
         </a>
         <button className="profile-button">
           <div className="profile-button img">
-            <img src="/assets/main/user.png" alt="User Picture" />
+            <Link to = "/login"><img src="/assets/main/user.png" alt="User Picture" /></Link>
           </div>
         </button>
       </div>
@@ -72,11 +68,11 @@ return (
     </div>
   </section>
   {/* Footer */}
-  <div className="side-menu__footer">
-    <div className="side-menu__footer_links">
-      <ul className="side-menu__footer_list">
+  <div className="side-menu__footer" >
+    <div className="side-menu__footer_links" >
+      <ul className="side-menu__footer_list" >
         {
-        foot.map((a,i)=> <Footer foot={foot} i={i}></Footer> )
+        foot.map((a,i)=> <Footer key={a.id} foot={foot} i={i}></Footer> )
         }
       </ul>
     </div>
@@ -103,6 +99,13 @@ return (
 
     <div className="menu-bar">
       <div className="menu">
+        <li className="search-box">
+          <i className="bx bx-search icon"></i>
+          <input type="text" placeholder="Search..." />
+        </li>
+
+
+
         <ul className="menu-links">
           <li className="nav-link">
             <a href="#">
@@ -138,6 +141,12 @@ return (
             <a href="#">
               <i className='bx bx-calendar-event icon'></i>
               <span className="text nav-text">Event</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i className="bx bx-log-out icon"></i>
+              <span className="text nav-text">Logout</span>
             </a>
           </li>
         </ul>
@@ -227,7 +236,7 @@ return (
 function Footer(props){
 return (
 <>
-  <li className="side-menu__footer_item">
+  <li className="side-menu__footer_item"  >
     <a className="side-menu__footer_link" href="#">{props.foot[props.i].text}</a>
   </li>
 </>
