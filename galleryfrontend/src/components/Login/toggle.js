@@ -1,3 +1,4 @@
+
 function Toggle(){
     window.onload=function(){
         const container = document.getElementById("container");
@@ -17,6 +18,5 @@ function Toggle(){
         signUp.addEventListener("click", toggle);
     }
 }
-
 Toggle()
 export default Toggle;

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="Backend AccessToken, RefreshToken 구현 완료" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/galleryBackend">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="testJwt" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebMvcConfig.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application-jwt.yml" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="HttpClientSelectedEnvironments">
+    <file url="file://$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" />
+    <file url="file://$USER_HOME$/AppData/Local/Temp/whats-new.http.http" environment="test" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="true" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="true" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaInspector" value="false" />
+        <entry key="com.haulmont.jpb.jpaPalette" value="false" />
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2Cqa9sVMiatM8uXZk1As3dhC76r" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project/SocialGallery&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;a8c7d9d08c5cce12ef9f1b44f835f853&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Project\SocialGallery\galleryBackend\src\main\resources\templates\main" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.GalleryBackendApplication">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.GalleryBackendApplication" />
+      <module name="galleryBackend.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberControllerTest.testGetInfoFail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="galleryBackend.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialgallery.gallerybackend.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialgallery.gallerybackend.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.controller.MemberControllerTest" />
+      <option name="METHOD_NAME" value="testGetInfoFail" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberControllerTest.testGetInfoSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="galleryBackend.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialgallery.gallerybackend.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialgallery.gallerybackend.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.controller.MemberControllerTest" />
+      <option name="METHOD_NAME" value="testGetInfoSuccess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberControllerTest.testLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="galleryBackend.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialgallery.gallerybackend.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialgallery.gallerybackend.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.controller.MemberControllerTest" />
+      <option name="METHOD_NAME" value="testLogin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberControllerTest.testSignUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="galleryBackend.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialgallery.gallerybackend.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialgallery.gallerybackend.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.controller.MemberControllerTest" />
+      <option name="METHOD_NAME" value="testSignUp" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MemberTest.testRead" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="galleryBackend.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialgallery.gallerybackend.security.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialgallery.gallerybackend.security" />
+      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.security.MemberTest" />
+      <option name="METHOD_NAME" value="testRead" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GalleryBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="galleryBackend.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialgallery.gallerybackend.GalleryBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.MemberControllerTest.testGetInfoFail" />
+      <item itemvalue="JUnit.MemberControllerTest.testGetInfoSuccess" />
+      <item itemvalue="JUnit.MemberControllerTest.testLogin" />
+      <item itemvalue="JUnit.MemberControllerTest.testSignUp" />
+      <item itemvalue="JUnit.MemberTest.testRead" />
+      <item itemvalue="Spring Boot.GalleryBackendApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MemberTest.testRead" />
+        <item itemvalue="JUnit.MemberControllerTest.testSignUp" />
+        <item itemvalue="JUnit.MemberControllerTest.testLogin" />
+        <item itemvalue="JUnit.MemberControllerTest.testGetInfoSuccess" />
+        <item itemvalue="JUnit.MemberControllerTest.testGetInfoFail" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="" />
+      <created>1659532423769</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1659532423769</updated>
+      <workItem from="1659532426736" duration="17282000" />
+      <workItem from="1659944548552" duration="24277000" />
+      <workItem from="1660025710582" duration="35991000" />
+      <workItem from="1660108952718" duration="28231000" />
+      <workItem from="1660137490928" duration="17916000" />
+      <workItem from="1660206139879" duration="19579000" />
+      <workItem from="1660540895009" duration="4122000" />
+    </task>
+    <task id="LOCAL-00001" summary="SignUp Test...">
+      <created>1659550407350</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1659550407350</updated>
+    </task>
+    <task id="LOCAL-00002" summary="SignUp Test...">
+      <created>1659965525563</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1659965525563</updated>
+    </task>
+    <task id="LOCAL-00003" summary="SignIn Test..(코드 수정 예정)">
+      <created>1660049092038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660049092038</updated>
+    </task>
+    <task id="LOCAL-00004" summary="SignIn Test..(코드 수정 예정)">
+      <created>1660065011383</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1660065011383</updated>
+    </task>
+    <task id="LOCAL-00005" summary="jwt Token test(코드 수정 예정)">
+      <created>1660155462383</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1660155462383</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Backend AccessToken, RefreshToken 구현 완료">
+      <created>1660225311725</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1660225311725</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Backend AccessToken, RefreshToken 구현 완료">
+      <created>1660225719278</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1660225719278</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Backend AccessToken, RefreshToken 구현 완료">
+      <created>1660226148818</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1660226148818</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Backend AccessToken, RefreshToken 구현 완료">
+      <created>1660542053381</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1660542053381</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Backend AccessToken, RefreshToken 구현 완료">
+      <created>1660545016954</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1660545016954</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="SignUp Test..." />
+    <MESSAGE value="SignIn Test..(코드 수정 예정)" />
+    <MESSAGE value="jwt Token test(코드 수정 예정)" />
+    <MESSAGE value="Backend AccessToken, RefreshToken 구현 완료" />
+    <option name="LAST_COMMIT_MESSAGE" value="Backend AccessToken, RefreshToken 구현 완료" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

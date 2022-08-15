@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  * 요청을 보낼때는 UserRequestDTO
  * 검색,수정,삭제 등을 하는데 토큰이 꼭 필요한지 생각해 봐야함
  * == 필요없을 것 같다. 토큰 삭제 예정
- * mapping url 통일 해야 할듯
+ * mapping url 통일 해야 할듯.
  */
 @Api(tags = {"2. Users"})   // 제목 역할
 @Controller
