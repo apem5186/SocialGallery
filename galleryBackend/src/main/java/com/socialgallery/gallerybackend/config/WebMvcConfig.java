@@ -1,11 +1,11 @@
 package com.socialgallery.gallerybackend.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+@EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
     private final long MAX_AGE_SECS = 3600;
@@ -22,4 +22,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
             .allowCredentials(true)
             .maxAge(MAX_AGE_SECS);
     }
+
+
 }

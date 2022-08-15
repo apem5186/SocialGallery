@@ -40,6 +40,23 @@ dependencies {
     testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.7.2'
     // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+    // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+    implementation (group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'){
+        exclude module: 'swagger-annotations' exclude module: 'swagger-models'
+    }
+    // https://mvnrepository.com/artifact/io.swagger/swagger-models
+    implementation group: 'io.swagger', name: 'swagger-models', version: '1.5.22'
+    // https://mvnrepository.com/artifact/io.swagger/swagger-annotations
+    implementation group: 'io.swagger', name: 'swagger-annotations', version: '1.5.22'
+    // i8n설정을 위해 추가
+    // https://mvnrepository.com/artifact/net.rakugakibox.util/yaml-resource-bundle
+    implementation group: 'net.rakugakibox.util', name: 'yaml-resource-bundle', version: '1.1'
+
+
+
+
 
 
 
