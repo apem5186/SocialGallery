@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Toggle from "./toggle";
 import  {Link} from 'react-router-dom'
-
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
 function Login() {
-	// 로그인 Form
+  const navigate = useNavigate()
+
+  // 로그인 Form
   const [email,setEmail] = useState('');
   const [pw,setPw] = useState('');
 
@@ -39,29 +42,79 @@ function Login() {
     setRgTel(e.currentTarget.value)
   }
 
+  const base_url = "http://localhost:8080"
+
   // 로그인 fetch
-  const signIn = (e) => {
-    e.preventDefault()
-    fetch('', { 
-      method: 'POST',
-      body: JSON.stringify({
-        email: email,
-        password: pw,
-      }),
+  // const signIn = (e) => {
+  //   e.preventDefault()
+  //   fetch(base_url + '/v1/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({
+  //       email: email,
+  //       password: pw,
+  //     }),
+  //   })
+  //     .then(res => res.json())
+  //     .then(result => console.log('결과', result))
+  // };
+
+  const signIn = () =>{
+    axios.post(base_url + '/v1/login',{
+      email : email,
+      password : pw
+    },{
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    withCredentials: true,
+      crossDomain: true,
+      credentials: "include"
     })
-      .then(res => res.json())
-      .then(result => console.log('결과', result))
-  };
+        .then(res => {
+          if(res.status === 200){
+            navigate('/')
+          }else{
+            alert('아이디 또는 비밀번호가 일치하지 않습니다.')
+          }
+        })
+  }
+  // const signIn = (e) =>{
+  //   e.preventDefault();
+  //   axios.post(base_url + '/v1/login',{
+  //       email : email,
+  //       password : pw
+  //   },{
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //       .then(res => res.status)
+  //       .then(res => {
+  //         if(res.config.data(email) === undefined){
+  //           alert('입력하신 Email이 일치하지 않습니다.')
+  //         }else if(res.data.email === null){
+  //           alert('Email을 입력해주세요.')
+  //         }else if(res.data.email === email){
+  //           document.location.href = '/'
+  //         }
+  //       })
+  // }
 
   // 회원가입 fetch
   const signUp = (e) => {
     e.preventDefault()
-    fetch('/user/signUp', {
+    fetch(base_url + '/v1/signUp', {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         email: rgEmail,
         password: rgPw,
-        name : rgName,
+        username : rgName,
         tel : rgTel
       }),
     })

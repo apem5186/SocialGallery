@@ -55,7 +55,7 @@ public class SignController {
             @RequestBody UserSignUpRequestDTO userSignUpRequestDTO) {
 
         Long signUpId = signService.signUp(userSignUpRequestDTO);
-        log.info("SIGNUP 요청 " + signUpId);
+        log.info("SIGNUP 요청, user pk : " + signUpId);
         return responseService.getSingleResult(signUpId);
     }
 

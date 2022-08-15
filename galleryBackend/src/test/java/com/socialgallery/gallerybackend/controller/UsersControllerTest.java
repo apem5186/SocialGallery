@@ -42,8 +42,6 @@ public class UsersControllerTest {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    JwtUtil util;
 
 //    @Test
 //    @DisplayName("SignUp 테스트")
@@ -84,21 +82,21 @@ public class UsersControllerTest {
 
     }
 
-    @Test
-    @DisplayName("정상적인 토큰을 전달했을 때 원하는 정보를 잘 얻을 수 있는지 확인한다.")
-    public void testGetInfoSuccess() throws Exception {
-        // given
-        String token = util.createAuthToken("user01@social.com");
-
-        // when
-        MockHttpServletRequestBuilder reqBuilder
-                = get("/info").header("jwt-auth-token", token);
-        ResultActions action = mock.perform(reqBuilder);
-
-        // then
-        action.andExpect(status().is(202))
-                .andExpect(jsonPath("$.info", startsWithIgnoringCase("여기는 은서파, 지금 시각은 ")));
-    }
+//    @Test
+//    @DisplayName("정상적인 토큰을 전달했을 때 원하는 정보를 잘 얻을 수 있는지 확인한다.")
+//    public void testGetInfoSuccess() throws Exception {
+//        // given
+//        String token = util.createAuthToken("user01@social.com");
+//
+//        // when
+//        MockHttpServletRequestBuilder reqBuilder
+//                = get("/info").header("jwt-auth-token", token);
+//        ResultActions action = mock.perform(reqBuilder);
+//
+//        // then
+//        action.andExpect(status().is(202))
+//                .andExpect(jsonPath("$.info", startsWithIgnoringCase("여기는 은서파, 지금 시각은 ")));
+//    }
 
     @Test
     @DisplayName("비 정상적인 토큰을 전달했을 때 예외가 발생하는지 확인한다.")
