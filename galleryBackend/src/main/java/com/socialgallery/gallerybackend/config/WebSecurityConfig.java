@@ -48,7 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) // 토큰 기반 인증이므로 세션 해제
                 .and()
                 .authorizeRequests() // 요청에 대한 사용권한 체크 antMatchers를 작성하기 위해 먼저 써야함
-
                 .antMatchers("/h2-console/**").permitAll()
                 /****
                  * anyRequest.hasRole("USER")와 anyRequest.authenticated() 는 동일한 효과를 낸다.

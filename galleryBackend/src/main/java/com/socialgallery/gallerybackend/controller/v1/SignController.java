@@ -5,6 +5,8 @@ import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserLoginRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
+import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
+import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
 import com.socialgallery.gallerybackend.service.security.SignService;
@@ -26,7 +28,7 @@ import org.springframework.web.bind.annotation.*;
  * 응답 부분에서 refresh Token은 안보이게 조정 필요
  */
 
-@Api(tags = "1. SignUp / Login")
+@Api(tags = "1. SignUp / Login / Logout")
 @RequiredArgsConstructor
 @RestController
 @Slf4j
@@ -66,5 +68,15 @@ public class SignController {
             @ApiParam(value = "토큰 재발급 요청 DTO", required = true)
             @RequestBody TokenRequestDTO tokenRequestDTO) {
         return responseService.getSingleResult(signService.reissue(tokenRequestDTO));
+    }
+
+    @ApiOperation(value = "로그아웃",
+                  notes = "리프레시토큰을 지움으로서 로그아웃을 합니다.")
+    @PostMapping("/logout")
+    public SingleResult<Long> logout(
+            @ApiParam(value = "로그아웃", required = true)
+            @RequestBody UserRequestDTO userRequestDTO
+            ) {
+        return responseService.getSingleResult(signService.logout(userRequestDTO));
     }
 }
