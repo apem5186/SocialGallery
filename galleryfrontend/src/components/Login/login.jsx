@@ -1,9 +1,13 @@
 import { useState } from "react";
 import Toggle from "./toggle";
 import  {Link} from 'react-router-dom'
+import axios from "axios";
+import {useNavigate} from 'react-router-dom'
 
 
 function Login() {
+
+  const navigate = useNavigate()
 	// 로그인 Form
   const [email,setEmail] = useState('');
   const [pw,setPw] = useState('');
@@ -38,20 +42,26 @@ function Login() {
   const onRgTelHandler = (e) => {
     setRgTel(e.currentTarget.value)
   }
-
   // 로그인 fetch
-  const signIn = (e) => {
-    e.preventDefault()
-    fetch('', { 
-      method: 'POST',
-      body: JSON.stringify({
-        email: email,
-        password: pw,
-      }),
+  const signIn = () =>{
+    axios.post('',{
+      email : email,
+      pw : pw
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+        }
     })
-      .then(res => res.json())
-      .then(result => console.log('결과', result))
-  };
+  .then(res => {
+    if(res.status === 200){
+      navigate('/')
+    }else{
+      alert('아이디 또는 비밀번호가 일치하지 않습니다.')
+    }
+  })
+  }
+
+
 
   // 회원가입 fetch
   const signUp = (e) => {

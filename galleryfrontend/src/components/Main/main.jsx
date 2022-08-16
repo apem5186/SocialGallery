@@ -3,6 +3,8 @@ import { useState } from 'react';
 import footerData from '../../Data/footerData';
 import  {Link} from 'react-router-dom'
 import postCommentInFeed from './comment';
+import UpLoad from '../PostReg/upload';
+
 
 function Main(){
 
@@ -167,9 +169,9 @@ return (
           <img src="assets/Main/user.png" alt="User Picture" />
         </a>
         <span>user1</span>
-        {/*
-        <!-- 파일 업로드 btn--> */}
-        <button>+</button>
+        {/*파일 업로드 btn-*/}
+        {/* <UpLoad></UpLoad> */}
+        <UpLoad></UpLoad>
       </div>
     </div>
     <div className="post__content">
