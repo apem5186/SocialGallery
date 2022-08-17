@@ -1,6 +1,66 @@
 import {Link} from 'react-router-dom'
+import { useState } from 'react';
+import { axios } from 'axios';
+import { useEffect } from 'react';
 
 function UpLoad(){
+	const [ imgs, setImgs ] = useState('')
+	const [ previewImg, setPreviewImg ] = useState('')
+	const [ title, setTitle] = useState('')
+	const [ content, setContent] = useState('')
+
+	const onTitleHandler = (e) => {
+		setTitle(e.currentTarget.value)
+	}
+	const onContentHandler = (e) => {
+		setContent(e.currentTarget.value)
+	}
+	// 미리보기
+	const insertImg = (e) => {
+		let reader = new FileReader()
+	
+		if(e.target.files[0]) {
+			reader.readAsDataURL(e.target.files[0])
+			setImgs(e.target.files[0])
+			console.log(e.target.files[0])
+		}
+	
+		reader.onloadend = () => {
+			const previewImgUrl = reader.result
+	
+			if(previewImgUrl) {
+				setPreviewImg([...previewImg, previewImgUrl])
+			}
+		}
+	}
+
+	// Img Data Server 전송
+	const handleClick = async (e) =>{
+		e.preventDefault();
+		const postImg = e.target.files[0]
+		const formdata = new FormData()
+
+		let dataSet ={
+			title : title,
+			content : content,
+		}
+
+		formdata.append('data', postImg);
+		formdata.append('data', JSON.stringify(dataSet) )
+
+		await axios({
+			method:'post',
+			url : '',
+			data : formdata,
+			headers : {
+				'Content-Type': 'multipart/form-data',
+			},
+		})
+		.then(res => console.log(res));
+	}
+
+	// Title Data Server 전송
+
 	return (
 		<>
 			{/*
@@ -14,7 +74,10 @@ function UpLoad(){
 					</button>
 				</div>
 			</Link>
+			<form onSubmit={(e)=> handleClick(e)}>
 			<div className="popup_layer" id="popup_layer">
+
+				{/* form */}
 				<div className="popup_box">
 		
 					{/* <!--팝업 컨텐츠 영역--> */}
@@ -23,16 +86,30 @@ function UpLoad(){
 							<div className="back">
 							</div>
 							<div className="title">새 게시물 만들기</div>
-							<div className="share">공유하기</div>
+							<button 
+								className="share" 
+								type="submit">
+								공유하기</button>
 						</div>
 						<div className="popup_contents">
 
 							<div className="popup_photoarea">
 								<div className="filebox">
-									
+
 									<input className="upload-name" defaultValue="첨부파일" placeholder="첨부파일"/>
 									<label htmlFor="file">파일찾기</label>
-									<input type="file" id="file"/>
+									<input 
+										type="file"
+										id="file"
+										name="files"
+										onChange={(e) => insertImg(e)}
+										/>
+										<div>
+											<img src={previewImg} alt="" />
+										</div>
+										<div>
+											{imgs.name}
+										</div>
 								</div>
 							</div>
 						
@@ -47,18 +124,31 @@ function UpLoad(){
 										<span className="material-icons">drive_file_rename_outline</span>
 										<span>Title</span>
 									</div>
-									<input type="text" id="cont_title" placeholder="제목을 입력해주세요." />
+									<input 
+										type="text" 
+										id="cont_title" 
+										placeholder="제목을 입력해주세요." 
+										multiple="multiple"
+										onChange={onTitleHandler}
+										/>
 		
 									<div className="contents">
 										<span className="material-icons">list_alt</span>
 										<span>Contents</span>
 									</div>
-									<textarea id="cont_story" name="story" rows="5" cols="33" placeholder="내용을 입력해주세요."></textarea>
+									<input 
+										type="text" 
+										id="cont_story" 
+										placeholder="내용을 입력해주세요."
+										multiple="multiple"
+										onChange={onContentHandler}
+										 />
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				{/*
 				<!--팝업 버튼 영역--> */}
 				<div className="popup_btn">
@@ -68,7 +158,9 @@ function UpLoad(){
 						</span>
 					</Link>
 				</div>
+				
 			</div>		
+			</form>
 			</>
 	)
 }

@@ -171,6 +171,7 @@ return (
         <span>user1</span>
         {/*파일 업로드 btn-*/}
         {/* <UpLoad></UpLoad> */}
+
         <UpLoad></UpLoad>
       </div>
     </div>
