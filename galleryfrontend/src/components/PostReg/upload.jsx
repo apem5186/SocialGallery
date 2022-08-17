@@ -34,7 +34,7 @@ function UpLoad(){
 		}
 	}
 
-	// Img Data Server 전송
+	// Img Data Server Post
 	const handleClick = async (e) =>{
 		e.preventDefault();
 		const postImg = e.target.files[0]
