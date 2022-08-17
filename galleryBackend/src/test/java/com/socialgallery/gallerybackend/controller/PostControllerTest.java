@@ -3,6 +3,7 @@ package com.socialgallery.gallerybackend.controller;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserLoginRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
+import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.service.post.PostService;
 import com.socialgallery.gallerybackend.service.security.SignService;
 import lombok.extern.slf4j.Slf4j;
@@ -40,10 +41,12 @@ public class PostControllerTest {
 
         signService.login(userLoginRequestDTO);
 
+        Users users = userSignUpRequestDTO.toEntity();
+
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
+                .users(users)
                 .title("테스트")
                 .content("테스트 content")
-                .writer("user01")
                 .build();
         log.info("결과 : " + postService.post(postRequestDTO));
     }

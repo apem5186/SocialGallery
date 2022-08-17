@@ -122,6 +122,31 @@ public class ExceptionAdvice {
         );
     }
 
+    /**
+     * -1007
+     * 게시글을 찾지 못할시 발생하는 에러
+     */
+
+    @ExceptionHandler(PostNotFoundCException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    protected CommonResult postNotFoundException(HttpServletRequest request, PostNotFoundCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("postNotFound.code")), getMessage("postNotFound.msg")
+        );
+    }
+
+    /**
+     * -1008
+     * 파일을 찾지 못할시 발생하는 에러
+     */
+    @ExceptionHandler(ImageNotFoundCException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    protected CommonResult imageNotFoundException(HttpServletRequest request, ImageNotFoundCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("imageNotFound.code")), getMessage("imageNotFound.msg")
+        );
+    }
+
     private String getMessage(String code) {
         return getMessage(code, null);
     }

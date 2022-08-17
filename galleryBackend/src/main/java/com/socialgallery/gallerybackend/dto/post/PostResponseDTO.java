@@ -4,6 +4,7 @@ import com.socialgallery.gallerybackend.entity.post.Post;
 import lombok.Getter;
 
 import javax.persistence.Id;
+import java.util.List;
 
 @Getter
 public class PostResponseDTO {
@@ -14,7 +15,7 @@ public class PostResponseDTO {
 
     private final String content;
 
-    private final String writer;
+    private final String username;
 
     private final int hits;
 
@@ -22,14 +23,17 @@ public class PostResponseDTO {
 
     private final int likeCnt;
 
-    public PostResponseDTO(Post post) {
+    private final List<Long> fileId;  // 첨부 파일 id 목록
+
+    public PostResponseDTO(Post post, List<Long> fileId) {
         this.pid = post.getPid();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.writer = post.getWriter();
+        this.username = post.getUsers().getUsername();
         this.hits = post.getHits();
         this.reviewCnt = post.getReviewCnt();
         this.likeCnt = post.getLikeCnt();
+        this.fileId = fileId;
     }
 
 
