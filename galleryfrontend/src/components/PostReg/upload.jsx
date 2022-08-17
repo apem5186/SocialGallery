@@ -59,12 +59,10 @@ function UpLoad(){
 		.then(res => console.log(res));
 	}
 
-	// Title Data Server 전송
-
 	return (
 		<>
 			{/*
-			<!-- 팝업 임시 테스트  시작 --> */}
+			 팝업 임시 테스트  시작 */}
 			<Link to ="#" onClick={openPop}>
 				<div>
 					<button className="popup_start">
