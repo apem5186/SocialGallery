@@ -10,6 +10,8 @@ import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserLoginRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
+import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
+import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.entity.security.RefreshToken;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.entity.user.Users;
@@ -20,6 +22,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 /*
@@ -134,5 +138,23 @@ public class SignService {
         log.info("NEW AUTHENTICATION : " + jwtProvider.getAuthentication(newCreatedToken.getAccessToken()));
         log.info("=============================================================");
         return newCreatedToken;
+    }
+
+    @Transactional
+    public Long logout(UserRequestDTO userRequestDTO) {
+        // 회원 정보 존재하는지 확인
+        Users users = userRepository.findByUsername(userRequestDTO.getUsername())
+                .orElseThrow(UserNotFoundCException::new);
+        log.info("SEARCH USERS : " + users);
+
+        // 회원 정보로 refresh token 찾기
+        RefreshToken refreshToken = refreshTokenJpaRepo.findByKey(users.getId())
+                .orElseThrow(RefreshTokenCException::new);
+        log.info("SEARCH REFRESHTOKEN : " + refreshToken.getToken());
+
+        // 리프레시 토큰 삭제
+        refreshTokenJpaRepo.delete(refreshToken);
+
+        return refreshToken.getKey();
     }
 }

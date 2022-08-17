@@ -2,6 +2,7 @@ package com.socialgallery.gallerybackend.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.socialgallery.gallerybackend.entity.BaseEntity;
+import com.socialgallery.gallerybackend.entity.post.Post;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,8 +18,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor // 모든 필드값을 파라미터로 받는 생성자를 생성
 @NoArgsConstructor  // parameter가 없는 기본 생성자를 생성
 @Getter
-@ToString
-@Table
+@ToString(exclude = "post")
+@Table(name = "users")
 public class Users extends BaseEntity implements UserDetails {
 
     @Id
@@ -41,6 +42,9 @@ public class Users extends BaseEntity implements UserDetails {
     private String phone;
 
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private List<Post> post = new ArrayList<>();
 
     @Column(length = 100)
     private String provider;

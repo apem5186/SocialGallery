@@ -22,3 +22,10 @@ refreshTokenInValid:
 expiredAccessToken:
   code: "-1006"
   msg: "액세스 토큰이 만료되었습니다."
+
+postNotFound:
+  code: "-1007"
+  msg: "게시글을 찾지 못했습니다."
+imageNotFound:
+  code: "-1008"
+  msg: "파일을 찾지 못했습니다."
