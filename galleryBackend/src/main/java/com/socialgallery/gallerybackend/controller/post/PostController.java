@@ -1,6 +1,5 @@
 package com.socialgallery.gallerybackend.controller.post;
 
-import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.config.file.FileHandler;
 import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.dto.image.ImageResponseDTO;
@@ -8,7 +7,6 @@ import com.socialgallery.gallerybackend.dto.image.PostFileVO;
 import com.socialgallery.gallerybackend.dto.post.PostListResponseDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
-import com.socialgallery.gallerybackend.dto.post.PostUpdateRequestDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.user.Users;
@@ -20,7 +18,6 @@ import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.image.ImageService;
 import com.socialgallery.gallerybackend.service.post.PostService;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
-import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -34,6 +31,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/*
+ * @Reference https://velog.io/@yu-jin-song/Spring-Boot-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EA%B5%AC%ED%98%84-5-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EB%8B%A4%EC%A4%91-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%98%ED%99%98-%EB%B0%8F-%EC%A1%B0%ED%9A%8C-%EC%B2%98%EB%A6%AC-MultipartFile
+ */
+
 @Api(tags = {"4. post"})
 @RequiredArgsConstructor
 @RestController
@@ -44,15 +45,9 @@ public class PostController {
 
     private final ImageService imageService;
 
-    private final UsersService usersService;
-
     private final UserRepository userRepository;
 
     private final ImageRepository imageRepository;
-
-    private final PostRepository postRepository;
-
-    private final FileHandler fileHandler;
 
     private final ResponseService responseService;
 
@@ -61,10 +56,9 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     public SingleResult<Long> post(
             @ApiParam(value = "게시글 등록 DTO", required = true)
-            @RequestBody PostRequestDTO postRequestDTO,
             PostFileVO postFileVO) throws Exception{
-        Optional<Users> users = userRepository.findById(Long.parseLong(postFileVO.getUsersId()));
-        postRequestDTO = PostRequestDTO.builder()
+        Optional<Users> users = userRepository.findById(postFileVO.getUsersId());
+        PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .users(users.orElseThrow())
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
@@ -78,10 +72,9 @@ public class PostController {
     public SingleResult<Long> update(
             @ApiParam(value = "게시글 수정 DTO", required = true)
             @PathVariable Long pid,
-            @RequestBody PostRequestDTO postRequestDTO,
             PostFileVO postFileVO) throws Exception {
 
-        postRequestDTO = PostRequestDTO.builder()
+        PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
                 .build();

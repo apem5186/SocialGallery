@@ -4,33 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="logout기능 구현">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/ImageNotFoundCException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/PostNotFoundCException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/file/FileHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/image/ImageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/PostFileVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostListResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostUpdateRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/image/Image.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/ImageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/image/ImageService.java" afterDir="false" />
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="post기능 구현">
+      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upload.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upload.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/uploadToggle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/ExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/ExceptionAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/file/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/file/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/image/ImageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/image/ImageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/PostFileVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/PostFileVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostListResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostListResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostRequestDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostUpdateRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostUpdateRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/image/Image.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/image/Image.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/user/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/user/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/ImageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/ImageRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/image/ImageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/image/ImageService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/i18n/exception_ko.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/i18n/exception_ko.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,7 +265,7 @@
       <workItem from="1660540895009" duration="5206000" />
       <workItem from="1660546357207" duration="14587000" />
       <workItem from="1660633825152" duration="6796000" />
-      <workItem from="1660718478219" duration="15801000" />
+      <workItem from="1660718478219" duration="28140000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -360,7 +358,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660641268591</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="post기능 구현">
+      <created>1660735599233</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1660735599233</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +388,8 @@
     <MESSAGE value="jwt Token test(코드 수정 예정)" />
     <MESSAGE value="Backend AccessToken, RefreshToken 구현 완료" />
     <MESSAGE value="logout기능 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="logout기능 구현" />
+    <MESSAGE value="post기능 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="post기능 구현" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
