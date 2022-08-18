@@ -1,12 +1,16 @@
 package com.socialgallery.gallerybackend.service.post;
 
+import com.socialgallery.gallerybackend.advice.exception.AuthenticationEntryPointCException;
 import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.RefreshTokenCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
 import com.socialgallery.gallerybackend.config.file.FileHandler;
 import com.socialgallery.gallerybackend.config.security.JwtProvider;
+import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
+import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
+import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
@@ -16,14 +20,16 @@ import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.repository.ImageRepository;
 import com.socialgallery.gallerybackend.repository.PostRepository;
 import com.socialgallery.gallerybackend.repository.UserRepository;
+import com.socialgallery.gallerybackend.service.security.SignService;
 import com.socialgallery.gallerybackend.service.user.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,22 +54,17 @@ public class PostService {
 
     private final JwtProvider jwtProvider;
 
+    private final SignService signService;
+
     private final FileHandler fileHandler;
     
     // 게시글 등록
     @Transactional
     public Long post(PostRequestDTO postRequestDTO,
-                     List<MultipartFile> files) throws Exception{
+                     List<MultipartFile> files,
+                     HttpServletRequest request) throws Exception{
 
-        if (postRequestDTO.getUsers() == null) {
-            throw new UserNotFoundCException();
-        }
-        Users users = postRequestDTO.getUsers();
-        UserResponseDTO userPk = usersService.findByUsername(users.getUsername());
-        Optional<RefreshToken> refreshToken = refreshTokenJpaRepo.findByKey(userPk.getId());
-        String token = refreshToken.orElseThrow().getToken();
-
-        if (jwtProvider.validationToken(token)) {
+        if (checkToken(postRequestDTO.getUsers().getId(), request)) {
             Post entity = postRequestDTO.toEntity();
             List<Image> imageList = fileHandler.parseFileInfo(files, entity);
             if (!imageList.isEmpty()) {
@@ -72,38 +73,48 @@ public class PostService {
                     entity.addImage(imageRepository.save(image));
                 }
             }
-            postRepository.save(entity);
-
-            return entity.getPid();
-        } else throw new RefreshTokenCException();
-
+            return postRepository.save(entity).getPid();
+        } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
     }
-    
-    // 게시글 수정
     @Transactional
-    public Long update(Long pid, PostRequestDTO postRequestDTO, List<MultipartFile> files) throws Exception{
-
-        Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
-        Users users = userRepository.findById(pid).orElseThrow(UserNotFoundCException::new);
-
-//        if (postRequestDTO.getUsers() == null) {
-//            log.info("USER가 NULL임 " + postRequestDTO.getUsers());
-//            throw new UserNotFoundCException();
-//        }
-//        Users users = postRequestDTO.getUsers();
-        log.info("USER 정보 : " + users);
+    public boolean checkToken(Long id, HttpServletRequest request) {
+        Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
         UserResponseDTO userPk = usersService.findByUsername(users.getUsername());
         Optional<RefreshToken> refreshToken = refreshTokenJpaRepo.findByKey(userPk.getId());
-        String token = refreshToken.orElseThrow().getToken();
-        if (jwtProvider.validationToken(token)) {
+        String accessToken = jwtProvider.resolveToken(request);
+        log.info("ACCESSTOKEN : " + accessToken);
+        String rtoken = refreshToken.orElseThrow().getToken();
+        log.info("REFRESHTOKEN : " + rtoken);
+        if (!jwtProvider.validationToken(rtoken)) {
+            request.setAttribute("Authorization", "");
+            signService.logout(id);
+            throw new RefreshTokenCException();
+        }
+        if (!jwtProvider.validationToken(accessToken)) {
+            TokenRequestDTO tokenRequestDTO = TokenRequestDTO.builder()
+                            .accessToken(accessToken)
+                                    .refreshToken(rtoken)
+                                            .build();
+            signService.reissue(tokenRequestDTO);
+            return true;
+        }
+        return true;
+    }
+    // 게시글 수정
+    @Transactional
+    public Long update(Long pid, PostRequestDTO postRequestDTO, List<MultipartFile> files,
+                       HttpServletRequest request) throws Exception{
+
+        Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
+        if(checkToken(post.getUsers().getId(), request)) {
             List<Image> imageList = fileHandler.parseFileInfo(files, post);
 
             if (!imageList.isEmpty()) {
                 imageRepository.saveAll(imageList);
             }
             post.update(postRequestDTO.getTitle(), postRequestDTO.getContent());
-        }
 
+        }
         return pid;
     }
 
@@ -123,19 +134,12 @@ public class PostService {
 
     // 게시글 삭제
     @Transactional
-    public Long delete(Long pid, PostRequestDTO postRequestDTO) {
-        if (postRequestDTO.getUsers() == null) {
-            throw new UserNotFoundCException();
-        }
-        Users users = postRequestDTO.getUsers();
-        UserResponseDTO userPk = usersService.findByUsername(users.getUsername());
-        Optional<RefreshToken> refreshToken = refreshTokenJpaRepo.findByKey(userPk.getId());
-        String token = refreshToken.orElseThrow().getToken();
-        if (jwtProvider.validationToken(token)) {
-            Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
+    public Long delete(Long pid, HttpServletRequest request) {
+
+        Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
+        if (checkToken(post.getUsers().getId(), request)) {
             postRepository.delete(post);
         }
-
         return pid;
     }
 }

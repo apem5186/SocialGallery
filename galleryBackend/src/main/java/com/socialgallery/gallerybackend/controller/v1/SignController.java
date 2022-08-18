@@ -14,11 +14,16 @@ import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 /*
@@ -42,11 +47,13 @@ public class SignController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public SingleResult<TokenDTO> login(
             @ApiParam(value = "로그인 요청 DTO", required = true)
-            @RequestBody UserLoginRequestDTO userLoginRequestDTO) {
+            @RequestBody UserLoginRequestDTO userLoginRequestDTO,
+            HttpServletResponse response) {
 
         TokenDTO tokenDTO = signService.login(userLoginRequestDTO);
         log.info("LOGIN 요청, Access 토큰 발행 : " + tokenDTO.getAccessToken());
-        log.info("LOGIN 요청, Refresh 토큰 발행 : " + tokenDTO.getAccessToken());
+        log.info("LOGIN 요청, Refresh 토큰 발행 : " + tokenDTO.getRefreshToken());
+        response.setHeader("Authorization", "Bearer " + tokenDTO.getAccessToken());
         return responseService.getSingleResult(tokenDTO);
     }
 
@@ -75,8 +82,8 @@ public class SignController {
     @PostMapping("/logout")
     public SingleResult<Long> logout(
             @ApiParam(value = "로그아웃", required = true)
-            @RequestBody UserRequestDTO userRequestDTO
+            @RequestParam Long uid
             ) {
-        return responseService.getSingleResult(signService.logout(userRequestDTO));
+        return responseService.getSingleResult(signService.logout(uid));
     }
 }

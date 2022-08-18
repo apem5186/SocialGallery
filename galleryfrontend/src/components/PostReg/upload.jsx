@@ -7,7 +7,8 @@ function UpLoad(){
     const [ previewImg, setPreviewImg ] = useState('')
     const [ title, setTitle] = useState('')
     const [ content, setContent] = useState('')
-    const base_url = "http://localhost:8080"
+    const [imageUrl, setImageUrl] = useState("");
+
 
     const onTitleHandler = (e) => {
         setTitle(e.currentTarget.value)
@@ -35,25 +36,19 @@ function UpLoad(){
     }
 
     // Img Data Server 전송
-    const handleClick = async (e) =>{
-        e.preventDefault();
-
-        if(e.target.files){
-            const postImg = e.target.files[0]
-            const formdata = new FormData()
-
-            formdata.append('data', postImg);
-
-
-            await axios({
-                method:'post',
-                url : base_url + '/api/post/upload',
-                data : formdata,
-                headers : {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
+    const handleClick = (e) => {
+        if (e.target.files[0]) {
+            const img = new FormData();
+            img.append("file", e.target.files[0]);
+            axios
+                .post("", img)
+                .then((res) => {
+                    setImageUrl(res.data);
+                })
         }
+    };
+    const handleFileSelect = (e) => {
+        setImageUrl(e.target.files[0])
     }
 
     return (
@@ -75,23 +70,20 @@ function UpLoad(){
                 {/* <!--팝업 컨텐츠 영역--> */}
 
                 <div className="popup_box">
-                    <div className="popup_cont">
-                        <form>
+                    <form onSubmit={handleClick}>
+                        <div className="popup_cont">
                             <div className="popup_header">
                                 <div className="back"></div>
                                 <div className="title">새 게시물 만들기</div>
                                 <button
                                     className="share"
                                     type="submit"
-                                    onClick={handleClick}
+                                    onChange={handleFileSelect}
                                 >
                                     공유하기</button>
                             </div>
-                        </form>
-                        <div className="popup_contents">
-
-                            <div className="popup_photoarea">
-                                <form>
+                            <div className="popup_contents">
+                                <div className="popup_photoarea">
                                     <div className="filebox">
                                         <input className="upload-name" defaultValue="첨부파일" placeholder="첨부파일"/>
                                         <label htmlFor="file">파일찾기</label>
@@ -108,41 +100,41 @@ function UpLoad(){
                                             {imgs.name}
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-
-                            <div className="popup_photoinfo">
-                                <div className="photoinfo_name">
-                                    <img src="assets/Main/user.png" alt="User Picture" />
-                                    <span>user1</span>
                                 </div>
 
-                                <div className="photoinfo_contents">
-                                    <div className="title">
-                                        <span className="material-icons">drive_file_rename_outline</span>
-                                        <span>Title</span>
+                                <div className="popup_photoinfo">
+                                    <div className="photoinfo_name">
+                                        <img src="assets/Main/user.png" alt="User Picture" />
+                                        <span>user1</span>
                                     </div>
-                                    <input
-                                        type="text"
-                                        id="cont_title"
-                                        placeholder="제목을 입력해주세요."
-                                        onChange={onTitleHandler}
-                                    />
 
-                                    <div className="contents">
-                                        <span className="material-icons">list_alt</span>
-                                        <span>Contents</span>
+                                    <div className="photoinfo_contents">
+                                        <div className="title">
+                                            <span className="material-icons">drive_file_rename_outline</span>
+                                            <span>Title</span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            id="cont_title"
+                                            placeholder="제목을 입력해주세요."
+                                            onChange={onTitleHandler}
+                                        />
+
+                                        <div className="contents">
+                                            <span className="material-icons">list_alt</span>
+                                            <span>Contents</span>
+                                        </div>
+                                        <input
+                                            type="text"
+                                            id="cont_story"
+                                            placeholder="내용을 입력해주세요."
+                                            onChange={onContentHandler}
+                                        />
                                     </div>
-                                    <input
-                                        type="text"
-                                        id="cont_story"
-                                        placeholder="내용을 입력해주세요."
-                                        onChange={onContentHandler}
-                                    />
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
 
                 {/*

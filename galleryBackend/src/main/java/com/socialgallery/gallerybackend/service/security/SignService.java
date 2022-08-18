@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.http.HttpRequest;
 import java.util.Optional;
 
 
@@ -141,9 +142,9 @@ public class SignService {
     }
 
     @Transactional
-    public Long logout(UserRequestDTO userRequestDTO) {
+    public Long logout(Long id) {
         // 회원 정보 존재하는지 확인
-        Users users = userRepository.findByUsername(userRequestDTO.getUsername())
+        Users users = userRepository.findById(id)
                 .orElseThrow(UserNotFoundCException::new);
         log.info("SEARCH USERS : " + users);
 

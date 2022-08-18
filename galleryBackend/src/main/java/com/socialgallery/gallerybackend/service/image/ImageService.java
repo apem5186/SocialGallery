@@ -49,15 +49,4 @@ public class ImageService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 이미지 삭제
-     */
-    @Transactional
-    public Image deleteImage(Long iid) {
-
-        Image image = imageRepository.findById(iid).orElseThrow(ImageNotFoundCException::new);
-        imageRepository.delete(image);
-
-        return image;
-    }
 }

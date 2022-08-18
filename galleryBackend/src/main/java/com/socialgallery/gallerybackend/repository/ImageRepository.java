@@ -2,6 +2,9 @@ package com.socialgallery.gallerybackend.repository;
 
 import com.socialgallery.gallerybackend.entity.image.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,4 +14,9 @@ import java.util.List;
 
 public interface ImageRepository extends JpaRepository<Image, Long> {
     List<Image> findAllByPostPid(Long postId);
+
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Image im WHERE im.iid =:iid and im.post.pid=:pid")
+    void deleteImageByIid(Long iid, Long pid);
 }

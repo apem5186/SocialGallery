@@ -7,6 +7,8 @@ import {useNavigate} from 'react-router-dom'
 function Login() {
   const navigate = useNavigate()
 
+  let accessToken = null;
+
   // 로그인 Form
   const [email,setEmail] = useState('');
   const [pw,setPw] = useState('');
@@ -75,6 +77,10 @@ function Login() {
     })
         .then(res => {
           if(res.status === 200){
+            console.log(res.data)
+            accessToken = res.data.data.accessToken
+            localStorage.setItem("user", email)
+            localStorage.setItem("token", res.data.data.accessToken)
             navigate('/')
           }else{
             alert('아이디 또는 비밀번호가 일치하지 않습니다.')

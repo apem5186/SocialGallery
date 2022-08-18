@@ -11,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -57,7 +58,8 @@ public class JwtProvider {
         claims.put(ROLES, roles);
         // 생성날짜, 만료날짜를 위한 Date
         Date now = new Date();
-
+        log.info("ACCESSTOKEN ISSUEAT : " + new Date(now.getTime()));
+        log.info("ACCESSTOKEN EXPIREAT :" + new Date(now.getTime() + accessTokenValidMillisecond));
         String accessToken = Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setClaims(claims)
@@ -117,10 +119,14 @@ public class JwtProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // HTTP Request의 Header에서 Token Parsing -> "X-AUTH-TOKEN: jwt"
-    // Request Header에 "X-AUTH-TOKEN" 이 있으면 탈취해서 Jwt값으로 취한다.
+    // HTTP Request의 Header에서 Token Parsing -> "Authorization: jwt"
+    // Request Header에 "Authorization" 이 있으면 탈취해서 Jwt값으로 취한다.
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        String token = request.getHeader("Authorization");
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            return token.substring(7);
+        } else
+            return request.getHeader("Authorization");
     }
 
     // jwt의 유효성 및 만료일자 확인
@@ -130,6 +136,7 @@ public class JwtProvider {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         } catch (JwtException | IllegalArgumentException e) {
+            log.info("실패한 토큰 : " + token);
             log.error(e.toString());
             return false;
         }
