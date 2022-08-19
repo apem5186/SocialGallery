@@ -9,6 +9,7 @@ import UpLoad from '../PostReg/upload';
 function Main(){
 
 const [foot, setFoot] = useState(footerData)
+const [file, setFile] = useState('')
 
 return (
 <>
