@@ -1,6 +1,7 @@
 package com.socialgallery.gallerybackend.entity.post;
 
 import com.socialgallery.gallerybackend.entity.BaseEntity;
+import com.socialgallery.gallerybackend.entity.comment.Comment;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import lombok.*;
@@ -46,8 +47,13 @@ public class Post extends BaseEntity {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 
+    @OneToMany(mappedBy = "post",
+    cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
+
     @Builder
-    public Post(Users users, String title, String content, int hits, int reviewCnt, int likeCnt) {
+    public Post(Long pid, Users users, String title, String content, int hits, int reviewCnt, int likeCnt) {
+        this.pid = pid;
         this.users = users;
         this.title = title;
         this.content = content;

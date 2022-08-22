@@ -24,6 +24,8 @@ import com.socialgallery.gallerybackend.service.security.SignService;
 import com.socialgallery.gallerybackend.service.user.UsersService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -128,8 +130,15 @@ public class PostService {
 
     // 복수 검색
     @Transactional(readOnly = true)
-    public List<Post> searchAllDesc() {
-        return postRepository.findAllByOrderByPidDesc();
+    public Page<Post> searchAllDesc(Pageable pageable) {
+        return postRepository.findAllByOrderByPidDesc(pageable);
+    }
+    
+    // 키워드랑 검색
+    @Transactional(readOnly = true)
+    public Page<Post> searchByKeyword(Pageable pageable, String keyword) {
+
+        return postRepository.findByTitleContaining(keyword, pageable);
     }
 
     // 게시글 삭제

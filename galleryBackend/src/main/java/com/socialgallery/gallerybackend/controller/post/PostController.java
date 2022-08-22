@@ -21,6 +21,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -76,7 +80,7 @@ public class PostController {
     @PutMapping("/post/modify/{pid}")
     public SingleResult<Long> update(
             @ApiParam(value = "게시글 수정 DTO", required = true)
-            @PathVariable Long pid,
+            @PathVariable("pid") Long pid,
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception {
 
@@ -147,7 +151,7 @@ public class PostController {
     @GetMapping("/post/{pid}")
     public SingleResult<PostResponseDTO> searchById(
             @ApiParam(value = "게시글 번호", required = true)
-            @PathVariable Long pid) {
+            @PathVariable("pid") Long pid) {
             // 게시글 id로 해당 게시글 첨부파일 전체 조회
             List<ImageResponseDTO> imageResponseDTOList =
                     imageService.findAllByPost(pid);
@@ -164,13 +168,22 @@ public class PostController {
     // 전체 조회
     @ApiOperation(value = "전체 조회", notes = "게시글 전체를 검색합니다.")
     @GetMapping("/post")
-    public ListResult<PostListResponseDTO> searchAllDesc() {
+    public ListResult<PostListResponseDTO> searchAllDesc(
+            @PageableDefault(sort = "pid", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(value = "keyword", required = false) String keyword) {
         // 게시글 전체 조회
-        List<Post> postList = postService.searchAllDesc();
+        Page<Post> list = null;
+
+        // 검색할 때와 검색하지 않았을 때를 구분
+        if(keyword == null) {
+            list = postService.searchAllDesc(pageable);
+        } else {
+            list = postService.searchByKeyword(pageable, keyword);
+        }
         // 반환할 List<BoardListResponseDto> 생성
         List<PostListResponseDTO> responseDTOList = new ArrayList<>();
 
-        for(Post post : postList){
+        for(Post post : list){
             // 전체 조회하여 획득한 각 게시글 객체를 이용하여 BoardListResponseDto 생성
             PostListResponseDTO responseDto = new PostListResponseDTO(post);
             responseDTOList.add(responseDto);
@@ -184,7 +197,7 @@ public class PostController {
     @DeleteMapping("/post/delete/{pid}")
     public SingleResult<Long> delete(
             @ApiParam(value = "게시글 번호", required = true)
-            @PathVariable Long pid,
+            @PathVariable("pid") Long pid,
             HttpServletRequest request) {
         return responseService.getSingleResult(postService.delete(pid, request));
     }

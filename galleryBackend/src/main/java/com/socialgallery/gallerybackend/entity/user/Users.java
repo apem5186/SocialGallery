@@ -2,8 +2,11 @@ package com.socialgallery.gallerybackend.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.socialgallery.gallerybackend.entity.BaseEntity;
+import com.socialgallery.gallerybackend.entity.comment.Comment;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import lombok.*;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,6 +48,10 @@ public class Users extends BaseEntity implements UserDetails {
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Post> post = new ArrayList<>();
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(length = 100)
     private String provider;
