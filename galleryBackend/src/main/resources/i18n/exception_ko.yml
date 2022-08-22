@@ -29,3 +29,6 @@ postNotFound:
 imageNotFound:
   code: "-1008"
   msg: "파일을 찾지 못했습니다."
+commentNotFound:
+  code: "-1009"
+  msg: "댓글을 찾지 못했습니다."

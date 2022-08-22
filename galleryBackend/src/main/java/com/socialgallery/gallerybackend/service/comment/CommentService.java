@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.service.comment;
 
+import com.socialgallery.gallerybackend.advice.exception.CommentNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.RefreshTokenCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
@@ -85,7 +86,7 @@ public class CommentService {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
         if (checkToken(post.getUsers().getId(), request)) {
-            Comment comment = commentRepository.findById(cid).orElseThrow();
+            Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
             commentRepository.delete(comment);
         }
         return cid;
