@@ -1,26 +1,18 @@
 package com.socialgallery.gallerybackend.controller.v1;
 
-import com.socialgallery.gallerybackend.config.security.JwtProvider;
 import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserLoginRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
-import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
-import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
 import com.socialgallery.gallerybackend.service.security.SignService;
-import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.Authorization;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;

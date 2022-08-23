@@ -8,6 +8,9 @@ build/
 ### jwt ###
 /src/main/resources/application-jwt.yml
 
+### oauth ###
+/src/main/resources/application-oauth.yml
+
 ### STS ###
 .apt_generated
 .classpath

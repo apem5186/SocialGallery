@@ -53,8 +53,8 @@ public class Users extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @Column(length = 100)
-    private String provider;
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
 
     /*
      * User 객체의 권한이 담긴 컬렉션 객체를 User 조회시 EAGER로 즉시로딩하지 않는다면,

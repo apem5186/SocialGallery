@@ -56,7 +56,8 @@ dependencies {
     // 파일 업로드를 위해 추가
     // https://mvnrepository.com/artifact/commons-io/commons-io
     implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
-
+    // oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 
 

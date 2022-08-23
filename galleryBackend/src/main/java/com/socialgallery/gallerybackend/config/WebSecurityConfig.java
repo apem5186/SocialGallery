@@ -1,9 +1,7 @@
 package com.socialgallery.gallerybackend.config;
 
-import com.socialgallery.gallerybackend.config.security.CustomAccessDeniedHandler;
-import com.socialgallery.gallerybackend.config.security.CustomAuthenticationEntryPoint;
-import com.socialgallery.gallerybackend.config.security.JwtAuthenticationFilter;
-import com.socialgallery.gallerybackend.config.security.JwtProvider;
+import com.socialgallery.gallerybackend.config.security.*;
+import com.socialgallery.gallerybackend.service.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private final JwtProvider jwtProvider;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
+
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     // authenticationManager를 Bean 등록합니다.
     @Bean
@@ -71,15 +72,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  */
                 .anyRequest().hasRole("USER")
 
+                /*
+                 * 로그아웃 설정
+                 */
+                .and()
+                .logout()
+                .logoutSuccessUrl("/")
+
+
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(customAuthenticationEntryPoint)
                 .accessDeniedHandler(customAccessDeniedHandler)
 
+
+
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider),
                         UsernamePasswordAuthenticationFilter.class);
                 // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
+
+        http
+                /*
+                 * 구글 로그인 설정
+                 */
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService)
+                .and()
+                .successHandler(oAuth2SuccessHandler)
+                .permitAll();
+
+
     }
 
 

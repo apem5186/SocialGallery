@@ -22,13 +22,16 @@ public class UserRequestDTO {
     private String phone;
     private String picture;
 
+    private boolean fromSocial;
+
     @Builder
-    public UserRequestDTO(String email, String username, String password, String phone, String picture) {
+    public UserRequestDTO(String email, String username, String password, String phone, String picture, boolean fromSocial) {
         this.email = email;
         this.username = username;
         this.password = password;
         this.phone = phone;
         this.picture = picture;
+        this.fromSocial = fromSocial;
     }
 
     public Users toEntity() {
@@ -38,6 +41,7 @@ public class UserRequestDTO {
                 .password(password)
                 .phone(phone)
                 .picture(picture)
+                .fromSocial(fromSocial)
                 .build();
     }
 }
