@@ -2,6 +2,9 @@ import { useState } from "react"
 import axios from "axios"
 
 function UpLoadForm() {
+	const [images, setImages] = useState([])
+	const [title, setTitle] = useState(null)
+	const [comments, setComments] = useState([])
 
 		// Img 미리보기
 		const [ imgs, setImgs ] = useState('')
@@ -26,17 +29,14 @@ function UpLoadForm() {
 	}
 }
 
-
-
 		// Img Data Server 전송
-		const [file, setFile] = useState(null)
 
-		const handleFile = (e) => {
+		const handleImgFile = (e) => {
 		let file = e.target.files[0]
-		setFile(file)
+		setImages(file)
 		}
 
-		const handleUpload = (e) => {
+		const handleImgUpload = async (e) => {
 		let formdata = new FormData()
 
 		formdata.append('image', e.target.files)
@@ -54,6 +54,25 @@ function UpLoadForm() {
 				console.log(res.data)
 				})
 			}
+		// 제목,글 Data Server 전송
+		const onHandlePostTitle = (e) =>{
+			setTitle(e.currentTarget.value)
+		}
+		const onHandlePostComments = (e) =>{
+			setComments(e.currentTarget.value)
+		}
+		const postSubmit = () => {
+			axios.post('',{
+				title : title,
+				comments : comments,
+			},{
+				headers: {
+					'Content-Type': 'application/json'
+					}
+			})
+			.then(res => res.json())
+			.then(result => console.log('결과: ', result));
+		}
 
 return (
 <>
@@ -65,7 +84,10 @@ return (
 					<div className="back"></div>
 					<div className="title">새 게시물 만들기</div>
 					{/* 버튼 */}
-					<button className="share"type="submit" onClick={handleUpload}>
+					<button className="share"type="submit" onClick= { (e)=>{
+						handleImgUpload(e)
+						postSubmit(e)
+					}}>
 						공유하기
 					</button>
 					<span className="material-icons" onClick={closePop}>
@@ -81,7 +103,7 @@ return (
 							{/* 파일찾기 */}
 							<input type="file" id="file" name="files"onChange={(e)=>{
 								 insertImg(e)
-								 handleFile(e)
+								 handleImgFile(e)
 							}} />
 							<div>
 								<img src={previewImg} alt="" />
@@ -103,13 +125,23 @@ return (
 								<span className="material-icons">drive_file_rename_outline</span>
 								<span>Title</span>
 							</div>
-							<input type="text" id="cont_title" placeholder="제목을 입력해주세요." />
+							<input 
+								type="text" 
+								id="cont_title" 
+								placeholder="제목을 입력해주세요." 
+								onChange={onHandlePostTitle}
+								/>
 
 							<div className="contents">
 								<span className="material-icons">list_alt</span>
 								<span>Contents</span>
 							</div>
-							<input type="text" id="cont_story" placeholder="내용을 입력해주세요." />
+							<input 
+								type="text" 
+								id="cont_story" 
+								placeholder="내용을 입력해주세요." 
+								onChange={onHandlePostComments}
+								/>
 						</div>
 					</div>
 				</div>

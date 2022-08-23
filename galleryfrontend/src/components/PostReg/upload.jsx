@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import UpLoadForm from '../test';
+import UpLoadForm from './upLoadForm';
 
 function UpLoad(){
 

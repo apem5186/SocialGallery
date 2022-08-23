@@ -4,12 +4,20 @@ import footerData from '../../Data/footerData';
 import  {Link} from 'react-router-dom'
 import postCommentInFeed from './comment';
 import UpLoad from '../PostReg/upload';
+import axios  from 'axios';
 
 
 function Main(){
 
 const [foot, setFoot] = useState(footerData)
 const [file, setFile] = useState('')
+
+// Logout
+// const onLogout = () =>{
+//   // localStorage에 있는 item삭제
+//   localStorage.removeItem('삭제할 키 값')
+//   document.location.href = '/'
+// }
 
 return (
 <>
@@ -150,6 +158,8 @@ return (
             <a href="#">
               <i className="bx bx-log-out icon"></i>
               <span className="text nav-text">Logout</span>
+              {/* 로그아웃 */}
+              {/* onClick={onLogout} */}
             </a>
           </li>
         </ul>
@@ -161,6 +171,23 @@ return (
 }
 
 function Content(){
+  const [comment, setComment] = useState(null)
+
+  // 댓글
+  const onCommentHandler = (e) =>{
+    setComment(e.currentTarget.value)
+  }
+  const commentSubmit = () => {
+    axios.post('',{
+      comment : comment
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+        }
+    })
+    .then(res => res.json())
+    .then(result => console.log('결과: ', result));
+  }
 return (
 <>
   <article className="post">
@@ -211,8 +238,16 @@ return (
           </ul>
         </div>
         <section className="post_comment_wrap">
-          <input id="post_comment_input" type="text" placeholder="댓글 달기..." />
-          <button className="post_comment_btn">
+          <input 
+            id="post_comment_input" 
+            type="text" 
+            placeholder="댓글 달기..." 
+            onChange={onCommentHandler}
+            />
+          <button 
+            className="post_comment_btn"
+            onClick={commentSubmit}
+            >
             <i className='bx bx-send'></i>
           </button>
         </section>
