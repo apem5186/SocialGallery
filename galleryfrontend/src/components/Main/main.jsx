@@ -172,6 +172,7 @@ return (
 
 function Content(){
   const [comment, setComment] = useState(null)
+  const [mainImg,setMainImg] = useState([])
 
   // 댓글
   const onCommentHandler = (e) =>{
@@ -188,6 +189,20 @@ function Content(){
     .then(res => res.json())
     .then(result => console.log('결과: ', result));
   }
+
+// 이미지 받아오기
+  const searchImg = ()=>{
+    const url = "https://jsonplaceholder.typicode.com/photos";
+    axios.get(url)
+    .then((res)=>{
+      setMainImg(res.data)
+      console.log('성공')
+    })
+    .catch((error)=>{
+      console.log('실패')
+    })
+  }
+
 return (
 <>
   <article className="post">
@@ -205,7 +220,18 @@ return (
     </div>
     <div className="post__content">
       <div className="post__medias">
-        <img className="post__media" src="assets/Img/Main_contents.jpg" />
+      {/* map */}
+        {
+          mainImg.map((a,i)=>{
+            return(
+              <>
+              <img src={a[Object.keys(a)[0]]} alt="" />
+              </>
+            )
+          })
+        }
+        <button onClick={searchImg}>불러</button>
+        {/* <img className="post__media" src="assets/Img/Main_contents.jpg" /> */}
       </div>
     </div>
     <div className="post__footer">
