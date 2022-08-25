@@ -26,6 +26,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -59,13 +60,13 @@ public class PostController {
     private final ResponseService responseService;
 
     @ApiOperation(value = "업로드", notes = "게시글 업로드를 합니다.")
-    @PostMapping("/post/upload")
+    @PostMapping(value = "/post/upload")
     @ResponseStatus(HttpStatus.CREATED)
     public SingleResult<Long> post(
             @ApiParam(value = "게시글 등록 DTO", required = true)
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception{
-        Optional<Users> users = userRepository.findById(postFileVO.getUsersId());
+        Optional<Users> users = userRepository.findByEmail(postFileVO.getEmail());
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .users(users.orElseThrow())
                 .title(postFileVO.getTitle())

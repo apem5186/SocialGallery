@@ -71,7 +71,7 @@ public class SignController {
 
     @ApiOperation(value = "로그아웃",
                   notes = "리프레시토큰을 지움으로서 로그아웃을 합니다.")
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public SingleResult<Long> logout(
             @ApiParam(value = "로그아웃", required = true)
             @RequestParam Long uid

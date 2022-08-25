@@ -80,6 +80,7 @@ public class PostService {
     }
     @Transactional
     public boolean checkToken(Long id, HttpServletRequest request) {
+
         Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
         UserResponseDTO userPk = usersService.findByUsername(users.getUsername());
         Optional<RefreshToken> refreshToken = refreshTokenJpaRepo.findByKey(userPk.getId());

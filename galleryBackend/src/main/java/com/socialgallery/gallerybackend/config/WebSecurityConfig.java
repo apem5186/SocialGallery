@@ -97,10 +97,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  * 구글 로그인 설정
                  */
                 .oauth2Login()
+                .loginPage("http://localhost:3000/login")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
                 .successHandler(oAuth2SuccessHandler)
+                .defaultSuccessUrl("http://localhost:3000/")
                 .permitAll();
 
 

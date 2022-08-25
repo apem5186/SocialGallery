@@ -15,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -123,6 +124,7 @@ public class JwtProvider {
     // Request Header에 "Authorization" 이 있으면 탈취해서 Jwt값으로 취한다.
     public String resolveToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
+
         if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
             return token.substring(7);
         } else

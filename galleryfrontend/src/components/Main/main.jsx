@@ -4,11 +4,25 @@ import footerData from '../../Data/footerData';
 import  {Link} from 'react-router-dom'
 import postCommentInFeed from './comment';
 import UpLoad from '../PostReg/upload';
+import axios  from 'axios';
 
 
 function Main(){
 
   const [foot, setFoot] = useState(footerData)
+  const [file, setFile] = useState('')
+
+  const userData = () => {
+    const data = axios.get("http://localhost:8080/findUserByEmail/" + localStorage.getItem("user"))
+  }
+
+  const onLogout = () =>{
+    axios.get("http://localhost:8080/v1/logout/" + userData().data.id)
+    // localStorage에 있는 item삭제
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    document.location.href = '/'
+  }
 
   return (
       <>
@@ -148,7 +162,7 @@ function Main(){
                 <li>
                   <a href="#">
                     <i className="bx bx-log-out icon"></i>
-                    <span className="text nav-text">Logout</span>
+                    <span className="text nav-text" onClick={onLogout}>Logout</span>
                   </a>
                 </li>
               </ul>
@@ -160,6 +174,38 @@ function Main(){
 }
 
 function Content(){
+  const [comment, setComment] = useState(null)
+  const [mainImg,setMainImg] = useState([])
+
+  // 댓글
+  const onCommentHandler = (e) =>{
+    setComment(e.currentTarget.value)
+  }
+  const commentSubmit = () => {
+    axios.post('',{
+      comment : comment
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+        .then(res => res.json())
+        .then(result => console.log('결과: ', result));
+  }
+
+// 이미지 받아오기
+  const searchImg = ()=>{
+    const url = "https://jsonplaceholder.typicode.com/photos";
+    axios.get(url)
+        .then((res)=>{
+          setMainImg(res.data)
+          console.log('성공')
+        })
+        .catch((error)=>{
+          console.log('실패')
+        })
+  }
+
   return (
       <>
         <article className="post">
@@ -177,7 +223,10 @@ function Content(){
           </div>
           <div className="post__content">
             <div className="post__medias">
-              <img className="post__media" src="assets/Img/Main_contents.jpg" />
+              {/* map */}
+
+
+              {/* <img className="post__media" src="assets/Img/Main_contents.jpg" /> */}
             </div>
           </div>
           <div className="post__footer">
@@ -210,8 +259,16 @@ function Content(){
                 </ul>
               </div>
               <section className="post_comment_wrap">
-                <input id="post_comment_input" type="text" placeholder="댓글 달기..." />
-                <button className="post_comment_btn">
+                <input
+                    id="post_comment_input"
+                    type="text"
+                    placeholder="댓글 달기..."
+                    onChange={onCommentHandler}
+                />
+                <button
+                    className="post_comment_btn"
+                    onClick={commentSubmit}
+                >
                   <i className='bx bx-send'></i>
                 </button>
               </section>
