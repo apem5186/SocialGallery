@@ -1,17 +1,15 @@
 package com.socialgallery.gallerybackend.service.oauth;
 
-
 import com.socialgallery.gallerybackend.config.security.JwtProvider;
 import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
-import com.socialgallery.gallerybackend.dto.oauth.OAuth2Attributes;
-import com.socialgallery.gallerybackend.entity.user.AuthProvider;
-import com.socialgallery.gallerybackend.entity.user.UserRole;
+import com.socialgallery.gallerybackend.dto.oauth.OAuthAttributes;
+import com.socialgallery.gallerybackend.entity.security.RefreshToken;
+import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -19,71 +17,61 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.List;
 
-@Slf4j
-@Service
 @RequiredArgsConstructor
+@Service
+@Slf4j
 public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
 
     private final UserRepository userRepository;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final JwtProvider jwtProvider;
 
-    private JwtProvider jwtProvider;
+    private final RefreshTokenJpaRepo refreshTokenJpaRepo;
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        //  1번
-        OAuth2UserService<OAuth2UserRequest, OAuth2User> oAuth2UserService = new DefaultOAuth2UserService();
-
-        //	2번
-        OAuth2User oAuth2User = oAuth2UserService.loadUser(userRequest);
-        log.info("============================================");
-        oAuth2User.getAttributes().forEach((k, v) -> {
-            log.info(k +":"+v); //sub, picture, email, email_verified, EMAIL 등이 출력
-        });
-        String email = oAuth2User.getAttribute("email");
-
-        Users users = Users.builder()
-                .email(email)
-                .username(oAuth2User.getAttribute("name"))
-                .password(bCryptPasswordEncoder.encode("1111"))
-                .phone(null)
-                .picture(oAuth2User.getAttribute("picture"))
-                .authProvider(String.valueOf(userRequest.getClientRegistration()))
-                .fromSocial(true)
-                .roles(Collections.singletonList("ROLE_USER"))
-                .build();
-        Optional<Users> result = userRepository.findByEmail(email);
-        if (result.isPresent()) {
-            throw new IllegalArgumentException("이미 가입된 이메일입니다. 가입된 이메일로 로그인을 해주세요.");
-        }
-
-        userRepository.save(users);
-
-
-
-        //	3번
+        OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
+        OAuth2User oAuth2User = delegate.loadUser(userRequest);
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
-        String userNameAttributeName = userRequest.getClientRegistration()
-                .getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
-        log.info("registrationId = {}", registrationId);
-        log.info("userNameAttributeName = {}", userNameAttributeName);
-        log.info("============================================");
+        String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails()
+                .getUserInfoEndpoint().getUserNameAttributeName();
 
-        // 4번
-        OAuth2Attributes oAuth2Attribute =
-                OAuth2Attributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
+        OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 
-        var memberAttribute = oAuth2Attribute.convertToMap();
+        Users users = saveOrUpdate(attributes);
+
+        TokenDTO tokenDTO = jwtProvider.createTokenDto(users.getId(), users.getRoles());
+        log.info("ACCESS TOKEN" + tokenDTO.getAccessToken());
+
+        RefreshToken refreshToken = RefreshToken.builder()
+                .key(users.getId())
+                .token(tokenDTO.getRefreshToken())
+                .build();
+
+        refreshTokenJpaRepo.save(refreshToken);
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")),
-                memberAttribute, "email");
+                attributes.getAttributes(),
+                attributes.getNameAttributeKey()
+        );
     }
+
+    private Users saveOrUpdate(OAuthAttributes attributes) {
+        Users users = userRepository.findByEmail(attributes.getEmail())
+                .map(entity -> entity.update(attributes.getName(), attributes.getPicture()))
+                .orElse(attributes.toEntity());
+
+        return userRepository.save(users);
+    }
+
 }

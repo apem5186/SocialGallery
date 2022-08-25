@@ -1,6 +1,5 @@
 package com.socialgallery.gallerybackend.dto.sign;
 
-import com.socialgallery.gallerybackend.entity.user.AuthProvider;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

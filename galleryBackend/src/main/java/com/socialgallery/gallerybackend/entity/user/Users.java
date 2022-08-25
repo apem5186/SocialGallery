@@ -10,6 +10,7 @@ import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,7 +24,7 @@ import java.util.stream.Collectors;
 @Getter
 @ToString(exclude = "post")
 @Table(name = "users")
-public class Users extends BaseEntity implements UserDetails {
+public class Users extends BaseEntity implements UserDetails, OAuth2User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)         // GenerationType : JPA에서 기본키의 생성 전략 타입
@@ -53,10 +54,7 @@ public class Users extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @Enumerated(EnumType.STRING)
     private String authProvider;
-
-    private String providerId;
 
     /*
      * User 객체의 권한이 담긴 컬렉션 객체를 User 조회시 EAGER로 즉시로딩하지 않는다면,
@@ -77,6 +75,11 @@ public class Users extends BaseEntity implements UserDetails {
 
     public void updateUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
     }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -116,5 +119,10 @@ public class Users extends BaseEntity implements UserDetails {
         this.picture = picture;
 
         return this;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }

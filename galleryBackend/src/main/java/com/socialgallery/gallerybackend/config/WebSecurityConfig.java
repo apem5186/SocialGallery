@@ -1,6 +1,7 @@
 package com.socialgallery.gallerybackend.config;
 
 import com.socialgallery.gallerybackend.config.security.*;
+import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.service.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,8 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /*
@@ -28,8 +31,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
-    private final OAuth2SuccessHandler oAuth2SuccessHandler;
     private final CustomOAuth2UserService customOAuth2UserService;
+
+    private final RefreshTokenJpaRepo refreshTokenJpaRepo;
+
+    //@Bean
+    //public OAuthSuccessHandler oAuthSuccessHandler() { return new OAuthSuccessHandler(passwordEncoder(), jwtProvider, refreshTokenJpaRepo);}
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
     // authenticationManager를 Bean 등록합니다.
     @Bean
@@ -97,11 +109,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  * 구글 로그인 설정
                  */
                 .oauth2Login()
-                .loginPage("http://localhost:3000/login")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                .successHandler(oAuth2SuccessHandler)
                 .defaultSuccessUrl("http://localhost:3000/")
                 .permitAll();
 
