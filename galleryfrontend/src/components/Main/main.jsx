@@ -5,19 +5,32 @@ import  {Link} from 'react-router-dom'
 import postCommentInFeed from './comment';
 import UpLoad from '../PostReg/upload';
 import axios  from 'axios';
+import { useEffect } from 'react';
 
 
 function Main(){
 
 const [foot, setFoot] = useState(footerData)
 const [file, setFile] = useState('')
+const [test, setTest] = useState('')
+const [mainImg,setMainImg] = useState([])
 
-// Logout
-// const onLogout = () =>{
-//   // localStorage에 있는 item삭제
-//   localStorage.removeItem('삭제할 키 값')
-//   document.location.href = '/'
-// }
+
+const onLogout = () =>{
+  // localStorage에 있는 item삭제
+  localStorage.removeItem('user')
+  localStorage.removeItem('token')
+  document.location.href = '/'
+}
+// 이미지 받아오기
+useEffect(()=>{
+  axios.get('https://jsonplaceholder.typicode.com/photos?id=1&id=2&id=3&id=4')
+  // axios.get('https://jsonplaceholder.typicode.com/photos?id=2')
+  .then(res =>{
+    setMainImg([...res.data])
+  })
+},[])
+
 
 return (
 <>
@@ -52,7 +65,9 @@ return (
       <div className="content">
         <div className="posts">
           {/* Content */}
-          <Content></Content>
+          {
+            mainImg.map((a,i)=><Content key={a.id}mainImg={mainImg} i={i}></Content>)
+          } 
         </div>
       </div>
     </section>
@@ -157,9 +172,7 @@ return (
           <li>
             <a href="#">
               <i className="bx bx-log-out icon"></i>
-              <span className="text nav-text">Logout</span>
-              {/* 로그아웃 */}
-              {/* onClick={onLogout} */}
+              <span className="text nav-text" onClick={onLogout}>Logout</span>
             </a>
           </li>
         </ul>
@@ -170,9 +183,8 @@ return (
 )
 }
 
-function Content(){
+function Content(props){
   const [comment, setComment] = useState(null)
-  const [mainImg,setMainImg] = useState([])
 
   // 댓글
   const onCommentHandler = (e) =>{
@@ -190,18 +202,11 @@ function Content(){
     .then(result => console.log('결과: ', result));
   }
 
-// 이미지 받아오기
-  const searchImg = ()=>{
-    const url = "https://jsonplaceholder.typicode.com/photos";
-    axios.get(url)
-    .then((res)=>{
-      setMainImg(res.data)
-      console.log('성공')
-    })
-    .catch((error)=>{
-      console.log('실패')
-    })
-  }
+// id=1일 데이터 받아오기
+// const Pid = props.mainImg.filter((a,i) =>{
+//   return (a.id < 2)
+// })
+
 
 return (
 <>
@@ -212,26 +217,14 @@ return (
           <img src="assets/Main/user.png" alt="User Picture" />
         </a>
         <span>user1</span>
-        {/*파일 업로드 btn-*/}
         {/* <UpLoad></UpLoad> */}
-
         <UpLoad></UpLoad>
       </div>
     </div>
     <div className="post__content">
-      <div className="post__medias">
+      <div className="post__medias" >
       {/* map */}
-        {
-          mainImg.map((a,i)=>{
-            return(
-              <>
-              <img src={a[Object.keys(a)[0]]} alt="" />
-              </>
-            )
-          })
-        }
-        <button onClick={searchImg}>불러</button>
-        {/* <img className="post__media" src="assets/Img/Main_contents.jpg" /> */}
+      <img src={props.mainImg[props.i].thumbnailUrl} alt="" />
       </div>
     </div>
     <div className="post__footer">
@@ -248,10 +241,10 @@ return (
       </div>
       <div className="post__infos">
         <div className="post__title">
-          <span>오늘의 회의</span>
+          <span>{props.mainImg[props.i].title}</span>
         </div>
         <div className="post__description">
-          <span>힘들었다.</span>
+          <span>{props.mainImg[props.i].title}</span>
         </div>
         <div className="post__border">
         </div>
