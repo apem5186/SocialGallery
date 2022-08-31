@@ -43,6 +43,10 @@ public class Image extends BaseEntity {
         this.fileSize = fileSize;
     }
 
+    public void getFileId(Long iid) {
+        this.iid = iid;
+    }
+
     // post 정보 저장
     public void setPost(Post post) {
         this.post = post;

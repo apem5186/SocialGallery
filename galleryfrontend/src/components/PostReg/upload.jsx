@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import UpLoadForm from './upLoadForm';
 
-function UpLoad(){
+function UpLoad(props){
 
     return (
         <>

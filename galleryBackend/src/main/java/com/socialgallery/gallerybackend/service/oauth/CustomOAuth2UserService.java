@@ -18,7 +18,9 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.filter.RequestContextFilter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
     private final RefreshTokenJpaRepo refreshTokenJpaRepo;
 
+
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
@@ -46,9 +49,10 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .getUserInfoEndpoint().getUserNameAttributeName();
 
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
-
+        log.info("ATTRIBUTES : " + attributes);
+        log.info("OAUTH2USER : " + oAuth2User);
         Users users = saveOrUpdate(attributes);
-
+        log.info("USERS : " + users);
         TokenDTO tokenDTO = jwtProvider.createTokenDto(users.getId(), users.getRoles());
         log.info("ACCESS TOKEN" + tokenDTO.getAccessToken());
 
@@ -56,7 +60,6 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .key(users.getId())
                 .token(tokenDTO.getRefreshToken())
                 .build();
-
         refreshTokenJpaRepo.save(refreshToken);
 
         return new DefaultOAuth2User(

@@ -68,6 +68,7 @@ public class PostService {
 
         if (checkToken(postRequestDTO.getUsers().getId(), request)) {
             Post entity = postRequestDTO.toEntity();
+            log.info("ENTITY : " + entity);
             List<Image> imageList = fileHandler.parseFileInfo(files, entity);
             if (!imageList.isEmpty()) {
                 for (Image image : imageList) {

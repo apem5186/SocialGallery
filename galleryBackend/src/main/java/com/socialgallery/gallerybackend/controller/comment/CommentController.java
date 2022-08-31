@@ -31,9 +31,8 @@ public class CommentController {
     @PostMapping("/{pid}/register")
     public SingleResult<Long> register(
             @ApiParam(value = "댓글 등록 DTO", required = true)
-            CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request,
             @PathVariable("pid") String pid) throws Exception {
-
         Long cid = commentService.commentSave(Long.valueOf(pid), commentRequestDTO, request);
 
         return responseService.getSingleResult(cid);

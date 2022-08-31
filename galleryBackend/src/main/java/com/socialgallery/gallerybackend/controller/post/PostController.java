@@ -66,13 +66,18 @@ public class PostController {
             @ApiParam(value = "게시글 등록 DTO", required = true)
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception{
-        Optional<Users> users = userRepository.findByEmail(postFileVO.getEmail());
+        log.info("POSTFILEVO : " + postFileVO);
+        Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
+        log.info("USERS : " + users);
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .users(users.orElseThrow())
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
                 .build();
+
+        log.info("POSTREQUESTDTO : " + postRequestDTO);
         Long pid = postService.post(postRequestDTO, postFileVO.getFiles(), request);
+        log.info("Pid : " + pid);
         ResponseEntity.ok().body(pid);
         return responseService.getSingleResult(pid);
     }
@@ -166,6 +171,10 @@ public class PostController {
             return responseService.getSingleResult(postService.searchById(pid, imageId));
         }
 
+
+
+
+        // fild_Id가 썸네일 용 하나만 나옴 여러개 나올 수 있도록 변경 필요
     // 전체 조회
     @ApiOperation(value = "전체 조회", notes = "게시글 전체를 검색합니다.")
     @GetMapping("/post")
@@ -174,6 +183,8 @@ public class PostController {
             @RequestParam(value = "keyword", required = false) String keyword) {
         // 게시글 전체 조회
         Page<Post> list = null;
+
+
 
         // 검색할 때와 검색하지 않았을 때를 구분
         if(keyword == null) {

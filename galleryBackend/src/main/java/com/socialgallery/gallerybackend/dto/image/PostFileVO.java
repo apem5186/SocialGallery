@@ -11,7 +11,7 @@ import java.util.List;
 
 @Data
 public class PostFileVO {
-    private String email;
+    private String usersId;
     private String title;
     private String content;
     private List<MultipartFile> files;

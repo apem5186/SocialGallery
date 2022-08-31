@@ -119,12 +119,6 @@ public class UserController {
         return responseService.getSingleResult(usersService.findByUsername(username));
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "X-AUTH-TOKEN",
-                    value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
-    })
     @ApiOperation(value = "회원 검색(이메일)", notes = "이메일로 회원을 검색합니다.")
     @GetMapping("/findUserByEmail/{email}")
     public SingleResult<UserResponseDTO> findUserByEmail(@ApiParam(value = "회원 이메일", required = true)@PathVariable String email

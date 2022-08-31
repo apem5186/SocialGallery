@@ -109,10 +109,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  * 구글 로그인 설정
                  */
                 .oauth2Login()
+                .defaultSuccessUrl("http://localhost:8080/")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService)
                 .and()
-                .defaultSuccessUrl("http://localhost:3000/")
                 .permitAll();
 
 

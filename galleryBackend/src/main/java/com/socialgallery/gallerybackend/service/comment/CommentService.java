@@ -54,10 +54,10 @@ public class CommentService {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
         // 유저정보와 토큰이 정상적이면 / access 토큰 만료시 재발급
-        if (checkToken(post.getUsers().getId(), request)) {
+        if (checkToken(commentRequestDTO.getUsers().getId(), request)) {
             // 유저 정보 post 이용해서 받아오기
-            Users users = userRepository.findById(post.getUsers().getId()).orElseThrow(UserNotFoundCException::new);
-            commentRequestDTO.setUsers(users);
+            Optional<Users> users = userRepository.findById(commentRequestDTO.getUsers().getId());
+            commentRequestDTO.setUsers(users.orElseThrow(UserNotFoundCException::new));
             commentRequestDTO.setPost(post);
             Comment entity = commentRequestDTO.toEntity();
             // 저장
@@ -72,7 +72,7 @@ public class CommentService {
     public Long update(Long pid, Long cid, CommentRequestDTO commentRequestDTO, HttpServletRequest request) {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
-        if (checkToken(post.getUsers().getId(), request)) {
+        if (checkToken(commentRequestDTO.getUsers().getId(), request)) {
             // 댓글 정보 받아오기
             Optional<Comment> result = commentRepository.findById(cid);
             result.ifPresent(comment -> comment.update(commentRequestDTO.getComment()));
@@ -85,8 +85,8 @@ public class CommentService {
     public Long delete(Long pid, Long cid, HttpServletRequest request) {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
-        if (checkToken(post.getUsers().getId(), request)) {
-            Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
+        Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
+        if (checkToken(comment.getUsers().getId(), request)) {
             commentRepository.delete(comment);
         }
         return cid;

@@ -12,6 +12,7 @@ function Login() {
   // 로그인 Form
   const [email,setEmail] = useState('');
   const [pw,setPw] = useState('');
+  let usersId = useState('');
 
   const onEmailHandler = e =>{
     setEmail(e.currentTarget.value)
@@ -62,9 +63,18 @@ function Login() {
   //     .then(res => res.json())
   //     .then(result => console.log('결과', result))
   // };
+  const getUser = (email) => {
+    axios.get(base_url + '/findUserByEmail/' + email, {
 
+    }).then(res => {
+      usersId = res.data.data.id;
+      localStorage.setItem("uid", usersId);
+      return usersId;
+    })
+  }
   const signIn = () =>{
     axios.post(base_url + '/v1/login',{
+      usersId : getUser(email),
       email : email,
       password : pw
     },{
@@ -81,6 +91,7 @@ function Login() {
             accessToken = res.data.data.accessToken
             localStorage.setItem("user", email)
             localStorage.setItem("token", res.data.data.accessToken)
+            getUser(email)
             navigate('/')
           }else{
             alert('아이디 또는 비밀번호가 일치하지 않습니다.')

@@ -580,7 +580,8 @@ body.dark .sidebar header .toggle{
     font-weight: 500;
     transition: var(--tran-03);
 }
-.sidebar li a{
+.sidebar li a,
+.sidebar li div{
     list-style: none;
     height: 100%;
     background-color: transparent;
@@ -591,11 +592,14 @@ body.dark .sidebar header .toggle{
     border-radius: 6px;
     text-decoration: none;
     transition: var(--tran-03);
+    cursor: pointer;
 }
 
-.sidebar li a:hover{
+.sidebar li a:hover,
+.sidebar li div:hover{
     background-color: var(--point);
 }
+.sidebar li div:hover .icon,.sidebar li div:hover .text,
 .sidebar li a:hover .icon,.sidebar li a:hover .text{
     color: var(--sidebar-color);
 }
@@ -699,4 +703,9 @@ body.dark .sidebar header .toggle{
     .sidebar{
         display: none;
     }
+}
+
+/* 테스트 */
+.test{
+    text-align: center;
 }
