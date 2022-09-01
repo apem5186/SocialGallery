@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 import axios from "axios"
 import UpLoad from '../PostReg/upload';
 import { Link } from "react-router-dom";
-
+import postCommentInFeed from "./comment";
 function Content({pfUser,setPfUser,mainImg,i}){
     const [comment, setComment] = useState(null)
     let [users, setUsers] = useState([]);
@@ -140,6 +140,7 @@ function Content({pfUser,setPfUser,mainImg,i}){
                                                 className="post_comment_btn"
                                                 onClick={commentSubmit}
                                             >
+
                                                 <i className='bx bx-send'></i>
                                             </button>
                                         </section>

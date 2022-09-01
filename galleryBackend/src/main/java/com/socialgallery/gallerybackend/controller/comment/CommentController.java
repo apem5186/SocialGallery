@@ -43,7 +43,7 @@ public class CommentController {
     public SingleResult<Long> update(
             @ApiParam(value = "게시글 pk", required = true)
             @PathVariable("pid") String pid, @PathVariable("cid") String cid,
-            CommentRequestDTO commentRequestDTO, HttpServletRequest request) throws Exception {
+            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request) throws Exception {
 
         return responseService.getSingleResult(
                 commentService.update(Long.valueOf(pid), Long.valueOf(cid), commentRequestDTO, request)

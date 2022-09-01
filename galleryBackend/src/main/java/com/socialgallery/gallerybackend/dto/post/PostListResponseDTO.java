@@ -2,6 +2,7 @@ package com.socialgallery.gallerybackend.dto.post;
 
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -22,21 +23,30 @@ public class PostListResponseDTO {
     private String title;
     private String content;
 
-    private String filePath;
+    @Builder.Default
+    private List<String> filePath = new ArrayList<>();
 
-    private Long thumbnailId;   // 썸네일 Id
+    private List<Long> thumbnailId = new ArrayList<>();   // 썸네일 Id
 
     public PostListResponseDTO(Post post) {
+        List<Image> pathList = post.getImages();
+        pathList.forEach(image -> {
+            filePath.add(image.getFilePath());
+        });
+        List<Image> thumbnailList = post.getImages();
+        thumbnailList.forEach(image -> {
+            thumbnailId.add(image.getIid());
+        });
         this.pid = post.getPid();
         this.username = post.getUsers().getUsername();
         this.title = post.getTitle();
         this.content = post.getContent();
-        this.filePath = post.getImages().get(0).getFilePath();
+        this.filePath = pathList.stream().map(Image::getFilePath).collect(Collectors.toList());
 
         if (!post.getImages().isEmpty())    // 첨부파일 존재 o
-                this.thumbnailId = post.getImages().get(0).getIid();
+                this.thumbnailId = thumbnailList.stream().map(Image::getIid).collect(Collectors.toList());
 
         else // 첨부파일 존재 x
-            this.thumbnailId = 0L;  // 서버에 저장된 기본 이미지 반환
+            this.thumbnailId.add(0, 0L);  // 서버에 저장된 기본 이미지 반환
     }
 }

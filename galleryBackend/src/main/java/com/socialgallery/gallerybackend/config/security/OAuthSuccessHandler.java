@@ -5,22 +5,25 @@
 //import com.socialgallery.gallerybackend.entity.security.RefreshToken;
 //import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 //import com.socialgallery.gallerybackend.entity.user.Users;
+//import lombok.RequiredArgsConstructor;
 //import lombok.extern.slf4j.Slf4j;
 //import org.springframework.security.core.Authentication;
 //import org.springframework.security.crypto.password.PasswordEncoder;
 //import org.springframework.security.web.DefaultRedirectStrategy;
 //import org.springframework.security.web.RedirectStrategy;
 //import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+//import org.springframework.stereotype.Component;
 //
 //import javax.servlet.ServletException;
 //import javax.servlet.http.HttpServletRequest;
 //import javax.servlet.http.HttpServletResponse;
 //import java.io.IOException;
+//import java.util.Optional;
 //
 //@Slf4j
+//@Component
+//@RequiredArgsConstructor
 //public class OAuthSuccessHandler implements AuthenticationSuccessHandler {
-//
-//    private final RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 //
 //    private final PasswordEncoder passwordEncoder;
 //
@@ -28,34 +31,23 @@
 //
 //    private final RefreshTokenJpaRepo refreshTokenJpaRepo;
 //
-//    public OAuthSuccessHandler(PasswordEncoder passwordEncoder, JwtProvider jwtProvider, RefreshTokenJpaRepo refreshTokenJpaRepo){
-//        this.passwordEncoder = passwordEncoder;
-//        this.jwtProvider = jwtProvider;
-//        this.refreshTokenJpaRepo = refreshTokenJpaRepo;
+//    @Override
+//    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+//            throws IOException, ServletException {
+//        log.info("onAuthenticationSuccessHandler");
+//        String targetUrl = determineTargetUrl(request, response, authentication);
+//
+//        if (response.isCommitted()) {
+//            log.debug("Response has already been committed. Unable to redirect to " +
+//                    targetUrl);
+//            return;
+//        }
+//
+//        getRedirectStrategy().sendRedirect(request, response, targetUrl);
 //    }
 //
-//    @Override
-//    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-//        log.info("onAuthenticationSuccessHandler");
-//
-//        OAuthAttributes oAuthAttributes = authentication.getPrincipal();
-//
-//        Users users = oAuthAttributes.toEntity();
-//        boolean fromSocial = users.isFromSocial();
-//        boolean passwordResult = passwordEncoder.matches("1111", users.getPassword());
-//
-//        TokenDTO tokenDTO = jwtProvider.createTokenDto(users.getId(), users.getRoles());
-//
-//        RefreshToken refreshToken = RefreshToken.builder()
-//                .token(tokenDTO.getRefreshToken())
-//                .key(users.getId())
-//                .build();
-//
-//        refreshTokenJpaRepo.save(refreshToken);
-//
-//
-//        if (fromSocial && passwordResult) {
-//            redirectStrategy.sendRedirect(request, response, "/");
-//        }
+//    // token을 생성하고 이를 포함한 프론트엔드로의 uri를 생성한다.
+//    protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+//        Optional<String> redirectUri =
 //    }
 //}
