@@ -35,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final RefreshTokenJpaRepo refreshTokenJpaRepo;
 
+    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+
     //@Bean
     //public OAuthSuccessHandler oAuthSuccessHandler() { return new OAuthSuccessHandler(passwordEncoder(), jwtProvider, refreshTokenJpaRepo);}
     @Bean
@@ -62,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .authorizeRequests() // 요청에 대한 사용권한 체크 antMatchers를 작성하기 위해 먼저 써야함
                 .antMatchers("/h2-console/**").permitAll()
-                /****
+                /**
                  * anyRequest.hasRole("USER")와 anyRequest.authenticated() 는 동일한 효과를 낸다.
                  * 로그인, 회원가입 기능 누구나 이용 가능
                  */
@@ -99,21 +101,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
 
 
-                .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider),
-                        UsernamePasswordAuthenticationFilter.class);
-                // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
 
-        http
+                .and()
                 /*
                  * 구글 로그인 설정
                  */
                 .oauth2Login()
-                .defaultSuccessUrl("http://localhost:8080/")
+                .successHandler(oAuth2SuccessHandler)
+                //.defaultSuccessUrl("http://localhost:8080/")
                 .userInfoEndpoint()
-                .userService(customOAuth2UserService)
-                .and()
-                .permitAll();
+                .userService(customOAuth2UserService);
+
+            http
+                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider),
+                UsernamePasswordAuthenticationFilter.class);
+        // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
+
 
 
     }
