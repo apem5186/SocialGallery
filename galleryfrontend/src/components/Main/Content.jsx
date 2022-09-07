@@ -3,11 +3,33 @@ import axios from "axios"
 import UpLoad from '../PostReg/upload';
 import { Link } from "react-router-dom";
 import postCommentInFeed from "./comment";
+import {useParams} from "react-router-dom";
 function Content({pfUser,setPfUser,mainImg,i}){
-    const [comment, setComment] = useState(null)
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
+    let pid = useState('')
     // 댓글
+    const [comment, setComment] = useState('');
+    const [commentArray, setCommentArray] = useState([]);
+    const handleComment = e => {
+        setComment(e.target.value);
+    }
+    useEffect(()=>{
+        pid = post.find(1)
+        axios.get(base_URL+`/api/comment/${pid}`)
+            .then(res=>{
+                setComment(res.data)
+                console.log(res.data)
+            })
+    },[])
+    const onCommentSubmit = e => {
+        e.preventDefault();
+        if (comment === '') {
+            return;
+        }
+        setCommentArray(a => [comment, ...a]);
+        setComment('');
+    };
     const onCommentHandler = (e) =>{
         setComment(e.currentTarget.value)
     }
@@ -110,7 +132,7 @@ function Content({pfUser,setPfUser,mainImg,i}){
                                             <img src="assets/Main/more_btn.png" alt="" />
                                         </button>
                                     </div>
-                                    <div className="post__infos">
+                                    <div className="post__infos" onSubmit={onCommentSubmit}   >
                                         <div className="post__title">
                                             <span>{mainImg[i].title}</span>
                                         </div>
@@ -123,27 +145,33 @@ function Content({pfUser,setPfUser,mainImg,i}){
         <!-- 댓글 --> */}
                                         <div>
                                             <ul className="comment_list">
-                                                <li>
-                                                </li>
+                                                {commentArray.map((value,i) => (
+                                                    <li key={i}>
+                                                        <div className="user_desc">
+                                                            <em>iAmUser</em>
+                                                            <span>{value[i]}</span>
+                                                        </div>
+                                                    </li>
+                                                ))}
                                             </ul>
                                         </div>
-                                        <section className="post_comment_wrap">
-                                            <input
-                                                id="post_comment_input"
-                                                type="text"
-                                                placeholder="댓글 달기..."
-                                                onChange={(e)=>{
-                                                    onCommentHandler(e)
-                                                }}
-                                            />
-                                            <button
-                                                className="post_comment_btn"
-                                                onClick={commentSubmit}
-                                            >
-
-                                                <i className='bx bx-send'></i>
-                                            </button>
-                                        </section>
+                                        <form>
+                                            <section className="post_comment_wrap" >
+                                                <input
+                                                    id="post_comment_input"
+                                                    type="text"
+                                                    placeholder="댓글 달기..."
+                                                    value={comment}
+                                                    onChange={handleComment}
+                                                />
+                                                <button
+                                                    className="post_comment_btn"
+                                                    onClick={onCommentSubmit}
+                                                >
+                                                    <i className='bx bx-send' ></i>
+                                                </button>
+                                            </section>
+                                        </form>
                                         <span className="post__date-time">more</span>
                                     </div>
                                 </div>
@@ -151,6 +179,7 @@ function Content({pfUser,setPfUser,mainImg,i}){
                         </div>
                     </div>
                 </section>
+
             </main>
         </>
 

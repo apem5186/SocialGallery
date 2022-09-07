@@ -81,6 +81,9 @@ textarea {
     align-items: center;
     gap: 15px;
 }
+.header__buttons a {
+    text-decoration: none;
+}
 .profile-button {
     background-color: transparent;
     border: none;

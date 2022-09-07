@@ -54,7 +54,23 @@ function Login() {
   const location = useLocation();
 
 
+  useEffect(()=>{
+    const container = document.getElementById("container");
+    const signIn = document.getElementById("sign-in");
+    const signUp = document.getElementById("sign-up");
 
+    setTimeout(() => {
+      container.classList.add("sign-in");
+    }, 200);
+
+    const toggle = () => {
+      container.classList.toggle("sign-in");
+      container.classList.toggle("sign-up");
+    };
+
+    signIn.addEventListener("click", toggle);
+    signUp.addEventListener("click", toggle);
+  },[])
 
   // 로그인 fetch
   // const signIn = (e) => {
@@ -151,7 +167,7 @@ function Login() {
   
 	return ( 
 		<>
-    <div className="container" id="container" onLoad={Toggle}>
+    <div className="container" id="container" onClick={Toggle}>
 			<img src="/assets/Login/bg1.jpg"></img>
 
 	    {/* 회원가입 */}
@@ -288,7 +304,7 @@ function Login() {
                 <i className="bx bxl-facebook"></i>
               </div>
               <div className="align-center google-bg" >
-                <a href={"http://localhost:8080/oauth2/authorization/google"} onClick={()=>{
+                <a href={"http://localhost:8080/oauth2/authorization/google"} onChange={()=>{
                   alert('성공')
                   console.log(location)
                   // console.log(res.data)
@@ -296,6 +312,7 @@ function Login() {
                   localStorage.setItem("user", email)
                   //localStorage.setItem("token", res.data.data.accessToken)
                   getUser(email)
+                  location.href('/')
                 }}>
                   <i className="bx bxl-google"></i>
                 </a>

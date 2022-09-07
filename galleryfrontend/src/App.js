@@ -16,6 +16,7 @@ function App() {
             <Routes>
                 <Route exact path="/" element={<Main></Main>}></Route>
                 <Route path="/login/" element={<Login></Login>}></Route>
+                <Route path="/:pid" element={<Main></Main>}></Route>
                 <Route path="/login/:location" element={<Login></Login>}></Route>
                 <Route path="/upload" element={<UpLoad></UpLoad>}></Route>
             </Routes>
