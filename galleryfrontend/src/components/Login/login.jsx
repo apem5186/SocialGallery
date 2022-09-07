@@ -1,8 +1,9 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Toggle from "./toggle";
-import {Link, useLocation} from 'react-router-dom'
+import {Link, useLocation, useParams} from 'react-router-dom'
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
+import {compareArraysAsSet} from "@testing-library/jest-dom/dist/utils";
 
 function Login() {
   const navigate = useNavigate()
@@ -46,6 +47,14 @@ function Login() {
   }
 
   const base_url = "http://localhost:8080"
+
+
+  //google
+  const logNavigate = useNavigate()
+  const location = useLocation();
+
+
+
 
   // 로그인 fetch
   // const signIn = (e) => {
@@ -209,7 +218,23 @@ function Login() {
 		  {/* Icons */}
           <div className="form-wrapper">
             <div className="social-list align-center sign-up">
-							<Icons></Icons>
+              <div className="align-center home-bg">
+                <i className='bx bxs-home' ></i>
+              </div>
+              <div className="align-center facebook-bg">
+                <i className="bx bxl-facebook"></i>
+              </div>
+              <div className="align-center google-bg" >
+                <a href={"http://localhost:8080/oauth2/authorization/google"}>
+                  <i className="bx bxl-google"></i>
+                </a>
+              </div>
+              <div className="align-center twitter-bg">
+                <i className="bx bxl-twitter"></i>
+              </div>
+              <div className="align-center insta-bg">
+                <i className="bx bxl-instagram-alt"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -256,7 +281,31 @@ function Login() {
 				{/* Icons */}
           <div className="form-wrapper">
             <div className="social-list align-center sign-in">
-							<Icons></Icons>
+              <div className="align-center home-bg">
+                <i className='bx bxs-home' ></i>
+              </div>
+              <div className="align-center facebook-bg">
+                <i className="bx bxl-facebook"></i>
+              </div>
+              <div className="align-center google-bg" >
+                <a href={"http://localhost:8080/oauth2/authorization/google"} onClick={()=>{
+                  alert('성공')
+                  console.log(location)
+                  // console.log(res.data)
+                  //accessToken = res.data.data.accessToken
+                  localStorage.setItem("user", email)
+                  //localStorage.setItem("token", res.data.data.accessToken)
+                  getUser(email)
+                }}>
+                  <i className="bx bxl-google"></i>
+                </a>
+              </div>
+              <div className="align-center twitter-bg">
+                <i className="bx bxl-twitter"></i>
+              </div>
+              <div className="align-center insta-bg">
+                <i className="bx bxl-instagram-alt"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -267,63 +316,8 @@ function Login() {
 }
 
 // icons
-function Icons(){
-  /**
-   * oauth2 redirect가 안되고 로컬스토리지에 저장도 안됨
-   * url 문제가 있는거 같은데 해결을 해봐야 할듯
-   * useLocation()으로 찍어봐도 안되고 애초에 oauth2가 동작을 안하는 듯
-   */
-  const navigate = useNavigate()
-  const base_url = "http://localhost:8080"
-  let accessToken = null;
-  let usersId = useState('');
-  let email = useState('');
 
-  const getUser = (email) => {
-    axios.get(base_url + '/findUserByEmail/' + email, {
-
-    }).then(res => {
-      usersId = res.data.data.id;
-      localStorage.setItem("uid", usersId);
-      return usersId;
-    })
-  }
-    const location = useLocation();
-  const oauth2 = () => {
-    axios.get(location)
-        .then(res => {
-          console.log(location)
-          console.log(res.data)
-          accessToken = res.data.data.accessToken
-          localStorage.setItem("user", email)
-          localStorage.setItem("token", res.data.data.accessToken)
-          getUser(email)
-          navigate('/')
-
-        })
-  }
-	return(
-		<>
-    <div className="align-center home-bg">
-    <i className='bx bxs-home' ></i>
-    </div>   
-		<div className="align-center facebook-bg">
-			<i className="bx bxl-facebook"></i>
-		</div>
-		<div className="align-center google-bg" onClick={oauth2}>
-          <a href={"http://localhost:8080/oauth2/authorization/google"}>
-			<i className="bx bxl-google"></i>
-          </a>
-		</div>
-		<div className="align-center twitter-bg">
-			<i className="bx bxl-twitter"></i>
-		</div>
-		<div className="align-center insta-bg">
-			<i className="bx bxl-instagram-alt"></i>
-	  </div>
-		</>
-	)
-}
 
 
 export default Login;
+

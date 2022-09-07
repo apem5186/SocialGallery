@@ -3,18 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import {useParams} from "react-router-dom";
 
 function Sidebar({pfUser,setPfUser,setSearchTitle}){
-
+    let [uid, setUid] = useState('')
     const navigate = useNavigate()
+    // const uid = localStorage.getItem('uid')
 
-
+    const getUid = () => {
+        uid = localStorage.getItem('uid')
+        setUid(uid)
+        return uid
+    }
     // Logout
     const onLogout = () =>{
-        axios.get('')
+        getUid()
+        axios.get(`http://localhost:8080/v1/logout?uid=`+uid)
             .then(res=>{
                 if(res.status === 200){
                     localStorage.removeItem('token')
+                    localStorage.removeItem('user')
+                    localStorage.removeItem('uid')
                     navigate('/')
                 }
             })

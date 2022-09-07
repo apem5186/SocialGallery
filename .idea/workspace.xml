@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="comment 구현중">
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/OAuth2SuccessHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/oauth/OAuth2Attribute.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/sign/OAuth2DTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/sign/UserRequestMapper.java" afterDir="false" />
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="google oauth2 구현중">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/OAuthSuccessHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/oauth/OAuthAttributes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/oauth/CustomOAuth2UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/oauth/CustomOAuth2UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/OAuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/OAuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/SignController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/SignController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Login/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,7 +285,8 @@
       <workItem from="1661763220874" duration="2242000" />
       <workItem from="1661932413890" duration="21905000" />
       <workItem from="1661998266493" duration="4973000" />
-      <workItem from="1662455911715" duration="10432000" />
+      <workItem from="1662455911715" duration="10471000" />
+      <workItem from="1662533412061" duration="10814000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -452,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662003250884</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="google oauth2 구현중">
+      <created>1662466598119</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1662466598119</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -480,7 +484,8 @@
     <MESSAGE value="댓글 기능, 검색 기능 구현" />
     <MESSAGE value="OAuth2 구현중" />
     <MESSAGE value="comment 구현중" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment 구현중" />
+    <MESSAGE value="google oauth2 구현중" />
+    <option name="LAST_COMMIT_MESSAGE" value="google oauth2 구현중" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

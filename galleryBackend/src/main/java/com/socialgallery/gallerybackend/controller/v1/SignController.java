@@ -74,8 +74,8 @@ public class SignController {
     @GetMapping("/logout")
     public SingleResult<Long> logout(
             @ApiParam(value = "로그아웃", required = true)
-            @RequestParam Long uid
+            @RequestParam String uid
             ) {
-        return responseService.getSingleResult(signService.logout(uid));
+        return responseService.getSingleResult(signService.logout(Long.parseLong(uid)));
     }
 }
