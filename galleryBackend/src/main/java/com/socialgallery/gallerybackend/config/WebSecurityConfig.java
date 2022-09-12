@@ -4,10 +4,12 @@ import com.socialgallery.gallerybackend.config.security.*;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.service.oauth.CustomOAuth2UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +33,11 @@ import java.io.IOException;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @Configuration
+@EnableGlobalMethodSecurity(
+        securedEnabled = true,
+        jsr250Enabled = true,
+        prePostEnabled = true
+)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtProvider jwtProvider;
@@ -43,6 +50,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final OAuth2SuccessHandler oAuth2SuccessHandler;
 
+    private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+
+    @Bean
+    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+        return new HttpCookieOAuth2AuthorizationRequestRepository();
+    }
+
+    @Bean
+    RedirectStrategy redirectStrategy() {return new DefaultRedirectStrategy();}
+
     //@Bean
     //public OAuthSuccessHandler oAuthSuccessHandler() { return new OAuthSuccessHandler(passwordEncoder(), jwtProvider, refreshTokenJpaRepo);}
     @Bean
@@ -50,9 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    RedirectStrategy redirectStrategy() {return new DefaultRedirectStrategy();
-    }
 
 
     // authenticationManager를 Bean 등록합니다.
@@ -117,8 +131,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  * 구글 로그인 설정
                  */
                 .oauth2Login()
+                .redirectionEndpoint()
+                .baseUri("/oauth2/callback/*")
+                .and()
                 .successHandler(oAuth2SuccessHandler)
-                //.defaultSuccessUrl("http://localhost:8080/")
                 .userInfoEndpoint()
                 .userService(customOAuth2UserService);
 

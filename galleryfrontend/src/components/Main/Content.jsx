@@ -1,59 +1,49 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
 import UpLoad from '../PostReg/upload';
-import { Link } from "react-router-dom";
-import postCommentInFeed from "./comment";
-import {useParams} from "react-router-dom";
-function Content({pfUser,setPfUser,mainImg,i}){
+import {Link} from "react-router-dom";
+
+function Content({pfUser,setPfUser,mainImg,i,setReply,reply}){
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
-    let pid = useState('')
+    let [pid, setPid] = useState('')
+    //let [uid, setUid] = useState('')
+    const uid = localStorage.getItem('uid')
     // 댓글
-    const [comment, setComment] = useState('');
-    const [commentArray, setCommentArray] = useState([]);
-    const handleComment = e => {
-        setComment(e.target.value);
-    }
-    useEffect(()=>{
-        pid = post.find(1)
-        axios.get(base_URL+`/api/comment/${pid}`)
-            .then(res=>{
-                setComment(res.data)
-                console.log(res.data)
-            })
-    },[])
-    const onCommentSubmit = e => {
-        e.preventDefault();
-        if (comment === '') {
-            return;
-        }
-        setCommentArray(a => [comment, ...a]);
-        setComment('');
-    };
-    const onCommentHandler = (e) =>{
-        setComment(e.currentTarget.value)
-    }
+    const [mainComment, setMainComment] = useState([])
+    const [comment, setComments] = useState([])
+    let [commentArray, setCommentArray] = useState([])
 
     const base_URL = "http://localhost:8080"
 
-    // const getUsers = () => {
-    //    axios.get(base_URL + "/findUserByEmail/" + localStorage.getItem("user"), {
-    //
-    //    }).then(res => {
-    //        users = setUsers(res.data.users)
-    //        return users
-    //
-    //    })
-    // }
-    //
-    // const getPost = () => {
-    //     axios.get(base_URL + "/api/post/" + mainImg[i].pid, {
-    //
-    //     }).then(res => {
-    //         post = setPost(res.data.post)
-    //         return post
-    //     })
-    // }
+
+    const postCommentSubmit = (e) => {
+        e.preventDefault()
+        setPid(mainImg[i].pid)
+
+        setCommentArray(a=>[comment,...a])
+        setCommentArray(a=>[reply,...a])
+        setComments('')
+
+        const headers = {
+            'Content-type': 'application/json',
+            'Authorization': "Bearer " + localStorage.getItem("token")
+        }
+        axios.post(`http://localhost:8080/api/comment/${pid}/register`,{
+            users: users,
+            post : post,
+            comment : comment,
+
+        } ,{headers},)
+            .then(res=>{
+                console.log([...res.data])
+            })
+    }
+
+    const onHandleComment = e =>{
+        setComments(e.currentTarget.value)
+    }
+
     useEffect(()=>{
         axios.get(base_URL + "/findUserByEmail/" + localStorage.getItem("user"))
             .then(res=>{
@@ -67,34 +57,6 @@ function Content({pfUser,setPfUser,mainImg,i}){
                 setPost(res.data.data)
             })
     }, [])
-
-        // const post = axios.get(base_URL + "/api/post/" + mainImg[i].pid)
-    const commentSubmit = () => {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin' : "*",
-            "Authorization": "Bearer " + localStorage.getItem("token")
-        }
-        axios.post(base_URL + "/api/comment/" + mainImg[i].pid + "/register",{
-            comment : comment,
-            users : users,
-            post : post
-        },{
-            headers
-        })
-            .then(result => {
-                console.log('결과: ', result)
-            }).catch(()=>{
-
-            console.log(users)
-        });
-    }
-
-
-    // id=1일 데이터 받아오기
-    // const Pid = props.mainImg.filter((a,i) =>{
-    //   return (a.id < 2)
-    // })
 
     return (
         <>
@@ -115,6 +77,11 @@ function Content({pfUser,setPfUser,mainImg,i}){
                                         <UpLoad></UpLoad>
                                     </div>
                                 </div>
+                                <div className="post__id">
+                                    <div className="post__pid">
+                                        <span>{mainImg[i].pid}</span>
+                                    </div>
+                                </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
                                         <img src={`assets/Img/${mainImg[i].filePath}`} alt="" />
@@ -132,7 +99,7 @@ function Content({pfUser,setPfUser,mainImg,i}){
                                             <img src="assets/Main/more_btn.png" alt="" />
                                         </button>
                                     </div>
-                                    <div className="post__infos" onSubmit={onCommentSubmit}   >
+                                    <div className="post__infos"   >
                                         <div className="post__title">
                                             <span>{mainImg[i].title}</span>
                                         </div>
@@ -145,28 +112,33 @@ function Content({pfUser,setPfUser,mainImg,i}){
         <!-- 댓글 --> */}
                                         <div>
                                             <ul className="comment_list">
-                                                {commentArray.map((value,i) => (
-                                                    <li key={i}>
-                                                        <div className="user_desc">
-                                                            <em>iAmUser</em>
-                                                            <span>{value[i]}</span>
-                                                        </div>
-                                                    </li>
-                                                ))}
+
+                                                {
+                                                    commentArray.map((a)=>{
+                                                        return (
+                                                            <>
+                                                            {/*<em>{a.username} &nbsp;</em>*/}
+                                                            {/*<span>{a.comment}</span>*/}
+                                                                <span>{a}</span>
+                                                                <br></br>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
                                             </ul>
                                         </div>
-                                        <form>
+                                        <form onSubmit={postCommentSubmit}>
                                             <section className="post_comment_wrap" >
                                                 <input
                                                     id="post_comment_input"
                                                     type="text"
                                                     placeholder="댓글 달기..."
                                                     value={comment}
-                                                    onChange={handleComment}
+                                                    onChange={onHandleComment}
                                                 />
                                                 <button
                                                     className="post_comment_btn"
-                                                    onClick={onCommentSubmit}
+                                                    // onClick={onCommentSubmit}
                                                 >
                                                     <i className='bx bx-send' ></i>
                                                 </button>

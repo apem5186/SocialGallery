@@ -45,3 +45,4 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
     generate-ddl: true
 
+

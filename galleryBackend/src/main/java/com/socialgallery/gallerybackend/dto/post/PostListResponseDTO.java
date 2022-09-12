@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.dto.post;
 
+import com.socialgallery.gallerybackend.entity.comment.Comment;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import lombok.Builder;
@@ -26,7 +27,9 @@ public class PostListResponseDTO {
     @Builder.Default
     private List<String> filePath = new ArrayList<>();
 
-    private List<Long> thumbnailId = new ArrayList<>();   // 썸네일 Id
+    private List<Long> thumbnailId = new ArrayList<>();   // 썸네일 Id'
+
+    private List<String > comments = new ArrayList<>();
 
     public PostListResponseDTO(Post post) {
         List<Image> pathList = post.getImages();
@@ -37,11 +40,16 @@ public class PostListResponseDTO {
         thumbnailList.forEach(image -> {
             thumbnailId.add(image.getIid());
         });
+        List<Comment> commentList = post.getComments();
+        commentList.forEach(comment -> {
+            comments.add(post.getComments().toString());
+        });
         this.pid = post.getPid();
         this.username = post.getUsers().getUsername();
         this.title = post.getTitle();
         this.content = post.getContent();
         this.filePath = pathList.stream().map(Image::getFilePath).collect(Collectors.toList());
+        this.comments = commentList.stream().map(Comment::getComment).collect(Collectors.toList());
 
         if (!post.getImages().isEmpty())    // 첨부파일 존재 o
                 this.thumbnailId = thumbnailList.stream().map(Image::getIid).collect(Collectors.toList());

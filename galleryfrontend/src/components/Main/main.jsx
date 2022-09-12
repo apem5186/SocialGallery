@@ -18,7 +18,13 @@ function Main(){
 // 검색
   const [posts, setPosts] = useState([])
   const [searchTitle, setSearchTitle] = useState("")
+    let [reply, setReply] = useState([])
+    let [urlPid, setUrlPid] = useState([])
+
+
+
   const base_URL = "http://localhost:8080"
+
 
 // 이미지 받아오기
   useEffect(()=>{
@@ -26,8 +32,17 @@ function Main(){
         .then(res =>{
             console.log(res.data.list)
           setMainImg([...res.data.list])
+
         })
   },[])
+
+//    댓글불러
+    useEffect(()=>{
+        axios.get('http://localhost:8080/api/comment/1')
+            .then(res =>{
+                setReply([...res.data.list])
+            })
+    },[])
 
 // 검색목록
   useEffect(()=>{
@@ -71,6 +86,8 @@ function Main(){
                     i={i}
                     pfUser={pfUser}
                     setPfUser={setPfUser}
+                    reply={reply}
+                    setReply={setReply}
                 ></Content>)
           }
         </div>
