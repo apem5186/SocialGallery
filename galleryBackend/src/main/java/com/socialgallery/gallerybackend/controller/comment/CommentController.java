@@ -28,13 +28,16 @@ public class CommentController {
     private final ResponseService responseService;
 
     @ApiOperation(value = "등록", notes = "댓글을 등록합니다.")
-    @PostMapping("/{pid}/register")
+    @PostMapping("/register")
     public SingleResult<Long> register(
             @ApiParam(value = "댓글 등록 DTO", required = true)
-            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request,
-            @PathVariable("pid") String pid) throws Exception {
-        Long cid = commentService.commentSave(Long.valueOf(pid), commentRequestDTO, request);
-
+            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request) throws Exception {
+        Long cid = commentService.commentSave(commentRequestDTO.getPost().getPid(), commentRequestDTO, request);
+        log.info("=================================================================================");
+        log.info("COMMENTREQUESTDTO'POST : " + commentRequestDTO.getPost());
+        log.info("=================================================================================");
+        log.info("COMMENTREQUESTDTO'USER : " + commentRequestDTO.getUsers());
+        log.info("=================================================================================");
         return responseService.getSingleResult(cid);
     }
 
@@ -69,6 +72,13 @@ public class CommentController {
             @PathVariable("pid") String pid) throws Exception {
 
         List<CommentResponseDTO> commentResponseDTOList = commentService.getListOfComment(Long.valueOf(pid));
+
+        return responseService.getListResult(commentResponseDTOList);
+    }
+
+    @GetMapping("/all")
+    public ListResult<CommentResponseDTO> getAll() {
+        List<CommentResponseDTO> commentResponseDTOList = commentService.getAllOfComment();
 
         return responseService.getListResult(commentResponseDTOList);
     }

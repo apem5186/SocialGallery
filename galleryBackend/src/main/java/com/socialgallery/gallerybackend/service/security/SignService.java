@@ -113,10 +113,10 @@ public class SignService {
         String accessToken = tokenRequestDTO.getAccessToken();
         log.info("BEFORE ACCESSTOKEN : " + accessToken);
         Authentication authentication = jwtProvider.getAuthentication(accessToken);
-        log.info("BEFORE AUTHENTICATION: " + authentication);
+        log.info("BEFORE AUTHENTICATION: " + authentication.getName());
 
         // user pk(id)로 유저 검색/ repo에 저장된 refresh token이 없음
-        Users users = userRepository.findByUsername(authentication.getName())
+        Users users = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(UserNotFoundCException::new);
         log.info("SEARCH USERS : " + users);
         RefreshToken refreshToken = refreshTokenJpaRepo.findByKey(users.getId())

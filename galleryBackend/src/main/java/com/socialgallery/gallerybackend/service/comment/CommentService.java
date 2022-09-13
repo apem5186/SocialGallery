@@ -105,6 +105,13 @@ public class CommentService {
     }
 
     @Transactional
+    public List<CommentResponseDTO> getAllOfComment() {
+        List<Comment> result = commentRepository.findAll();
+
+        return result.stream().map(CommentResponseDTO::new).collect(Collectors.toList());
+    }
+
+    @Transactional
     public boolean checkToken(Long id, HttpServletRequest request) {
         Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
         UserResponseDTO userPk = usersService.findByUsername(users.getUsername());

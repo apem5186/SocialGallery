@@ -2,45 +2,49 @@ import {useEffect, useState} from "react"
 import axios from "axios"
 import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Content({pfUser,setPfUser,mainImg,i,setReply,reply}){
+function Content({pfUser,setPfUser,mainImg,i,setReply,reply,setMainImg,commentArray,setCommentArray}){
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
     let [pid, setPid] = useState('')
-    //let [uid, setUid] = useState('')
     const uid = localStorage.getItem('uid')
     // 댓글
     const [mainComment, setMainComment] = useState([])
     const [comment, setComments] = useState([])
-    let [commentArray, setCommentArray] = useState([])
+    const navigate = useNavigate()
 
     const base_URL = "http://localhost:8080"
 
+    useEffect(()=>{
+        console.log(commentArray)
+        console.log(reply)
+        console.log(mainImg[i].pid)
+    },[])
 
     const postCommentSubmit = (e) => {
         e.preventDefault()
-        setPid(mainImg[i].pid)
-
-        setCommentArray(a=>[comment,...a])
-        setCommentArray(a=>[reply,...a])
+        setCommentArray(a=>[comment])
         setComments('')
+
 
         const headers = {
             'Content-type': 'application/json',
             'Authorization': "Bearer " + localStorage.getItem("token")
         }
-        axios.post(`http://localhost:8080/api/comment/${pid}/register`,{
+        axios.post(`http://localhost:8080/api/comment/register`,{
             users: users,
             post : post,
             comment : comment,
 
         } ,{headers},)
             .then(res=>{
-                console.log([...res.data])
+                console.log([...res.data.data])
             })
     }
 
     const onHandleComment = e =>{
+        e.preventDefault()
         setComments(e.currentTarget.value)
     }
 
@@ -112,21 +116,24 @@ function Content({pfUser,setPfUser,mainImg,i,setReply,reply}){
         <!-- 댓글 --> */}
                                         <div>
                                             <ul className="comment_list">
-
                                                 {
-                                                    commentArray.map((a)=>{
-                                                        return (
-                                                            <>
-                                                            {/*<em>{a.username} &nbsp;</em>*/}
-                                                            {/*<span>{a.comment}</span>*/}
-                                                                <span>{a}</span>
-                                                                <br></br>
-                                                            </>
-                                                        )
-                                                    })
+                                                    reply
+                                                        .filter((value)=>value.pid === mainImg[i].pid)
+                                                        .map((a,i)=>{
+                                                            return(
+                                                                <div><em>{a.username}</em> : {a.comment}</div>)
+                                                        })
+
+
                                                 }
+
+
+                                                <div>{}</div>
+
                                             </ul>
                                         </div>
+
+
                                         <form onSubmit={postCommentSubmit}>
                                             <section className="post_comment_wrap" >
                                                 <input
@@ -138,7 +145,9 @@ function Content({pfUser,setPfUser,mainImg,i,setReply,reply}){
                                                 />
                                                 <button
                                                     className="post_comment_btn"
-                                                    // onClick={onCommentSubmit}
+                                                    onClick={()=>{
+                                                        window.location.reload('/')
+                                                    }}
                                                 >
                                                     <i className='bx bx-send' ></i>
                                                 </button>

@@ -119,7 +119,7 @@ public class JwtProvider {
             throw new AuthenticationEntryPointCException();
         }
 
-        UserDetails userDetails = userDetailService.loadUserByUsername(claims.getSubject());
+        UserDetails userDetails = userDetailService.loadUserById(Long.valueOf(claims.getSubject()));
         log.info("GET AUTHENTICATION FROM JWTPROVIDER : " + userDetails);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }

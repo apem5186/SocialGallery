@@ -260,6 +260,7 @@ textarea {
 
 .comment_list li{
     list-style: none;
+
 }
 .post_comment_wrap{
     margin-left: 10px;
@@ -711,4 +712,9 @@ body.dark .sidebar header .toggle{
 /* 테스트 */
 .test{
     text-align: center;
+}
+
+.test2 {
+    white-space:pre-wrap;
+    color: red;
 }
