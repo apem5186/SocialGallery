@@ -2,9 +2,10 @@ package com.socialgallery.gallerybackend.config;
 
 import com.socialgallery.gallerybackend.config.security.*;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
+import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.oauth.CustomOAuth2UserService;
+import com.socialgallery.gallerybackend.service.security.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,14 +22,12 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
 /*
- * @Reference https://ws-pace.tistory.com/87?category=964036
+ * @Reference https://ws-pace.tistory.com/87?category=964036,
+ * https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
  * Spring Security를 위한 설정, Jwt를 위한 설정, Cors설정 등이 이루어진다.
  */
+
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -41,6 +40,8 @@ import java.io.IOException;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtProvider jwtProvider;
+
+    private final CustomUserDetailService customUserDetailService;
     private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
     private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
@@ -48,7 +49,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final RefreshTokenJpaRepo refreshTokenJpaRepo;
 
-    private final OAuth2SuccessHandler oAuth2SuccessHandler;
+    private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
     private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
@@ -98,6 +101,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         "/swagger-ui.html",
                         "/webjars/**" ,
                         /*Probably not needed*/ "/swagger.json").permitAll()
+                .antMatchers("/",
+                        "/error",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js")
+                .permitAll()
+                .antMatchers("/auth/**", "/oauth2/**")
+                .permitAll()
                 .antMatchers(HttpMethod.GET, "/exception/**").permitAll()
 
                 .mvcMatchers(HttpMethod.OPTIONS, "/**").permitAll()
@@ -131,15 +147,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                  * 구글 로그인 설정
                  */
                 .oauth2Login()
-                .redirectionEndpoint()
-                .baseUri("/oauth2/callback/*")
-                .and()
-                .successHandler(oAuth2SuccessHandler)
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService);
+                    .authorizationEndpoint()
+                        .baseUri("/oauth2/authorization")
+                        .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+                        .and()
+                    .redirectionEndpoint()
+                        .baseUri("/oauth2/callback/*")
+                        .and()
+                    .userInfoEndpoint()
+                        .userService(customOAuth2UserService)
+                        .and()
+                    .successHandler(oAuth2AuthenticationSuccessHandler)
+                    .failureHandler(oAuth2AuthenticationFailureHandler);
+
 
             http
-                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider),
+                .addFilterBefore(new JwtAuthenticationFilter(jwtProvider, customUserDetailService),
                 UsernamePasswordAuthenticationFilter.class);
         // JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter 전에 넣는다
 

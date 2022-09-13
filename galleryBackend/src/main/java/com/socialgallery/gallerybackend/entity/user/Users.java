@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -54,7 +55,11 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    private String authProvider;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private AuthProvider authProvider;
+
+    private String providerId;
 
     /*
      * User 객체의 권한이 담긴 컬렉션 객체를 User 조회시 EAGER로 즉시로딩하지 않는다면,

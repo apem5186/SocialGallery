@@ -304,7 +304,7 @@ function Login() {
                 <i className="bx bxl-facebook"></i>
               </div>
               <div className="align-center google-bg" >
-                <a href={"http://localhost:8080/oauth2/authorization/google"} onChange={()=>{
+                <a href={"http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth2/redirect"} onChange={()=>{
                   alert('성공')
                   console.log(location)
                   // console.log(res.data)

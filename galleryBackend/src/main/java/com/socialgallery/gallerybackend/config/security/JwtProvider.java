@@ -1,7 +1,9 @@
 package com.socialgallery.gallerybackend.config.security;
 
 import com.socialgallery.gallerybackend.advice.exception.AuthenticationEntryPointCException;
+import com.socialgallery.gallerybackend.config.AppProperties;
 import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
+import com.socialgallery.gallerybackend.dto.oauth.UserPrincipal;
 import com.socialgallery.gallerybackend.service.security.CustomUserDetailService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 /*
- * @Reference https://ws-pace.tistory.com/87?category=964036
+ * @Reference https://ws-pace.tistory.com/87?category=964036,
+ * https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
  * 유저 정보로 Jwt를 발급하거나 Jwt로 유저 정보를 가져온다.
  * JwtProvider에서 Jwt 생성, 유저 정보 매핑, Jwt 암호화, 복호화, 검증이 이뤄진다.
  */
@@ -39,6 +42,8 @@ public class JwtProvider {
     private final Long refreshTokenValidMillisecond = 14 * 24 * 60 * 60 * 1000L;    // 14days
 
     private final CustomUserDetailService userDetailService;
+
+    private final AppProperties appProperties;
 
     //Base64로 인코딩
     @PostConstruct
@@ -81,6 +86,20 @@ public class JwtProvider {
                 .refreshToken(refreshToken)
                 .accessTokenExpireDate(accessTokenValidMillisecond)
                 .build();
+    }
+
+    public String oauth2CreateToken(Authentication authentication) {
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
+
+        return Jwts.builder()
+                .setSubject(Long.toString(userPrincipal.getId()))
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
+                .compact();
     }
 
     /****
@@ -137,10 +156,17 @@ public class JwtProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            log.info("실패한 토큰 : " + token);
-            log.error(e.toString());
-            return false;
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
+        }
+        return false;
         }
     }
-}

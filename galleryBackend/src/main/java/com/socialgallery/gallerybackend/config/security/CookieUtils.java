@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Base64;
 import java.util.Optional;
 
+/**
+ * @Reference https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
+ */
+
 public class CookieUtils {
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {

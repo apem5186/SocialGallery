@@ -6,6 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @Reference https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
+ */
+
 @Configuration
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
@@ -15,7 +19,7 @@ public class AppProperties {
 
     public static class Auth {
         private String tokenSecret;
-        private long tokenExprirationMsec;
+        private long tokenExpirationMsec;
 
         public String getTokenSecret() {
             return tokenSecret;
@@ -26,11 +30,11 @@ public class AppProperties {
         }
 
         public long getTokenExpirationMsec() {
-            return tokenExprirationMsec;
+            return tokenExpirationMsec;
         }
 
         public void setTokenExpirationMsec(long tokenExpirationMsec) {
-            this.tokenExprirationMsec = tokenExpirationMsec;
+            this.tokenExpirationMsec = tokenExpirationMsec;
         }
     }
 

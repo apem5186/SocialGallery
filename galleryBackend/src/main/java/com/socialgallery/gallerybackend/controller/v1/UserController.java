@@ -1,15 +1,21 @@
 package com.socialgallery.gallerybackend.controller.v1;
 
+import com.socialgallery.gallerybackend.advice.exception.ResourceNotFoundException;
+import com.socialgallery.gallerybackend.config.security.CurrentUser;
+import com.socialgallery.gallerybackend.dto.oauth.UserPrincipal;
 import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
+import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.model.response.CommonResult;
 import com.socialgallery.gallerybackend.model.response.ListResult;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
+import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
 import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +37,8 @@ public class UserController {
 
 
     private final UsersService usersService;
+
+    private final UserRepository userRepository;
 
     private final ResponseService responseService;
 
@@ -86,6 +94,13 @@ public class UserController {
     public CommonResult delete(@ApiParam(value = "회원 아이디", required = true)@PathVariable Long id) {
         usersService.delete(id);
         return responseService.getSuccessResult();
+    }
+
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('USER')")
+    public Users getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        return userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
     }
 
     @ApiImplicitParams({
