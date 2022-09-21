@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/aws/HealthCheck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-dev.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/UsersControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/UsersControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -496,7 +493,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663092767168</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="배포 준비">
+      <created>1663750445225</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1663750445225</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +532,8 @@
     <MESSAGE value="google oauth2, comment 구현중" />
     <MESSAGE value="google oauth2 백엔드 구현중" />
     <MESSAGE value="comment 구현 완료 css 수정 필요" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment 구현 완료 css 수정 필요" />
+    <MESSAGE value="배포 준비" />
+    <option name="LAST_COMMIT_MESSAGE" value="배포 준비" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
