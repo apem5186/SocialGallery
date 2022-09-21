@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/UsersControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/UsersControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/GalleryBackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/GalleryBackendApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -500,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663750445225</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="배포 준비">
+      <created>1663750940490</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1663750940490</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
