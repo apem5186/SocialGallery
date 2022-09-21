@@ -4,34 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="logout기능 구현">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/ImageNotFoundCException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/PostNotFoundCException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/file/FileHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/image/ImageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/ImageResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/PostFileVO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostListResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostUpdateRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/image/Image.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/ImageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/image/ImageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/ExceptionAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/ExceptionAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/user/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/user/Users.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/i18n/exception_ko.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/i18n/exception_ko.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="comment 구현 완료 css 수정 필요" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,9 +47,36 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/AccessDeniedCException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/AuthenticationEntryPointCException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/CommentNotFoundCException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/EmailLoginFailedCException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/EmailSignUpFailedCException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/ExpiredAccessTokenCException.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/ImageNotFoundCException.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebMvcConfig.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/CookieUtils.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/HttpCookieOAuth2AuthorizationRequestRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtAuthenticationFilter.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/OAuth2AuthenticationSuccessHandler.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/SignController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/UserController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/jwt/TokenDTO.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/sign/OAuth2DTO.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/user/Users.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/ImageRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application-jwt.yml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application-oauth.yml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Login/login.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Main/MainHeader.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upload.jsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="HttpClientSelectedEnvironments">
     <file url="file://$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" />
@@ -108,32 +108,42 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Project/SocialGallery",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "advanced.settings",
-    "spring.configuration.checksum": "a8c7d9d08c5cce12ef9f1b44f835f853"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Project/SocialGallery&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;spring.boot&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;a8c7d9d08c5cce12ef9f1b44f835f853&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;h2&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Project\SocialGallery\galleryBackend\src\main\resources\templates\main" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.socialgallery.gallerybackend.dto.oauth" />
+      <recent name="com.socialgallery.gallerybackend.config" />
+      <recent name="com.socialgallery.gallerybackend.service.oauth" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.GalleryBackendApplication">
@@ -267,7 +277,27 @@
       <workItem from="1660540895009" duration="5206000" />
       <workItem from="1660546357207" duration="14587000" />
       <workItem from="1660633825152" duration="6796000" />
-      <workItem from="1660718478219" duration="15801000" />
+      <workItem from="1660718478219" duration="31388000" />
+      <workItem from="1660795538887" duration="26181000" />
+      <workItem from="1661150762536" duration="16070000" />
+      <workItem from="1661236226701" duration="14038000" />
+      <workItem from="1661333586110" duration="23337000" />
+      <workItem from="1661413765072" duration="19224000" />
+      <workItem from="1661735840549" duration="4009000" />
+      <workItem from="1661755592796" duration="3664000" />
+      <workItem from="1661763220874" duration="2242000" />
+      <workItem from="1661932413890" duration="21905000" />
+      <workItem from="1661998266493" duration="4973000" />
+      <workItem from="1662455911715" duration="10471000" />
+      <workItem from="1662533412061" duration="15113000" />
+      <workItem from="1662602726317" duration="2065000" />
+      <workItem from="1662606246396" duration="2772000" />
+      <workItem from="1662610152894" duration="5621000" />
+      <workItem from="1662963268000" duration="18353000" />
+      <workItem from="1662981850901" duration="2065000" />
+      <workItem from="1663050751245" duration="39205000" />
+      <workItem from="1663216169917" duration="1218000" />
+      <workItem from="1663656778425" duration="10063000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -360,7 +390,119 @@
       <option name="project" value="LOCAL" />
       <updated>1660641268591</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="post기능 구현">
+      <created>1660735599233</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1660735599233</updated>
+    </task>
+    <task id="LOCAL-00015" summary="post기능 구현">
+      <created>1660747892020</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1660747892020</updated>
+    </task>
+    <task id="LOCAL-00016" summary="각 기능에 token인증 추가 및 여러 에러 픽스">
+      <created>1660823294511</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1660823294511</updated>
+    </task>
+    <task id="LOCAL-00017" summary="댓글 기능, 검색 기능 구현">
+      <created>1661167550533</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1661167550533</updated>
+    </task>
+    <task id="LOCAL-00018" summary="댓글 기능, 검색 기능 구현">
+      <created>1661168548181</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1661168548181</updated>
+    </task>
+    <task id="LOCAL-00019" summary="OAuth2 구현중">
+      <created>1661255543080</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1661255543080</updated>
+    </task>
+    <task id="LOCAL-00020" summary="OAuth2 구현중">
+      <created>1661418148540</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1661418148540</updated>
+    </task>
+    <task id="LOCAL-00021" summary="OAuth2 구현중">
+      <created>1661434584548</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1661434584548</updated>
+    </task>
+    <task id="LOCAL-00022" summary="comment 구현중">
+      <created>1661956534311</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1661956534311</updated>
+    </task>
+    <task id="LOCAL-00023" summary="comment 구현중">
+      <created>1662003250884</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1662003250884</updated>
+    </task>
+    <task id="LOCAL-00024" summary="google oauth2 구현중">
+      <created>1662466598119</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1662466598119</updated>
+    </task>
+    <task id="LOCAL-00025" summary="google oauth2 구현중">
+      <created>1662544548722</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1662544548722</updated>
+    </task>
+    <task id="LOCAL-00026" summary="google oauth2 구현중">
+      <created>1662548670439</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1662548670439</updated>
+    </task>
+    <task id="LOCAL-00027" summary="google oauth2, comment 구현중">
+      <created>1662983913129</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1662983913129</updated>
+    </task>
+    <task id="LOCAL-00028" summary="google oauth2 백엔드 구현중">
+      <created>1663063012503</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1663063012503</updated>
+    </task>
+    <task id="LOCAL-00029" summary="comment 구현 완료 css 수정 필요">
+      <created>1663092767168</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1663092767168</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -383,7 +525,16 @@
     <MESSAGE value="jwt Token test(코드 수정 예정)" />
     <MESSAGE value="Backend AccessToken, RefreshToken 구현 완료" />
     <MESSAGE value="logout기능 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="logout기능 구현" />
+    <MESSAGE value="post기능 구현" />
+    <MESSAGE value="각 기능에 token인증 추가 및 여러 에러 픽스" />
+    <MESSAGE value="댓글 기능, 검색 기능 구현" />
+    <MESSAGE value="OAuth2 구현중" />
+    <MESSAGE value="comment 구현중" />
+    <MESSAGE value="google oauth2 구현중" />
+    <MESSAGE value="google oauth2, comment 구현중" />
+    <MESSAGE value="google oauth2 백엔드 구현중" />
+    <MESSAGE value="comment 구현 완료 css 수정 필요" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment 구현 완료 css 수정 필요" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

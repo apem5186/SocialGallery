@@ -1,24 +1,21 @@
 package com.socialgallery.gallerybackend.controller.v1;
 
-import com.socialgallery.gallerybackend.config.security.JwtProvider;
 import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserLoginRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
-import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
-import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
 import com.socialgallery.gallerybackend.service.security.SignService;
-import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 
 /*
@@ -42,11 +39,13 @@ public class SignController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public SingleResult<TokenDTO> login(
             @ApiParam(value = "로그인 요청 DTO", required = true)
-            @RequestBody UserLoginRequestDTO userLoginRequestDTO) {
+            @RequestBody UserLoginRequestDTO userLoginRequestDTO,
+            HttpServletResponse response) {
 
         TokenDTO tokenDTO = signService.login(userLoginRequestDTO);
         log.info("LOGIN 요청, Access 토큰 발행 : " + tokenDTO.getAccessToken());
-        log.info("LOGIN 요청, Refresh 토큰 발행 : " + tokenDTO.getAccessToken());
+        log.info("LOGIN 요청, Refresh 토큰 발행 : " + tokenDTO.getRefreshToken());
+        response.setHeader("Authorization", "Bearer " + tokenDTO.getAccessToken());
         return responseService.getSingleResult(tokenDTO);
     }
 
@@ -72,11 +71,11 @@ public class SignController {
 
     @ApiOperation(value = "로그아웃",
                   notes = "리프레시토큰을 지움으로서 로그아웃을 합니다.")
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public SingleResult<Long> logout(
             @ApiParam(value = "로그아웃", required = true)
-            @RequestBody UserRequestDTO userRequestDTO
+            @RequestParam String uid
             ) {
-        return responseService.getSingleResult(signService.logout(userRequestDTO));
+        return responseService.getSingleResult(signService.logout(Long.parseLong(uid)));
     }
 }

@@ -7,7 +7,9 @@ server:
 
 spring:
   profiles:
-    include: jwt
+    include:
+      - oauth
+      - jwt
   h2:
     console:
       enabled: true
@@ -42,4 +44,5 @@ spring:
     open-in-view: false
     database-platform: org.hibernate.dialect.H2Dialect
     generate-ddl: true
+
 

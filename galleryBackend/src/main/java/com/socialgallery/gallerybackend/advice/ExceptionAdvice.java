@@ -147,6 +147,18 @@ public class ExceptionAdvice {
         );
     }
 
+    /**
+     * -1009
+     * 댓글을 찾지 못할시 발생하는 에러
+     */
+    @ExceptionHandler(CommentNotFoundCException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    protected CommonResult commentNotFoundCException(HttpServletRequest request, CommentNotFoundCException e) {
+        return responseService.getFailResult(
+                Integer.parseInt(getMessage("commentNotFound.code")), getMessage("commentNotFound.msg")
+        );
+    }
+
     private String getMessage(String code) {
         return getMessage(code, null);
     }

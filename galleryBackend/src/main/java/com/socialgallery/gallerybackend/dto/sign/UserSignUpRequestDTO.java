@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.dto.sign;
 
+import com.socialgallery.gallerybackend.entity.user.AuthProvider;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,6 @@ public class UserSignUpRequestDTO {
     private String password;
     private String username;
     private String phone;
-    private String provider = null;
 
     public Users toEntity(PasswordEncoder passwordEncoder) {
         return Users.builder()
@@ -26,8 +26,9 @@ public class UserSignUpRequestDTO {
                 .password(passwordEncoder.encode(password))
                 .username(username)
                 .phone(phone)
-                .provider(provider)
                 .roles(Collections.singletonList("ROLE_USER"))
+                .authProvider(AuthProvider.local)
+                .fromSocial(false)
                 .build();
     }
 
@@ -35,9 +36,9 @@ public class UserSignUpRequestDTO {
         return Users.builder()
                 .email(email)
                 .username(username)
-                .provider(provider)
                 .roles(Collections.singletonList("ROLE_USER"))
                 .build();
 
     }
+
 }

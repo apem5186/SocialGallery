@@ -29,7 +29,6 @@ public class PostControllerTest {
                 .username("user01")
                 .password("1111")
                 .phone("010-1234-1234")
-                .provider(null)
                 .build();
 
         signService.signUp(userSignUpRequestDTO);
@@ -48,7 +47,6 @@ public class PostControllerTest {
                 .title("테스트")
                 .content("테스트 content")
                 .build();
-        log.info("결과 : " + postService.post(postRequestDTO));
     }
 
 }

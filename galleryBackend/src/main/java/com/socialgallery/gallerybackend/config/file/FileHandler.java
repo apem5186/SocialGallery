@@ -10,7 +10,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -46,11 +45,13 @@ public class FileHandler {
 
             // 프로젝트 디렉터리 내의 저장을 위한 절대 경로 설정
             // 경로 구분자 File.separator 사용
-            String absolutePath = new File("").getAbsolutePath() + File.separator + File.separator;
+            String absolutePath = new File("galleryfrontend"
+            + File.separator + File.separator + "public" + File.separator + File.separator
+            + "assets" + File.separator + File.separator + "Img").getAbsolutePath() + File.separator + File.separator;
 
             // 파일을 저장할 세부 경로 지정
             String path = "images" + File.separator + current_date;
-            File file = new File(path);
+            File file = new File(absolutePath + path);
 
             // 디렉터리가 존재하지 않을 경우
             if (!file.exists()) {

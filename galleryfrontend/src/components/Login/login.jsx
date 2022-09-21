@@ -1,15 +1,19 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import Toggle from "./toggle";
-import  {Link} from 'react-router-dom'
+import {Link, useLocation, useParams} from 'react-router-dom'
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'
+import {compareArraysAsSet} from "@testing-library/jest-dom/dist/utils";
 
 function Login() {
   const navigate = useNavigate()
 
+  let accessToken = null;
+
   // 로그인 Form
   const [email,setEmail] = useState('');
   const [pw,setPw] = useState('');
+  let usersId = useState('');
 
   const onEmailHandler = e =>{
     setEmail(e.currentTarget.value)
@@ -44,6 +48,30 @@ function Login() {
 
   const base_url = "http://localhost:8080"
 
+
+  //google
+  const logNavigate = useNavigate()
+  const location = useLocation();
+
+
+  useEffect(()=>{
+    const container = document.getElementById("container");
+    const signIn = document.getElementById("sign-in");
+    const signUp = document.getElementById("sign-up");
+
+    setTimeout(() => {
+      container.classList.add("sign-in");
+    }, 200);
+
+    const toggle = () => {
+      container.classList.toggle("sign-in");
+      container.classList.toggle("sign-up");
+    };
+
+    signIn.addEventListener("click", toggle);
+    signUp.addEventListener("click", toggle);
+  },[])
+
   // 로그인 fetch
   // const signIn = (e) => {
   //   e.preventDefault()
@@ -60,9 +88,18 @@ function Login() {
   //     .then(res => res.json())
   //     .then(result => console.log('결과', result))
   // };
+  const getUser = (email) => {
+    axios.get(base_url + '/findUserByEmail/' + email, {
 
+    }).then(res => {
+      usersId = res.data.data.id;
+      localStorage.setItem("uid", usersId);
+      return usersId;
+    })
+  }
   const signIn = () =>{
     axios.post(base_url + '/v1/login',{
+      usersId : getUser(email),
       email : email,
       password : pw
     },{
@@ -75,6 +112,11 @@ function Login() {
     })
         .then(res => {
           if(res.status === 200){
+            console.log(res.data)
+            accessToken = res.data.data.accessToken
+            localStorage.setItem("user", email)
+            localStorage.setItem("token", res.data.data.accessToken)
+            getUser(email)
             navigate('/')
           }else{
             alert('아이디 또는 비밀번호가 일치하지 않습니다.')
@@ -125,7 +167,7 @@ function Login() {
   
 	return ( 
 		<>
-    <div className="container" id="container" onLoad={Toggle}>
+    <div className="container" id="container" onClick={Toggle}>
 			<img src="/assets/Login/bg1.jpg"></img>
 
 	    {/* 회원가입 */}
@@ -192,7 +234,23 @@ function Login() {
 		  {/* Icons */}
           <div className="form-wrapper">
             <div className="social-list align-center sign-up">
-							<Icons></Icons>
+              <div className="align-center home-bg">
+                <i className='bx bxs-home' ></i>
+              </div>
+              <div className="align-center facebook-bg">
+                <i className="bx bxl-facebook"></i>
+              </div>
+              <div className="align-center google-bg" >
+                <a href={"http://localhost:8080/oauth2/authorization/google"}>
+                  <i className="bx bxl-google"></i>
+                </a>
+              </div>
+              <div className="align-center twitter-bg">
+                <i className="bx bxl-twitter"></i>
+              </div>
+              <div className="align-center insta-bg">
+                <i className="bx bxl-instagram-alt"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -239,7 +297,32 @@ function Login() {
 				{/* Icons */}
           <div className="form-wrapper">
             <div className="social-list align-center sign-in">
-							<Icons></Icons>
+              <div className="align-center home-bg">
+                <i className='bx bxs-home' ></i>
+              </div>
+              <div className="align-center facebook-bg">
+                <i className="bx bxl-facebook"></i>
+              </div>
+              <div className="align-center google-bg" >
+                <a href={"http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/oauth2/redirect"} onChange={()=>{
+                  alert('성공')
+                  console.log(location)
+                  // console.log(res.data)
+                  //accessToken = res.data.data.accessToken
+                  localStorage.setItem("user", email)
+                  //localStorage.setItem("token", res.data.data.accessToken)
+                  getUser(email)
+                  location.href('/')
+                }}>
+                  <i className="bx bxl-google"></i>
+                </a>
+              </div>
+              <div className="align-center twitter-bg">
+                <i className="bx bxl-twitter"></i>
+              </div>
+              <div className="align-center insta-bg">
+                <i className="bx bxl-instagram-alt"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -250,27 +333,8 @@ function Login() {
 }
 
 // icons
-function Icons(){
-	return(
-		<>
-    <div className="align-center home-bg">
-    <i className='bx bxs-home' ></i>
-    </div>   
-		<div className="align-center facebook-bg">
-			<i className="bx bxl-facebook"></i>
-		</div>
-		<div className="align-center google-bg">
-			<i className="bx bxl-google"></i>
-		</div>
-		<div className="align-center twitter-bg">
-			<i className="bx bxl-twitter"></i>
-		</div>
-		<div className="align-center insta-bg">
-			<i className="bx bxl-instagram-alt"></i>
-	  </div>
-		</>
-	)
-}
+
 
 
 export default Login;
+

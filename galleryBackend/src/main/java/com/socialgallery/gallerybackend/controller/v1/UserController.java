@@ -1,15 +1,21 @@
 package com.socialgallery.gallerybackend.controller.v1;
 
+import com.socialgallery.gallerybackend.advice.exception.ResourceNotFoundException;
+import com.socialgallery.gallerybackend.config.security.CurrentUser;
+import com.socialgallery.gallerybackend.dto.oauth.UserPrincipal;
 import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
+import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.model.response.CommonResult;
 import com.socialgallery.gallerybackend.model.response.ListResult;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
+import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
 import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
  * 검색,수정,삭제 등을 하는데 토큰이 꼭 필요한지 생각해 봐야함
  * == 필요없을 것 같다. 토큰 삭제 예정
  * mapping url 통일 해야 할듯.
+ * @RequestParam을 Body로 받도록 변경 예정
  */
 @Api(tags = {"2. Users"})   // 제목 역할
 @Controller
@@ -30,6 +37,8 @@ public class UserController {
 
 
     private final UsersService usersService;
+
+    private final UserRepository userRepository;
 
     private final ResponseService responseService;
 
@@ -87,6 +96,13 @@ public class UserController {
         return responseService.getSuccessResult();
     }
 
+    @GetMapping("/user/me")
+    @PreAuthorize("hasRole('USER')")
+    public Users getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+        return userRepository.findById(userPrincipal.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+    }
+
     @ApiImplicitParams({
             @ApiImplicitParam(
                     name = "X-AUTH-TOKEN",
@@ -118,12 +134,6 @@ public class UserController {
         return responseService.getSingleResult(usersService.findByUsername(username));
     }
 
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "X-AUTH-TOKEN",
-                    value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
-    })
     @ApiOperation(value = "회원 검색(이메일)", notes = "이메일로 회원을 검색합니다.")
     @GetMapping("/findUserByEmail/{email}")
     public SingleResult<UserResponseDTO> findUserByEmail(@ApiParam(value = "회원 이메일", required = true)@PathVariable String email

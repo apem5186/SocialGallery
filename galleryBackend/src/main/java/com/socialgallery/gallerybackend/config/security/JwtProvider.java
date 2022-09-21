@@ -1,7 +1,9 @@
 package com.socialgallery.gallerybackend.config.security;
 
 import com.socialgallery.gallerybackend.advice.exception.AuthenticationEntryPointCException;
+import com.socialgallery.gallerybackend.config.AppProperties;
 import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
+import com.socialgallery.gallerybackend.dto.oauth.UserPrincipal;
 import com.socialgallery.gallerybackend.service.security.CustomUserDetailService;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -11,15 +13,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.awt.*;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 /*
- * @Reference https://ws-pace.tistory.com/87?category=964036
+ * @Reference https://ws-pace.tistory.com/87?category=964036,
+ * https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
  * 유저 정보로 Jwt를 발급하거나 Jwt로 유저 정보를 가져온다.
  * JwtProvider에서 Jwt 생성, 유저 정보 매핑, Jwt 암호화, 복호화, 검증이 이뤄진다.
  */
@@ -37,6 +42,8 @@ public class JwtProvider {
     private final Long refreshTokenValidMillisecond = 14 * 24 * 60 * 60 * 1000L;    // 14days
 
     private final CustomUserDetailService userDetailService;
+
+    private final AppProperties appProperties;
 
     //Base64로 인코딩
     @PostConstruct
@@ -57,7 +64,8 @@ public class JwtProvider {
         claims.put(ROLES, roles);
         // 생성날짜, 만료날짜를 위한 Date
         Date now = new Date();
-
+        log.info("ACCESSTOKEN ISSUEAT : " + new Date(now.getTime()));
+        log.info("ACCESSTOKEN EXPIREAT :" + new Date(now.getTime() + accessTokenValidMillisecond));
         String accessToken = Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
                 .setClaims(claims)
@@ -80,6 +88,20 @@ public class JwtProvider {
                 .build();
     }
 
+    public String oauth2CreateToken(Authentication authentication) {
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
+
+        return Jwts.builder()
+                .setSubject(Long.toString(userPrincipal.getId()))
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
+                .compact();
+    }
+
     /****
      * jwt로 인증정보를 조회
      * Jwt에서 권한정보를 확인하기 위해 시크릿키으로 검증 후 권한 목록을 가져온다 (만약 키에 문제가 있다면 SignatureException이 발생한다
@@ -97,7 +119,7 @@ public class JwtProvider {
             throw new AuthenticationEntryPointCException();
         }
 
-        UserDetails userDetails = userDetailService.loadUserByUsername(claims.getSubject());
+        UserDetails userDetails = userDetailService.loadUserById(Long.valueOf(claims.getSubject()));
         log.info("GET AUTHENTICATION FROM JWTPROVIDER : " + userDetails);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
@@ -117,10 +139,15 @@ public class JwtProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // HTTP Request의 Header에서 Token Parsing -> "X-AUTH-TOKEN: jwt"
-    // Request Header에 "X-AUTH-TOKEN" 이 있으면 탈취해서 Jwt값으로 취한다.
+    // HTTP Request의 Header에서 Token Parsing -> "Authorization: jwt"
+    // Request Header에 "Authorization" 이 있으면 탈취해서 Jwt값으로 취한다.
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        String token = request.getHeader("Authorization");
+
+        if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
+            return token.substring(7);
+        } else
+            return request.getHeader("Authorization");
     }
 
     // jwt의 유효성 및 만료일자 확인
@@ -129,9 +156,17 @@ public class JwtProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            log.error(e.toString());
-            return false;
+        } catch (SignatureException ex) {
+            log.error("Invalid JWT signature");
+        } catch (MalformedJwtException ex) {
+            log.error("Invalid JWT token");
+        } catch (ExpiredJwtException ex) {
+            log.error("Expired JWT token");
+        } catch (UnsupportedJwtException ex) {
+            log.error("Unsupported JWT token");
+        } catch (IllegalArgumentException ex) {
+            log.error("JWT claims string is empty.");
+        }
+        return false;
         }
     }
-}

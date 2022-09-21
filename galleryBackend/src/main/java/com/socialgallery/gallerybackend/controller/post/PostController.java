@@ -1,40 +1,49 @@
 package com.socialgallery.gallerybackend.controller.post;
 
-import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
-import com.socialgallery.gallerybackend.config.file.FileHandler;
 import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.dto.image.ImageResponseDTO;
 import com.socialgallery.gallerybackend.dto.image.PostFileVO;
 import com.socialgallery.gallerybackend.dto.post.PostListResponseDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
-import com.socialgallery.gallerybackend.dto.post.PostUpdateRequestDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.model.response.ListResult;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
 import com.socialgallery.gallerybackend.repository.ImageRepository;
-import com.socialgallery.gallerybackend.repository.PostRepository;
 import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.image.ImageService;
 import com.socialgallery.gallerybackend.service.post.PostService;
 import com.socialgallery.gallerybackend.service.response.ResponseService;
-import com.socialgallery.gallerybackend.service.user.UsersService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+/*
+ * @Reference https://velog.io/@yu-jin-song/Spring-Boot-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EA%B5%AC%ED%98%84-5-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EB%8B%A4%EC%A4%91-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%98%ED%99%98-%EB%B0%8F-%EC%A1%B0%ED%9A%8C-%EC%B2%98%EB%A6%AC-MultipartFile
+ */
 
 @Api(tags = {"4. post"})
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
@@ -44,32 +53,32 @@ public class PostController {
 
     private final ImageService imageService;
 
-    private final UsersService usersService;
-
     private final UserRepository userRepository;
 
     private final ImageRepository imageRepository;
 
-    private final PostRepository postRepository;
-
-    private final FileHandler fileHandler;
-
     private final ResponseService responseService;
 
     @ApiOperation(value = "업로드", notes = "게시글 업로드를 합니다.")
-    @PostMapping("/post/upload")
+    @PostMapping(value = "/post/upload")
     @ResponseStatus(HttpStatus.CREATED)
     public SingleResult<Long> post(
             @ApiParam(value = "게시글 등록 DTO", required = true)
-            @RequestBody PostRequestDTO postRequestDTO,
-            PostFileVO postFileVO) throws Exception{
-        Optional<Users> users = userRepository.findById(Long.parseLong(postFileVO.getUsersId()));
-        postRequestDTO = PostRequestDTO.builder()
+            PostFileVO postFileVO,
+            HttpServletRequest request) throws Exception{
+        log.info("POSTFILEVO : " + postFileVO);
+        Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
+        log.info("USERS : " + users);
+        PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .users(users.orElseThrow())
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
                 .build();
-        Long pid = postService.post(postRequestDTO, postFileVO.getFiles());
+
+        log.info("POSTREQUESTDTO : " + postRequestDTO);
+        Long pid = postService.post(postRequestDTO, postFileVO.getFiles(), request);
+        log.info("Pid : " + pid);
+        ResponseEntity.ok().body(pid);
         return responseService.getSingleResult(pid);
     }
 
@@ -77,11 +86,11 @@ public class PostController {
     @PutMapping("/post/modify/{pid}")
     public SingleResult<Long> update(
             @ApiParam(value = "게시글 수정 DTO", required = true)
-            @PathVariable Long pid,
-            @RequestBody PostRequestDTO postRequestDTO,
-            PostFileVO postFileVO) throws Exception {
+            @PathVariable("pid") Long pid,
+            PostFileVO postFileVO,
+            HttpServletRequest request) throws Exception {
 
-        postRequestDTO = PostRequestDTO.builder()
+        PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
                 .build();
@@ -90,6 +99,7 @@ public class PostController {
         List<Image> dbImageList = imageRepository.findAllByPostPid(pid);
         // 전달되어온 파일들
         List<MultipartFile> multipartList = postFileVO.getFiles();
+
         // 새롭게 전달되어온 파일들의 목록을 저장할 list 선언
         List<MultipartFile> addFileList = new ArrayList<>();
 
@@ -102,12 +112,15 @@ public class PostController {
             if (CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일 아예 x
                 // 파일 삭제
                 for (Image dbImage : dbImageList)
-                    imageService.deleteImage(dbImage.getIid());
+                    imageRepository.deleteImageByIid(dbImage.getIid(), pid);
             } else {  // 전달되어온 파일 한 장 이상 존재
 
                 // DB에 저장되어있는 파일 원본명 목록
                 List<String> dbOriginNameList = new ArrayList<>();
 
+                // multipartFile형식은 String값으로 찾을 수 없으니 원본명만 빼서 리스트로 만듦
+                List<String> multiList = multipartList.stream()
+                        .map(MultipartFile::getOriginalFilename).collect(Collectors.toList());
                 // DB의 파일 원본명 추출
                 for (Image dbImage : dbImageList) {
                     // file id로 DB에 저장된 파일 정보 얻어오기
@@ -115,10 +128,15 @@ public class PostController {
                     // DB의 파일 원본명 얻어오기
                     String dbOriginFileName = dbImageDTO.getOriginFilename();
 
-                    if (!multipartList.contains(dbOriginFileName))  // 서버에 저장된 파일들 중 전달되어온 파일이 존재하지 않는다면
-                        imageService.deleteImage(dbImage.getIid());  // 파일 삭제
-                    else  // 그것도 아니라면
+                    if (!multiList.contains(dbOriginFileName))  { // 서버에 저장된 파일들 중 전달되어온 파일이 존재하지 않는다면
+                        log.info("파일 삭제 중 : " + dbImage.getOriginFileName());
+                        imageRepository.deleteImageByIid(dbImage.getIid(), pid);
+                    }
+                    else  { // 그것도 아니라면
+                        log.info("파일 추가 중 : " + dbOriginFileName);
                         dbOriginNameList.add(dbOriginFileName);    // DB에 저장할 파일 목록에 추가
+                    }
+
                 }
 
                 for (MultipartFile multipartFile : multipartList) { // 전달되어온 파일 하나씩 검사
@@ -130,7 +148,7 @@ public class PostController {
                 }
             }
         }
-            return responseService.getSingleResult(postService.update(pid, postRequestDTO, addFileList));
+            return responseService.getSingleResult(postService.update(pid, postRequestDTO, addFileList, request));
     }
 
 
@@ -139,7 +157,7 @@ public class PostController {
     @GetMapping("/post/{pid}")
     public SingleResult<PostResponseDTO> searchById(
             @ApiParam(value = "게시글 번호", required = true)
-            @PathVariable Long pid) {
+            @PathVariable("pid") Long pid) {
             // 게시글 id로 해당 게시글 첨부파일 전체 조회
             List<ImageResponseDTO> imageResponseDTOList =
                     imageService.findAllByPost(pid);
@@ -153,16 +171,31 @@ public class PostController {
             return responseService.getSingleResult(postService.searchById(pid, imageId));
         }
 
+
+
+
+        // fild_Id가 썸네일 용 하나만 나옴 여러개 나올 수 있도록 변경 필요
     // 전체 조회
     @ApiOperation(value = "전체 조회", notes = "게시글 전체를 검색합니다.")
     @GetMapping("/post")
-    public ListResult<PostListResponseDTO> searchAllDesc() {
+    public ListResult<PostListResponseDTO> searchAllDesc(
+            @PageableDefault(sort = "pid", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(value = "keyword", required = false) String keyword) {
         // 게시글 전체 조회
-        List<Post> postList = postService.searchAllDesc();
+        Page<Post> list = null;
+
+
+
+        // 검색할 때와 검색하지 않았을 때를 구분
+        if(keyword == null) {
+            list = postService.searchAllDesc(pageable);
+        } else {
+            list = postService.searchByKeyword(pageable, keyword);
+        }
         // 반환할 List<BoardListResponseDto> 생성
         List<PostListResponseDTO> responseDTOList = new ArrayList<>();
 
-        for(Post post : postList){
+        for(Post post : list){
             // 전체 조회하여 획득한 각 게시글 객체를 이용하여 BoardListResponseDto 생성
             PostListResponseDTO responseDto = new PostListResponseDTO(post);
             responseDTOList.add(responseDto);
@@ -176,9 +209,9 @@ public class PostController {
     @DeleteMapping("/post/delete/{pid}")
     public SingleResult<Long> delete(
             @ApiParam(value = "게시글 번호", required = true)
-            @PathVariable Long pid,
-            @RequestBody PostRequestDTO postRequestDTO) {
-        return responseService.getSingleResult(postService.delete(pid, postRequestDTO));
+            @PathVariable("pid") Long pid,
+            HttpServletRequest request) {
+        return responseService.getSingleResult(postService.delete(pid, request));
     }
 
 

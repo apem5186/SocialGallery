@@ -20,8 +20,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
             // GET, POST, PUT, PATCH, DELETE, OPTIONS 메서드를 허용한다.
             .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
             .allowedHeaders("*")
+            .exposedHeaders("Authorization")
             .allowCredentials(true)
             .maxAge(MAX_AGE_SECS);
+
     }
 
 

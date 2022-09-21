@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.net.http.HttpRequest;
 import java.util.Optional;
 
 
@@ -112,10 +113,10 @@ public class SignService {
         String accessToken = tokenRequestDTO.getAccessToken();
         log.info("BEFORE ACCESSTOKEN : " + accessToken);
         Authentication authentication = jwtProvider.getAuthentication(accessToken);
-        log.info("BEFORE AUTHENTICATION: " + authentication);
+        log.info("BEFORE AUTHENTICATION: " + authentication.getName());
 
         // user pk(id)로 유저 검색/ repo에 저장된 refresh token이 없음
-        Users users = userRepository.findByUsername(authentication.getName())
+        Users users = userRepository.findByEmail(authentication.getName())
                 .orElseThrow(UserNotFoundCException::new);
         log.info("SEARCH USERS : " + users);
         RefreshToken refreshToken = refreshTokenJpaRepo.findByKey(users.getId())
@@ -141,9 +142,9 @@ public class SignService {
     }
 
     @Transactional
-    public Long logout(UserRequestDTO userRequestDTO) {
+    public Long logout(Long id) {
         // 회원 정보 존재하는지 확인
-        Users users = userRepository.findByUsername(userRequestDTO.getUsername())
+        Users users = userRepository.findById(id)
                 .orElseThrow(UserNotFoundCException::new);
         log.info("SEARCH USERS : " + users);
 
