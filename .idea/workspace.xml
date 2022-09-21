@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="comment 구현 완료 css 수정 필요" />
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/aws/HealthCheck.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-dev.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,34 +56,21 @@
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/AccessDeniedCException.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/AuthenticationEntryPointCException.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/CommentNotFoundCException.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/EmailLoginFailedCException.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/EmailSignUpFailedCException.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/ExpiredAccessTokenCException.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/advice/exception/ImageNotFoundCException.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebMvcConfig.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/CookieUtils.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/HttpCookieOAuth2AuthorizationRequestRepository.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtAuthenticationFilter.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/OAuth2AuthenticationSuccessHandler.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/SignController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/UserController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/jwt/TokenDTO.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/sign/OAuth2DTO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/user/Users.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/ImageRepository.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application-jwt.yml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application-oauth.yml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Login/login.jsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Main/MainHeader.jsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upload.jsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="HttpClientSelectedEnvironments">
     <file url="file://$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" />
