@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="google oauth2 백엔드 구현중">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="comment 구현 완료 css 수정 필요">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqlDataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/security/SignService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/security/SignService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,29 +113,34 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Project/SocialGallery&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;spring.boot&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;a8c7d9d08c5cce12ef9f1b44f835f853&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Project/SocialGallery",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "spring.boot",
+    "spring.configuration.checksum": "a8c7d9d08c5cce12ef9f1b44f835f853"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "h2"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Project\SocialGallery\galleryBackend\src\main\resources\templates\main" />
@@ -300,7 +300,9 @@
       <workItem from="1662610152894" duration="5621000" />
       <workItem from="1662963268000" duration="18353000" />
       <workItem from="1662981850901" duration="2065000" />
-      <workItem from="1663050751245" duration="39065000" />
+      <workItem from="1663050751245" duration="39205000" />
+      <workItem from="1663216169917" duration="1218000" />
+      <workItem from="1663656778425" duration="10063000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -498,7 +500,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663063012503</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="comment 구현 완료 css 수정 필요">
+      <created>1663092767168</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1663092767168</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -529,7 +538,8 @@
     <MESSAGE value="google oauth2 구현중" />
     <MESSAGE value="google oauth2, comment 구현중" />
     <MESSAGE value="google oauth2 백엔드 구현중" />
-    <option name="LAST_COMMIT_MESSAGE" value="google oauth2 백엔드 구현중" />
+    <MESSAGE value="comment 구현 완료 css 수정 필요" />
+    <option name="LAST_COMMIT_MESSAGE" value="comment 구현 완료 css 수정 필요" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
