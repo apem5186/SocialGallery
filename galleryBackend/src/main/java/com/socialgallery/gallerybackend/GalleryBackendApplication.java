@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
-@EnableJpaAuditing  // JPA auditing 기능 사용할 수 있게 함S
+@EnableJpaAuditing  // JPA auditing 기능 사용할 수 있게 함
 @EnableConfigurationProperties(AppProperties.class)
 public class GalleryBackendApplication implements WebMvcConfigurer {
 
