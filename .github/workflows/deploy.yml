@@ -7,11 +7,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  backend:
+    name: galleryBackend
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: galleryBackend
 
     steps:
-      - name: Checkout
+      - name: Checkout Github-Action
         uses: actions/checkout@v2
 
       - name: Set up JDK 11
@@ -21,8 +26,33 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod -x ./gradlew
-        shell: bash
 
       - name: Build with Gradle
         run: ./gradlew clean build
+
+  frontend:
+    name: galleryFrontend
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
         shell: bash
+        working-directory: galleryFrontend
+
+    strategy:
+      matrix:
+        node-version: [12.22.12]
+
+    steps:
+      - name: Checkout Github-Action
+        uses: actions/checkout@v2
+
+      - name: node.js 12 설치 ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm 설치
+        run: npm install
+
+      - name: npm 빌드
+        run: npm run build
