@@ -6,6 +6,7 @@ function UpLoadForm(props) {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState([])
     const usersId = useState('')
+    const [category, setCategory] = useState('')
 
 // Img 미리보기
     const [ imgs, setImgs ] = useState('')
@@ -41,6 +42,9 @@ function UpLoadForm(props) {
     const onHandlePostComments = (e) =>{
         setContent(e.currentTarget.value)
     }
+    const onHandleCategory = (e)=>{
+        setCategory(e.target.value)
+    }
     const postSubmit = (e) => {
         e.preventDefault();
         const headers = {
@@ -48,11 +52,15 @@ function UpLoadForm(props) {
             'Authorization': "Bearer " + localStorage.getItem("token")
         }
         const formData = new FormData()
-        formData.append('files', imgs)
+        if (!imgs === null) {
+            formData.append('files', imgs)
+            console.log("이미지 " + formData.get("files").name)
+        }
         formData.append('usersId', localStorage.getItem('uid'))
         formData.append('title', title)
         formData.append('content', content)
-        console.log("이미지 " + formData.get("files").name)
+        formData.append('category', category)
+        console.log("CATEGORY " + formData.get("category"))
         console.log("EMAIL" + formData.get("usersId"))
         console.log("TITLE" + formData.get("title"))
         console.log("content" + formData.get("content"))
@@ -104,7 +112,25 @@ function UpLoadForm(props) {
                                         <img src="assets/Main/user.png" alt="User Picture" />
                                         <span>user1</span>
                                     </div>
-
+                                    {/* 라디오 */}
+                                    <form onChange={onHandleCategory}>
+                                        <div>
+                                            <input type="radio" name="CATEGORY" value='BROADCAST'/>
+                                            <label for="dewey">Broadcast</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="CATEGORY" value='MOVIE' />
+                                            <label for="dewey">Movie</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="CATEGORY" value='TRAVEL' />
+                                            <label for="dewey">Travel</label>
+                                        </div>
+                                        <div>
+                                            <input type="radio" name="CATEGORY" value='LIFE' />
+                                            <label for="dewey">Life</label>
+                                        </div>
+                                    </form>
                                     <div className="photoinfo_contents">
                                         <div className="title">
                                             <span className="material-icons">drive_file_rename_outline</span>
@@ -117,6 +143,7 @@ function UpLoadForm(props) {
                                             <span>Contents</span>
                                         </div>
                                         <input type="text" id="cont_story" placeholder="내용을 입력해주세요." onChange={onHandlePostComments} />
+
                                     </div>
                                 </div>
                             </div>

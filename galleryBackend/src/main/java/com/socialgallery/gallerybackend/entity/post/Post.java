@@ -9,6 +9,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,10 @@ public class Post extends BaseEntity {
 
     private int likeCnt;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
     @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Users.class)
     private Users users;
     
@@ -53,7 +58,8 @@ public class Post extends BaseEntity {
     private List<Comment> comments = new ArrayList<>();
 
     @Builder
-    public Post(Long pid, Users users, String title, String content, int hits, int reviewCnt, int likeCnt) {
+    public Post(Long pid, Users users, String title, String content, int hits, int reviewCnt, int likeCnt,
+                String category) {
         this.pid = pid;
         this.users = users;
         this.title = title;
@@ -61,6 +67,7 @@ public class Post extends BaseEntity {
         this.hits = hits;
         this.reviewCnt = reviewCnt;
         this.likeCnt = likeCnt;
+        this.category = Category.valueOf(category);
     }
 
     public void update(String title, String content) {

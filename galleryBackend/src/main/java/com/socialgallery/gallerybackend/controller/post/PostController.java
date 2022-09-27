@@ -7,6 +7,7 @@ import com.socialgallery.gallerybackend.dto.post.PostListResponseDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
+import com.socialgallery.gallerybackend.entity.post.Category;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.model.response.ListResult;
@@ -26,7 +27,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +73,7 @@ public class PostController {
                 .users(users.orElseThrow())
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
+                .category(postFileVO.getCategory())
                 .build();
 
         log.info("POSTREQUESTDTO : " + postRequestDTO);
@@ -172,7 +173,36 @@ public class PostController {
         }
 
 
+    @ApiOperation(value = "카테고리 조회", notes = "카테고리로 게시글을 검색합니다.")
+    @GetMapping("/post/category")
+    public ListResult<PostListResponseDTO> searchCategory(
+            @PageableDefault(sort = "pid", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(value = "keyword", required = false) String keyword, HttpServletRequest request
+    ) {
+        // 반환할 List<BoardListResponseDto> 생성
+        List<PostListResponseDTO> responseDTOList = new ArrayList<>();
+        // 게시글 전체 조회
+        Page<Post> list = null;
 
+//        // 검색할 때와 검색하지 않았을 때를 구분
+//        if(keyword == null) {
+//            list = postService.searchAllDesc(pageable);
+//        } else {
+//            list = postService.searchByKeyword(pageable, keyword);
+//        }
+        log.info("=======================================");
+        log.info(request.getContextPath());
+        log.info("=======================================");
+        Category category = Category.valueOf(request.getContextPath());
+        list = postService.searchByCategory(pageable, category);
+        for(Post post : list){
+            // 전체 조회하여 획득한 각 게시글 객체를 이용하여 BoardListResponseDto 생성
+            PostListResponseDTO responseDto = new PostListResponseDTO(post);
+            responseDTOList.add(responseDto);
+        }
+
+        return responseService.getListResult(responseDTOList);
+    }
 
         // fild_Id가 썸네일 용 하나만 나옴 여러개 나올 수 있도록 변경 필요
     // 전체 조회
@@ -181,10 +211,11 @@ public class PostController {
     public ListResult<PostListResponseDTO> searchAllDesc(
             @PageableDefault(sort = "pid", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam(value = "keyword", required = false) String keyword) {
+
+        // 반환할 List<BoardListResponseDto> 생성
+        List<PostListResponseDTO> responseDTOList = new ArrayList<>();
         // 게시글 전체 조회
         Page<Post> list = null;
-
-
 
         // 검색할 때와 검색하지 않았을 때를 구분
         if(keyword == null) {
@@ -192,8 +223,6 @@ public class PostController {
         } else {
             list = postService.searchByKeyword(pageable, keyword);
         }
-        // 반환할 List<BoardListResponseDto> 생성
-        List<PostListResponseDTO> responseDTOList = new ArrayList<>();
 
         for(Post post : list){
             // 전체 조회하여 획득한 각 게시글 객체를 이용하여 BoardListResponseDto 생성

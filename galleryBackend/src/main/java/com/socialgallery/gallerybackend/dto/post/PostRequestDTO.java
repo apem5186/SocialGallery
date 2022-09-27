@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.dto.post;
 
+import com.socialgallery.gallerybackend.entity.post.Category;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import lombok.Builder;
@@ -22,11 +23,14 @@ public class PostRequestDTO {
 
     private String content;
 
+    private Category category;
+
     @Builder
-    public PostRequestDTO (Users users, String title, String content) {
+    public PostRequestDTO (Users users, String title, String content, Category category) {
         this.users = users;
         this.title = title;
         this.content = content;
+        this.category = category;
     }
 
     public Post toEntity() {
@@ -37,6 +41,7 @@ public class PostRequestDTO {
                 .hits(0)
                 .reviewCnt(0)
                 .likeCnt(0)
+                .category(String.valueOf(category))
                 .build();
     }
 }

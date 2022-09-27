@@ -6,7 +6,7 @@ function MainHeader(){
             <header className="header">
                 <nav className="header__content">
                     <div className="header__buttons">
-                        <p>Social Gallery</p>
+                        <Link to='/'><p>Social Gallery</p></Link>
                     </div>
 
                     <div className="header__buttons header__buttons--desktop">

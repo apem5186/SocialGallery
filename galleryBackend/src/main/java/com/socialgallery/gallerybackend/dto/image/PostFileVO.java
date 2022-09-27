@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.dto.image;
 
+import com.socialgallery.gallerybackend.entity.post.Category;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,5 +15,6 @@ public class PostFileVO {
     private String usersId;
     private String title;
     private String content;
+    private Category category;
     private List<MultipartFile> files;
 }

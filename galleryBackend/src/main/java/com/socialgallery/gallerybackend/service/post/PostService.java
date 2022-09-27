@@ -13,6 +13,7 @@ import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
 import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
+import com.socialgallery.gallerybackend.entity.post.Category;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.security.RefreshToken;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
@@ -141,6 +142,11 @@ public class PostService {
     public Page<Post> searchByKeyword(Pageable pageable, String keyword) {
 
         return postRepository.findByTitleContaining(keyword, pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Post> searchByCategory(Pageable pageable, Category category) {
+        return postRepository.findByCategory(pageable, category);
     }
 
     // 게시글 삭제

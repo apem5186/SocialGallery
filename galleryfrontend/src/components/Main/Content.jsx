@@ -2,25 +2,17 @@ import {useEffect, useState} from "react"
 import axios from "axios"
 import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import Delete from "../PostReg/delete";
 
-function Content({pfUser,setPfUser,mainImg,i,setReply,reply,setMainImg,commentArray,setCommentArray}){
+function Content({pfUser,mainImg,i,reply,setCommentArray}){
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
-    let [pid, setPid] = useState('')
-    const uid = localStorage.getItem('uid')
     // 댓글
-    const [mainComment, setMainComment] = useState([])
+
     const [comment, setComments] = useState([])
-    const navigate = useNavigate()
 
     const base_URL = "http://localhost:8080"
 
-    useEffect(()=>{
-        console.log(commentArray)
-        console.log(reply)
-        console.log(mainImg[i].pid)
-    },[])
 
     const postCommentSubmit = (e) => {
         e.preventDefault()
@@ -39,7 +31,7 @@ function Content({pfUser,setPfUser,mainImg,i,setReply,reply,setMainImg,commentAr
 
         } ,{headers},)
             .then(res=>{
-                console.log([...res.data.data])
+                console.log([...res.data])
             })
     }
 
@@ -74,16 +66,11 @@ function Content({pfUser,setPfUser,mainImg,i,setReply,reply,setMainImg,commentAr
                                         <Link to="#" className="post__avatar">
                                             <img src="assets/Main/user.png" alt="User Picture" />
                                         </Link>
-                                        <span>
-          {pfUser.name}
-        </span>
-                                        {/* <UpLoad></UpLoad> */}
+                                        <span>{pfUser.username}</span>
+                                        {/* Upload*/}
                                         <UpLoad></UpLoad>
-                                    </div>
-                                </div>
-                                <div className="post__id">
-                                    <div className="post__pid">
-                                        <span>{mainImg[i].pid}</span>
+                                        {/* Delete */}
+                                        <Delete mainImg={mainImg} i={i}></Delete>
                                     </div>
                                 </div>
                                 <div className="post__content">
@@ -115,22 +102,21 @@ function Content({pfUser,setPfUser,mainImg,i,setReply,reply,setMainImg,commentAr
                                         {/*
         <!-- 댓글 --> */}
                                         <div>
-                                            <ul className="comment_list">
+                                            <div className="comment_list">
                                                 {
                                                     reply
                                                         .filter((value)=>value.pid === mainImg[i].pid)
                                                         .map((a,i)=>{
                                                             return(
-                                                                <div><em>{a.username}</em> : {a.comment}</div>)
+                                                                <div key={a.cid}>
+                                                                    <em>{a.username}</em>
+                                                                    &nbsp;&nbsp;:
+                                                                    <span>{a.comment}</span>
+                                                                </div>)
                                                         })
-
-
                                                 }
 
-
-                                                <div>{}</div>
-
-                                            </ul>
+                                            </div>
                                         </div>
 
 

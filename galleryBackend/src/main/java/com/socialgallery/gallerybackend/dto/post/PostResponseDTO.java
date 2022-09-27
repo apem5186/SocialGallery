@@ -1,6 +1,7 @@
 package com.socialgallery.gallerybackend.dto.post;
 
 import com.socialgallery.gallerybackend.dto.comment.CommentResponseDTO;
+import com.socialgallery.gallerybackend.entity.post.Category;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import lombok.Getter;
 
@@ -28,6 +29,8 @@ public class PostResponseDTO {
 
     private final int likeCnt;
 
+    private final Category category;
+
     private final List<Long> fileId;  // 첨부 파일 id 목록
 
     private final List<CommentResponseDTO> comments;
@@ -40,6 +43,7 @@ public class PostResponseDTO {
         this.hits = post.getHits();
         this.reviewCnt = post.getReviewCnt();
         this.likeCnt = post.getLikeCnt();
+        this.category = post.getCategory();
         this.fileId = fileId;
         this.comments = post.getComments().stream().map(CommentResponseDTO::new).collect(Collectors.toList());
     }

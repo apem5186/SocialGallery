@@ -1,5 +1,6 @@
 package com.socialgallery.gallerybackend.repository;
 
+import com.socialgallery.gallerybackend.entity.post.Category;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,4 +17,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findAllByOrderByPidDesc(Pageable pageable);
 
     Page<Post> findByTitleContaining(String keyword, Pageable pageable);
+
+    Page<Post> findByCategory(Pageable pageable, Category category);
 }

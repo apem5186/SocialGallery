@@ -3,9 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import {useParams} from "react-router-dom";
 
-function Sidebar({pfUser,setPfUser,setSearchTitle}){
+function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg}){
     let [uid, setUid] = useState('')
     const navigate = useNavigate()
     // const uid = localStorage.getItem('uid')
@@ -36,14 +35,24 @@ function Sidebar({pfUser,setPfUser,setSearchTitle}){
                 console.log(setPfUser)
             },[])
     }
+
+    // 검색
+    const base_URL = "http://localhost:8080"
+
+    const searchList = (e) => {
+        axios.get(base_URL + '/api/post?keyword=' + searchTitle)
+            .then(res => {
+                setMainImg([...res.data.list])
+            })
+    }
     return (
         <>
             <nav className="sidebar close" id="nav">
                 <header>
                     <div className="image-text">
-				<span className="image">
-					<img src="assets/Main/user.png" alt="" />
-				</span>
+            <span className="image">
+               <img src="assets/Main/user.png" alt="" />
+            </span>
                         <div className="text logo-text">
                             <span className="name">{pfUser}</span>
                             <span className="profession">Welcome</span>
@@ -59,7 +68,8 @@ function Sidebar({pfUser,setPfUser,setSearchTitle}){
                 <div className="menu-bar">
                     <div className="menu">
                         <li className="search-box">
-                            <i className="bx bx-search icon"></i>
+                            <i className="bx bx-search icon"
+                               onClick={searchList}></i>
                             <input
                                 type="text"
                                 placeholder="Search..."
@@ -68,7 +78,7 @@ function Sidebar({pfUser,setPfUser,setSearchTitle}){
                         </li>
                         <ul className="menu-links">
                             <li className="nav-link">
-                                <Link to = "#">
+                                <Link to = "/">
                                     <i className="bx bx-home-alt icon"></i>
                                     <span className="text nav-text">Home</span>
                                 </Link>
