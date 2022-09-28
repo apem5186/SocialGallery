@@ -11,6 +11,7 @@ spring:
     include:
       - oauth
       - jwt
+    active: prod
   security:
     oauth2:
       client:
