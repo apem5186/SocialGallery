@@ -16,7 +16,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./galleryBackend
+        working-directory: galleryBackend
 
     steps:
       - name: Checkout Github-Action
@@ -52,9 +52,6 @@ jobs:
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
-          pwd
-      - name: check pwd
-        run: pwd
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v19
         with:
@@ -64,7 +61,7 @@ jobs:
           environment_name: Socialgallery-env-1
           region: ap-northeast-2
           version_label: github-action-${{steps.current-time.outputs.formattedTime}}
-          deployment_package: deploy.zip
+          deployment_package: galleryBackend/deploy/deploy.zip
 
   frontend:
     name: galleryFrontend
