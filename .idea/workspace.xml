@@ -295,14 +295,7 @@
       <workItem from="1664366506791" duration="544000" />
       <workItem from="1664367094525" duration="485000" />
       <workItem from="1664367610564" duration="1514000" />
-      <workItem from="1664369148041" duration="7065000" />
-    </task>
-    <task id="LOCAL-00013" summary="logout기능 구현">
-      <created>1660641268591</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1660641268591</updated>
+      <workItem from="1664369148041" duration="7216000" />
     </task>
     <task id="LOCAL-00014" summary="post기능 구현">
       <created>1660735599233</created>
@@ -640,7 +633,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664376166035</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="배포 준비">
+      <created>1664376469789</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1664376469789</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
