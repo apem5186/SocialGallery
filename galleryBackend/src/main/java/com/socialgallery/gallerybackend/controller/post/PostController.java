@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -177,7 +178,8 @@ public class PostController {
     @GetMapping("/post/category")
     public ListResult<PostListResponseDTO> searchCategory(
             @PageableDefault(sort = "pid", direction = Sort.Direction.DESC) Pageable pageable,
-            @RequestParam(value = "keyword", required = false) String keyword, HttpServletRequest request
+            @RequestParam(value = "keyword", required = false) String keyword, HttpServletRequest request,
+            HttpServletResponse response
     ) {
         // 반환할 List<BoardListResponseDto> 생성
         List<PostListResponseDTO> responseDTOList = new ArrayList<>();
@@ -192,6 +194,10 @@ public class PostController {
 //        }
         log.info("=======================================");
         log.info(request.getContextPath());
+        log.info(request.getPathInfo());
+        log.info(request.getPathTranslated());
+        log.info(request.getServletPath());
+        log.info(String.valueOf(request.getParameterNames()));
         log.info("=======================================");
         Category category = Category.valueOf(request.getContextPath());
         list = postService.searchByCategory(pageable, category);

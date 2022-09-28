@@ -1,12 +1,24 @@
 import { Link } from "react-router-dom";
+import axios from "axios";
 
-function MainHeader(){
+function MainHeader({setMainImg}){
+    const base_URL = "http://localhost:8080"
+
+    const getAll = (e) => {
+        axios.get(base_URL + '/api/post')
+            .then(res => {
+                setMainImg([...res.data.list])
+            }).catch(
+                console.log("왜안돼 ㅅ발")
+        )
+    }
+
     return(
         <>
             <header className="header">
                 <nav className="header__content">
                     <div className="header__buttons">
-                        <Link to='/'><p>Social Gallery</p></Link>
+                        <Link to='/'><p onClick={getAll}>Social Gallery</p></Link>
                     </div>
 
                     <div className="header__buttons header__buttons--desktop">

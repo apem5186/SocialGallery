@@ -39,6 +39,13 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
     // 검색
     const base_URL = "http://localhost:8080"
 
+    const getAll = (e) => {
+        axios.get(base_URL + 'api/post')
+            .then(res => {
+                setMainImg([...res.data.list])
+            })
+    }
+
     const searchList = (e) => {
         axios.get(base_URL + '/api/post?keyword=' + searchTitle)
             .then(res => {

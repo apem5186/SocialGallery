@@ -5,31 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
-      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Category.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/delete.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/broadcast.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/life.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/movie.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/travel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/PostFileVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/image/PostFileVO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/entity/post/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/MainHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/MainHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,6 +100,7 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2Cqa9sVMiatM8uXZk1As3dhC76r" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
@@ -140,7 +123,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a8c7d9d08c5cce12ef9f1b44f835f853&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -314,7 +297,10 @@
       <workItem from="1663216169917" duration="1218000" />
       <workItem from="1663656778425" duration="10063000" />
       <workItem from="1663820496789" duration="3780000" />
-      <workItem from="1664270775302" duration="18909000" />
+      <workItem from="1664270775302" duration="20100000" />
+      <workItem from="1664293328842" duration="91000" />
+      <workItem from="1664293649581" duration="1048000" />
+      <workItem from="1664352380471" duration="696000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -575,7 +561,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663825251249</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="배포 준비">
+      <created>1664292550210</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1664292550210</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,6 +586,9 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/SocialGallery" />
+    </ignored-roots>
     <MESSAGE value="SignUp Test..." />
     <MESSAGE value="SignIn Test..(코드 수정 예정)" />
     <MESSAGE value="jwt Token test(코드 수정 예정)" />

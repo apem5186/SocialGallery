@@ -14,7 +14,9 @@ function Main({mainImg,setMainImg,setReply,searchTitle,pfUser,reply,setCommentAr
     return (
         <>
             {/* Header*/}
-            <MainHeader></MainHeader>
+            <MainHeader
+            setMainImg={setMainImg}
+            ></MainHeader>
 
             {/* Side Menu */}
             <SideMenu></SideMenu>
