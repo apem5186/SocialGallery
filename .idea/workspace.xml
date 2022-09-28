@@ -136,26 +136,10 @@
       <recent name="com.socialgallery.gallerybackend.service.oauth" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.GalleryBackendApplication">
+  <component name="RunManager" selected="npm.build">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.GalleryBackendApplication" />
       <module name="galleryBackend.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MemberControllerTest.testGetInfoSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="galleryBackend.test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.socialgallery.gallerybackend.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.socialgallery.gallerybackend.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.controller.MemberControllerTest" />
-      <option name="METHOD_NAME" value="testGetInfoSuccess" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -231,22 +215,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/galleryfrontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.PostControllerTest.postTest" />
-      <item itemvalue="JUnit.MemberControllerTest.testGetInfoSuccess" />
       <item itemvalue="JUnit.MemberControllerTest.testLogin" />
       <item itemvalue="JUnit.MemberControllerTest.testSignUp" />
       <item itemvalue="JUnit.MemberTest.testRead" />
+      <item itemvalue="npm.build" />
       <item itemvalue="Spring Boot.GalleryBackendApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="JUnit.PostControllerTest.postTest" />
         <item itemvalue="JUnit.MemberTest.testRead" />
         <item itemvalue="JUnit.MemberControllerTest.testSignUp" />
         <item itemvalue="JUnit.MemberControllerTest.testLogin" />
-        <item itemvalue="JUnit.MemberControllerTest.testGetInfoSuccess" />
       </list>
     </recent_temporary>
   </component>
@@ -292,7 +286,7 @@
       <workItem from="1664270775302" duration="20100000" />
       <workItem from="1664293328842" duration="91000" />
       <workItem from="1664293649581" duration="1048000" />
-      <workItem from="1664352380471" duration="1795000" />
+      <workItem from="1664352380471" duration="2315000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -574,7 +568,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664354443601</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="배포 준비">
+      <created>1664354742409</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1664354742409</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
