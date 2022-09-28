@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  RESOURCE_PATH: ./src/main/resources/application-prod.yaml
+  RESOURCE_PATH: ./galleryBackend/src/main/resources/application-prod.yaml
 
 jobs:
   backend:

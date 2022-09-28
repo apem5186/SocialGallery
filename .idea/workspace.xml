@@ -7,7 +7,6 @@
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -297,14 +296,7 @@
       <workItem from="1664366506791" duration="544000" />
       <workItem from="1664367094525" duration="485000" />
       <workItem from="1664367610564" duration="1514000" />
-      <workItem from="1664369148041" duration="10451000" />
-    </task>
-    <task id="LOCAL-00017" summary="댓글 기능, 검색 기능 구현">
-      <created>1661167550533</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1661167550533</updated>
+      <workItem from="1664369148041" duration="10578000" />
     </task>
     <task id="LOCAL-00018" summary="댓글 기능, 검색 기능 구현">
       <created>1661168548181</created>
@@ -642,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664379484486</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="배포 준비">
+      <created>1664380370554</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1664380370554</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
