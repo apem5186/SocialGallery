@@ -53,7 +53,9 @@ jobs:
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
       - name: Deploy to EB
-        run: pwd
+        run: |
+          pwd
+          grep -r 'deploy' /galleryBackend/* [-include '*.zip']
         uses: einaregilsson/beanstalk-deploy@v19
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
