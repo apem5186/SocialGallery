@@ -52,7 +52,7 @@ jobs:
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
-          find /galleryBackend/ -name "deploy*"
+          pwd
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v19
         with:
