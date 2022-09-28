@@ -296,14 +296,7 @@
       <workItem from="1664366506791" duration="544000" />
       <workItem from="1664367094525" duration="485000" />
       <workItem from="1664367610564" duration="1514000" />
-      <workItem from="1664369148041" duration="7380000" />
-    </task>
-    <task id="LOCAL-00015" summary="post기능 구현">
-      <created>1660747892020</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1660747892020</updated>
+      <workItem from="1664369148041" duration="9534000" />
     </task>
     <task id="LOCAL-00016" summary="각 기능에 token인증 추가 및 여러 에러 픽스">
       <created>1660823294511</created>
@@ -641,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664376630599</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="배포 준비">
+      <created>1664376784511</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1664376784511</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
