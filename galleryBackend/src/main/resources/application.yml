@@ -10,6 +10,7 @@ spring:
     include:
       - oauth
       - jwt
+    active: prod
   h2:
     console:
       enabled: true

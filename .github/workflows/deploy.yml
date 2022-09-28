@@ -9,6 +9,7 @@ on:
       - master
   workflow_dispatch:
 
+# ./galleryBackend/src/main/resources/application-prod.yaml
 env:
   RESOURCE_PATH: ./galleryBackend/src/main/resources/application-prod.yaml
 
