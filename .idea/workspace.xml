@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
+      <change afterPath="$PROJECT_DIR$/galleryBackend/.ebextensions/00-makeFiles.config" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryBackend/.platform/nginx/nginx.conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryBackend/Procfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -109,7 +112,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Project/SocialGallery&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/apem5/Downloads/intellij-hocon-2022.1.0.zip&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -118,7 +121,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a8c7d9d08c5cce12ef9f1b44f835f853&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -130,6 +133,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\SocialGallery\galleryBackend" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Project\SocialGallery\galleryBackend\src\main\resources\templates\main" />
     </key>
@@ -139,7 +145,7 @@
       <recent name="com.socialgallery.gallerybackend.service.oauth" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="Spring Boot.GalleryBackendApplication">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.socialgallery.gallerybackend.GalleryBackendApplication" />
       <module name="galleryBackend.main" />
@@ -289,7 +295,11 @@
       <workItem from="1664270775302" duration="20100000" />
       <workItem from="1664293328842" duration="91000" />
       <workItem from="1664293649581" duration="1048000" />
-      <workItem from="1664352380471" duration="3287000" />
+      <workItem from="1664352380471" duration="8258000" />
+      <workItem from="1664366506791" duration="544000" />
+      <workItem from="1664367094525" duration="485000" />
+      <workItem from="1664367610564" duration="1514000" />
+      <workItem from="1664369148041" duration="353000" />
     </task>
     <task id="LOCAL-00001" summary="SignUp Test...">
       <created>1659550407350</created>
@@ -585,7 +595,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664355335280</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="배포 준비">
+      <created>1664356123738</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1664356123738</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
