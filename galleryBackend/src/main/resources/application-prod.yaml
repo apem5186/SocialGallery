@@ -11,6 +11,18 @@ spring:
     include:
       - oauth
       - jwt
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${google.client-id}
+            client-secret: ${google.client-secret}
+            redirect-uri: ${baseurl}/oauth2/code/google
+            scope: profile,email
+
+  jwt:
+    secret: ${jwt.secret}
 
   main:
     allow-bean-definition-overriding: true
@@ -35,3 +47,13 @@ spring:
     url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}
     username: ${rds.username}
     password: ${rds.password}
+
+app:
+  auth:
+    token-secret: ${token-secret}
+    token-expiration-msec: 300
+  cors:
+    allowedOrigins: http://localhost:3000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect

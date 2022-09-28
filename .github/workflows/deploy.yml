@@ -9,6 +9,9 @@ on:
       - master
   workflow_dispatch:
 
+env:
+  RESOURCE_PATH: ./src/main/resources/application-prod.yaml
+
 jobs:
   backend:
     name: galleryBackend
@@ -35,7 +38,7 @@ jobs:
           spring.security.oauth2.client.registration.google.client-secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
           spring.security.oauth2.client.registration.google.redirect-uri: ${{ secrets.GOOGLE_REDIRECT_URI }}
           spring.jwt.secret: ${{ secrets.JWT_SECRET }}
-          app.auth.tokenSecret: ${{ secrets.TOKEN_SECRET }}
+          app.auth.token-secret: ${{ secrets.TOKEN_SECRET }}
 
       - name: Grant execute permission for gradlew
         run: chmod +x ./gradlew
