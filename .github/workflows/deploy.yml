@@ -52,8 +52,8 @@ jobs:
           cp Procfile deploy/Procfile
           cp -r .ebextensions deploy/.ebextensions
           cd deploy && zip -r deploy.zip .
+          grep -r 'deploy' /deploy/* [-include '*.zip']
       - name: Deploy to EB
-        run: grep -r 'deploy' /galleryBackend/* [-include '*.zip']
         uses: einaregilsson/beanstalk-deploy@v19
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
