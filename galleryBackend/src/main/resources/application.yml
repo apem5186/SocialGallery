@@ -7,10 +7,14 @@ server:
 
 spring:
   profiles:
-#    include:
+    include:
+      - prod
 #      - oauth
 #      - jwt
     active: prod
+  config:
+    activate:
+      on-profile: prod
   h2:
     console:
       enabled: true
