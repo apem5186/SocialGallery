@@ -15,6 +15,7 @@ spring:
   config:
     activate:
       on-profile: prod
+    location: optional:classpath:application-prod.yaml
   h2:
     console:
       enabled: true
