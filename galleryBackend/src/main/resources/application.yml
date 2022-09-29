@@ -8,10 +8,10 @@ server:
 spring:
   profiles:
     include:
-      - prod
+#      - prod
 #      - oauth
 #      - jwt
-    active: prod
+#    active: prod
   config:
     activate:
       on-profile: prod
