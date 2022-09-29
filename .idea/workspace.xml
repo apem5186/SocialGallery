@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/.ebextensions/00-makeFiles.config" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/.ebextensions/00-makeFiles.config" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -297,14 +296,7 @@
       <workItem from="1664367094525" duration="485000" />
       <workItem from="1664367610564" duration="1514000" />
       <workItem from="1664369148041" duration="16281000" />
-      <workItem from="1664423672969" duration="4632000" />
-    </task>
-    <task id="LOCAL-00025" summary="google oauth2 구현중">
-      <created>1662544548722</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1662544548722</updated>
+      <workItem from="1664423672969" duration="4683000" />
     </task>
     <task id="LOCAL-00026" summary="google oauth2 구현중">
       <created>1662548670439</created>
@@ -642,7 +634,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664426227598</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="배포 준비">
+      <created>1664428452326</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1664428452326</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
