@@ -7,9 +7,9 @@ server:
 
 spring:
   profiles:
-    include:
-      - oauth
-      - jwt
+#    include:
+#      - oauth
+#      - jwt
     active: prod
   h2:
     console:

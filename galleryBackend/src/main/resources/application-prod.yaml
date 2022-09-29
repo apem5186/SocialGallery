@@ -8,9 +8,9 @@ server:
 
 spring:
   profiles:
-    include:
-      - oauth
-      - jwt
+#    include:
+#      - oauth
+#      - jwt
   security:
     oauth2:
       client:
