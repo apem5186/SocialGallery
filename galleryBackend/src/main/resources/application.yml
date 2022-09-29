@@ -14,8 +14,8 @@ spring:
 #    active: prod
   config:
     activate:
-      on-profile: prod
-    location: optional:classpath:application-prod.yaml
+      on-profile: "prod"
+    location: optional:classpath:/BOOT-INF/classes/application-prod.yaml
   h2:
     console:
       enabled: true
