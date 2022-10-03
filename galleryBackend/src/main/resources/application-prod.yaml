@@ -7,10 +7,10 @@ server:
   port: 5000
 
 spring:
-  profiles:
-    active: prod
   config:
     import: classpath:application-prod.yaml
+    activate:
+      on-profile: "prod"
   #  profiles:
 #    include:
 #      - oauth
@@ -48,7 +48,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.dbname}
+    url: jdbc:mariadb://${rds.hostname}:${rds.port}/${rds.dbname}
     username: ${rds.username}
     password: ${rds.password}
     driver-class-name: ${rds.driver}
