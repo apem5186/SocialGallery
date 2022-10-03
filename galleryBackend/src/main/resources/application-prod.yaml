@@ -7,7 +7,9 @@ server:
   port: 5000
 
 spring:
-#  profiles:
+  profiles:
+    active: prod
+  #  profiles:
 #    include:
 #      - oauth
 #      - jwt
@@ -44,9 +46,10 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.db.name}
+    url: jdbc:mysql://${rds.hostname}:${rds.port}/${rds.dbname}
     username: ${rds.username}
     password: ${rds.password}
+    driver-class-name: ${rds.driver}
 
 app:
   auth:

@@ -3,7 +3,7 @@ logging:
     root: info
     com.socialgallery.gallerybackend: trace
 server:
-  port: 5000
+  port: 8080
 
 spring:
 #  profiles:
@@ -12,10 +12,15 @@ spring:
 #      - oauth
 #      - jwt
 #    active: prod
-  config:
-    activate:
-      on-profile: "prod"
-    import: "optional:classpath:/application-prod.yaml"
+#  config:
+#    activate:
+#      on-profile: "prod"
+#    import: "optional:classpath:/application-prod.yaml"
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
   h2:
     console:
       enabled: true
@@ -25,6 +30,7 @@ spring:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
     username: sa
+
 
   main:
     allow-bean-definition-overriding: true

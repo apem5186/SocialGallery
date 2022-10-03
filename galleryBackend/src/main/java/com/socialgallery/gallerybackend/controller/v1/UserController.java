@@ -43,7 +43,7 @@ public class UserController {
     private final ResponseService responseService;
 
 
-    @GetMapping("/index")
+    @GetMapping("/indexes")
     public String index() {
         return "Hello!";
     }
@@ -52,7 +52,7 @@ public class UserController {
             @ApiImplicitParam(
                     name = "X-AUTH-TOKEN",
                     value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
+                    required = true, dataTypeClass = String.class, paramType = "header")
     })
     @ApiOperation(value = "모든 회원 조회", notes = "모든 회원 목록을 조회합니다.")
     @GetMapping("api/users/findAll")
@@ -64,7 +64,7 @@ public class UserController {
             @ApiImplicitParam(
                     name = "X-AUTH-TOKEN",
                     value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
+                    required = true, dataTypeClass = String.class, paramType = "header")
     })
     @ApiOperation(value = "회원 수정", notes = "회원 정보를 수정합니다.")
     @PutMapping("/api/users/userUpdate")
@@ -87,7 +87,7 @@ public class UserController {
             @ApiImplicitParam(
                     name = "X-AUTH-TOKEN",
                     value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
+                    required = true, dataTypeClass = String.class, paramType = "header")
     })
     @ApiOperation(value = "회원 삭제", notes = "회원 정보를 삭제합니다.")
     @DeleteMapping("/api/users/userDelete/{id}")
@@ -107,7 +107,7 @@ public class UserController {
             @ApiImplicitParam(
                     name = "X-AUTH-TOKEN",
                     value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
+                    required = true, dataTypeClass = String.class, paramType = "header")
     })
     @ApiOperation(value = "회원 단건 검색", notes = "id로 회원을 조회합니다.")
     @GetMapping("/findUserById/{id}")
@@ -123,7 +123,7 @@ public class UserController {
             @ApiImplicitParam(
                     name = "X-AUTH-TOKEN",
                     value = "로그인 성공 후 AccessToken",
-                    required = true, dataType = "String", paramType = "header")
+                    required = true, dataTypeClass = String.class, paramType = "header")
     })
     @ApiOperation(value = "회원 검색 (이름)", notes = "이름으로 회원을 검색합니다.")
     @GetMapping("/findUserByName/{username}")
@@ -141,30 +141,4 @@ public class UserController {
                                                          ) {
         return responseService.getSingleResult(usersService.findByEmail(email));
     }
-
-//    @ResponseBody
-//    @PostMapping(value = "api/signIn", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> signIn(@RequestBody Users users) {
-//        System.out.println("Sign In");
-//        System.out.println(users);
-//        userService.signIn(users.getEmail(), users.getPassword());
-//        String loginUsers = userService.signIn(users.getEmail(), users.getPassword());
-//        String result = jwtTokenProvider.getUsername(loginUsers);
-//            return ResponseEntity.ok()
-//                    .body(result);
-//    }
-
-//    @ResponseBody
-//    @PostMapping(value = "api/signUp", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<?> signUp(@RequestBody UserDTO dto) {
-//
-//        System.out.println("Sign Up");
-//        System.out.println(dto);
-//        Users registeredUsers = userService.signUp(dto);
-//
-//        UserDTO userDTO = userService.entitiesToDTO(registeredUsers);
-//
-//        return ResponseEntity.ok().body(userDTO);
-//    }
-
 }
