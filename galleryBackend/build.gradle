@@ -66,6 +66,7 @@ dependencies {
     annotationProcessor group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: '2.7.3'
 
     runtimeOnly 'mysql:mysql-connector-java:8.0.26'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 
 
