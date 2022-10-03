@@ -4,7 +4,7 @@ logging:
     com.socialgallery.gallerybackend: trace
 
 server:
-  port: 5000
+  port: 8080
 
 spring:
   profiles:
