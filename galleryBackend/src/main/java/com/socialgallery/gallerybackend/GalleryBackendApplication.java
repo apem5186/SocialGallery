@@ -15,8 +15,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableConfigurationProperties(AppProperties.class)
 public class GalleryBackendApplication implements WebMvcConfigurer {
 
-    public static final String APPLICATION_LOCATIONS = "spring.config.location="
-            + "classpath:application-prod.yml,";
+//    public static final String APPLICATION_LOCATIONS = "spring.config.location="
+//            + "classpath:application-prod.yml,";
 
     public static void main(String[] args) {
         SpringApplication.run(GalleryBackendApplication.class, args);
