@@ -6,8 +6,8 @@ server:
   port: 5000
 
 spring:
-  profiles:
-    include:
+#  profiles:
+#    include:
 #      - prod
 #      - oauth
 #      - jwt
@@ -15,7 +15,7 @@ spring:
   config:
     activate:
       on-profile: "prod"
-    import: "classpath:/application-prod.yaml"
+    import: "optional:classpath:/application-prod.yaml"
   h2:
     console:
       enabled: true
