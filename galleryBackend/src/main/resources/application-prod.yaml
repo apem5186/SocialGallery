@@ -9,6 +9,8 @@ server:
 spring:
   profiles:
     active: prod
+  config:
+    import: application-prod.yaml
   #  profiles:
 #    include:
 #      - oauth
