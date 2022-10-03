@@ -15,7 +15,7 @@ spring:
   config:
     activate:
       on-profile: "prod"
-    location: optional:classpath:/BOOT-INF/classes/application-prod.yaml
+    import: "classpath:/application-prod.yaml"
   h2:
     console:
       enabled: true
