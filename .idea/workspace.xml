@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/GalleryBackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/SwaggerConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/SwaggerConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/GalleryBackendApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/GalleryBackendApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/PostControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/test/java/com/socialgallery/gallerybackend/controller/UsersControllerTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,14 +304,7 @@
       <workItem from="1664506484601" duration="72000" />
       <workItem from="1664789030764" duration="3974000" />
       <workItem from="1664797942501" duration="11897000" />
-      <workItem from="1664815010757" duration="7279000" />
-    </task>
-    <task id="LOCAL-00038" summary="배포 준비">
-      <created>1664292550210</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1664292550210</updated>
+      <workItem from="1664815010757" duration="7419000" />
     </task>
     <task id="LOCAL-00039" summary="배포 준비">
       <created>1664353400634</created>
@@ -662,7 +642,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664809361173</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="배포 준비">
+      <created>1664823027560</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1664823027561</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
