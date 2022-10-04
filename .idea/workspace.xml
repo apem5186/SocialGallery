@@ -5,9 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/mariadb/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -111,7 +111,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/apem5/Downloads/intellij-hocon-2022.1.0.zip",
+    "last_opened_file_path": "C:/Project/SocialGallery/galleryBackend/src/main/resources/mariadb",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -120,7 +120,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle",
+    "settings.editor.selected.configurable": "SQL Dialects",
     "spring.configuration.checksum": "a8c7d9d08c5cce12ef9f1b44f835f853"
   },
   "keyToStringList": {
@@ -133,6 +133,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Project\SocialGallery\galleryBackend\src\main\resources\mariadb" />
       <recent name="C:\Project\SocialGallery\galleryBackend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -307,14 +308,7 @@
       <workItem from="1664506484601" duration="72000" />
       <workItem from="1664789030764" duration="3974000" />
       <workItem from="1664797942501" duration="11897000" />
-      <workItem from="1664815010757" duration="15260000" />
-    </task>
-    <task id="LOCAL-00044" summary="배포 준비">
-      <created>1664369563696</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1664369563696</updated>
+      <workItem from="1664815010757" duration="20131000" />
     </task>
     <task id="LOCAL-00045" summary="배포 준비">
       <created>1664370867184</created>
@@ -652,7 +646,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664827523016</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="배포 준비">
+      <created>1664847471718</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1664847471719</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
