@@ -6,12 +6,12 @@ server:
   port: 8080
 
 spring:
-#  profiles:
+  profiles:
 #    include:
 #      - prod
 #      - oauth
 #      - jwt
-#    active: prod
+    active: prod
 #  config:
 #    activate:
 #      on-profile: "prod"
