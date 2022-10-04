@@ -52,6 +52,9 @@ spring:
     username: ${rds.username}
     password: ${rds.password}
     driver-class-name: ${rds.driver}
+  sql:
+    init:
+      schema-locations: classpath:mariadb:schema.sql
 
 app:
   auth:
