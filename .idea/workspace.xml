@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="배포 준비">
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +118,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "SQL Dialects",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.SQL",
     "spring.configuration.checksum": "a8c7d9d08c5cce12ef9f1b44f835f853"
   },
   "keyToStringList": {
@@ -305,14 +306,7 @@
       <workItem from="1664506484601" duration="72000" />
       <workItem from="1664789030764" duration="3974000" />
       <workItem from="1664797942501" duration="11897000" />
-      <workItem from="1664815010757" duration="20854000" />
-    </task>
-    <task id="LOCAL-00046" summary="배포 준비">
-      <created>1664371046454</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1664371046454</updated>
+      <workItem from="1664815010757" duration="21512000" />
     </task>
     <task id="LOCAL-00047" summary="배포 준비">
       <created>1664371228299</created>
@@ -650,7 +644,14 @@
       <option name="project" value="LOCAL" />
       <updated>1664853269390</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="배포 준비">
+      <created>1664854016165</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1664854016166</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
