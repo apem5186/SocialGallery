@@ -25,10 +25,22 @@ function App() {
     const base_URL = "http://localhost:8080"
 
     useEffect(()=>{
-        axios.get(base_URL + '/api/post')
-            .then(res =>{
-                setMainImg([...res.data.list])
-            })
+        const params = new URLSearchParams(window.location.search);
+        let category = params.get("category")
+        if (category === null) {
+            axios.get(base_URL + '/api/post')
+                .then(res =>{
+                    setMainImg([...res.data.list])
+                })
+        } else if (category) {
+            axios.get(base_URL + "/api/post/category?category="+category).then(
+                res => {
+                    console.log(category)
+                    setMainImg([...res.data.list])
+                }
+            )
+        }
+
     },[])
 
 
@@ -86,11 +98,11 @@ function App() {
                 {/* SideMenu */}
                 <Route path="/movie" element={<Movie></Movie>}></Route>
                 <Route path="/broadcast" element={<Broadcast
-                    mainImg={mainImg}
-                    pfUser={pfUser}
-                    setPfUser={setPfUser}
-                    setCommentArray={setCommentArray}
-                    reply={reply}
+                    // mainImg={mainImg}
+                    // pfUser={pfUser}
+                    // setPfUser={setPfUser}
+                    // setCommentArray={setCommentArray}
+                    // reply={reply}
                 ></Broadcast>}></Route>
                 <Route path="/life" element={<Life></Life>}></Route>
                 <Route path="/travel" element={<Travel></Travel>}></Route>

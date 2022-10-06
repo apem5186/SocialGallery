@@ -45,13 +45,25 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
                 setMainImg([...res.data.list])
             })
     }
+    const params = new URLSearchParams(window.location.search);
+    let category = params.get("category")
 
-    const searchList = (e) => {
-        axios.get(base_URL + '/api/post?keyword=' + searchTitle)
-            .then(res => {
-                setMainImg([...res.data.list])
-            })
-    }
+            const search1 = (e) => {
+                axios.get(base_URL + '/api/post?keyword=' + searchTitle)
+                    .then(res => {
+                        setMainImg([...res.data.list])
+                    })
+                return search1
+            }
+            const search2 = (e) => {
+                axios.get(base_URL + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
+                    .then(res => {
+                        setMainImg([...res.data.list])
+                    })
+                return search2
+            }
+
+
     return (
         <>
             <nav className="sidebar close" id="nav">
@@ -76,7 +88,7 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
                     <div className="menu">
                         <li className="search-box">
                             <i className="bx bx-search icon"
-                               onClick={searchList}></i>
+                               onClick={category === null ? search1 : search2}></i>
                             <input
                                 type="text"
                                 placeholder="Search..."

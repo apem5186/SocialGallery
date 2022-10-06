@@ -156,7 +156,7 @@ public class PostController {
 
     // 개별 조회
     @ApiOperation(value = "단일 검색", notes = "게시글 하나를 검색합니다.")
-    @GetMapping("/post/{pid}")
+    @GetMapping(value = {"/post/{pid}", "/post/category/{pid}"})
     public SingleResult<PostResponseDTO> searchById(
             @ApiParam(value = "게시글 번호", required = true)
             @PathVariable("pid") Long pid) {
@@ -173,34 +173,28 @@ public class PostController {
             return responseService.getSingleResult(postService.searchById(pid, imageId));
         }
 
-
     @ApiOperation(value = "카테고리 조회", notes = "카테고리로 게시글을 검색합니다.")
     @GetMapping("/post/category")
     public ListResult<PostListResponseDTO> searchCategory(
             @PageableDefault(sort = "pid", direction = Sort.Direction.DESC) Pageable pageable,
-            @RequestParam(value = "keyword", required = false) String keyword, HttpServletRequest request,
-            HttpServletResponse response
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "category", required = false) String category
     ) {
         // 반환할 List<BoardListResponseDto> 생성
         List<PostListResponseDTO> responseDTOList = new ArrayList<>();
         // 게시글 전체 조회
         Page<Post> list = null;
 
-//        // 검색할 때와 검색하지 않았을 때를 구분
-//        if(keyword == null) {
-//            list = postService.searchAllDesc(pageable);
-//        } else {
-//            list = postService.searchByKeyword(pageable, keyword);
-//        }
         log.info("=======================================");
-        log.info(request.getContextPath());
-        log.info(request.getPathInfo());
-        log.info(request.getPathTranslated());
-        log.info(request.getServletPath());
-        log.info(String.valueOf(request.getParameterNames()));
+        log.info("CATEGORY : " + category);
+        log.info("KEYWORD : " + keyword);
         log.info("=======================================");
-        Category category = Category.valueOf(request.getContextPath());
-        list = postService.searchByCategory(pageable, category);
+        if (keyword == null) {
+            list = postService.searchByCategory(pageable, Category.valueOf(category));
+        } else {
+            list = postService.searchByKeywordWithCategory(pageable, keyword, Category.valueOf(category));
+        }
+
         for(Post post : list){
             // 전체 조회하여 획득한 각 게시글 객체를 이용하여 BoardListResponseDto 생성
             PostListResponseDTO responseDto = new PostListResponseDTO(post);

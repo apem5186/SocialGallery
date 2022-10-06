@@ -149,6 +149,11 @@ public class PostService {
         return postRepository.findByCategory(pageable, category);
     }
 
+    @Transactional(readOnly = true)
+    public Page<Post> searchByKeywordWithCategory(Pageable pageable, String keyword, Category category) {
+        return postRepository.findByTitleAndCategory(pageable, keyword, category);
+    }
+
     // 게시글 삭제
     @Transactional
     public Long delete(Long pid, HttpServletRequest request) {

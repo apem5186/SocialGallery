@@ -48,10 +48,22 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
     },[])
 
     useEffect(() => {
-        axios.get(base_URL + "/api/post/" + mainImg[i].pid).then(
-            res => {
-                setPost(res.data.data)
-            })
+        const params = new URLSearchParams(window.location.search);
+        let category = params.get("category")
+
+        if (category === null) {
+            axios.get(base_URL + "/api/post/" + mainImg[i].pid).then(
+                res => {
+                    setPost(res.data.data)
+                })
+        } else if (category) {
+            axios.get(base_URL + "/api/post/category/" + mainImg[i].pid).then(
+                res => {
+                    setPost(res.data.data)
+                }
+            )
+        }
+
     }, [])
 
     return (
