@@ -1,3 +1,13 @@
+#####################
+# 백엔드 배포 참고
+# https://wonit.tistory.com/597
+# https://jojoldu.tistory.com/549
+# https://bluayer.com/46
+# RDS 생성
+# https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.html
+# https://velog.io/@dnwlsrla40/IntelliJ-RDS%EC%99%80-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0
+#####################
+
 name: SocialGallery
 
 on:
@@ -9,7 +19,6 @@ on:
       - master
   workflow_dispatch:
 
-# ./galleryBackend/src/main/resources/application-prod.yaml
 env:
   RESOURCE_PATH: ./galleryBackend/src/main/resources/application-prod.yaml
 
@@ -95,15 +104,38 @@ jobs:
       - name: Checkout Github-Action
         uses: actions/checkout@v2
 
+      - name: Cache node modules
+        id: node-cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          # npm cache files are stored in `~/.npm` on Linux/macOS
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
       - name: node.js 12 설치 ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: npm 설치
+      - name: Install Dependencies
+        if: steps.node-cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: npm 빌드
         run: npm run build
         env:
           CI: ""
+
+      - name: Deploy
+        env:
+          AWS_S3_ACCESS_KEY_ID: ${{ secrets.AWS_S3_ACCESS_KEY_ID }}
+          AWS_S3_SECRET_ACCESS_KEY: ${{ secrets.AWS_S3_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            build s3://elasticbeanstalk-ap-northeast-2-506714295105
