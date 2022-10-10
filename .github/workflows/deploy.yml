@@ -122,7 +122,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install Dependencies
-        if: steps.node-cache.outputs.cache-hit != 'true'
+        # if: steps.node-cache.outputs.cache-hit != 'true'
         run: npm install
 
       - name: npm 빌드
