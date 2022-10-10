@@ -7,6 +7,7 @@ import Delete from "../PostReg/delete";
 function Content({pfUser,mainImg,i,reply,setCommentArray}){
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
     // 댓글
 
     const [comment, setComments] = useState([])
@@ -24,7 +25,7 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
             'Content-type': 'application/json',
             'Authorization': "Bearer " + localStorage.getItem("token")
         }
-        axios.post(`http://localhost:8080/api/comment/register`,{
+        axios.post(dev_url+`/api/comment/register`,{
             users: users,
             post : post,
             comment : comment,
@@ -41,7 +42,7 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
     }
 
     useEffect(()=>{
-        axios.get(base_URL + "/findUserByEmail/" + localStorage.getItem("user"))
+        axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
             .then(res=>{
                 setUsers(res.data.data)
             })
@@ -52,12 +53,12 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
         let category = params.get("category")
 
         if (category === null) {
-            axios.get(base_URL + "/api/post/" + mainImg[i].pid).then(
+            axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
                 res => {
                     setPost(res.data.data)
                 })
         } else if (category) {
-            axios.get(base_URL + "/api/post/category/" + mainImg[i].pid).then(
+            axios.get(dev_url + "/api/post/category/" + mainImg[i].pid).then(
                 res => {
                     setPost(res.data.data)
                 }

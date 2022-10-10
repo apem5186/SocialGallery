@@ -47,6 +47,7 @@ function Login() {
   }
 
   const base_url = "http://localhost:8080"
+  const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
 
   //google
@@ -89,7 +90,7 @@ function Login() {
   //     .then(result => console.log('결과', result))
   // };
   const getUser = (email) => {
-    axios.get(base_url + '/findUserByEmail/' + email, {
+    axios.get(dev_url + '/findUserByEmail/' + email, {
 
     }).then(res => {
       usersId = res.data.data.id;
@@ -98,7 +99,7 @@ function Login() {
     })
   }
   const signIn = () =>{
-    axios.post("http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com" + '/v1/login',{
+    axios.post(dev_url + '/v1/login',{
       usersId : getUser(email),
       email : email,
       password : pw
@@ -148,7 +149,7 @@ function Login() {
   // 회원가입 fetch
   const signUp = (e) => {
     e.preventDefault()
-    fetch(base_url + '/v1/signUp', {
+    fetch(dev_url + '/v1/signUp', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

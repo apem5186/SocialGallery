@@ -23,17 +23,18 @@ function App() {
     const [pfUser, setPfUser] = useState([])
 
     const base_URL = "http://localhost:8080"
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
     useEffect(()=>{
         const params = new URLSearchParams(window.location.search);
         let category = params.get("category")
         if (category === null) {
-            axios.get(base_URL + '/api/post')
+            axios.get(dev_url + '/api/post')
                 .then(res =>{
                     setMainImg([...res.data.list])
                 })
         } else if (category) {
-            axios.get(base_URL + "/api/post/category?category="+category).then(
+            axios.get(dev_url + "/api/post/category?category="+category).then(
                 res => {
                     console.log(category)
                     setMainImg([...res.data.list])
@@ -46,7 +47,7 @@ function App() {
 
     //    댓글불러
     useEffect(()=>{
-        axios.get('http://localhost:8080/api/comment/all')
+        axios.get(dev_url+'/api/comment/all')
             .then(res =>{
                 setReply([...res.data.list])
             })

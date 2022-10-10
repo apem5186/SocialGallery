@@ -8,6 +8,7 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
     let [uid, setUid] = useState('')
     const navigate = useNavigate()
     // const uid = localStorage.getItem('uid')
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
     const getUid = () => {
         uid = localStorage.getItem('uid')
@@ -49,14 +50,14 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
     let category = params.get("category")
 
             const search1 = (e) => {
-                axios.get(base_URL + '/api/post?keyword=' + searchTitle)
+                axios.get(dev_url + '/api/post?keyword=' + searchTitle)
                     .then(res => {
                         setMainImg([...res.data.list])
                     })
                 return search1
             }
             const search2 = (e) => {
-                axios.get(base_URL + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
+                axios.get(dev_url + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
                     .then(res => {
                         setMainImg([...res.data.list])
                     })

@@ -7,6 +7,7 @@ function UpLoadForm(props) {
     const [content, setContent] = useState([])
     const usersId = useState('')
     const [category, setCategory] = useState('')
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
 // Img 미리보기
     const [ imgs, setImgs ] = useState('')
@@ -65,7 +66,7 @@ function UpLoadForm(props) {
         console.log("TITLE" + formData.get("title"))
         console.log("content" + formData.get("content"))
         axios.defaults.headers.post = null
-        axios.post('http://localhost:8080/api/post/upload',formData, {headers})
+        axios.post(dev_url+'/api/post/upload',formData, {headers})
             .then(res=>{
                 console.log('서버')
             })
