@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="front s3 배포 진행">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/.platform/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/.platform/nginx/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -307,14 +308,7 @@
       <workItem from="1664797942501" duration="11897000" />
       <workItem from="1664815010757" duration="24679000" />
       <workItem from="1665018267643" duration="15271000" />
-      <workItem from="1665389845442" duration="14153000" />
-    </task>
-    <task id="LOCAL-00065" summary="배포 준비">
-      <created>1664379484486</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1664379484486</updated>
+      <workItem from="1665389845442" duration="14932000" />
     </task>
     <task id="LOCAL-00066" summary="배포 준비">
       <created>1664380370554</created>
@@ -652,7 +646,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665409823424</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="front s3 배포 진행">
+      <created>1665411619945</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1665411619945</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
