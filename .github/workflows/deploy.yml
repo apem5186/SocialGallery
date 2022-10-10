@@ -130,12 +130,15 @@ jobs:
         env:
           CI: ""
 
-      - name: Deploy
-        env:
+      - name: Configure AWS credentials from Test account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Deploy
         run: |
           aws s3 cp \
             --recursive \
-            --region ap-northeast-2 \
-            build s3://elasticbeanstalk-ap-northeast-2-506714295105/build/
+            build s3://elasticbeanstalk-ap-northeast-2-506714295105 --acl public-read
