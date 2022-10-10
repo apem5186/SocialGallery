@@ -307,14 +307,7 @@
       <workItem from="1664797942501" duration="11897000" />
       <workItem from="1664815010757" duration="24679000" />
       <workItem from="1665018267643" duration="15271000" />
-      <workItem from="1665389845442" duration="15640000" />
-    </task>
-    <task id="LOCAL-00069" summary="배포 준비">
-      <created>1664390200683</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1664390200683</updated>
+      <workItem from="1665389845442" duration="15879000" />
     </task>
     <task id="LOCAL-00070" summary="배포 준비">
       <created>1664423716438</created>
@@ -652,7 +645,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665412706404</updated>
     </task>
-    <option name="localTasksCounter" value="118" />
+    <task id="LOCAL-00118" summary="front s3 배포 진행">
+      <created>1665412866944</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1665412866944</updated>
+    </task>
+    <option name="localTasksCounter" value="119" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
