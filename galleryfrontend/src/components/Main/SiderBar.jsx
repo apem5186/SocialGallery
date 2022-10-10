@@ -17,7 +17,7 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
     // Logout
     const onLogout = () =>{
         getUid()
-        axios.get(`http://localhost:8080/v1/logout?uid=`+uid)
+        axios.get(`http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com/v1/logout?uid=`+uid)
             .then(res=>{
                 if(res.status === 200){
                     localStorage.removeItem('token')

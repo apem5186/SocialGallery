@@ -98,7 +98,7 @@ function Login() {
     })
   }
   const signIn = () =>{
-    axios.post(base_url + '/v1/login',{
+    axios.post("http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com/" + '/v1/login',{
       usersId : getUser(email),
       email : email,
       password : pw
