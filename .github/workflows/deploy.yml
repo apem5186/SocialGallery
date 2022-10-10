@@ -138,4 +138,4 @@ jobs:
           aws s3 cp \
             --recursive \
             --region ap-northeast-2 \
-            build s3://elasticbeanstalk-ap-northeast-2-506714295105
+            build s3://elasticbeanstalk-ap-northeast-2-506714295105/build/
