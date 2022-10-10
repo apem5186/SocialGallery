@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="카테고리 분류, 검색 기능 구현">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="front s3 배포 진행">
       <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,14 +307,7 @@
       <workItem from="1664797942501" duration="11897000" />
       <workItem from="1664815010757" duration="24679000" />
       <workItem from="1665018267643" duration="15271000" />
-      <workItem from="1665389845442" duration="2133000" />
-    </task>
-    <task id="LOCAL-00051" summary="배포 준비">
-      <created>1664373621461</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1664373621461</updated>
+      <workItem from="1665389845442" duration="2991000" />
     </task>
     <task id="LOCAL-00052" summary="배포 준비">
       <created>1664373757822</created>
@@ -653,7 +645,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665031621293</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="front s3 배포 진행">
+      <created>1665392235913</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1665392235914</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -690,7 +689,8 @@
     <MESSAGE value="comment 구현 완료 css 수정 필요" />
     <MESSAGE value="배포 준비" />
     <MESSAGE value="카테고리 분류, 검색 기능 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="카테고리 분류, 검색 기능 구현" />
+    <MESSAGE value="front s3 배포 진행" />
+    <option name="LAST_COMMIT_MESSAGE" value="front s3 배포 진행" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
