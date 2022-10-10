@@ -123,7 +123,7 @@ jobs:
 
       - name: Install Dependencies
         if: steps.node-cache.outputs.cache-hit != 'true'
-        run: npm install
+        run: npm install --global npm
 
       - name: npm 빌드
         run: npm run build
