@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="front s3 배포 진행">
+      <change afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/AWSConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/file/FileHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/file/FileHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,9 +39,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JavaScript File" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -308,14 +314,7 @@
       <workItem from="1664815010757" duration="24679000" />
       <workItem from="1665018267643" duration="15271000" />
       <workItem from="1665389845442" duration="17610000" />
-      <workItem from="1665463088551" duration="5102000" />
-    </task>
-    <task id="LOCAL-00074" summary="배포 준비">
-      <created>1664428452326</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1664428452326</updated>
+      <workItem from="1665463088551" duration="13078000" />
     </task>
     <task id="LOCAL-00075" summary="배포 준비">
       <created>1664428488174</created>
@@ -653,7 +652,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665465016047</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="front s3 배포 진행">
+      <created>1665471714075</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1665471714075</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

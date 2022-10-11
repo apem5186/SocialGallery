@@ -1,9 +1,11 @@
 package com.socialgallery.gallerybackend.config.file;
 
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.service.image.ImageService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -24,8 +26,17 @@ public class FileHandler {
 
     private final ImageService imageService;
 
-    public FileHandler(ImageService imageService) {
+    private final AmazonS3Client amazonS3Client;
+
+    @Value("${cloud.aws.s3.bucket-name}")
+    private String S3Bucket;
+
+    @Value("${cloud.aws.s3.dir}")
+    private String dir;
+
+    public FileHandler(ImageService imageService, AmazonS3Client amazonS3Client) {
         this.imageService = imageService;
+        this.amazonS3Client = amazonS3Client;
     }
 
     public List<Image> parseFileInfo(
@@ -45,10 +56,12 @@ public class FileHandler {
 
             // 프로젝트 디렉터리 내의 저장을 위한 절대 경로 설정
             // 경로 구분자 File.separator 사용
-            String absolutePath = new File("galleryfrontend"
-            + File.separator + File.separator + "public" + File.separator + File.separator
-            + "assets" + File.separator + File.separator + "Img").getAbsolutePath() + File.separator + File.separator;
+//            String absolutePath = new File("galleryfrontend"
+//            + File.separator + File.separator + "public" + File.separator + File.separator
+//            + "assets" + File.separator + File.separator + "Img").getAbsolutePath() + File.separator + File.separator;
 
+            // 배포용 절대 경로
+            String absolutePath = new File(S3Bucket + File.separator + File.separator + dir).getAbsolutePath();
             // 파일을 저장할 세부 경로 지정
             String path = "images" + File.separator + current_date;
             File file = new File(absolutePath + path);
