@@ -72,7 +72,7 @@ cloud:
       access-key: ${aws-access-key-id}
       secret-key: ${aws-secret-access-key}
     s3:
-      bucket: ${s3-bucket-name}
+      bucket: ${s3.bucket-name}
       dir: /build/assets/Img/
     region:
       static: ap-northeast-2
