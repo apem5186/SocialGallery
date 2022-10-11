@@ -1,8 +1,3 @@
-id:
-  access-key: ""
-  secret-key: ""
-  bucket-name: ""
-
 logging:
   level:
     root: info
@@ -74,10 +69,10 @@ app:
 cloud:
   aws:
     credentials:
-      access-key: ${AWS_ACCESS_KEY_ID}
-      secret-key: ${AWS_SECRET_ACCESS_KEY}
+      access-key: ${aws-access-key-id}
+      secret-key: ${aws-secret-access-key}
     s3:
-      bucket: ${S3_BUCKET_NAME}
+      bucket: ${s3-bucket-name}
       dir: /build/assets/Img/
     region:
       static: ap-northeast-2
