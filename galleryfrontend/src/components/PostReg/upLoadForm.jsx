@@ -10,7 +10,7 @@ function UpLoadForm(props) {
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
 // Img 미리보기
-    const [ imgs, setImgs ] = useState([])
+    let [ imgs, setImgs ] = useState('')
     const [ previewImg, setPreviewImg ] = useState('')
 
 // 미리보기
@@ -22,7 +22,7 @@ function UpLoadForm(props) {
             setImgs(e.target.files[0])
             console.log(e.target.files[0])
             console.log("============================")
-            console.log("imgs : " + imgs[0])
+            console.log("imgs : " + setImgs[0])
             console.log("============================")
         }
 
@@ -115,7 +115,7 @@ function UpLoadForm(props) {
                                         <div>
                                             <img className="preImg" src={previewImg} alt="" />
                                         </div>
-                                        <div className="preText">{previewImg.name}</div>
+                                        <div className="preText">{imgs.name}</div>
                                     </div>
                                 </div>
 
