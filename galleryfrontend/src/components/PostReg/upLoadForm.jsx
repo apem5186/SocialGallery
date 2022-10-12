@@ -19,8 +19,9 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            setImgs([e.target.files[0]])
-            console.log([e.target.files[0]])
+            setImgs($("#e.target.files")[0].files[0])
+            console.log(e.target.files[0])
+            console.log("#file : " + $("#file")[0])
             console.log("============================")
             console.log("imgs : " + imgs[0])
             console.log("============================")
@@ -56,8 +57,8 @@ function UpLoadForm(props) {
             'Authorization': "Bearer " + localStorage.getItem("token")
         }
         const formData = new FormData()
-        if (!images === null) {
-            formData.append('files', [images])
+        if (!imgs === null) {
+            formData.append('files', imgs)
             console.log("이미지 " + formData.get("files").name)
         }
         formData.append('usersId', localStorage.getItem('uid'))
