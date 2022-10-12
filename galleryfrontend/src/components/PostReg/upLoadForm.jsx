@@ -65,16 +65,16 @@ function UpLoadForm(props) {
         formData.append('content', content)
         formData.append('category', category)
         console.log("CATEGORY " + formData.get("category"))
-        console.log("EMAIL" + formData.get("usersId"))
-        console.log("TITLE" + formData.get("title"))
-        console.log("content" + formData.get("content"))
+        console.log("USERSID " + formData.get("usersId"))
+        console.log("TITLE " + formData.get("title"))
+        console.log("content " + formData.get("content"))
         axios.defaults.headers.post = null
         axios.post(dev_url+'/api/post/upload',formData, {headers})
             .then(res=>{
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
-                console.log("이미지 imgs : " + imgs)
-                console.log("이미지 images : " + images)
+                console.log("이미지 imgs : " + imgs.valueOf())
+                console.log("이미지 images : " + images.find("name"))
             })
     }
 
