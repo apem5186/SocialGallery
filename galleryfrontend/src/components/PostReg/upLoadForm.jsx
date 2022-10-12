@@ -69,6 +69,7 @@ function UpLoadForm(props) {
         axios.post(dev_url+'/api/post/upload',formData, {headers})
             .then(res=>{
                 console.log('서버')
+                console.log("이미지 : " + formData.get("files"))
             })
     }
 
