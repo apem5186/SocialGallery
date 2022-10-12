@@ -13,7 +13,6 @@ function UpLoadForm(props) {
 
 // Img 미리보기
     const [imgs, setImgs] = useState('')
-    console.log("default imgs : " + imgs)
     const [ previewImg, setPreviewImg ] = useState('')
 
 // 미리보기

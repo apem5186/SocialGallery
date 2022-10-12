@@ -97,6 +97,10 @@ public class PostService {
                                     .withCannedAcl(CannedAccessControlList.PublicRead));
                             atomicInteger.incrementAndGet();
                         } catch (IOException e) {
+                            log.info("=====================IMAGE TEST======================");
+                            log.info("bucket : " + bucket);
+                            log.info("objMeta : " + objMeta);
+                            log.info("=====================IMAGE TEST======================");
                             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
                         }
                     });
