@@ -56,7 +56,7 @@ function UpLoadForm(props) {
             'Authorization': "Bearer " + localStorage.getItem("token")
         }
         const formData = new FormData()
-        if (!imgs === null) {
+        if (!images === null) {
             formData.append('files', images)
             console.log("이미지 " + formData.get("files").name)
         }
@@ -74,7 +74,7 @@ function UpLoadForm(props) {
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
                 console.log("이미지 imgs : " + imgs.valueOf())
-                console.log("이미지 images : " + images.find("name"))
+                console.log("이미지 images : " + images.values())
             })
     }
 
