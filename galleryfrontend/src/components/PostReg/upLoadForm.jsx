@@ -23,7 +23,7 @@ function UpLoadForm(props) {
         if(e.target.files[0]) {
             try {
                 setImgs(e.target.files[0])
-                if (!imgs === null) {
+                if (imgs !== null) {
                     console.log("IIIIMMMGGG : " + imgs.valueOf())
                 } else {
                     console.log("IIIIMMMGGG is null ")
@@ -66,7 +66,7 @@ function UpLoadForm(props) {
             'Content-type': 'multipart/form-data',
             'Authorization': "Bearer " + localStorage.getItem("token"),
         }
-        if (!imgs === null) {
+        if (imgs !== null) {
             formData.append('files', imgs)
             console.log("이미지 " + formData.get("files").name)
         }
