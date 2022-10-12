@@ -12,7 +12,7 @@ function UpLoadForm(props) {
 
 
 // Img 미리보기
-    const [imgs, setImgs] = useState([])
+    const [imgs, setImgs] = useState('')
     const [ previewImg, setPreviewImg ] = useState('')
 
 // 미리보기
@@ -21,17 +21,19 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            const imgss = e.target.files[0]
-            setImgs((imgs) => [imgs, imgss])
-            console.log(e.target.files[0])
-            console.log("imgs : " + imgs)
+            // const imgss = e.target.files[0]
+            // setImgs((imgs) => [imgs, imgss])
+            // console.log(e.target.files[0])
+            // console.log("imgs : " + imgs)
         }
 
         reader.onloadend = () => {
             const previewImgUrl = reader.result
 
             if(previewImgUrl) {
+                setImgs([...imgs, previewImg])
                 setPreviewImg([...previewImg, previewImgUrl])
+                console.log("imgs : " + imgs + "previewImg : " + previewImg)
             }
         }
     }
