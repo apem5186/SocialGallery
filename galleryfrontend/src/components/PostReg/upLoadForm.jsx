@@ -110,7 +110,7 @@ function UpLoadForm(props) {
                                         <div>
                                             <img className="preImg" src={previewImg} alt="" />
                                         </div>
-                                        <div className="preText">{imgs.name}</div>
+                                        <div className="preText">{imgs.name}{images.values()}</div>
                                     </div>
                                 </div>
 
