@@ -8,6 +8,8 @@ function UpLoadForm(props) {
     const usersId = useState('')
     const [category, setCategory] = useState('')
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+    const formData = new FormData()
+
 
 // Img 미리보기
     const [imgs, setImgs] = useState([])
@@ -19,8 +21,8 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            const [imgs] = e.target.files[0]
-            setImgs((arr) => [arr, imgs])
+            const imgss = e.target.files[0]
+            setImgs((imgs) => [imgs, imgss])
             console.log(e.target.files[0])
             console.log("imgs : " + imgs)
         }
@@ -54,7 +56,6 @@ function UpLoadForm(props) {
             'Authorization': "Bearer " + localStorage.getItem("token"),
             'Content-Length': `${imgs.length}`
         }
-        const formData = new FormData()
         if (!imgs === null) {
             formData.append('files', imgs)
             console.log("이미지 " + formData.get("files").name)
