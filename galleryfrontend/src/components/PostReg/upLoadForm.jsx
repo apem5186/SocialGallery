@@ -20,7 +20,7 @@ function UpLoadForm(props) {
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
             const [imgs] = e.target.files[0]
-            setImgs((arr) => [...arr, imgs])
+            setImgs((arr) => [arr, imgs])
             console.log(e.target.files[0])
             console.log("imgs : " + imgs)
         }
@@ -37,7 +37,6 @@ function UpLoadForm(props) {
 // 제목,글 Data Server 전송
     const handleImgFile = (e) => {
         setImages([e.target.files[0]])
-        console.log("images : " + images)
     }
     const onHandlePostTitle = (e) =>{
         setTitle(e.currentTarget.value)
@@ -101,7 +100,6 @@ function UpLoadForm(props) {
 
                                         <input type="file" id="file" name="files" onChange={(e)=>{
                                             insertImg(e)
-                                            handleImgFile(e)
                                         }} />
 
                                         <div>
