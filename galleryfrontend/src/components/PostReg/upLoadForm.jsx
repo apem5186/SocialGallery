@@ -74,7 +74,7 @@ function UpLoadForm(props) {
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
                 console.log("이미지 imgs : " + imgs.valueOf())
-                console.log("이미지 images : " + images.values())
+                console.log("이미지 images : " + images.values(name))
             })
     }
 
@@ -110,7 +110,7 @@ function UpLoadForm(props) {
                                         <div>
                                             <img className="preImg" src={previewImg} alt="" />
                                         </div>
-                                        <div className="preText">{imgs.name}{images.values()}</div>
+                                        <div className="preText">{imgs.name}{images.values(name)}</div>
                                     </div>
                                 </div>
 
