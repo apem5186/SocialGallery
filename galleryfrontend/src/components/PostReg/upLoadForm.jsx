@@ -50,7 +50,7 @@ function UpLoadForm(props) {
         e.preventDefault();
         const headers = {
             'Content-type': 'multipart/form-data',
-            'Authorization': "Bearer " + localStorage.getItem("token")
+            'Authorization': "Bearer " + localStorage.getItem("token"),
             'Content-length': `${imgs.length}`
         }
         const formData = new FormData()
