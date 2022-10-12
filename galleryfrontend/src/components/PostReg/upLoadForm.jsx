@@ -19,9 +19,8 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            setImgs($("#e.target.files")[0].files[0])
+            setImgs(e.target.files[0])
             console.log(e.target.files[0])
-            console.log("#file : " + $("#file")[0])
             console.log("============================")
             console.log("imgs : " + imgs[0])
             console.log("============================")
@@ -70,7 +69,7 @@ function UpLoadForm(props) {
         console.log("TITLE " + formData.get("title"))
         console.log("content " + formData.get("content"))
         axios.defaults.headers.post = null
-        axios.post(dev_url+'/api/post/upload',formData, {headers})
+        axios.post(dev_url+'/api/post/upload',formData, {headers, contentType: false, processData: false})
             .then(res=>{
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
