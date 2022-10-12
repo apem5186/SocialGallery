@@ -22,7 +22,9 @@ function UpLoadForm(props) {
             setImgs(e.target.files[0])
             console.log(e.target.files[0])
             console.log("============================")
-            console.log("imgs : " + imgs)
+            console.log("setImgs : " + setImgs.name)
+            console.log("============================")
+            console.log("imgs : " + imgs.valueOf())
             console.log("============================")
         }
 
@@ -74,7 +76,7 @@ function UpLoadForm(props) {
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
                 console.log("이미지 imgs : " + imgs.valueOf())
-                console.log("이미지 images : " + images.values(name))
+                console.log("이미지 images : " + images.values("name"))
             })
     }
 
@@ -110,7 +112,7 @@ function UpLoadForm(props) {
                                         <div>
                                             <img className="preImg" src={previewImg} alt="" />
                                         </div>
-                                        <div className="preText">{imgs.name}{images.values(name)}</div>
+                                        <div className="preText">{imgs.name}{images.values("name")}</div>
                                     </div>
                                 </div>
 
