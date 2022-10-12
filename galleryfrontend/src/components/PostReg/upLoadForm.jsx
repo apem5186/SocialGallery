@@ -19,7 +19,7 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            setImgs([...e.target.files[0]])
+            setImgs([e.target.files[0]])
             console.log(e.target.files[0])
             console.log("============================")
             console.log("setImgs : " + setImgs.toString())
@@ -39,7 +39,7 @@ function UpLoadForm(props) {
 
 // 제목,글 Data Server 전송
     const handleImgFile = (e) => {
-        setImages(e.target.files[0])
+        setImages([e.target.files[0]])
         console.log("setImages toString : " + setImages.toString())
         console.log("images : " + images.valueOf())
     }
