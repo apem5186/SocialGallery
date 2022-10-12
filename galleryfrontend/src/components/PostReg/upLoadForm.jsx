@@ -20,11 +20,9 @@ function UpLoadForm(props) {
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
             setImgs([e.target.files[0]])
-            console.log(e.target.files[0])
+            console.log([e.target.files[0]])
             console.log("============================")
-            console.log("setImgs : " + setImgs.toString())
-            console.log("============================")
-            console.log("imgs : " + imgs.valueOf())
+            console.log("imgs : " + imgs[0])
             console.log("============================")
         }
 
@@ -40,8 +38,7 @@ function UpLoadForm(props) {
 // 제목,글 Data Server 전송
     const handleImgFile = (e) => {
         setImages([e.target.files[0]])
-        console.log("setImages toString : " + setImages.toString())
-        console.log("images : " + images.valueOf())
+        console.log("images : " + images[0])
     }
     const onHandlePostTitle = (e) =>{
         setTitle(e.currentTarget.value)
@@ -60,7 +57,7 @@ function UpLoadForm(props) {
         }
         const formData = new FormData()
         if (!images === null) {
-            formData.append('files', images)
+            formData.append('files', [images])
             console.log("이미지 " + formData.get("files").name)
         }
         formData.append('usersId', localStorage.getItem('uid'))
@@ -76,8 +73,7 @@ function UpLoadForm(props) {
             .then(res=>{
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
-                console.log("이미지 imgs : " + imgs.valueOf())
-                console.log("setImgs 이미지 : " + setImgs.toString())
+                console.log("이미지 imgs : " + [imgs])
                 images.forEach(i => {
                     console.log("images 이미지 : " + i)
                 })
