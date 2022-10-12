@@ -24,9 +24,9 @@ function UpLoadForm(props) {
                 setImgs(e.target.files[0])
             } catch (err) {
                 console.log(err.message)
+                console.log("imgs : " + imgs)
             }
             reader.readAsDataURL(e.target.files[0])
-            console.log("imgs : " + imgs)
             // setImgs((imgs) => [imgs, imgss])
             // console.log(e.target.files[0])
             // console.log("imgs : " + imgs)
