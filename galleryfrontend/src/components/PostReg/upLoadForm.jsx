@@ -22,7 +22,7 @@ function UpLoadForm(props) {
             setImgs(e.target.files[0])
             console.log(e.target.files[0])
             console.log("============================")
-            console.log("setImgs : " + setImgs.name)
+            console.log("setImgs : " + setImgs.prototype.valueOf())
             console.log("============================")
             console.log("imgs : " + imgs.valueOf())
             console.log("============================")
@@ -39,8 +39,8 @@ function UpLoadForm(props) {
 
 // 제목,글 Data Server 전송
     const handleImgFile = (e) => {
-        let file = e.target.files[0]
-        setImages(file)
+        setImages(e.target.files[0])
+        console.log("setImages toString : " + setImages.toString())
     }
     const onHandlePostTitle = (e) =>{
         setTitle(e.currentTarget.value)
@@ -76,7 +76,9 @@ function UpLoadForm(props) {
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
                 console.log("이미지 imgs : " + imgs.valueOf())
-                console.log("이미지 images : " + images.values("name"))
+                images.forEach(i => {
+                    console.log("images 이미지 : " + i)
+                })
             })
     }
 
@@ -112,7 +114,7 @@ function UpLoadForm(props) {
                                         <div>
                                             <img className="preImg" src={previewImg} alt="" />
                                         </div>
-                                        <div className="preText">{imgs.name}{images.values("name")}</div>
+                                        <div className="preText">{imgs.name}</div>
                                     </div>
                                 </div>
 
