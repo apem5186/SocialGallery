@@ -5,6 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="이미지 업로드 배포 테스트">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -310,13 +312,6 @@
       <workItem from="1665389845442" duration="17610000" />
       <workItem from="1665463088551" duration="15859000" />
       <workItem from="1665560997087" duration="2264000" />
-    </task>
-    <task id="LOCAL-00113" summary="front s3 배포 진행">
-      <created>1665409823423</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1665409823424</updated>
     </task>
     <task id="LOCAL-00114" summary="front s3 배포 진행">
       <created>1665411619945</created>
@@ -654,7 +649,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665578501419</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="이미지 업로드 배포 테스트">
+      <created>1665578730271</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1665578730271</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -5,17 +5,14 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.socialgallery.gallerybackend.advice.exception.AuthenticationEntryPointCException;
 import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.RefreshTokenCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
 import com.socialgallery.gallerybackend.config.file.FileHandler;
 import com.socialgallery.gallerybackend.config.security.JwtProvider;
-import com.socialgallery.gallerybackend.dto.jwt.TokenDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
-import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Category;
@@ -42,10 +39,9 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.http.HttpRequest;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
  * @Reference https://velog.io/@yu-jin-song/Spring-Boot-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EA%B5%AC%ED%98%84-5-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EB%8B%A4%EC%A4%91-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%98%ED%99%98-%EB%B0%8F-%EC%A1%B0%ED%9A%8C-%EC%B2%98%EB%A6%AC-MultipartFile
@@ -89,12 +85,17 @@ public class PostService {
             ObjectMetadata objMeta = new ObjectMetadata();
             if (!imageList.isEmpty()) {
                 for (Image image : imageList) {
+                    // i 변수같이 증가하는 값 사용할라고 사용
+                    AtomicInteger atomicInteger = new AtomicInteger(0);
                     // 파일을 DB에 저장
                     entity.addImage(imageRepository.save(image));
                     files.forEach(file -> {
+                        objMeta.setContentType(file.getContentType());
+                        objMeta.setContentLength(file.getSize());
                         try (InputStream inputStream = file.getInputStream()) {
-                            amazonS3.putObject(new PutObjectRequest(bucket, image.getOriginFileName(), inputStream, objMeta)
+                            amazonS3.putObject(new PutObjectRequest(bucket, imageList.get(atomicInteger.get()).getOriginFileName(), inputStream, objMeta)
                                     .withCannedAcl(CannedAccessControlList.PublicRead));
+                            atomicInteger.incrementAndGet();
                         } catch (IOException e) {
                             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
                         }

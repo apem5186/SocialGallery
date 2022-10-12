@@ -21,17 +21,8 @@ function UpLoadForm(props) {
         let reader = new FileReader()
 
         if(e.target.files[0]) {
-            try {
-                setImgs(e.target.files[0])
-                if (imgs !== null) {
-                    console.log("IIIIMMMGGG : " + imgs.valueOf())
-                } else {
-                    console.log("IIIIMMMGGG is null ")
-                }
-            } catch (err) {
-                console.log(err.message)
-                console.log("imgs : " + imgs)
-            }
+            setImgs(e.target.files[0])
+
             reader.readAsDataURL(e.target.files[0])
             // setImgs((imgs) => [imgs, imgss])
             // console.log(e.target.files[0])
