@@ -59,6 +59,9 @@ function UpLoadForm(props) {
         if (!imgs === null) {
             formData.append('files', imgs)
             console.log("이미지 " + formData.get("files").name)
+        } else {
+            console.log("img is null,,, " + imgs[0])
+            console.log("e.target.files : " + e.target.files[0])
         }
         formData.append('usersId', localStorage.getItem('uid'))
         formData.append('title', title)
