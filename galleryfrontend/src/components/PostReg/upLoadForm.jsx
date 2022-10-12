@@ -41,6 +41,7 @@ function UpLoadForm(props) {
     const handleImgFile = (e) => {
         setImages(e.target.files[0])
         console.log("setImages toString : " + setImages.toString())
+        console.log("images : " + images.valueOf())
     }
     const onHandlePostTitle = (e) =>{
         setTitle(e.currentTarget.value)
