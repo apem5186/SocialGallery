@@ -73,6 +73,7 @@ function UpLoadForm(props) {
             .then(res=>{
                 console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
+                console.log("이미지 imgs : " + imgs)
             })
     }
 
