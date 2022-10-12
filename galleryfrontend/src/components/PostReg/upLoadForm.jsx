@@ -13,6 +13,7 @@ function UpLoadForm(props) {
 
 // Img 미리보기
     const [imgs, setImgs] = useState('')
+    console.log("default imgs : " + imgs)
     const [ previewImg, setPreviewImg ] = useState('')
 
 // 미리보기
@@ -21,7 +22,7 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             try {
-                setImgs(e.target.files[0])
+                setImgs([...(e.target.files[0])])
                 if (!imgs === null) {
                     console.log("IIIIMMMGGG : " + imgs.valueOf())
                 } else {
