@@ -19,7 +19,7 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            setImgs(e.target.files[0])
+            setImgs([...e.target.files[0]])
             console.log(e.target.files[0])
             console.log("============================")
             console.log("setImgs : " + setImgs.toString())
@@ -116,7 +116,7 @@ function UpLoadForm(props) {
                                         <div>
                                             <img className="preImg" src={previewImg} alt="" />
                                         </div>
-                                        <div className="preText">{imgs.name}</div>
+                                        <div className="preText">{previewImg.name}</div>
                                     </div>
                                 </div>
 
