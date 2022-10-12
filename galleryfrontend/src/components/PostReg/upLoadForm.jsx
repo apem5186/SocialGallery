@@ -21,6 +21,9 @@ function UpLoadForm(props) {
             reader.readAsDataURL(e.target.files[0])
             setImgs(e.target.files[0])
             console.log(e.target.files[0])
+            console.log("============================")
+            console.log("imgs : " + imgs)
+            console.log("============================")
         }
 
         reader.onloadend = () => {
