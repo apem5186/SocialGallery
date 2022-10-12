@@ -10,7 +10,7 @@ function UpLoadForm(props) {
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
 // Img 미리보기
-    const [imgs, setImgs] = useState<File>()
+    const [imgs, setImgs] = useState([])
     const [ previewImg, setPreviewImg ] = useState('')
 
 // 미리보기
@@ -19,8 +19,10 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            setImgs(e.target.files[0])
+            const imgs = e.target.files[0]
+            setImgs((arr)=>[...arr, {imgs}])
             console.log(e.target.files[0])
+            console.log("imgs : " + imgs)
         }
 
         reader.onloadend = () => {
