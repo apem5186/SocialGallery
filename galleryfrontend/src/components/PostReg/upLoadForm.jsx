@@ -21,7 +21,9 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            // const imgss = e.target.files[0]
+            const imgss = e.target.files[0]
+            setImgs([...imgs, imgss])
+            console.log("imgs : " + imgs)
             // setImgs((imgs) => [imgs, imgss])
             // console.log(e.target.files[0])
             // console.log("imgs : " + imgs)
@@ -31,9 +33,7 @@ function UpLoadForm(props) {
             const previewImgUrl = reader.result
 
             if(previewImgUrl) {
-                setImgs([...imgs, previewImg])
                 setPreviewImg([...previewImg, previewImgUrl])
-                console.log("imgs : " + imgs + "previewImg : " + previewImg)
             }
         }
     }
@@ -56,7 +56,6 @@ function UpLoadForm(props) {
         const headers = {
             'Content-type': 'multipart/form-data',
             'Authorization': "Bearer " + localStorage.getItem("token"),
-            'Content-Length': `${imgs.length}`
         }
         if (!imgs === null) {
             formData.append('files', imgs)
