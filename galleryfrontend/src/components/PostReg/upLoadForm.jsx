@@ -22,7 +22,7 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             try {
-                setImgs([...(e.target.files[0])])
+                setImgs(e.target.files[0])
                 if (!imgs === null) {
                     console.log("IIIIMMMGGG : " + imgs.valueOf())
                 } else {
