@@ -19,8 +19,8 @@ function UpLoadForm(props) {
 
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
-            const imgs = e.target.files[0]
-            setImgs((arr)=>[...arr, {imgs}])
+            const [imgs] = e.target.files[0]
+            setImgs((arr) => [...arr, {imgs}])
             console.log(e.target.files[0])
             console.log("imgs : " + imgs)
         }
@@ -37,7 +37,7 @@ function UpLoadForm(props) {
 // 제목,글 Data Server 전송
     const handleImgFile = (e) => {
         setImages([e.target.files[0]])
-        console.log("images : " + images[0])
+        console.log("images : " + images)
     }
     const onHandlePostTitle = (e) =>{
         setTitle(e.currentTarget.value)
@@ -53,7 +53,7 @@ function UpLoadForm(props) {
         const headers = {
             'Content-type': 'multipart/form-data',
             'Authorization': "Bearer " + localStorage.getItem("token"),
-            'Content-length': `${imgs.length}`
+            'Content-Length': `${imgs.length}`
         }
         const formData = new FormData()
         if (!imgs === null) {
