@@ -10,7 +10,7 @@ function UpLoadForm(props) {
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
 // Img 미리보기
-    let [ imgs, setImgs ] = useState('')
+    const [imgs, setImgs] = useState<File>()
     const [ previewImg, setPreviewImg ] = useState('')
 
 // 미리보기
@@ -21,9 +21,6 @@ function UpLoadForm(props) {
             reader.readAsDataURL(e.target.files[0])
             setImgs(e.target.files[0])
             console.log(e.target.files[0])
-            console.log("============================")
-            console.log("imgs : " + setImgs[0])
-            console.log("============================")
         }
 
         reader.onloadend = () => {
@@ -54,14 +51,12 @@ function UpLoadForm(props) {
         const headers = {
             'Content-type': 'multipart/form-data',
             'Authorization': "Bearer " + localStorage.getItem("token")
+            'Content-length': `${imgs.length}`
         }
         const formData = new FormData()
         if (!imgs === null) {
             formData.append('files', imgs)
             console.log("이미지 " + formData.get("files").name)
-        } else {
-            console.log("img is null,,, " + imgs[0])
-            console.log("e.target.files : " + e.target.files[0])
         }
         formData.append('usersId', localStorage.getItem('uid'))
         formData.append('title', title)
@@ -74,12 +69,7 @@ function UpLoadForm(props) {
         axios.defaults.headers.post = null
         axios.post(dev_url+'/api/post/upload',formData, {headers})
             .then(res=>{
-                console.log('서버')
                 console.log("이미지 : " + formData.get("files"))
-                console.log("이미지 imgs : " + [imgs])
-                images.forEach(i => {
-                    console.log("images 이미지 : " + i)
-                })
             })
     }
 
