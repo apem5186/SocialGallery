@@ -63,7 +63,7 @@ public class FileHandler {
 //            + "assets" + File.separator + File.separator + "Img").getAbsolutePath() + File.separator + File.separator;
 
             // 배포용 절대 경로
-            String absolutePath = new File(S3Bucket + File.separator + File.separator + dir).getAbsolutePath();
+            String absolutePath = new File(S3Bucket + File.separator + File.separator + dir + File.separator + File.separator).getAbsolutePath();
             // 파일을 저장할 세부 경로 지정
             String path = "images" + File.separator + current_date;
             File file = new File(absolutePath + path);
