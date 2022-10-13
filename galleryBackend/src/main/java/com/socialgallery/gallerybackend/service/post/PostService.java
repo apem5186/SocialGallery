@@ -327,7 +327,7 @@ public class PostService {
 
     // s3 bucket image delete
     public void deleteImage(String fileName) {
-        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket, fileName);
+        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket+"/images", fileName);
         amazonS3.deleteObject(deleteObjectRequest);
     }
 }

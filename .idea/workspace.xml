@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="이미지 업로드 배포 테스트">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -312,14 +311,7 @@
       <workItem from="1665463088551" duration="15859000" />
       <workItem from="1665560997087" duration="2264000" />
       <workItem from="1665624001259" duration="12240000" />
-      <workItem from="1665649905213" duration="8291000" />
-    </task>
-    <task id="LOCAL-00127" summary="front s3 배포 진행">
-      <created>1665481671635</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1665481671635</updated>
+      <workItem from="1665649905213" duration="8577000" />
     </task>
     <task id="LOCAL-00128" summary="이미지 업로드 배포 테스트">
       <created>1665561810111</created>
@@ -657,7 +649,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665664901218</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="이미지 업로드 배포 테스트">
+      <created>1665665906339</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1665665906339</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
