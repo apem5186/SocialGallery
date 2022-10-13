@@ -5,6 +5,7 @@ import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.service.image.ImageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 
 @Component
+@Slf4j
 public class FileHandler {
 
     private final ImageService imageService;
@@ -122,6 +124,10 @@ public class FileHandler {
                 // 업로드 한 파일 데이터를 지정한 파일에 저장
                 file = new File(absolutePath + path + File.separator + new_file_name);
                 multipartFile.transferTo(file);
+                log.info("================FileHandler===============");
+                log.info("ABSOLUTEPATH : " + absolutePath);
+                log.info("DIR : " + dir);
+                log.info("================FileHandler===============");
 
                 // 파일 권한 설정(쓰기, 읽기)
                 file.setWritable(true);
