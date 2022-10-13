@@ -63,7 +63,7 @@ public class PostController {
     @ApiOperation(value = "업로드", notes = "게시글 업로드를 합니다.")
     @PostMapping(value = "/post/upload")
     @ResponseStatus(HttpStatus.CREATED)
-    public SingleResult<Long> post(
+    public ListResult<String> post(
             @ApiParam(value = "게시글 등록 DTO", required = true)
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception{
@@ -78,10 +78,11 @@ public class PostController {
                 .build();
 
         log.info("POSTREQUESTDTO : " + postRequestDTO);
-        Long pid = postService.post(postRequestDTO, postFileVO.getFiles(), request);
-        log.info("Pid : " + pid);
-        ResponseEntity.ok().body(pid);
-        return responseService.getSingleResult(pid);
+        List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
+        log.info("imgPathUrl List : " + imgPathUrl);
+
+        ResponseEntity.ok().body(imgPathUrl);
+        return responseService.getListResult(imgPathUrl);
     }
 
     @ApiOperation(value = "수정", notes = "게시글을 수정합니다.")

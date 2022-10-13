@@ -7,11 +7,13 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.util.IOUtils;
 import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.RefreshTokenCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
 import com.socialgallery.gallerybackend.config.file.FileHandler;
 import com.socialgallery.gallerybackend.config.security.JwtProvider;
+import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
@@ -39,10 +41,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
@@ -74,59 +80,149 @@ public class PostService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    private final AmazonS3 amazonS3;
-    // 게시글 등록
-    @Transactional
-    public Long post(PostRequestDTO postRequestDTO,
-                     List<MultipartFile> files,
-                     HttpServletRequest request) throws Exception{
+    @Value("${cloud.aws.s3.dir}")
+    private String dir;
 
+    private final AmazonS3 amazonS3;
+
+    @Transactional
+    public List<String > upload(List<MultipartFile> files, PostRequestDTO postRequestDTO,
+                                HttpServletRequest request) {
+        List<String > imgUrlList = new ArrayList<>();
+
+        // 파일 DTO 생성
+        Post entity = postRequestDTO.toEntity();
+        log.info("ENTITY : " + entity);
         if (checkToken(postRequestDTO.getUsers().getId(), request)) {
-            Post entity = postRequestDTO.toEntity();
-            log.info("ENTITY : " + entity);
-            List<Image> imageList = fileHandler.parseFileInfo(files, entity);
-            ObjectMetadata objMeta = new ObjectMetadata();
-            if (!imageList.isEmpty()) {
-                for (Image image : imageList) {
-                    // i 변수같이 증가하는 값 사용할라고 사용
-                    AtomicInteger atomicInteger = new AtomicInteger(0);
-                    // 파일을 DB에 저장
-                    entity.addImage(imageRepository.save(image));
-                    files.forEach(file -> {
-                        objMeta.setContentType(file.getContentType());
-                        objMeta.setContentLength(file.getSize());
-                        try (InputStream inputStream = file.getInputStream()) {
-                            amazonS3.putObject(new PutObjectRequest(bucket, imageList.get(atomicInteger.get()).getOriginFileName(), inputStream, objMeta)
-                                    .withCannedAcl(CannedAccessControlList.PublicRead));
-                            atomicInteger.incrementAndGet();
-                        } catch (AmazonServiceException ase) {
-                            log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
-                            log.info("Error Message : " + ase.getErrorCode());
-                            log.info("HTTP Status Code : " + ase.getStatusCode());
-                            log.info("AWS Error Code : " + ase.getErrorCode());
-                            log.info("Error Type : " + ase.getErrorType());
-                            log.info("Request ID : " + ase.getRequestId());
-                            log.info("Service Name : " + ase.getServiceName());
-                        } catch (AmazonClientException ace) {
-                            log.info("Caught an AmazonClientException: ");
-                            log.info("Error Message : " + ace.getMessage());
-                        } catch (IOException e) {
-                            log.info("=====================IMAGE TEST======================");
-                            log.info("bucket : " + bucket);
-                            log.info("objMeta : " + objMeta);
-                            e.printStackTrace();
-                            log.info("=====================IMAGE TEST======================");
-                            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    });
+            for (MultipartFile file : files) {
+                String fileName = createFileName(file.getOriginalFilename());
+
+                ImageDTO imageDTO = ImageDTO.builder()
+                        .originFilename(file.getOriginalFilename())
+                        .filePath(dir + File.separator + fileName)
+                        .fileSize(file.getSize())
+                        .build();
+
+                // 파일 DTO 이용하여 Image 엔티티 생성
+                Image image = new Image(
+                        imageDTO.getOriginFilename(),
+                        imageDTO.getFilePath(),
+                        imageDTO.getFileSize()
+                );
+                entity.addImage(imageRepository.save(image));
+                postRepository.save(entity);
+
+
+                ObjectMetadata objectMetadata = new ObjectMetadata();
+                objectMetadata.setContentLength(file.getSize());
+                objectMetadata.setContentType(file.getContentType());
+
+                try(InputStream inputStream = file.getInputStream()) {
+                    amazonS3.putObject(new PutObjectRequest(bucket+"/images", fileName, inputStream, objectMetadata)
+                            .withCannedAcl(CannedAccessControlList.PublicRead));
+                    imgUrlList.add(amazonS3.getUrl(bucket+"/images", fileName).toString());
+                } catch (AmazonServiceException ase) {
+                    log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
+                    log.info("Error Message : " + ase.getErrorCode());
+                    log.info("HTTP Status Code : " + ase.getStatusCode());
+                    log.info("AWS Error Code : " + ase.getErrorCode());
+                    log.info("Error Type : " + ase.getErrorType());
+                    log.info("Request ID : " + ase.getRequestId());
+                    log.info("Service Name : " + ase.getServiceName());
+                } catch (AmazonClientException ace) {
+                    log.info("Caught an AmazonClientException: ");
+                    log.info("Error Message : " + ace.getMessage());
+                } catch (IOException e) {
+                    log.info("=====================IMAGE TEST======================");
+                    log.info("bucket : " + bucket);
+                    log.info("objMeta : " + objectMetadata);
+                    e.printStackTrace();
+                    log.info("=====================IMAGE TEST======================");
+                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
-
-            return postRepository.save(entity).getPid();
+            return imgUrlList;
         } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
     }
+
+    // 이미지파일명 중복 방지
+    private String createFileName(String fileName) {
+        return UUID.randomUUID().toString().concat(getFileExtension(fileName));
+    }
+
+    // 파일 유효성 검사
+    private String getFileExtension(String fileName) {
+        if (fileName.length() == 0) {
+            throw new IllegalArgumentException("파일이 존재하지 않습니다.");
+        }
+        ArrayList<String> fileValidate = new ArrayList<>();
+        fileValidate.add(".jpg");
+        fileValidate.add(".jpeg");
+        fileValidate.add(".png");
+        fileValidate.add(".JPG");
+        fileValidate.add(".JPEG");
+        fileValidate.add(".PNG");
+        String idxFileName = fileName.substring(fileName.lastIndexOf("."));
+        if (!fileValidate.contains(idxFileName)) {
+            throw new IllegalArgumentException("적합한 확장자가 아닙니다.");
+        }
+        return fileName.substring(fileName.lastIndexOf("."));
+    }
+
+    // 게시글 등록
+//    @Transactional
+//    public Long post(PostRequestDTO postRequestDTO,
+//                     List<MultipartFile> files,
+//                     HttpServletRequest request) throws Exception{
+//
+//        if (checkToken(postRequestDTO.getUsers().getId(), request)) {
+//            Post entity = postRequestDTO.toEntity();
+//            log.info("ENTITY : " + entity);
+//            List<Image> imageList = fileHandler.parseFileInfo(files, entity);
+//            ObjectMetadata objMeta = new ObjectMetadata();
+//            if (!imageList.isEmpty()) {
+//                for (Image image : imageList) {
+//                    // i 변수같이 증가하는 값 사용할라고 사용
+//                    AtomicInteger atomicInteger = new AtomicInteger(0);
+//                    // 파일을 DB에 저장
+//                    entity.addImage(imageRepository.save(image));
+//                    files.forEach(file -> {
+//                        objMeta.setContentType(file.getContentType());
+//                        objMeta.setContentLength(file.getSize());
+//                        try (InputStream inputStream = file.getInputStream()) {
+//                            amazonS3.putObject(new PutObjectRequest(bucket, imageList.get(atomicInteger.get()).getOriginFileName(), inputStream, objMeta)
+//                                    .withCannedAcl(CannedAccessControlList.PublicRead));
+//                            atomicInteger.incrementAndGet();
+//                        } catch (AmazonServiceException ase) {
+//                            log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
+//                            log.info("Error Message : " + ase.getErrorCode());
+//                            log.info("HTTP Status Code : " + ase.getStatusCode());
+//                            log.info("AWS Error Code : " + ase.getErrorCode());
+//                            log.info("Error Type : " + ase.getErrorType());
+//                            log.info("Request ID : " + ase.getRequestId());
+//                            log.info("Service Name : " + ase.getServiceName());
+//                        } catch (AmazonClientException ace) {
+//                            log.info("Caught an AmazonClientException: ");
+//                            log.info("Error Message : " + ace.getMessage());
+//                        } catch (IOException e) {
+//                            log.info("=====================IMAGE TEST======================");
+//                            log.info("bucket : " + bucket);
+//                            log.info("objMeta : " + objMeta);
+//                            e.printStackTrace();
+//                            log.info("=====================IMAGE TEST======================");
+//                            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    });
+//                }
+//            }
+//
+//            return postRepository.save(entity).getPid();
+//        } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
+//    }
     @Transactional
     public boolean checkToken(Long id, HttpServletRequest request) {
 
