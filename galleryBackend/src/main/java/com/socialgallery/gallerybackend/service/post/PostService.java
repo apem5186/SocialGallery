@@ -1,5 +1,7 @@
 package com.socialgallery.gallerybackend.service.post;
 
+import com.amazonaws.AmazonClientException;
+import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
@@ -96,12 +98,26 @@ public class PostService {
                             amazonS3.putObject(new PutObjectRequest(bucket, imageList.get(atomicInteger.get()).getOriginFileName(), inputStream, objMeta)
                                     .withCannedAcl(CannedAccessControlList.PublicRead));
                             atomicInteger.incrementAndGet();
+                        } catch (AmazonServiceException ase) {
+                            log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
+                            log.info("Error Message : " + ase.getErrorCode());
+                            log.info("HTTP Status Code : " + ase.getStatusCode());
+                            log.info("AWS Error Code : " + ase.getErrorCode());
+                            log.info("Error Type : " + ase.getErrorType());
+                            log.info("Request ID : " + ase.getRequestId());
+                            log.info("Service Name : " + ase.getServiceName());
+                        } catch (AmazonClientException ace) {
+                            log.info("Caught an AmazonClientException: ");
+                            log.info("Error Message : " + ace.getMessage());
                         } catch (IOException e) {
                             log.info("=====================IMAGE TEST======================");
                             log.info("bucket : " + bucket);
                             log.info("objMeta : " + objMeta);
+                            e.printStackTrace();
                             log.info("=====================IMAGE TEST======================");
                             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
                     });
                 }
