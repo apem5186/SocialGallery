@@ -88,7 +88,7 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
                                 </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
-                                        <img src={`assets/Img/${mainImg[i].filePath}`} alt="" />
+                                        <img src={`${mainImg[i].filePath}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="post__footer">

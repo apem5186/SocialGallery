@@ -90,29 +90,19 @@ public class PostService {
     public List<String > upload(List<MultipartFile> files, PostRequestDTO postRequestDTO,
                                 HttpServletRequest request) {
         List<String > imgUrlList = new ArrayList<>();
+        List<String > result = new ArrayList<>();
 
         // 파일 DTO 생성
         Post entity = postRequestDTO.toEntity();
         log.info("ENTITY : " + entity);
         if (checkToken(postRequestDTO.getUsers().getId(), request)) {
+            if(files.isEmpty()) {
+                postRepository.save(entity);
+                result.add(String.valueOf(entity.getPid()));
+                return result;
+            }
             for (MultipartFile file : files) {
                 String fileName = createFileName(file.getOriginalFilename());
-
-                ImageDTO imageDTO = ImageDTO.builder()
-                        .originFilename(file.getOriginalFilename())
-                        .filePath(bucket + dir + fileName)
-                        .fileSize(file.getSize())
-                        .build();
-
-                // 파일 DTO 이용하여 Image 엔티티 생성
-                Image image = new Image(
-                        imageDTO.getOriginFilename(),
-                        imageDTO.getFilePath(),
-                        imageDTO.getFileSize()
-                );
-                entity.addImage(imageRepository.save(image));
-                postRepository.save(entity);
-
 
                 ObjectMetadata objectMetadata = new ObjectMetadata();
                 objectMetadata.setContentLength(file.getSize());
@@ -122,6 +112,23 @@ public class PostService {
                     amazonS3.putObject(new PutObjectRequest(bucket+"/images", fileName, inputStream, objectMetadata)
                             .withCannedAcl(CannedAccessControlList.PublicRead));
                     imgUrlList.add(amazonS3.getUrl(bucket+"/images", fileName).toString());
+
+                    ImageDTO imageDTO = ImageDTO.builder()
+                            .originFilename(file.getOriginalFilename())
+                            .filePath(amazonS3.getUrl(bucket+"/images", fileName).toString())
+                            .fileSize(file.getSize())
+                            .build();
+
+                    // 파일 DTO 이용하여 Image 엔티티 생성
+                    Image image = new Image(
+                            imageDTO.getOriginFilename(),
+                            imageDTO.getFilePath(),
+                            imageDTO.getFileSize()
+                    );
+
+                    entity.addImage(imageRepository.save(image));
+                    postRepository.save(entity);
+
                 } catch (AmazonServiceException ase) {
                     log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
                     log.info("Error Message : " + ase.getErrorCode());
