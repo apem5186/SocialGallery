@@ -7,6 +7,7 @@
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="이미지 업로드 배포 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/resources/application-prod.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -311,14 +312,7 @@
       <workItem from="1665389845442" duration="17610000" />
       <workItem from="1665463088551" duration="15859000" />
       <workItem from="1665560997087" duration="2264000" />
-      <workItem from="1665624001259" duration="2656000" />
-    </task>
-    <task id="LOCAL-00118" summary="front s3 배포 진행">
-      <created>1665412866944</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1665412866944</updated>
+      <workItem from="1665624001259" duration="3303000" />
     </task>
     <task id="LOCAL-00119" summary="front s3 배포 진행">
       <created>1665413105833</created>
@@ -656,7 +650,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665626999209</updated>
     </task>
-    <option name="localTasksCounter" value="167" />
+    <task id="LOCAL-00167" summary="이미지 업로드 배포 테스트">
+      <created>1665628050208</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1665628050208</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
