@@ -78,11 +78,19 @@ public class PostController {
                 .build();
 
         log.info("POSTREQUESTDTO : " + postRequestDTO);
-        List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
-        log.info("imgPathUrl List : " + imgPathUrl);
+        List<String > result = new ArrayList<>();
+        result.add(postRequestDTO.toString());
+        if (!postFileVO.getFiles().isEmpty()) {
+            List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
+            log.info("imgPathUrl List : " + imgPathUrl);
 
-        ResponseEntity.ok().body(imgPathUrl);
-        return responseService.getListResult(imgPathUrl);
+            ResponseEntity.ok().body(imgPathUrl);
+            return responseService.getListResult(imgPathUrl);
+        } else {
+            ResponseEntity.ok().body(postRequestDTO);
+            return responseService.getListResult(result);
+        }
+
     }
 
     @ApiOperation(value = "수정", notes = "게시글을 수정합니다.")

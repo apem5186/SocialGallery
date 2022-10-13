@@ -314,7 +314,7 @@ public class PostService {
         if (checkToken(post.getUsers().getId(), request)) {
             if (!images.isEmpty()) {
                 images.forEach(image -> {
-                    deleteImage(image.getOriginFileName());
+                    deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1));
                 });
             }
             postRepository.delete(post);
