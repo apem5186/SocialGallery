@@ -349,9 +349,11 @@ public class PostService {
         if (checkToken(post.getUsers().getId(), request)) {
             if (!images.isEmpty()) {
                 images.forEach(image -> {
-                    deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1));
+                    String date = image.getFilePath().split("/")[5];
+                    deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1), date);
                     log.info("=======================delete File S3==============================");
-                    log.info(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1));
+                    log.info("FILENAME = " + image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1) +
+                            "DATE = " + date);
                     log.info("=======================delete File S3==============================");
                 });
             }
@@ -361,8 +363,8 @@ public class PostService {
     }
 
     // s3 bucket image delete
-    public void deleteImage(String fileName) {
-        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket+"/images", fileName);
+    public void deleteImage(String fileName, String date) {
+        DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(bucket+"/images/" + date, fileName);
         amazonS3.deleteObject(deleteObjectRequest);
     }
 }
