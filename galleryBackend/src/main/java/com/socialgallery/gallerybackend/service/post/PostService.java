@@ -365,7 +365,7 @@ public class PostService {
             List<Image> imgDBList;
             imgDBList = imageRepository.findAllByPostPid(pid);
             // 전달되어 온 파일이 존재할 경우
-            if (!files.isEmpty()) {
+            if (files != null) {
                 // DB에 파일 존재할 경우
                 if (!imgDBList.isEmpty()) {
                     // s3와 DB에 이미지 제거
@@ -379,14 +379,14 @@ public class PostService {
                         log.info("=======================delete File S3==============================");
                     });
                     log.info("===============files TEST=================");
-                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.get(0).toString());
+                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.equals(null));
                     log.info("TEST 1 : " + !(files.isEmpty()));
                     log.info("===============files TEST=================");
                     s3Upload(files, post);
                 } else { // DB에 파일이 없을 경우
                     log.info("===============files TEST=================");
                     log.info("fefwe");
-                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.get(0).toString());                    log.info("TEST 1 : " + !(files.isEmpty()));
+                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.equals(null));
                     log.info("TEST 1 : " + !(files.isEmpty()));
                     log.info("===============files TEST=================");
                     s3Upload(files, post);
