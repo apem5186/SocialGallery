@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="이미지 업로드 배포 테스트(날짜별 폴더 생성)">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="이미지 삭제 배포 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/post/PostService.java" afterDir="false" />
     </list>
@@ -313,14 +313,8 @@
       <workItem from="1665560997087" duration="2264000" />
       <workItem from="1665624001259" duration="12240000" />
       <workItem from="1665649905213" duration="9539000" />
-      <workItem from="1666523604064" duration="4686000" />
-    </task>
-    <task id="LOCAL-00130" summary="이미지 업로드 배포 테스트">
-      <created>1665564540753</created>
-      <option name="number" value="00130" />
-      <option name="presentableId" value="LOCAL-00130" />
-      <option name="project" value="LOCAL" />
-      <updated>1665564540754</updated>
+      <workItem from="1666523604064" duration="4954000" />
+      <workItem from="1666687234614" duration="3242000" />
     </task>
     <task id="LOCAL-00131" summary="이미지 업로드 배포 테스트">
       <created>1665564947155</created>
@@ -658,7 +652,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666525977353</updated>
     </task>
-    <option name="localTasksCounter" value="179" />
+    <task id="LOCAL-00179" summary="이미지 삭제 배포 테스트">
+      <created>1666529094431</created>
+      <option name="number" value="00179" />
+      <option name="presentableId" value="LOCAL-00179" />
+      <option name="project" value="LOCAL" />
+      <updated>1666529094431</updated>
+    </task>
+    <option name="localTasksCounter" value="180" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -698,7 +699,8 @@
     <MESSAGE value="front s3 배포 진행" />
     <MESSAGE value="이미지 업로드 배포 테스트" />
     <MESSAGE value="이미지 업로드 배포 테스트(날짜별 폴더 생성)" />
-    <option name="LAST_COMMIT_MESSAGE" value="이미지 업로드 배포 테스트(날짜별 폴더 생성)" />
+    <MESSAGE value="이미지 삭제 배포 테스트" />
+    <option name="LAST_COMMIT_MESSAGE" value="이미지 삭제 배포 테스트" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
