@@ -47,10 +47,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /*
@@ -387,6 +384,13 @@ public class PostService {
                     log.info("===============files TEST=================");
                     log.info("fefwe");
                     log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.equals(null));
+                    log.info("FILES TEST2 : " + files.get(0).getOriginalFilename());
+                    log.info("FILES TEST2 : " + files.get(0).getName());
+                    log.info("FILES TEST2 : " + files.get(0).getResource());
+                    log.info("FILES TEST2 : " + files.get(0).getSize());
+                    log.info("FILES TEST2 : " + files.size());
+                    log.info("FILES TEST2 : " + files.listIterator());
+                    log.info("FILES TEST2 : " + Arrays.toString(files.toArray()));
                     log.info("TEST 1 : " + !(files.isEmpty()));
                     log.info("===============files TEST=================");
                     s3Upload(files, post);
