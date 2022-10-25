@@ -315,14 +315,7 @@
       <workItem from="1665624001259" duration="12240000" />
       <workItem from="1665649905213" duration="9539000" />
       <workItem from="1666523604064" duration="4954000" />
-      <workItem from="1666687234614" duration="7629000" />
-    </task>
-    <task id="LOCAL-00133" summary="이미지 업로드 배포 테스트">
-      <created>1665566454433</created>
-      <option name="number" value="00133" />
-      <option name="presentableId" value="LOCAL-00133" />
-      <option name="project" value="LOCAL" />
-      <updated>1665566454433</updated>
+      <workItem from="1666687234614" duration="8432000" />
     </task>
     <task id="LOCAL-00134" summary="이미지 업로드 배포 테스트">
       <created>1665566632157</created>
@@ -660,7 +653,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666691227939</updated>
     </task>
-    <option name="localTasksCounter" value="182" />
+    <task id="LOCAL-00182" summary="이미지 배포 수정 테스트">
+      <created>1666695532593</created>
+      <option name="number" value="00182" />
+      <option name="presentableId" value="LOCAL-00182" />
+      <option name="project" value="LOCAL" />
+      <updated>1666695532593</updated>
+    </task>
+    <option name="localTasksCounter" value="183" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -107,7 +107,7 @@ public class PostController {
                 .build();
 
         // DB에 저장되어 있는 파일 불러오기
-        List<Image> dbImageList = imageRepository.findAllByPostPid(pid);
+        // List<Image> dbImageList = imageRepository.findAllByPostPid(pid);
         // 전달되어온 파일들
         List<MultipartFile> multipartList = postFileVO.getFiles();
 
