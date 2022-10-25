@@ -7,7 +7,6 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.util.IOUtils;
 import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.RefreshTokenCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
@@ -41,14 +40,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
  * @Reference https://velog.io/@yu-jin-song/Spring-Boot-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EA%B5%AC%ED%98%84-5-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EB%8B%A4%EC%A4%91-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%98%ED%99%98-%EB%B0%8F-%EC%A1%B0%ED%9A%8C-%EC%B2%98%EB%A6%AC-MultipartFile,
@@ -361,8 +359,15 @@ public class PostService {
         if (checkToken(post.getUsers().getId(), request)) {
             List<Image> imgDBList;
             imgDBList = imageRepository.findAllByPostPid(pid);
+
+            // 기본적으로 값이 들어가 있기 때문에 files.isEmpty() 체크를 해도 쓸모가없음
+            // 그래서 null 체크를 할 변수를 새로 만듦
+            boolean check = true;
+            for (MultipartFile file : files) {
+                if (file.isEmpty()) check = false;
+            }
             // 전달되어 온 파일이 존재할 경우
-            if (files != null) {
+            if (check) {
                 // DB에 파일 존재할 경우
                 if (!imgDBList.isEmpty()) {
                     // s3와 DB에 이미지 제거
@@ -375,24 +380,8 @@ public class PostService {
                                 "DATE = " + date);
                         log.info("=======================delete File S3==============================");
                     });
-                    log.info("===============files TEST=================");
-                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.equals(null));
-                    log.info("TEST 1 : " + !(files.isEmpty()));
-                    log.info("===============files TEST=================");
                     s3Upload(files, post);
                 } else { // DB에 파일이 없을 경우
-                    log.info("===============files TEST=================");
-                    log.info("fefwe");
-                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.equals(null));
-                    log.info("FILES TEST2 : " + files.get(0).getOriginalFilename());
-                    log.info("FILES TEST2 : " + files.get(0).getName());
-                    log.info("FILES TEST2 : " + files.get(0).getResource());
-                    log.info("FILES TEST2 : " + files.get(0).getSize());
-                    log.info("FILES TEST2 : " + files.size());
-                    log.info("FILES TEST2 : " + files.listIterator());
-                    log.info("FILES TEST2 : " + Arrays.toString(files.toArray()));
-                    log.info("TEST 1 : " + !(files.isEmpty()));
-                    log.info("===============files TEST=================");
                     s3Upload(files, post);
                 }
 
