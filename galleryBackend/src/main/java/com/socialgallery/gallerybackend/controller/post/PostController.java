@@ -112,54 +112,54 @@ public class PostController {
         List<MultipartFile> multipartList = postFileVO.getFiles();
 
         // 새롭게 전달되어온 파일들의 목록을 저장할 list 선언
-        List<MultipartFile> addFileList = new ArrayList<>();
-
-        if (CollectionUtils.isEmpty(dbImageList)) { // DB에 아예 존재 x
-            if (!CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일이 하나라도 존재
-                // 저장할 파일 목록에 추가
-                addFileList.addAll(multipartList);
-            }
-        } else {  // DB에 한 장 이상 존재
-            if (CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일 아예 x
-                // 파일 삭제
-                for (Image dbImage : dbImageList)
-                    imageRepository.deleteImageByIid(dbImage.getIid(), pid);
-            } else {  // 전달되어온 파일 한 장 이상 존재
-
-                // DB에 저장되어있는 파일 원본명 목록
-                List<String> dbOriginNameList = new ArrayList<>();
-
-                // multipartFile형식은 String값으로 찾을 수 없으니 원본명만 빼서 리스트로 만듦
-                List<String> multiList = multipartList.stream()
-                        .map(MultipartFile::getOriginalFilename).collect(Collectors.toList());
-                // DB의 파일 원본명 추출
-                for (Image dbImage : dbImageList) {
-                    // file id로 DB에 저장된 파일 정보 얻어오기
-                    ImageDTO dbImageDTO = imageService.findByFileIid(dbImage.getIid());
-                    // DB의 파일 원본명 얻어오기
-                    String dbOriginFileName = dbImageDTO.getOriginFilename();
-
-                    if (!multiList.contains(dbOriginFileName))  { // 서버에 저장된 파일들 중 전달되어온 파일이 존재하지 않는다면
-                        log.info("파일 삭제 중 : " + dbImage.getOriginFileName());
-                        imageRepository.deleteImageByIid(dbImage.getIid(), pid);
-                    }
-                    else  { // 그것도 아니라면
-                        log.info("파일 추가 중 : " + dbOriginFileName);
-                        dbOriginNameList.add(dbOriginFileName);    // DB에 저장할 파일 목록에 추가
-                    }
-
-                }
-
-                for (MultipartFile multipartFile : multipartList) { // 전달되어온 파일 하나씩 검사
-                    // 파일의 원본명 얻어오기
-                    String multipartOriginName = multipartFile.getOriginalFilename();
-                    if (!dbOriginNameList.contains(multipartOriginName)) {   // DB에 없는 파일이면
-                        addFileList.add(multipartFile); // DB에 저장할 파일 목록에 추가
-                    }
-                }
-            }
-        }
-            return responseService.getSingleResult(postService.update(pid, postRequestDTO, addFileList, request));
+//        List<MultipartFile> addFileList = new ArrayList<>();
+//
+//        if (CollectionUtils.isEmpty(dbImageList)) { // DB에 아예 존재 x
+//            if (!CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일이 하나라도 존재
+//                // 저장할 파일 목록에 추가
+//                addFileList.addAll(multipartList);
+//            }
+//        } else {  // DB에 한 장 이상 존재
+//            if (CollectionUtils.isEmpty(multipartList)) { // 전달되어온 파일 아예 x
+//                // 파일 삭제
+//                for (Image dbImage : dbImageList)
+//                    imageRepository.deleteImageByIid(dbImage.getIid(), pid);
+//            } else {  // 전달되어온 파일 한 장 이상 존재
+//
+//                // DB에 저장되어있는 파일 원본명 목록
+//                List<String> dbOriginNameList = new ArrayList<>();
+//
+//                // multipartFile형식은 String값으로 찾을 수 없으니 원본명만 빼서 리스트로 만듦
+//                List<String> multiList = multipartList.stream()
+//                        .map(MultipartFile::getOriginalFilename).collect(Collectors.toList());
+//                // DB의 파일 원본명 추출
+//                for (Image dbImage : dbImageList) {
+//                    // file id로 DB에 저장된 파일 정보 얻어오기
+//                    ImageDTO dbImageDTO = imageService.findByFileIid(dbImage.getIid());
+//                    // DB의 파일 원본명 얻어오기
+//                    String dbOriginFileName = dbImageDTO.getOriginFilename();
+//
+//                    if (!multiList.contains(dbOriginFileName))  { // 서버에 저장된 파일들 중 전달되어온 파일이 존재하지 않는다면
+//                        log.info("파일 삭제 중 : " + dbImage.getOriginFileName());
+//                        imageRepository.deleteImageByIid(dbImage.getIid(), pid);
+//                    }
+//                    else  { // 그것도 아니라면
+//                        log.info("파일 추가 중 : " + dbOriginFileName);
+//                        dbOriginNameList.add(dbOriginFileName);    // DB에 저장할 파일 목록에 추가
+//                    }
+//
+//                }
+//
+//                for (MultipartFile multipartFile : multipartList) { // 전달되어온 파일 하나씩 검사
+//                    // 파일의 원본명 얻어오기
+//                    String multipartOriginName = multipartFile.getOriginalFilename();
+//                    if (!dbOriginNameList.contains(multipartOriginName)) {   // DB에 없는 파일이면
+//                        addFileList.add(multipartFile); // DB에 저장할 파일 목록에 추가
+//                    }
+//                }
+//            }
+//        }
+            return responseService.getSingleResult(postService.update(pid, postRequestDTO, multipartList, request));
     }
 
 
