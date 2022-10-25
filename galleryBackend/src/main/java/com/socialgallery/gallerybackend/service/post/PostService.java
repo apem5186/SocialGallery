@@ -362,14 +362,21 @@ public class PostService {
 
             // 기본적으로 값이 들어가 있기 때문에 files.isEmpty() 체크를 해도 쓸모가없음
             // 그래서 null 체크를 할 변수를 새로 만듦
-            boolean check = true;
+            boolean checkFiles = true;
             for (MultipartFile file : files) {
-                if (file.isEmpty()) check = false;
+                if (file.isEmpty()) checkFiles = false;
+            }
+            boolean checkimageDB = true;
+            for (Image db : imgDBList) {
+                if (db.getOriginFileName().isEmpty()) {
+                    checkimageDB = false;
+                    break;
+                }
             }
             // 전달되어 온 파일이 존재할 경우
-            if (check) {
+            if (checkFiles) {
                 // DB에 파일 존재할 경우
-                if (!imgDBList.isEmpty()) {
+                if (checkimageDB) {
                     // s3와 DB에 이미지 제거
                     imgDBList.forEach(image -> {
                         String date = image.getFilePath().split("/")[5];
@@ -387,7 +394,7 @@ public class PostService {
 
             } else {    // 전달되어 온 파일이 없을 경우
                 // DB에 파일이 존재할 경우
-                if (!imgDBList.isEmpty()) {
+                if (checkimageDB) {
                     // s3와 DB에 이미지 제거
                     imgDBList.forEach(image -> {
                         String date = image.getFilePath().split("/")[5];
