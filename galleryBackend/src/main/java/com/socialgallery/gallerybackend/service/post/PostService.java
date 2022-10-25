@@ -289,174 +289,121 @@ public class PostService {
         }
         return true;
     }
+
+    public void s3Upload(List<MultipartFile> files, Post post) {
+        for (MultipartFile file : files) {
+            // 파일명을 업로드 한 날짜로 변환하여 저장
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter dateTimeFormatter =
+                    DateTimeFormatter.ofPattern("yyyyMMdd");
+            String current_date = now.format(dateTimeFormatter);
+            File folder = new File(bucket + dir + current_date);
+
+            // 디렉터리가 없을 경우
+            if (!folder.exists()) {
+                boolean wasSuccessful = folder.mkdirs();
+
+                // 디렉터리 생성에 실패했을 경우
+                if (!wasSuccessful)
+                    System.out.println("file: was not successful");
+            }
+
+            String fileName = createFileName(file.getOriginalFilename());
+
+            ObjectMetadata objectMetadata = new ObjectMetadata();
+            objectMetadata.setContentLength(file.getSize());
+            objectMetadata.setContentType(file.getContentType());
+
+            try(InputStream inputStream = file.getInputStream()) {
+                amazonS3.putObject(new PutObjectRequest(bucket+"/images/"+current_date, fileName, inputStream, objectMetadata)
+                        .withCannedAcl(CannedAccessControlList.PublicRead));
+                ImageDTO imageDTO = ImageDTO.builder()
+                        .originFilename(file.getOriginalFilename())
+                        .filePath(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString())
+                        .fileSize(file.getSize())
+                        .build();
+
+                // 파일 DTO 이용하여 Image 엔티티 생성
+                Image image = new Image(
+                        imageDTO.getOriginFilename(),
+                        imageDTO.getFilePath(),
+                        imageDTO.getFileSize()
+                );
+                image.setPost(post);
+                imageRepository.save(image);
+
+            } catch (AmazonServiceException ase) {
+                log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
+                log.info("Error Message : " + ase.getErrorCode());
+                log.info("HTTP Status Code : " + ase.getStatusCode());
+                log.info("AWS Error Code : " + ase.getErrorCode());
+                log.info("Error Type : " + ase.getErrorType());
+                log.info("Request ID : " + ase.getRequestId());
+                log.info("Service Name : " + ase.getServiceName());
+            } catch (AmazonClientException ace) {
+                log.info("Caught an AmazonClientException: ");
+                log.info("Error Message : " + ace.getMessage());
+            } catch (IOException e) {
+                log.info("=====================IMAGE TEST======================");
+                log.info("bucket : " + bucket);
+                log.info("objMeta : " + objectMetadata);
+                e.printStackTrace();
+                log.info("=====================IMAGE TEST======================");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
     // 게시글 수정
     @Transactional
     public Long update(Long pid, PostRequestDTO postRequestDTO, List<MultipartFile> files,
-                       HttpServletRequest request) throws Exception{
-
-        List<String > imgUrlList = new ArrayList<>();
-        List<String > result = new ArrayList<>();
+                       HttpServletRequest request) throws Exception {
 
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
-        if(checkToken(post.getUsers().getId(), request)) {
-                // 전달되어 온 파일이 존재할 경우
-                if (!files.isEmpty()) {
-                    List<Image> imageList = imageRepository.findAllByPostPid(pid);
-                    // 일단 디비에 파일 존재할 경우 s3와 DB에 이미지 삭제
-                    if (!imageList.isEmpty()) {
-                        imageList.forEach(image -> {
-                            String date = image.getFilePath().split("/")[5];
-                            // DB에 image 제거
-                            imageRepository.delete(image);
-                            // s3에 image 제거
-                            deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1), date);
-                            log.info("=======================delete File S3==============================");
-                            log.info("FILENAME = " + image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1) +
-                                    "DATE = " + date);
-                            log.info("=======================delete File S3==============================");
-                        });
-                    for (MultipartFile file : files) {
-                        // 파일명을 업로드 한 날짜로 변환하여 저장
-                        LocalDateTime now = LocalDateTime.now();
-                        DateTimeFormatter dateTimeFormatter =
-                                DateTimeFormatter.ofPattern("yyyyMMdd");
-                        String current_date = now.format(dateTimeFormatter);
-                        File folder = new File(bucket + dir + current_date);
-
-                        // 디렉터리가 없을 경우
-                        if (!folder.exists()) {
-                            boolean wasSuccessful = folder.mkdirs();
-
-                            // 디렉터리 생성에 실패했을 경우
-                            if (!wasSuccessful)
-                                System.out.println("file: was not successful");
-                        }
-
-                        String fileName = createFileName(file.getOriginalFilename());
-
-                        ObjectMetadata objectMetadata = new ObjectMetadata();
-                        objectMetadata.setContentLength(file.getSize());
-                        objectMetadata.setContentType(file.getContentType());
-
-                        try(InputStream inputStream = file.getInputStream()) {
-                            amazonS3.putObject(new PutObjectRequest(bucket+"/images/"+current_date, fileName, inputStream, objectMetadata)
-                                    .withCannedAcl(CannedAccessControlList.PublicRead));
-                            imgUrlList.add(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString());
-
-                            ImageDTO imageDTO = ImageDTO.builder()
-                                    .originFilename(file.getOriginalFilename())
-                                    .filePath(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString())
-                                    .fileSize(file.getSize())
-                                    .build();
-
-                            // 파일 DTO 이용하여 Image 엔티티 생성
-                            Image image = new Image(
-                                    imageDTO.getOriginFilename(),
-                                    imageDTO.getFilePath(),
-                                    imageDTO.getFileSize()
-                            );
-
-                            imageRepository.save(image);
-
-                        } catch (AmazonServiceException ase) {
-                            log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
-                            log.info("Error Message : " + ase.getErrorCode());
-                            log.info("HTTP Status Code : " + ase.getStatusCode());
-                            log.info("AWS Error Code : " + ase.getErrorCode());
-                            log.info("Error Type : " + ase.getErrorType());
-                            log.info("Request ID : " + ase.getRequestId());
-                            log.info("Service Name : " + ase.getServiceName());
-                        } catch (AmazonClientException ace) {
-                            log.info("Caught an AmazonClientException: ");
-                            log.info("Error Message : " + ace.getMessage());
-                        } catch (IOException e) {
-                            log.info("=====================IMAGE TEST======================");
-                            log.info("bucket : " + bucket);
-                            log.info("objMeta : " + objectMetadata);
-                            e.printStackTrace();
-                            log.info("=====================IMAGE TEST======================");
-                            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+        if (checkToken(post.getUsers().getId(), request)) {
+            List<Image> imgDBList;
+            imgDBList = imageRepository.findAllByPostPid(pid);
+            // 전달되어 온 파일이 존재할 경우
+            if (!files.isEmpty()) {
+                // DB에 파일 존재할 경우
+                if (!imgDBList.isEmpty()) {
+                    // s3와 DB에 이미지 제거
+                    imgDBList.forEach(image -> {
+                        String date = image.getFilePath().split("/")[5];
+                        deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1), date);
+                        imageRepository.delete(image);
+                        log.info("=======================delete File S3==============================");
+                        log.info("FILENAME = " + image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1) +
+                                "DATE = " + date);
+                        log.info("=======================delete File S3==============================");
+                    });
+                    s3Upload(files, post);
+                } else { // DB에 파일이 없을 경우
+                    s3Upload(files, post);
                 }
-            } else {    // DB에 파일이 없을 경우
-                // 전달되어 온 파일이 존재할 경우
-                if (!files.isEmpty()) {
-                    for (MultipartFile file : files) {
-                        // 파일명을 업로드 한 날짜로 변환하여 저장
-                        LocalDateTime now = LocalDateTime.now();
-                        DateTimeFormatter dateTimeFormatter =
-                                DateTimeFormatter.ofPattern("yyyyMMdd");
-                        String current_date = now.format(dateTimeFormatter);
-                        File folder = new File(bucket + dir + current_date);
 
-                        // 디렉터리가 없을 경우
-                        if (!folder.exists()) {
-                            boolean wasSuccessful = folder.mkdirs();
-
-                            // 디렉터리 생성에 실패했을 경우
-                            if (!wasSuccessful)
-                                System.out.println("file: was not successful");
-                        }
-
-                        String fileName = createFileName(file.getOriginalFilename());
-
-                        ObjectMetadata objectMetadata = new ObjectMetadata();
-                        objectMetadata.setContentLength(file.getSize());
-                        objectMetadata.setContentType(file.getContentType());
-
-                        try(InputStream inputStream = file.getInputStream()) {
-                            amazonS3.putObject(new PutObjectRequest(bucket+"/images/"+current_date, fileName, inputStream, objectMetadata)
-                                    .withCannedAcl(CannedAccessControlList.PublicRead));
-                            imgUrlList.add(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString());
-
-                            ImageDTO imageDTO = ImageDTO.builder()
-                                    .originFilename(file.getOriginalFilename())
-                                    .filePath(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString())
-                                    .fileSize(file.getSize())
-                                    .build();
-
-                            // 파일 DTO 이용하여 Image 엔티티 생성
-                            Image image = new Image(
-                                    imageDTO.getOriginFilename(),
-                                    imageDTO.getFilePath(),
-                                    imageDTO.getFileSize()
-                            );
-
-                            imageRepository.save(image);
-
-                        } catch (AmazonServiceException ase) {
-                            log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
-                            log.info("Error Message : " + ase.getErrorCode());
-                            log.info("HTTP Status Code : " + ase.getStatusCode());
-                            log.info("AWS Error Code : " + ase.getErrorCode());
-                            log.info("Error Type : " + ase.getErrorType());
-                            log.info("Request ID : " + ase.getRequestId());
-                            log.info("Service Name : " + ase.getServiceName());
-                        } catch (AmazonClientException ace) {
-                            log.info("Caught an AmazonClientException: ");
-                            log.info("Error Message : " + ace.getMessage());
-                        } catch (IOException e) {
-                            log.info("=====================IMAGE TEST======================");
-                            log.info("bucket : " + bucket);
-                            log.info("objMeta : " + objectMetadata);
-                            e.printStackTrace();
-                            log.info("=====================IMAGE TEST======================");
-                            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
+            } else {    // 전달되어 온 파일이 없을 경우
+                // DB에 파일이 존재할 경우
+                if (!imgDBList.isEmpty()) {
+                    // s3와 DB에 이미지 제거
+                    imgDBList.forEach(image -> {
+                        String date = image.getFilePath().split("/")[5];
+                        deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1), date);
+                        imageRepository.delete(image);
+                        log.info("=======================delete File S3==============================");
+                        log.info("FILENAME = " + image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1) +
+                                "DATE = " + date);
+                        log.info("=======================delete File S3==============================");
+                    });
+                }   // DB에 파일이 없을 경우 코드 불필요
             }
+
             // title이랑 content는 항상 수정
             post.update(postRequestDTO.getTitle(), postRequestDTO.getContent());
-        }
-        // 오류 방지용
-        result.add(imgUrlList.get(0));
-        return pid;
+            // 오류 방지용
+            return pid;
+        } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
     }
 
 
