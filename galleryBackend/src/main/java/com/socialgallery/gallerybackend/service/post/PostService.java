@@ -379,13 +379,14 @@ public class PostService {
                         log.info("=======================delete File S3==============================");
                     });
                     log.info("===============files TEST=================");
-                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files);
+                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.get(0));
                     log.info("TEST 1 : " + !(files.isEmpty()));
                     log.info("===============files TEST=================");
                     s3Upload(files, post);
                 } else { // DB에 파일이 없을 경우
                     log.info("===============files TEST=================");
-                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files);                    log.info("TEST 1 : " + !(files.isEmpty()));
+                    log.info("fefwe");
+                    log.info("FILES TEST : " + !files.isEmpty() + "FILES : " + files.get(0));                    log.info("TEST 1 : " + !(files.isEmpty()));
                     log.info("TEST 1 : " + !(files.isEmpty()));
                     log.info("===============files TEST=================");
                     s3Upload(files, post);
