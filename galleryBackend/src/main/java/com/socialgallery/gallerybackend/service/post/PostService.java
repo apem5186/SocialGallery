@@ -381,7 +381,7 @@ public class PostService {
                     imgDBList.forEach(image -> {
                         String date = image.getFilePath().split("/")[5];
                         deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1), date);
-                        imageRepository.delete(image);
+                        imageRepository.deleteImageByIid(image.getIid(), pid);
                         log.info("=======================delete File S3==============================");
                         log.info("FILENAME = " + image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1) +
                                 "DATE = " + date);
@@ -399,7 +399,7 @@ public class PostService {
                     imgDBList.forEach(image -> {
                         String date = image.getFilePath().split("/")[5];
                         deleteImage(image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1), date);
-                        imageRepository.delete(image);
+                        imageRepository.deleteImageByIid(image.getIid(), pid);
                         log.info("=======================delete File S3==============================");
                         log.info("FILENAME = " + image.getFilePath().substring(image.getFilePath().lastIndexOf("/")+1) +
                                 "DATE = " + date);
