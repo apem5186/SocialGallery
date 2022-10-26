@@ -3,17 +3,38 @@ import axios from "axios"
 import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchMainImg, fetchReply } from './../../store/commentSlice';
+import Edit from "../PostReg/edit";
 
-function Content({pfUser,mainImg,i,reply,setCommentArray}){
+function Content({i}){
+    const [title, setTitle] = useState('')
+    const [content, setContent] = useState([])
+
+    // base_URL
+    const base_URL = "http://localhost:8080"
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
+    // mainImg useSelector
+    let mainImg = useSelector((state)=>state.mainImg.mainList)
+    // 댓글 useSelector
+    let reply = useSelector((state)=>state.reply.replyList)
+    let dispatch = useDispatch()
+
+    // MainImg, Reply dispatch
+    useEffect(()=>{
+        dispatch(fetchMainImg())
+        dispatch(fetchReply())
+    },[dispatch])
+
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
-    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
+    // 빈 댓글
+    const [commentArray, setCommentArray] = useState([])
+
     // 댓글
-
     const [comment, setComments] = useState([])
-
-    const base_URL = "http://localhost:8080"
-
 
     const postCommentSubmit = (e) => {
         e.preventDefault()
@@ -25,7 +46,7 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
             'Content-type': 'application/json',
             'Authorization': "Bearer " + localStorage.getItem("token")
         }
-        axios.post(dev_url+`/api/comment/register`,{
+        axios.post(dev_url + `/api/comment/register`,{
             users: users,
             post : post,
             comment : comment,
@@ -49,26 +70,15 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
     },[])
 
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        let category = params.get("category")
-
-        if (category === null) {
-            axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
-                res => {
-                    setPost(res.data.data)
-                })
-        } else if (category) {
-            axios.get(dev_url + "/api/post/category/" + mainImg[i].pid).then(
-                res => {
-                    setPost(res.data.data)
-                }
-            )
-        }
-
+        axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
+            res => {
+                setPost(res.data.data)
+            })
     }, [])
 
     return (
         <>
+
             <main className="main-container">
                 <section className="content-container">
                     <div className="content">
@@ -79,16 +89,29 @@ function Content({pfUser,mainImg,i,reply,setCommentArray}){
                                         <Link to="#" className="post__avatar">
                                             <img src="assets/Main/user.png" alt="User Picture" />
                                         </Link>
-                                        <span>{pfUser.username}</span>
+                                        <span>{mainImg[0].username}</span>
                                         {/* Upload*/}
-                                        <UpLoad></UpLoad>
+                                        <UpLoad
+                                            title={title}
+                                            setTitle={setTitle}
+                                            content={content}
+                                            setContent={setContent}
+                                        ></UpLoad>
+                                        {/* Edit */}
+                                        <Edit
+                                            title={title}
+                                            setTitle={setTitle}
+                                            content={content}
+                                            setContent={setContent}
+                                            i={i}
+                                        ></Edit>
                                         {/* Delete */}
                                         <Delete mainImg={mainImg} i={i}></Delete>
                                     </div>
                                 </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
-                                        <img src={`${mainImg[i].filePath}`} alt="" />
+                                        <img src={`assets/Img/${mainImg[i].filePath}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="post__footer">

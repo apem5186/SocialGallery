@@ -1,5 +1,4 @@
 import  axios  from 'axios';
-import { useState } from 'react';
 
 function Delete({mainImg,i}){
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
@@ -20,7 +19,7 @@ function Delete({mainImg,i}){
     return (
         <>
             <div>
-            <span class="material-icons outlined" onClick={()=>{onHandelDelete(mainImg[i].pid)}}>
+            <span className="material-icons outlined" onClick={()=>{onHandelDelete(mainImg[i].pid)}}>
                 delete
             </span>
             </div>

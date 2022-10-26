@@ -7,11 +7,11 @@
     right: 10px;
     top : 20px;
 }
-
 .post__header .material-icons {
     display:flex;
     font-size: 25px;
     color: #9932CC;
+    cursor: pointer;
 }
 
 /* 토글 */
@@ -47,7 +47,6 @@
     -webkit-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
     -moz-box-shadow: 2px 5px 10px 0px rgba(0,0,0,0.35);
     border-radius: 30px;
-    /* display: flex; */
 }
 
 /*컨텐츠 영역*/
@@ -87,7 +86,6 @@
 
 .popup_contents {
     display: flex;
-    /* border: 5px solid #333; */
     height: 980px;
     width: 100%;
 }
@@ -100,7 +98,6 @@
 }
 
 .popup_photoinfo {
-    /* border: 5px solid #333; */
     display: flex;
     width: 30%;
     flex-direction: column;
@@ -121,7 +118,6 @@
     text-decoration: none;
 }
 .photoinfo_name{
-    /* border: 5px solid #333; */
     display: flex;
     height: 70px;
     align-items: center;
@@ -229,18 +225,6 @@
     margin: 20px auto 10px;
     text-align: center;
 }
-
-
-/* 사진업로드 인풋 스타일 변경 */
-/* .filebox .upload-name {
-  display: inline-block;
-  height: 50px;
-  padding: 0 10px;
-  vertical-align: middle;
-  border: 1px solid #dddddd;
-  width: 300px;
-  color: #999999;
-} */
 
 
 /* 사진업로드 label스타일 변경 */

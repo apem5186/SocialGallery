@@ -2,13 +2,16 @@ import sideToggle from './sideToggle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg}){
-    let [uid, setUid] = useState('')
+function Sidebar({setMainImg}){
+    const [searchTitle, setSearchTitle] = useState([])
+
     const navigate = useNavigate()
-    // const uid = localStorage.getItem('uid')
-    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
+
+    // Uid
+    let [uid, setUid] = useState('')
 
     const getUid = () => {
         uid = localStorage.getItem('uid')
@@ -18,7 +21,7 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
     // Logout
     const onLogout = () =>{
         getUid()
-        axios.get(`http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com/v1/logout?uid=`+uid)
+        axios.get(dev_url +`/v1/logout?uid=`+uid)
             .then(res=>{
                 if(res.status === 200){
                     localStorage.removeItem('token')
@@ -29,57 +32,35 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
             })
     }
 
-    const userProfile = ()=>{
-        axios.get('https://jsonplaceholder.typicode.com/users/1')
-            .then(res=>{
-                setPfUser(res.data.name)
-                console.log(setPfUser)
-            },[])
-    }
+    //username
 
     // 검색
     const base_URL = "http://localhost:8080"
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
-    const getAll = (e) => {
-        axios.get(base_URL + 'api/post')
+    const searchList = (e) => {
+        axios.get(dev_url + '/api/post?keyword=' + searchTitle)
             .then(res => {
                 setMainImg([...res.data.list])
             })
     }
-    const params = new URLSearchParams(window.location.search);
-    let category = params.get("category")
-
-            const search1 = (e) => {
-                axios.get(dev_url + '/api/post?keyword=' + searchTitle)
-                    .then(res => {
-                        setMainImg([...res.data.list])
-                    })
-                return search1
-            }
-            const search2 = (e) => {
-                axios.get(dev_url + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
-                    .then(res => {
-                        setMainImg([...res.data.list])
-                    })
-                return search2
-            }
-
 
     return (
         <>
             <nav className="sidebar close" id="nav">
                 <header>
                     <div className="image-text">
-            <span className="image">
-               <img src="assets/Main/user.png" alt="" />
-            </span>
+				<span className="image">
+					<img src="assets/Main/user.png" alt="" />
+				</span>
                         <div className="text logo-text">
-                            <span className="name">{pfUser}</span>
+                            {/* username */}
+                            <span className="name">어서오세요</span>
                             <span className="profession">Welcome</span>
                         </div>
                     </div>
                     <i className="bx bx-chevron-right toggle" id="close" onClick={(e)=>{
-                        userProfile(e)
+                        // userProfile(e)
                         sideToggle(e)
                     }}></i>
                 </header>
@@ -89,7 +70,7 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
                     <div className="menu">
                         <li className="search-box">
                             <i className="bx bx-search icon"
-                               onClick={category === null ? search1 : search2}></i>
+                               onClick={searchList}></i>
                             <input
                                 type="text"
                                 placeholder="Search..."
@@ -115,8 +96,9 @@ function Sidebar({pfUser,setPfUser,setSearchTitle,mainImg,searchTitle,setMainImg
                                     <span className="text nav-text">Notifications</span>
                                 </Link>
                             </li>
+
                             <li className="nav-link">
-                                <Link to = "#">
+                                <Link to = "#" >
                                     <i className='bx bx-news icon'></i>
                                     <span className="text nav-text">News</span>
                                 </Link>

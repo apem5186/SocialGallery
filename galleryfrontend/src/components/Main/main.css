@@ -41,6 +41,31 @@ textarea {
     --point: #9932CC;
 }
 
+.myButton {
+    box-shadow:inset 0px 0px 0px 0px #ffffff;
+    background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+    background-color:#ffffff;
+    border-radius:13px;
+    border:2px solid #dcdcdc;
+    display:inline-block;
+    cursor:pointer;
+    color:#666666;
+    font-family:Arial;
+    font-size:16px;
+    font-weight:bold;
+    padding:10px 40px;
+    text-decoration:none;
+    text-shadow:0px 0px 0px #ffffff;
+}
+.myButton:hover {
+    background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+    background-color:#f6f6f6;
+}
+.myButton:active {
+    position:relative;
+    top:1px;
+}
+
 
 
 /* Header Navbar */
@@ -48,10 +73,8 @@ textarea {
     width: 100%;
     height: var(--header-height);
     background-color: var(--primary);
-
     display: flex;
     justify-content: center;
-
     position: fixed;
     top: 0;
     left: 0;
@@ -102,8 +125,7 @@ textarea {
 /* Main Content */
 .main-container {
     background-color: var(--primary);
-    margin-top: var(--header-height);
-    margin-bottom: var(--nav-height);
+    padding-top: 44px;
     display: flex;
     flex: 1;
 }
@@ -114,14 +136,16 @@ textarea {
     padding: 0 0 8px;
     margin: 0 auto;
     display: flex;
-}
 
+}
 .content {
     width: 100%;
+    height: 100%;
     max-width: 614px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+
 }
 
 
@@ -174,7 +198,7 @@ textarea {
     border: none;
     cursor: pointer;
     padding: 8px;
-    padding-left: 28rem;
+    padding-left: 24rem;
     font-weight: 900;
 }
 
@@ -182,15 +206,19 @@ textarea {
 .post__content {
     display: flex;
     position: relative;
+
 }
 .post__medias {
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
-    width: 100%;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none;
+    justify-content: center;
+    width:100%;
+    height:30rem;
+    object-fit:cover;
 }
 .post__medias::-webkit-scrollbar {
     display: none;
@@ -200,6 +228,7 @@ textarea {
     flex: none;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+
 }
 
 .post__footer {
@@ -553,6 +582,7 @@ header .image-text .profession{
     font-size: 22px;
     cursor: pointer;
     transition: var(--tran-03);
+    z-index: 999;
 }
 
 body.dark .sidebar header .toggle{

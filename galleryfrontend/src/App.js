@@ -6,90 +6,24 @@ import './components/Login/login.css'
 import './components/Main/main.css'
 import { Routes, Route } from 'react-router-dom'
 import UpLoad from './components/PostReg/upload';
-import Movie from "./components/Sidemenu/movie";
-import Broadcast from "./components/Sidemenu/broadcast";
-import Life from "./components/Sidemenu/life";
-import Travel from "./components/Sidemenu/travel";
+import Movie from './components/SideMenu/movie';
+import Broadcast from './components/SideMenu/broadcast';
+import Life from './components/SideMenu/life';
+import Travel from './components/SideMenu/travel';
 import { useState } from 'react';
-import { useEffect } from 'react';
-import axios from 'axios';
+
+
 
 
 function App() {
-    const [mainImg,setMainImg] = useState([])
-    const [searchTitle, setSearchTitle] = useState("")
-    let [reply, setReply] = useState([])
-    let [commentArray, setCommentArray] = useState([])
-    const [pfUser, setPfUser] = useState([])
-
-    const base_URL = "http://localhost:8080"
-    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
-
-    useEffect(()=>{
-        const params = new URLSearchParams(window.location.search);
-        let category = params.get("category")
-        if (category === null) {
-            axios.get(dev_url + '/api/post')
-                .then(res =>{
-                    setMainImg([...res.data.list])
-                })
-        } else if (category) {
-            axios.get(dev_url + "/api/post/category?category="+category).then(
-                res => {
-                    console.log(category)
-                    setMainImg([...res.data.list])
-                }
-            )
-        }
-
-    },[])
-
-
-    //    댓글불러
-    useEffect(()=>{
-        axios.get(dev_url+'/api/comment/all')
-            .then(res =>{
-                setReply([...res.data.list])
-            })
-    },[])
-
-
 
 
     return (
         <div className="App">
             <Routes>
                 {/* Main */}
-                <Route exact path="/" element={
-                    <Main
-                        mainImg={mainImg}
-                        setMainImg={setMainImg}
-                        searchTitle={searchTitle}
-                        setSearchTitle={setSearchTitle}
-                        reply={reply}
-                        setReply={setReply}
-                        commentArray={commentArray}
-                        setCommentArray={setCommentArray}
-                        pfUser={pfUser}
-                        setPfUser={setPfUser}
-
-                    ></Main>
-                }></Route>
-                <Route path="/:pid" element={
-                    <Main
-                        mainImg={mainImg}
-                        setMainImg={setMainImg}
-                        searchTitle={searchTitle}
-                        setSearchTitle={setSearchTitle}
-                        reply={reply}
-                        setReply={setReply}
-                        commentArray={commentArray}
-                        setCommentArray={setCommentArray}
-                        pfUser={pfUser}
-                        setPfUser={setPfUser}
-                    ></Main>
-                }></Route>
-
+                <Route exact path="/" element={<Main ></Main>}></Route>
+                <Route path="/:pid" element={<Main></Main>}></Route>
                 <Route path="/upload" element={<UpLoad></UpLoad>}></Route>
 
                 {/* Login */}
@@ -98,13 +32,7 @@ function App() {
 
                 {/* SideMenu */}
                 <Route path="/movie" element={<Movie></Movie>}></Route>
-                <Route path="/broadcast" element={<Broadcast
-                    // mainImg={mainImg}
-                    // pfUser={pfUser}
-                    // setPfUser={setPfUser}
-                    // setCommentArray={setCommentArray}
-                    // reply={reply}
-                ></Broadcast>}></Route>
+                <Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>
                 <Route path="/life" element={<Life></Life>}></Route>
                 <Route path="/travel" element={<Travel></Travel>}></Route>
             </Routes>

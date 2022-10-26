@@ -1,8 +1,9 @@
 import footerData from "../../Data/footerData"
 import { useState } from "react"
+import { useSelector } from 'react-redux';
 
 function Footer(){
-    const [foot, setFoot] = useState(footerData)
+    const [footer,setFooter] = useState(footerData)
 
     return(
         <>
@@ -11,7 +12,7 @@ function Footer(){
                     <ul className="side-menu__footer_list">
                         <li className="side-menu__footer_item">
                             <a className="side-menu__footer_link" href="#">{
-                                foot.map((a,i)=>{
+                                footer.map((a,i)=>{
                                     return(
 
                                         <span  key={a.id} >{a.text} &nbsp;</span>
