@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 통합 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/app-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/app-config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/store/commentSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/store/commentSlice.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +116,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.SQL&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a8c7d9d08c5cce12ef9f1b44f835f853&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -320,14 +314,7 @@
       <workItem from="1665649905213" duration="9539000" />
       <workItem from="1666523604064" duration="4954000" />
       <workItem from="1666687234614" duration="13690000" />
-      <workItem from="1666778265556" duration="4765000" />
-    </task>
-    <task id="LOCAL-00148" summary="이미지 업로드 배포 테스트">
-      <created>1665573657011</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1665573657011</updated>
+      <workItem from="1666778265556" duration="6542000" />
     </task>
     <task id="LOCAL-00149" summary="이미지 업로드 배포 테스트">
       <created>1665574060612</created>
@@ -665,7 +652,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666781872420</updated>
     </task>
-    <option name="localTasksCounter" value="197" />
+    <task id="LOCAL-00197" summary="프론트 통합 테스트">
+      <created>1666783279844</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1666783279844</updated>
+    </task>
+    <option name="localTasksCounter" value="198" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
