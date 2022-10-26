@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 통합 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/broadcast.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/broadcast.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/life.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/life.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/movie.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/movie.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Sidemenu/travel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/travel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/app-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/app-config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/store/commentSlice.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/store/commentSlice.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,14 +320,7 @@
       <workItem from="1665649905213" duration="9539000" />
       <workItem from="1666523604064" duration="4954000" />
       <workItem from="1666687234614" duration="13690000" />
-      <workItem from="1666778265556" duration="3280000" />
-    </task>
-    <task id="LOCAL-00147" summary="이미지 업로드 배포 테스트">
-      <created>1665573621903</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1665573621903</updated>
+      <workItem from="1666778265556" duration="4765000" />
     </task>
     <task id="LOCAL-00148" summary="이미지 업로드 배포 테스트">
       <created>1665573657011</created>
@@ -664,7 +658,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666781321572</updated>
     </task>
-    <option name="localTasksCounter" value="196" />
+    <task id="LOCAL-00196" summary="프론트 통합 테스트">
+      <created>1666781872420</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1666781872420</updated>
+    </task>
+    <option name="localTasksCounter" value="197" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
