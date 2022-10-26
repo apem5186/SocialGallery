@@ -7,7 +7,7 @@ import Content from './Content';
 import { useSelector,useDispatch } from "react-redux";
 import { fetchMainImg } from '../../store/commentSlice';
 import { useEffect } from 'react';
-import { useState } from 'react';
+
 
 function Main({rgName,setRgName}){
 

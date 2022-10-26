@@ -6,11 +6,10 @@ import './components/Login/login.css'
 import './components/Main/main.css'
 import { Routes, Route } from 'react-router-dom'
 import UpLoad from './components/PostReg/upload';
-import Movie from "./components/Sidemenu/movie";
+import Movie from "./components/SideMenu/movie";
 import Broadcast from './components/SideMenu/broadcast';
 import Life from './components/SideMenu/life';
 import Travel from './components/SideMenu/travel';
-import { useState } from 'react';
 
 
 
@@ -31,10 +30,10 @@ function App() {
                 <Route path="/login/:location" element={<Login></Login>}></Route>
 
                 {/* SideMenu */}
-                {/*<Route path="/movie" element={<Movie></Movie>}></Route>*/}
-                {/*<Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>*/}
-                {/*<Route path="/life" element={<Life></Life>}></Route>*/}
-                {/*<Route path="/travel" element={<Travel></Travel>}></Route>*/}
+                <Route path="/movie" element={<Movie></Movie>}></Route>
+                <Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>
+                <Route path="/life" element={<Life></Life>}></Route>
+                <Route path="/travel" element={<Travel></Travel>}></Route>
             </Routes>
         </div>
     );
