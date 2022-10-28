@@ -51,7 +51,7 @@ function Sidebar({setMainImg}){
                 <header>
                     <div className="image-text">
 				<span className="image">
-					<img src="assets/Main/user.png" alt="" />
+					<img src="/assets/Main/user.png" alt="" />
 				</span>
                         <div className="text logo-text">
                             {/* username */}

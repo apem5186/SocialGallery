@@ -4,7 +4,7 @@ import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
-import { fetchMainImg, fetchReply } from './../../store/commentSlice';
+import { fetchMainImg, fetchReply } from '../../store/commentSlice';
 import Edit from "../PostReg/edit";
 
 function Content({i}){
@@ -87,7 +87,7 @@ function Content({i}){
                                 <div className="post__header">
                                     <div className="post__profile">
                                         <Link to="#" className="post__avatar">
-                                            <img src="assets/Main/user.png" alt="User Picture" />
+                                            <img src="/assets/Main/user.png" alt="User Picture" />
                                         </Link>
                                         <span>{mainImg[0].username}</span>
                                         {/* Upload*/}
@@ -117,13 +117,13 @@ function Content({i}){
                                 <div className="post__footer">
                                     <div className="post__buttons">
                                         <button className="post__button">
-                                            <img src="assets/Main/chat_btn.png" alt="" />
+                                            <img src="/assets/Main/chat_btn.png" alt="" />
                                         </button>
                                         <button className="post__button">
-                                            <img src="assets/Main/love_btn.png" alt="" />
+                                            <img src="/assets/Main/love_btn.png" alt="" />
                                         </button>
                                         <button className="post__button post__button--align-right">
-                                            <img src="assets/Main/more_btn.png" alt="" />
+                                            <img src="/assets/Main/more_btn.png" alt="" />
                                         </button>
                                     </div>
                                     <div className="post__infos"   >

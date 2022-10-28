@@ -12,7 +12,7 @@ function MainHeader(){
 
                     <div className="header__buttons header__buttons--desktop">
                         <Link to="#">
-                            <img src="/assets/Main/home_btn.jpg" alt="" />
+                            <img src="/assets/Main/home_btn.png" alt="" />
                         </Link>
                         <Link to="#">
                             <img src="/assets/Main/msg_btn.png" alt="" />

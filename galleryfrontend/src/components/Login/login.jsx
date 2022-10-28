@@ -20,7 +20,7 @@ function Login() {
 
 
   // const [id,setId] = useState('') id 불러오기
-  let usersId = useState('');
+  const [usersId, setUsersId] = useState('');
 
   const onEmailHandler = e =>{
     setEmail(e.currentTarget.value)
@@ -56,16 +56,15 @@ function Login() {
   const location = useLocation();
 
   const getUser = (email) => {
-    axios.get(dev_url + '/findUserByEmail/' + email, {
-    }).then(res => {
-      usersId = res.data.data.id;
+    axios.get(dev_url + '/findUserByEmail/' + email).then(res => {
+      setUsersId(res.data.data.id);
       localStorage.setItem("uid", usersId);
-      return usersId;
     })
   }
   const signIn = () =>{
+    getUser(email)
     axios.post(dev_url + '/v1/login',{
-      usersId : getUser(email),
+      usersId : usersId,
       email : email,
       password : pw
     },{
@@ -91,45 +90,24 @@ function Login() {
         })
   }
 
-
-  // 회원가입 fetch
-  // const signUp = (e) => {
-  //   e.preventDefault()
-  //   fetch(base_url + '/v1/signUp', {
-  //     method: 'POST',
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     body: JSON.stringify({
-  //       email: rgEmail,
-  //       password: rgPw,
-  //       username : rgName,
-  //       tel : rgTel
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(result => console.log('결과: ', result));
-  // };
-
   const signUp = (e) =>{
     e.preventDefault()
-    axios.post(dev_url + '/v1/signUp',{
-      usersId : getUser(email),
+    axios.post(dev_url + '/v1/signUp', {
       email: rgEmail,
       password: rgPw,
-      username : rgName,
-      tel : rgTel
-    },{
+      username: rgName,
+      tel: rgTel
+    }, {
       headers: {
         'Content-Type': 'application/json',
       },
       withCredentials: true,
       crossDomain: true,
       credentials: "include"
-    })
-        .then(res=>{
-
-        });
+    }).then(r => {
+      getUser(email);
+      console.log(r + ", userId : "+ usersId);
+    });
   }
 
 

@@ -92,7 +92,7 @@ function UpLoadForm({title,setTitle,content,setContent}) {
 
                                 <div className="popup_photoinfo">
                                     <div className="photoinfo_name">
-                                        <img src="assets/Main/user.png" alt="User Picture" />
+                                        <img src="/assets/Main/user.png" alt="User Picture" />
                                         <span>user1</span>
                                     </div>
 
