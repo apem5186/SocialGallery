@@ -10,6 +10,7 @@ import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.model.response.ListResult;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
+import com.socialgallery.gallerybackend.repository.PostRepository;
 import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.image.ImageService;
 import com.socialgallery.gallerybackend.service.post.PostService;
@@ -50,6 +51,7 @@ public class PostController {
 
     private final UserRepository userRepository;
 
+    private final PostRepository postRepository;
 
     private final ResponseService responseService;
 
@@ -85,6 +87,8 @@ public class PostController {
             ResponseEntity.ok().body(imgPathUrl);
             return responseService.getListResult(imgPathUrl);
         } else {
+            Post post = postRequestDTO.toEntity();
+            postRepository.save(post);
             log.info("==================================");
             log.info("==================================");
             log.info("==================================");
@@ -92,7 +96,6 @@ public class PostController {
             log.info("==================================");
             log.info("==================================");
             log.info("==================================");
-            postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             ResponseEntity.ok().body(postRequestDTO);
             return responseService.getListResult(result);
         }
