@@ -20,7 +20,7 @@ function Login() {
 
 
   // const [id,setId] = useState('') id 불러오기
-  const [usersId, setUsersId] = useState('');
+  let usersId = useState('');
 
   const onEmailHandler = e =>{
     setEmail(e.currentTarget.value)
@@ -58,15 +58,14 @@ function Login() {
   const getUser = (email) => {
     axios.get(dev_url + '/findUserByEmail/' + email, {
     }).then(res => {
-      setUsersId(res.data.data.id);
+      usersId = res.data.data.id;
       localStorage.setItem("uid", usersId);
       return usersId;
     })
   }
   const signIn = () =>{
-    getUser(email)
     axios.post(dev_url + '/v1/login',{
-      usersId : usersId,
+      usersId : getUser(email),
       email : email,
       password : pw
     },{
@@ -95,6 +94,7 @@ function Login() {
   const signUp = (e) =>{
     e.preventDefault()
     axios.post(base_url + '/v1/signUp',{
+      usersId : getUser(email),
       email: rgEmail,
       password: rgPw,
       username : rgName,
