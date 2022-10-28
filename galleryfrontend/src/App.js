@@ -6,10 +6,10 @@ import './components/Login/login.css'
 import './components/Main/main.css'
 import { Routes, Route } from 'react-router-dom'
 import UpLoad from './components/PostReg/upload';
-import Movie from './components/SideMenu/Movie';
-import Broadcast from './components/SideMenu/Broadcast';
-import Life from './components/SideMenu/Life';
-import Travel from './components/SideMenu/Travel';
+import Movie from "./components/SideMenu/Movie";
+import Broadcast from "./components/SideMenu/Broadcast";
+import Life from "./components/SideMenu/Life";
+import Travel from "./components/SideMenu/Travel";
 
 
 function App() {
