@@ -75,10 +75,11 @@ public class PostController {
         log.info("POSTREQUESTDTO : " + postRequestDTO);
 
         boolean checkFiles = true;
-        List<MultipartFile> fileList = new ArrayList<>(postFileVO.getFiles());
-        for (MultipartFile file : fileList) {
-            if (file.isEmpty()) checkFiles = false;
-        }
+        // List<MultipartFile> fileList = new ArrayList<>(postFileVO.getFiles());
+//        for (MultipartFile file : fileList) {
+//            if (file.isEmpty()) checkFiles = false;
+//        }
+        if (postFileVO.getFiles().size() == 0) checkFiles = false;
         if (!checkFiles) {
             log.info("POSTFILEVO : " + postFileVO);
             List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
