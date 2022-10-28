@@ -62,7 +62,7 @@ public class PostController {
             @ApiParam(value = "게시글 등록 DTO", required = true)
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception{
-        log.info("POSTFILEVO : " + postFileVO);
+
         Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
         log.info("USERS : " + users);
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
@@ -73,23 +73,22 @@ public class PostController {
                 .build();
 
         log.info("POSTREQUESTDTO : " + postRequestDTO);
-        List<String > result = new ArrayList<>();
-        result.add(postRequestDTO.toString());
-        // 기본적으로 값이 들어가 있기 때문에 files.isEmpty() 체크를 해도 쓸모가없음
-        // 그래서 null 체크를 할 변수를 새로 만듦
+
         boolean checkFiles = true;
         List<MultipartFile> fileList = new ArrayList<>(postFileVO.getFiles());
         for (MultipartFile file : fileList) {
             if (file.isEmpty()) checkFiles = false;
         }
-
         if (!checkFiles) {
+            log.info("POSTFILEVO : " + postFileVO);
             List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             log.info("imgPathUrl List : " + imgPathUrl);
 
             ResponseEntity.ok().body(imgPathUrl);
             return responseService.getListResult(imgPathUrl);
         } else {
+            List<String > result = new ArrayList<>();
+            result.add("성공");
             log.info("실행은 됨");
             Post post = postRequestDTO.toEntity();
             postRepository.save(post);
