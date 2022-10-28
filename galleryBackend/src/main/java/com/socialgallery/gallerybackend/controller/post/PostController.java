@@ -80,6 +80,7 @@ public class PostController {
             ResponseEntity.ok().body(imgPathUrl);
             return responseService.getListResult(imgPathUrl);
         } else {
+            postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             ResponseEntity.ok().body(postRequestDTO);
             return responseService.getListResult(result);
         }
