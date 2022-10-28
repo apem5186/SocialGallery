@@ -59,7 +59,9 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
         axios.post(dev_url + '/api/post/upload',formData, {headers})
             .then(()=>{
                 window.location.reload()
-            })
+            }).catch(()=> {
+                console.log(imgs)
+        })
     }
 
     return (

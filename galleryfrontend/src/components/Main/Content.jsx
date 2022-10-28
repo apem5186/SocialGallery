@@ -10,7 +10,7 @@ import Edit from "../PostReg/edit";
 
 function Content({i}){
      // Img 미리보기
-    const [ imgs, setImgs ] = useState('')
+    const [ imgs, setImgs ] = useState([])
     const [ previewImg, setPreviewImg ] = useState('')
     // 빈 댓글 
     const [commentArray, setCommentArray] = useState([])
