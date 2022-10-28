@@ -7,9 +7,9 @@ function SideMenu(){
             <section className="side-menu">
                 <div className="side-menu__title">
                     <div className="side-menu__title_info">
-                        <Link to="#" className="myButton" onClick={openPop}>
-                            새 게시글
-                        </Link>
+                    <Link to="#" className="myButton" onClick={openPop}>
+                        새 게시글
+                    </Link>
                     </div>
                 </div>
                 {/* Side text */}

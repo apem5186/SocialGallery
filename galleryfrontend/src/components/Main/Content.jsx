@@ -4,19 +4,26 @@ import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
-import { fetchMainImg, fetchReply } from '../../store/commentSlice';
+import { fetchMainImg, fetchReply } from './../../store/commentSlice';
 import Edit from "../PostReg/edit";
+import CommentDel from "./CommentDel";
 
 function Content({i}){
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState([])
+     // Img 미리보기
+    const [ imgs, setImgs ] = useState('')
+    const [ previewImg, setPreviewImg ] = useState('')
+    // 빈 댓글 
+    const [commentArray, setCommentArray] = useState([])
+    let [users, setUsers] = useState([]);
+    let [post, setPost] = useState([]);
+
 
     // base_URL
     const base_URL = "http://localhost:8080"
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
     // mainImg useSelector
-    let mainImg = useSelector((state)=>state.mainImg.mainList)
+    let mainImg = useSelector((state)=>state.mainImg.mainList)    
     // 댓글 useSelector
     let reply = useSelector((state)=>state.reply.replyList)
     let dispatch = useDispatch()
@@ -26,16 +33,10 @@ function Content({i}){
         dispatch(fetchMainImg())
         dispatch(fetchReply())
     },[dispatch])
-
-    let [users, setUsers] = useState([]);
-    let [post, setPost] = useState([]);
-
-    // 빈 댓글
-    const [commentArray, setCommentArray] = useState([])
-
+    
     // 댓글
     const [comment, setComments] = useState([])
-
+    
     const postCommentSubmit = (e) => {
         e.preventDefault()
         setCommentArray(a=>[comment])
@@ -53,12 +54,11 @@ function Content({i}){
 
         } ,{headers},)
             .then(res=>{
-                console.log([...res.data])
             })
     }
 
     const onHandleComment = e =>{
-        e.preventDefault()
+			e.preventDefault()
         setComments(e.currentTarget.value)
     }
 
@@ -76,6 +76,7 @@ function Content({i}){
             })
     }, [])
 
+
     return (
         <>
 
@@ -83,7 +84,7 @@ function Content({i}){
                 <section className="content-container">
                     <div className="content">
                         <div className="posts"> {/*4줄까지 */}
-                            <article className="post">
+                            <article className="post">        
                                 <div className="post__header">
                                     <div className="post__profile">
                                         <Link to="#" className="post__avatar">
@@ -91,22 +92,22 @@ function Content({i}){
                                         </Link>
                                         <span>{mainImg[0].username}</span>
                                         {/* Upload*/}
-                                        <UpLoad
-                                            title={title}
-                                            setTitle={setTitle}
-                                            content={content}
-                                            setContent={setContent}
+                                        <UpLoad 
+                                            imgs={imgs}
+                                            setImgs={setImgs}
+                                            previewImg={previewImg}
+                                            setPreviewImg={setPreviewImg}
                                         ></UpLoad>
                                         {/* Edit */}
                                         <Edit
-                                            title={title}
-                                            setTitle={setTitle}
-                                            content={content}
-                                            setContent={setContent}
                                             i={i}
+                                            imgs={imgs}
+                                            setImgs={setImgs}
+                                            previewImg={previewImg}
+                                            setPreviewImg={setPreviewImg}
                                         ></Edit>
                                         {/* Delete */}
-                                        <Delete mainImg={mainImg} i={i}></Delete>
+                                        <Delete i={i}></Delete>
                                     </div>
                                 </div>
                                 <div className="post__content">
@@ -141,17 +142,18 @@ function Content({i}){
                                             <div className="comment_list">
                                                 {
                                                     reply
-                                                        .filter((value)=>value.pid === mainImg[i].pid)
-                                                        .map((a,i)=>{
-                                                            return(
-                                                                <div key={a.cid}>
-                                                                    <em>{a.username}</em>
-                                                                    &nbsp;&nbsp;:
-                                                                    <span>{a.comment}</span>
-                                                                </div>)
-                                                        })
+														.filter((value)=>value.pid === mainImg[i].pid)
+														.map((a,i)=>{
+                                                        return(
+                                                            <div key={a.cid}>
+                                                                <em>{a.username}</em>
+                                                                &nbsp;&nbsp;:
+                                                                <span>{a.comment}</span>
+                                                                <CommentDel i={i}></CommentDel>
+                                                            </div>)
+                                                    })																							
                                                 }
-
+                                                
                                             </div>
                                         </div>
 
@@ -167,9 +169,9 @@ function Content({i}){
                                                 />
                                                 <button
                                                     className="post_comment_btn"
-                                                    onClick={()=>{
-                                                        window.location.reload('/')
-                                                    }}
+																										onClick={()=>{
+																										window.location.reload('/')
+																									}}
                                                 >
                                                     <i className='bx bx-send' ></i>
                                                 </button>

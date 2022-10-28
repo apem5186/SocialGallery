@@ -1,20 +1,20 @@
 
 function Toggle(){
 
-    const container = document.getElementById("container");
-    const signIn = document.getElementById("sign-in");
-    const signUp = document.getElementById("sign-up");
+        const container = document.getElementById("container");
+        const signIn = document.getElementById("sign-in");
+        const signUp = document.getElementById("sign-up");
 
-    setTimeout(() => {
+        setTimeout(() => {
         container.classList.add("sign-in");
-    }, 1000);
+        }, 1000);
 
-    const toggle = () => {
+        const toggle = () => {
         container.classList.toggle("sign-in");
         container.classList.toggle("sign-up");
-    };
+        };
 
-    signIn.addEventListener("click", toggle);
-    signUp.addEventListener("click", toggle);
+        signIn.addEventListener("click", toggle);
+        signUp.addEventListener("click", toggle);
 }
 export default Toggle;

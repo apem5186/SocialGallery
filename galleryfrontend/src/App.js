@@ -6,16 +6,14 @@ import './components/Login/login.css'
 import './components/Main/main.css'
 import { Routes, Route } from 'react-router-dom'
 import UpLoad from './components/PostReg/upload';
-import Movie from "./components/SideMenu/movie";
-import Broadcast from './components/SideMenu/broadcast';
-import Life from './components/SideMenu/life';
-import Travel from './components/SideMenu/travel';
-
-
+import Movie from './components/SideMenu/Movie';
+import Broadcast from './components/SideMenu/Broadcast';
+import Life from './components/SideMenu/Life';
+import Travel from './components/SideMenu/Travel';
 
 
 function App() {
-
+    
 
     return (
         <div className="App">

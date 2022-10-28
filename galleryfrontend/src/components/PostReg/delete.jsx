@@ -1,6 +1,9 @@
 import  axios  from 'axios';
+import { useSelector } from 'react-redux';
 
-function Delete({mainImg,i}){
+function Delete({i}){
+
+    let mainImg = useSelector((state)=>state.mainImg.mainList)
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
     const headers = {
         'Content-type': 'application/json',
@@ -8,7 +11,7 @@ function Delete({mainImg,i}){
     }
 
     function onHandelDelete(pid){
-        axios.delete(dev_url+`/api/post/delete/${pid}`, {headers})
+        axios.delete(dev_url + `/api/post/delete/${pid}`, {headers})
             .then(res=>{
                 window.location.reload()
             })

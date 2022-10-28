@@ -1,24 +1,23 @@
-import {Link} from 'react-router-dom'
 import UpLoadForm from './upLoadForm';
 
-function UpLoad({title,setTitle,content,setContent}){
+function UpLoad({imgs,setImgs,previewImg,setPreviewImg}){
 
     return (
         <>
             {/*Open 팝업*/}
             <div onClick={openPop}>
-                <button className="popup_start">
+                    <button className="popup_start">
                         <span className="material-icons uploadtext">
                             add_circle_outline
                         </span>
-                </button>
+                    </button>
             </div>
             {/* 팝업 컨텐츠 영역*/}
             <UpLoadForm
-                title={title}
-                setTitle={setTitle}
-                content={content}
-                setContent={setContent}
+            imgs={imgs}
+            setImgs={setImgs}
+            previewImg={previewImg}
+            setPreviewImg={setPreviewImg}
             ></UpLoadForm>
 
         </>

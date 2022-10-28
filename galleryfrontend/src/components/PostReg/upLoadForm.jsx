@@ -1,13 +1,15 @@
-import { useState } from "react"
 import axios from "axios"
+import { useSelector, useDispatch } from 'react-redux';
+import { setPostContent, setPostTitle } from "../../store/commentSlice";
 
 
-function UpLoadForm({title,setTitle,content,setContent}) {
+function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
 
-// Img 미리보기
-    const [ imgs, setImgs ] = useState('')
-    const [ previewImg, setPreviewImg ] = useState('')
+    const title = useSelector((state)=>state.postTitle.postTitleList)
+    const content = useSelector((state)=>state.postContent.postContentList)
+    const dispatch = useDispatch()
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
 
 // 미리보기
     const insertImg = (e) => {
@@ -16,28 +18,28 @@ function UpLoadForm({title,setTitle,content,setContent}) {
         if(e.target.files[0]) {
             reader.readAsDataURL(e.target.files[0])
             setImgs(e.target.files[0])
-            console.log(e.target.files[0])
         }
 
         reader.onloadend = () => {
-            const previewImgUrl = reader.result
+            let previewImgUrl = reader.result
 
             if(previewImgUrl) {
                 setPreviewImg([...previewImg, previewImgUrl])
             }
         }
+        
     }
 
 // 제목,글 Data Server 전송
     const onHandlePostTitle = (e) =>{
-        setTitle(e.currentTarget.value)
+        dispatch(setPostTitle(e.currentTarget.value))
     }
     const onHandlePostComments = (e) =>{
-        setContent(e.currentTarget.value)
+        dispatch(setPostContent(e.currentTarget.value))
     }
 
     const postSubmit = (e) => {
-
+        
         e.preventDefault();
         const headers = {
             'Content-type': 'multipart/form-data',
@@ -50,7 +52,7 @@ function UpLoadForm({title,setTitle,content,setContent}) {
         formData.append('content', content)
 
         axios.defaults.headers.post = null
-        axios.post(dev_url+'/api/post/upload',formData, {headers})
+        axios.post(dev_url + '/api/post/upload',formData, {headers})
             .then(()=>{
                 window.location.reload()
             })
@@ -109,7 +111,7 @@ function UpLoadForm({title,setTitle,content,setContent}) {
                                             <span>Contents</span>
                                         </div>
                                         <input type="text" id="cont_story" placeholder="내용을 입력해주세요." onChange={onHandlePostComments} />
-
+                                    
                                     </div>
                                 </div>
                             </div>

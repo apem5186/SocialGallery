@@ -4,10 +4,10 @@ import Sidebar from "../Main/SiderBar"
 import Footer from "../Main/Footer"
 
 function Broadcast(){
-    return (
+    return ( 
         <>
             <MainHeader></MainHeader>
-
+            
             <SideMenu></SideMenu>
             <Sidebar></Sidebar>
             <Footer></Footer>

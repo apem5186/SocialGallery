@@ -4,7 +4,7 @@ import Sidebar from "../Main/SiderBar"
 import Footer from "../Main/Footer"
 
 function Travel(){
-    return (
+    return ( 
         <>
             <MainHeader></MainHeader>
             <SideMenu></SideMenu>

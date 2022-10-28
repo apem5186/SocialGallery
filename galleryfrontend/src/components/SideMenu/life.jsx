@@ -4,7 +4,7 @@ import Sidebar from "../Main/SiderBar"
 import Footer from "../Main/Footer"
 
 function Life(){
-    return (
+    return ( 
         <>
             <MainHeader></MainHeader>
             <SideMenu></SideMenu>
