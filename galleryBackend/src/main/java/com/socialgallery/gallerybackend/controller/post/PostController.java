@@ -74,12 +74,24 @@ public class PostController {
         List<String > result = new ArrayList<>();
         result.add(postRequestDTO.toString());
         if (!postFileVO.getFiles().isEmpty()) {
+            log.info("==================================");
+            log.info("==================================");
+            log.info("GETFILES : " + postFileVO.getFiles() + "------" + postFileVO.getFiles().isEmpty());
+            log.info("==================================");
+            log.info("==================================");
             List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             log.info("imgPathUrl List : " + imgPathUrl);
 
             ResponseEntity.ok().body(imgPathUrl);
             return responseService.getListResult(imgPathUrl);
         } else {
+            log.info("==================================");
+            log.info("==================================");
+            log.info("==================================");
+            log.info("GETFILES : " + postFileVO.getFiles() + "------" + postFileVO.getFiles().isEmpty());
+            log.info("==================================");
+            log.info("==================================");
+            log.info("==================================");
             postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             ResponseEntity.ok().body(postRequestDTO);
             return responseService.getListResult(result);

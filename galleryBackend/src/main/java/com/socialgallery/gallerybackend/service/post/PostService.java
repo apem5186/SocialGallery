@@ -93,6 +93,10 @@ public class PostService {
             // 그래서 null 체크를 할 변수를 새로 만듦
             boolean checkFiles = true;
             for (MultipartFile file : files) {
+                log.info("==============================================");
+                log.info("FILE : " + file.isEmpty() + file.getOriginalFilename());
+                log.info("==============================================");
+
                 if (file.isEmpty()) checkFiles = false;
             }
 
