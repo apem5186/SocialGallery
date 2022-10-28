@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 통합 테스트">
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,14 +318,7 @@
       <workItem from="1666785400481" duration="841000" />
       <workItem from="1666857946845" duration="3390000" />
       <workItem from="1666959159870" duration="5115000" />
-      <workItem from="1666967293811" duration="1999000" />
-    </task>
-    <task id="LOCAL-00156" summary="이미지 업로드 배포 테스트">
-      <created>1665576522608</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
-      <option name="project" value="LOCAL" />
-      <updated>1665576522608</updated>
+      <workItem from="1666967293811" duration="2141000" />
     </task>
     <task id="LOCAL-00157" summary="이미지 업로드 배포 테스트">
       <created>1665577464565</created>
@@ -663,7 +656,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666969100049</updated>
     </task>
-    <option name="localTasksCounter" value="205" />
+    <task id="LOCAL-00205" summary="프론트 통합 테스트">
+      <created>1666969317078</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1666969317078</updated>
+    </task>
+    <option name="localTasksCounter" value="206" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

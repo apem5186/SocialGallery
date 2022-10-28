@@ -4,9 +4,9 @@ import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
-import { fetchMainImg, fetchReply } from './../../store/commentSlice';
+import { fetchMainImg, fetchReply } from '../../store/commentSlice';
 import Edit from "../PostReg/edit";
-import CommentDel from "./CommentDel";
+// import CommentDel from "./CommentDel";
 
 function Content({i}){
      // Img 미리보기
@@ -149,7 +149,7 @@ function Content({i}){
                                                                 <em>{a.username}</em>
                                                                 &nbsp;&nbsp;:
                                                                 <span>{a.comment}</span>
-                                                                <CommentDel i={i}></CommentDel>
+                                                                {/*<CommentDel i={i}></CommentDel>*/}
                                                             </div>)
                                                     })																							
                                                 }
