@@ -100,74 +100,75 @@ public class PostService {
                 postRepository.save(entity);
                 result.add(String.valueOf(entity.getPid()));
                 return result;
-            }
-            for (MultipartFile file : files) {
-                // 파일명을 업로드 한 날짜로 변환하여 저장
-                LocalDateTime now = LocalDateTime.now();
-                DateTimeFormatter dateTimeFormatter =
-                        DateTimeFormatter.ofPattern("yyyyMMdd");
-                String current_date = now.format(dateTimeFormatter);
-                File folder = new File(bucket + dir + current_date);
+            } else {
+                for (MultipartFile file : files) {
+                    // 파일명을 업로드 한 날짜로 변환하여 저장
+                    LocalDateTime now = LocalDateTime.now();
+                    DateTimeFormatter dateTimeFormatter =
+                            DateTimeFormatter.ofPattern("yyyyMMdd");
+                    String current_date = now.format(dateTimeFormatter);
+                    File folder = new File(bucket + dir + current_date);
 
-                // 디렉터리가 없을 경우
-                if (!folder.exists()) {
-                    boolean wasSuccessful = folder.mkdirs();
+                    // 디렉터리가 없을 경우
+                    if (!folder.exists()) {
+                        boolean wasSuccessful = folder.mkdirs();
 
-                    // 디렉터리 생성에 실패했을 경우
-                    if (!wasSuccessful)
-                        System.out.println("file: was not successful");
+                        // 디렉터리 생성에 실패했을 경우
+                        if (!wasSuccessful)
+                            System.out.println("file: was not successful");
+                    }
+
+                    String fileName = createFileName(file.getOriginalFilename());
+
+                    ObjectMetadata objectMetadata = new ObjectMetadata();
+                    objectMetadata.setContentLength(file.getSize());
+                    objectMetadata.setContentType(file.getContentType());
+
+                    try(InputStream inputStream = file.getInputStream()) {
+                        amazonS3.putObject(new PutObjectRequest(bucket+"/images/"+current_date, fileName, inputStream, objectMetadata)
+                                .withCannedAcl(CannedAccessControlList.PublicRead));
+                        imgUrlList.add(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString());
+
+                        ImageDTO imageDTO = ImageDTO.builder()
+                                .originFilename(file.getOriginalFilename())
+                                .filePath(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString())
+                                .fileSize(file.getSize())
+                                .build();
+
+                        // 파일 DTO 이용하여 Image 엔티티 생성
+                        Image image = new Image(
+                                imageDTO.getOriginFilename(),
+                                imageDTO.getFilePath(),
+                                imageDTO.getFileSize()
+                        );
+
+                        entity.addImage(imageRepository.save(image));
+                        postRepository.save(entity);
+
+                    } catch (AmazonServiceException ase) {
+                        log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
+                        log.info("Error Message : " + ase.getErrorCode());
+                        log.info("HTTP Status Code : " + ase.getStatusCode());
+                        log.info("AWS Error Code : " + ase.getErrorCode());
+                        log.info("Error Type : " + ase.getErrorType());
+                        log.info("Request ID : " + ase.getRequestId());
+                        log.info("Service Name : " + ase.getServiceName());
+                    } catch (AmazonClientException ace) {
+                        log.info("Caught an AmazonClientException: ");
+                        log.info("Error Message : " + ace.getMessage());
+                    } catch (IOException e) {
+                        log.info("=====================IMAGE TEST======================");
+                        log.info("bucket : " + bucket);
+                        log.info("objMeta : " + objectMetadata);
+                        e.printStackTrace();
+                        log.info("=====================IMAGE TEST======================");
+                        throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-
-                String fileName = createFileName(file.getOriginalFilename());
-
-                ObjectMetadata objectMetadata = new ObjectMetadata();
-                objectMetadata.setContentLength(file.getSize());
-                objectMetadata.setContentType(file.getContentType());
-
-                try(InputStream inputStream = file.getInputStream()) {
-                    amazonS3.putObject(new PutObjectRequest(bucket+"/images/"+current_date, fileName, inputStream, objectMetadata)
-                            .withCannedAcl(CannedAccessControlList.PublicRead));
-                    imgUrlList.add(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString());
-
-                    ImageDTO imageDTO = ImageDTO.builder()
-                            .originFilename(file.getOriginalFilename())
-                            .filePath(amazonS3.getUrl(bucket+"/images/"+current_date, fileName).toString())
-                            .fileSize(file.getSize())
-                            .build();
-
-                    // 파일 DTO 이용하여 Image 엔티티 생성
-                    Image image = new Image(
-                            imageDTO.getOriginFilename(),
-                            imageDTO.getFilePath(),
-                            imageDTO.getFileSize()
-                    );
-
-                    entity.addImage(imageRepository.save(image));
-                    postRepository.save(entity);
-
-                } catch (AmazonServiceException ase) {
-                    log.info("Caught an AmazonServiceException from PUT requests, rejected reasons:");
-                    log.info("Error Message : " + ase.getErrorCode());
-                    log.info("HTTP Status Code : " + ase.getStatusCode());
-                    log.info("AWS Error Code : " + ase.getErrorCode());
-                    log.info("Error Type : " + ase.getErrorType());
-                    log.info("Request ID : " + ase.getRequestId());
-                    log.info("Service Name : " + ase.getServiceName());
-                } catch (AmazonClientException ace) {
-                    log.info("Caught an AmazonClientException: ");
-                    log.info("Error Message : " + ace.getMessage());
-                } catch (IOException e) {
-                    log.info("=====================IMAGE TEST======================");
-                    log.info("bucket : " + bucket);
-                    log.info("objMeta : " + objectMetadata);
-                    e.printStackTrace();
-                    log.info("=====================IMAGE TEST======================");
-                    throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "이미지 업로드에 실패했습니다.");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                return imgUrlList;
             }
-            return imgUrlList;
         } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
     }
 
