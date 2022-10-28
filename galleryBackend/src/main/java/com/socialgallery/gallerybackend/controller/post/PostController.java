@@ -75,7 +75,15 @@ public class PostController {
         log.info("POSTREQUESTDTO : " + postRequestDTO);
         List<String > result = new ArrayList<>();
         result.add(postRequestDTO.toString());
-        if (!postFileVO.getFiles().isEmpty()) {
+        // 기본적으로 값이 들어가 있기 때문에 files.isEmpty() 체크를 해도 쓸모가없음
+        // 그래서 null 체크를 할 변수를 새로 만듦
+        boolean checkFiles = true;
+        List<MultipartFile> fileList = new ArrayList<>(postFileVO.getFiles());
+        for (MultipartFile file : fileList) {
+            if (file.isEmpty()) checkFiles = false;
+        }
+
+        if (!checkFiles) {
             List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             log.info("imgPathUrl List : " + imgPathUrl);
 
