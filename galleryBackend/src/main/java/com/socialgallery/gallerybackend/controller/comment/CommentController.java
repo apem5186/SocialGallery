@@ -31,7 +31,7 @@ public class CommentController {
     @PostMapping("/register")
     public SingleResult<Long> register(
             @ApiParam(value = "댓글 등록 DTO", required = true)
-            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request) throws Exception {
+            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request) {
         Long cid = commentService.commentSave(commentRequestDTO.getPost().getPid(), commentRequestDTO, request);
         log.info("=================================================================================");
         log.info("COMMENTREQUESTDTO'POST : " + commentRequestDTO.getPost());
@@ -69,7 +69,7 @@ public class CommentController {
     @GetMapping("/{pid}")
     public ListResult<CommentResponseDTO> getList(
             @ApiParam(value = "게시글 pk", required = true)
-            @PathVariable("pid") String pid) throws Exception {
+            @PathVariable("pid") String pid) {
 
         List<CommentResponseDTO> commentResponseDTOList = commentService.getListOfComment(Long.valueOf(pid));
 

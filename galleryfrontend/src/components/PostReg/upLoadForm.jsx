@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
 import { setPostContent, setPostTitle } from "../../store/commentSlice";
+import {useState} from "react";
 
 
 function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
@@ -9,7 +10,7 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
     const content = useSelector((state)=>state.postContent.postContentList)
     const dispatch = useDispatch()
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
-
+    const [category, setCategory] = useState('')
 
 // 미리보기
     const insertImg = (e) => {
@@ -37,7 +38,9 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
     const onHandlePostComments = (e) =>{
         dispatch(setPostContent(e.currentTarget.value))
     }
-
+    const onHandleCategory = (e)=>{
+        setCategory(e.target.value)
+    }
     const postSubmit = (e) => {
         
         e.preventDefault();
@@ -50,6 +53,7 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
         formData.append('usersId', localStorage.getItem('uid'))
         formData.append('title', title)
         formData.append('content', content)
+        formData.append('category', category)
 
         axios.defaults.headers.post = null
         axios.post(dev_url + '/api/post/upload',formData, {headers})
@@ -97,7 +101,14 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
                                         <img src="/assets/Main/user.png" alt="User Picture" />
                                         <span>user1</span>
                                     </div>
-
+                                    <div>
+                                        <form onChange={onHandleCategory}>
+                                        <input type='radio' name='category' value='broadcast'/>영화/드라마<br></br>
+                                        <input type='radio' name='category' value='life' />연예/방송<br></br>
+                                        <input type='radio' name='category' value='movie'/>취미/생활<br></br>
+                                        <input type='radio' name='category' value='travel' />여행/음식<br></br>
+                                        </form>
+                                    </div>
                                     <div className="photoinfo_contents">
                                         <div className="title">
                                             <span className="material-icons">drive_file_rename_outline</span>

@@ -72,7 +72,7 @@ public class UserController {
                                       @ApiParam(value = "회원 이메일", required = true) @RequestParam String email,
                                       @ApiParam(value = "회원 이름", required = true) @RequestParam String username,
                                       @ApiParam(value = "회원 비밀번호", required = true) @RequestParam String password,
-                                      @ApiParam(value = "회원 핸드폰번호", required = false) @RequestParam String phone) {
+                                      @ApiParam(value = "회원 핸드폰번호") @RequestParam String phone) {
         UserRequestDTO userRequestDTO = UserRequestDTO.builder()
                 .email(email)
                 .username(username)

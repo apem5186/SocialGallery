@@ -10,7 +10,6 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.socialgallery.gallerybackend.advice.exception.PostNotFoundCException;
 import com.socialgallery.gallerybackend.advice.exception.RefreshTokenCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
-import com.socialgallery.gallerybackend.config.file.FileHandler;
 import com.socialgallery.gallerybackend.config.security.JwtProvider;
 import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
@@ -46,7 +45,6 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
  * @Reference https://velog.io/@yu-jin-song/Spring-Boot-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EA%B5%AC%ED%98%84-5-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EB%8B%A4%EC%A4%91-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%98%ED%99%98-%EB%B0%8F-%EC%A1%B0%ED%9A%8C-%EC%B2%98%EB%A6%AC-MultipartFile,
@@ -73,8 +71,6 @@ public class PostService {
 
     private final SignService signService;
 
-    private final FileHandler fileHandler;
-
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
@@ -93,7 +89,14 @@ public class PostService {
         Post entity = postRequestDTO.toEntity();
         log.info("ENTITY : " + entity);
         if (checkToken(postRequestDTO.getUsers().getId(), request)) {
-            if(files.isEmpty()) {
+            // 기본적으로 값이 들어가 있기 때문에 files.isEmpty() 체크를 해도 쓸모가없음
+            // 그래서 null 체크를 할 변수를 새로 만듦
+            boolean checkFiles = true;
+            for (MultipartFile file : files) {
+                if (file.isEmpty()) checkFiles = false;
+            }
+
+            if(checkFiles) {
                 postRepository.save(entity);
                 result.add(String.valueOf(entity.getPid()));
                 return result;

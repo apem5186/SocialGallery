@@ -1,18 +1,15 @@
 package com.socialgallery.gallerybackend.controller.post;
 
-import com.socialgallery.gallerybackend.dto.image.ImageDTO;
 import com.socialgallery.gallerybackend.dto.image.ImageResponseDTO;
 import com.socialgallery.gallerybackend.dto.image.PostFileVO;
 import com.socialgallery.gallerybackend.dto.post.PostListResponseDTO;
 import com.socialgallery.gallerybackend.dto.post.PostRequestDTO;
 import com.socialgallery.gallerybackend.dto.post.PostResponseDTO;
-import com.socialgallery.gallerybackend.entity.image.Image;
 import com.socialgallery.gallerybackend.entity.post.Category;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.model.response.ListResult;
 import com.socialgallery.gallerybackend.model.response.SingleResult;
-import com.socialgallery.gallerybackend.repository.ImageRepository;
 import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.image.ImageService;
 import com.socialgallery.gallerybackend.service.post.PostService;
@@ -28,16 +25,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /*
  * @Reference https://velog.io/@yu-jin-song/Spring-Boot-%EA%B2%8C%EC%8B%9C%ED%8C%90-%EA%B5%AC%ED%98%84-5-%EA%B2%8C%EC%8B%9C%EA%B8%80-%EC%88%98%EC%A0%95-%EB%B0%8F-%EC%82%AD%EC%A0%9C-%EB%8B%A4%EC%A4%91-%ED%8C%8C%EC%9D%BC%EC%9D%B4%EB%AF%B8%EC%A7%80-%EB%B0%98%ED%99%98-%EB%B0%8F-%EC%A1%B0%ED%9A%8C-%EC%B2%98%EB%A6%AC-MultipartFile
@@ -56,7 +50,6 @@ public class PostController {
 
     private final UserRepository userRepository;
 
-    private final ImageRepository imageRepository;
 
     private final ResponseService responseService;
 
@@ -192,7 +185,7 @@ public class PostController {
         // 반환할 List<BoardListResponseDto> 생성
         List<PostListResponseDTO> responseDTOList = new ArrayList<>();
         // 게시글 전체 조회
-        Page<Post> list = null;
+        Page<Post> list;
 
         log.info("=======================================");
         log.info("CATEGORY : " + category);
@@ -224,7 +217,7 @@ public class PostController {
         // 반환할 List<BoardListResponseDto> 생성
         List<PostListResponseDTO> responseDTOList = new ArrayList<>();
         // 게시글 전체 조회
-        Page<Post> list = null;
+        Page<Post> list;
 
         // 검색할 때와 검색하지 않았을 때를 구분
         if(keyword == null) {
