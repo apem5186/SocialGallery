@@ -100,7 +100,7 @@ public class PostService {
                 if (file.isEmpty()) checkFiles = false;
             }
 
-            if(checkFiles) {
+            if(!checkFiles) {
                 postRepository.save(entity);
                 result.add(String.valueOf(entity.getPid()));
                 return result;
