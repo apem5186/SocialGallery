@@ -103,10 +103,10 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
                                     </div>
                                     <div>
                                         <form onChange={onHandleCategory}>
-                                        <input type='radio' name='category' value='broadcast'/>영화/드라마<br></br>
-                                        <input type='radio' name='category' value='life' />연예/방송<br></br>
-                                        <input type='radio' name='category' value='movie'/>취미/생활<br></br>
-                                        <input type='radio' name='category' value='travel' />여행/음식<br></br>
+                                        <input type='radio' name='category' value='BROADCAST'/>영화/드라마<br></br>
+                                        <input type='radio' name='category' value='LIFE' />연예/방송<br></br>
+                                        <input type='radio' name='category' value='MOVIE'/>취미/생활<br></br>
+                                        <input type='radio' name='category' value='TRAVEL' />여행/음식<br></br>
                                         </form>
                                     </div>
                                     <div className="photoinfo_contents">

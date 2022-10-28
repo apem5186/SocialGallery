@@ -9,11 +9,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    private final long MAX_AGE_SECS = 3600;
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         //모든 경로에 대해
+        long MAX_AGE_SECS = 3600;
         registry.addMapping("/**")
             // Origin이 http:localhost:3000에 대해
             .allowedOrigins("http://localhost:3000", "http://127.0.0.1:3000", "http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/")

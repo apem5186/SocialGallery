@@ -1,18 +1,13 @@
 package com.socialgallery.gallerybackend.config;
 
 import com.socialgallery.gallerybackend.config.security.*;
-import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
-import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.oauth.CustomOAuth2UserService;
 import com.socialgallery.gallerybackend.service.security.CustomUserDetailService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.BeanIds;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -51,13 +46,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final CustomOAuth2UserService customOAuth2UserService;
 
-    private final RefreshTokenJpaRepo refreshTokenJpaRepo;
-
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
-    private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
