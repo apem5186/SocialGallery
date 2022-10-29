@@ -60,13 +60,19 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     public ListResult<String> post(
             @ApiParam(value = "게시글 등록 DTO", required = true)
+            //TODO : @RequestParam 사용해서 받아보기, 이미지 없인 값 안넘어감
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception{
-        log.info("POSTFILE SIZE : " + postFileVO.getFiles().size());
-        log.info("POSTFILE :: : " + postFileVO.getFiles().get(0).getSize());
-        log.info("POSTRERE :: : " + postFileVO.getFiles().isEmpty());
-        log.info("POSTRERE :: : " + postFileVO.getFiles().get(0).isEmpty());
-        log.info("POSTRERE :: : " + postFileVO.getFiles().get(0).getOriginalFilename());
+        boolean checkFiles = true;
+        for (MultipartFile image : postFileVO.getFiles()) {
+            if (image.isEmpty()) checkFiles = false;
+        }
+//        log.info("POSTFILE SIZE : " + postFileVO.getFiles().size());
+//        log.info("POSTFILE :: : " + postFileVO.getFiles().get(0).getSize());
+//        log.info("POSTRERE :: : " + postFileVO.getFiles().isEmpty());
+//        log.info("POSTRERE :: : " + postFileVO.getFiles().get(0).isEmpty());
+//        log.info("POSTRERE :: : " + postFileVO.getFiles().get(0).getOriginalFilename());
+        log.info("POSTFILEVO : " + postFileVO);
         Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
         log.info("USERS : " + users);
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
@@ -78,15 +84,14 @@ public class PostController {
 
         log.info("POSTREQUESTDTO : " + postRequestDTO);
 
-        boolean checkFiles = true;
         // List<MultipartFile> fileList = new ArrayList<>(postFileVO.getFiles());
 //        for (MultipartFile file : fileList) {
 //            if (file.isEmpty()) checkFiles = false;
 //        }
-        if (postFileVO.getFiles().size() == 0) checkFiles = false;
+//        if (postFileVO.getFiles().size() == 0) checkFiles = false;
 
 
-        if (!checkFiles) {
+        if (checkFiles) {
             log.info("POSTFILEVO : " + postFileVO);
             List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
             log.info("imgPathUrl List : " + imgPathUrl);
