@@ -2,6 +2,7 @@ package com.socialgallery.gallerybackend.dto.image;
 
 import com.socialgallery.gallerybackend.entity.post.Category;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public class PostFileVO {
     private String title;
     private String content;
     private Category category;
-    private List<MultipartFile> files;
+    private List<MultipartFile> files = null;
 }

@@ -46,7 +46,7 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
         e.preventDefault();
         const headers = {
             'Content-type': 'multipart/form-data',
-            'Authorization': "Bearer " + localStorage.getItem("token")
+            'Authorization': "Bearer " + localStorage.getItem("token"),
         }
         const formData = new FormData()
 
