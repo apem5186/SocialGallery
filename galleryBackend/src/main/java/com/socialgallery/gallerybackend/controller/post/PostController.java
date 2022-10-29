@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,52 +64,49 @@ public class PostController {
             //TODO : @RequestParam 사용해서 받아보기, 이미지 없인 값 안넘어감
             PostFileVO postFileVO,
             HttpServletRequest request) throws Exception{
-        boolean checkFiles = true;
-        for (MultipartFile image : postFileVO.getFiles()) {
-            if (image.isEmpty()) checkFiles = false;
-        }
-//        log.info("POSTFILE SIZE : " + postFileVO.getFiles().size());
-//        log.info("POSTFILE :: : " + postFileVO.getFiles().get(0).getSize());
-//        log.info("POSTRERE :: : " + postFileVO.getFiles().isEmpty());
-//        log.info("POSTRERE :: : " + postFileVO.getFiles().get(0).isEmpty());
-//        log.info("POSTRERE :: : " + postFileVO.getFiles().get(0).getOriginalFilename());
-        log.info("POSTFILEVO : " + postFileVO);
-        Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
-        log.info("USERS : " + users);
-        PostRequestDTO postRequestDTO = PostRequestDTO.builder()
-                .users(users.orElseThrow())
-                .title(postFileVO.getTitle())
-                .content(postFileVO.getContent())
-                .category(postFileVO.getCategory())
-                .build();
+            boolean checkFiles = true;
+        try {
+            for (MultipartFile image : postFileVO.getFiles()) {
+                if (image.isEmpty()) checkFiles = false;
+            }
 
-        log.info("POSTREQUESTDTO : " + postRequestDTO);
-
-        // List<MultipartFile> fileList = new ArrayList<>(postFileVO.getFiles());
-//        for (MultipartFile file : fileList) {
-//            if (file.isEmpty()) checkFiles = false;
-//        }
-//        if (postFileVO.getFiles().size() == 0) checkFiles = false;
-
-
-        if (checkFiles) {
             log.info("POSTFILEVO : " + postFileVO);
-            List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
-            log.info("imgPathUrl List : " + imgPathUrl);
+            Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
+            log.info("USERS : " + users);
+            PostRequestDTO postRequestDTO = PostRequestDTO.builder()
+                    .users(users.orElseThrow())
+                    .title(postFileVO.getTitle())
+                    .content(postFileVO.getContent())
+                    .category(postFileVO.getCategory())
+                    .build();
 
-            ResponseEntity.ok().body(imgPathUrl);
-            return responseService.getListResult(imgPathUrl);
-        } else {
-            List<String > result = new ArrayList<>();
-            result.add("성공");
-            log.info("실행은 됨");
-            Post post = postRequestDTO.toEntity();
-            postRepository.save(post);
-            log.info("여기도 됨");
-            log.info("RESULT : " + result);
-            ResponseEntity.ok().body(postRequestDTO);
-            return responseService.getListResult(result);
-        }
+            log.info("POSTREQUESTDTO : " + postRequestDTO);
+
+            if (checkFiles) {
+                log.info("POSTFILEVO : " + postFileVO);
+                List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
+                log.info("imgPathUrl List : " + imgPathUrl);
+
+                ResponseEntity.ok().body(imgPathUrl);
+                return responseService.getListResult(imgPathUrl);
+            } else {
+                List<String > result = new ArrayList<>();
+                result.add("성공");
+                log.info("실행은 됨");
+                Post post = postRequestDTO.toEntity();
+                postRepository.save(post);
+                log.info("여기도 됨");
+                log.info("RESULT : " + result);
+                ResponseEntity.ok().body(postRequestDTO);
+                return responseService.getListResult(result);
+            }
+        } catch (Exception e) {
+            log.info("=====================================");
+            e.printStackTrace();
+            log.info("CATCH문 발동 CHECKFILES : " + checkFiles);
+            log.info("=====================================");
+        } throw new Exception();
+
 
     }
 
