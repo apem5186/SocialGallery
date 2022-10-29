@@ -65,18 +65,10 @@ public class PostController {
             PostFileVO postFileVO,
             @RequestParam(value = "files", required = false) List<MultipartFile> files,
             HttpServletRequest request) throws Exception{
-            boolean checkFiles = true;
-        try {
-            if (files == null) {
-                checkFiles = false;
-            } else {
-                for (MultipartFile image : files) {
-                    if (image.isEmpty()) checkFiles = false;
-                }
-            }
+        // null 체크
+        boolean checkFiles = files != null;
 
-
-            log.info("POSTFILEVO : " + postFileVO);
+        log.info("POSTFILEVO : " + postFileVO);
             Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
             log.info("USERS : " + users);
             PostRequestDTO postRequestDTO = PostRequestDTO.builder()
@@ -98,22 +90,11 @@ public class PostController {
             } else {
                 List<String > result = new ArrayList<>();
                 result.add("성공");
-                log.info("실행은 됨");
                 Post post = postRequestDTO.toEntity();
                 postRepository.save(post);
-                log.info("여기도 됨");
-                log.info("RESULT : " + result);
                 ResponseEntity.ok().body(postRequestDTO);
                 return responseService.getListResult(result);
             }
-        } catch (Exception e) {
-            log.info("=====================================");
-            e.printStackTrace();
-            log.info("CATCH문 발동 CHECKFILES : " + checkFiles);
-            log.info("=====================================");
-        } throw new Exception();
-
-
     }
 
     @ApiOperation(value = "수정", notes = "게시글을 수정합니다.")
@@ -124,26 +105,16 @@ public class PostController {
             PostFileVO postFileVO,
             @RequestParam(value = "files", required = false) List<MultipartFile> files,
             HttpServletRequest request) throws Exception {
-        boolean checkFiles = true;
-        if (files == null) {
-            checkFiles = false;
-        } else {
-            for (MultipartFile image : files) {
-                if (image.isEmpty()) checkFiles = false;
-            }
-        }
+        // null 체크
+        // boolean checkFiles = files != null;
 
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
                 .build();
-        List<MultipartFile> multipartList = new ArrayList<>();
         // DB에 저장되어 있는 파일 불러오기
         // List<Image> dbImageList = imageRepository.findAllByPostPid(pid);
         // 전달되어온 파일들
-        if (checkFiles) {
-            multipartList = files;
-        }
 
         // 새롭게 전달되어온 파일들의 목록을 저장할 list 선언
 //        List<MultipartFile> addFileList = new ArrayList<>();
@@ -193,7 +164,7 @@ public class PostController {
 //                }
 //            }
 //        }
-            return responseService.getSingleResult(postService.update(pid, postRequestDTO, multipartList, request));
+            return responseService.getSingleResult(postService.update(pid, postRequestDTO, files, request));
     }
 
 
