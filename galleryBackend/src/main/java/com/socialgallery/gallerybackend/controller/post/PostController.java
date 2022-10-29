@@ -67,9 +67,14 @@ public class PostController {
             HttpServletRequest request) throws Exception{
             boolean checkFiles = true;
         try {
-            for (MultipartFile image : files) {
-                if (image.isEmpty()) checkFiles = false;
+            if (files == null) {
+                checkFiles = false;
+            } else {
+                for (MultipartFile image : files) {
+                    if (image.isEmpty()) checkFiles = false;
+                }
             }
+
 
             log.info("POSTFILEVO : " + postFileVO);
             Optional<Users> users = userRepository.findById(Long.valueOf(postFileVO.getUsersId()));
@@ -120,16 +125,26 @@ public class PostController {
             PostFileVO postFileVO,
             @RequestParam(value = "files", required = false) List<MultipartFile> files,
             HttpServletRequest request) throws Exception {
+        boolean checkFiles = true;
+        if (files == null) {
+            checkFiles = false;
+        } else {
+            for (MultipartFile image : files) {
+                if (image.isEmpty()) checkFiles = false;
+            }
+        }
 
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
                 .build();
-
+        List<MultipartFile> multipartList = new ArrayList<>();
         // DB에 저장되어 있는 파일 불러오기
         // List<Image> dbImageList = imageRepository.findAllByPostPid(pid);
         // 전달되어온 파일들
-        List<MultipartFile> multipartList = files;
+        if (checkFiles) {
+            multipartList = files;
+        }
 
         // 새롭게 전달되어온 파일들의 목록을 저장할 list 선언
 //        List<MultipartFile> addFileList = new ArrayList<>();
