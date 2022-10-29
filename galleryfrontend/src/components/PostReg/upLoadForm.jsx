@@ -49,12 +49,16 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
             'Authorization': "Bearer " + localStorage.getItem("token"),
         }
         const formData = new FormData()
+        if (imgs.length === 0) {
+            formData.append('files', "")
+        } else {
+            formData.append('files', imgs)
+        }
 
         formData.append('usersId', localStorage.getItem('uid'))
         formData.append('title', title)
         formData.append('content', content)
         formData.append('category', category)
-        formData.append('files', imgs)
 
         axios.defaults.headers.post = null
         axios.post(dev_url + '/api/post/upload',formData, {headers})

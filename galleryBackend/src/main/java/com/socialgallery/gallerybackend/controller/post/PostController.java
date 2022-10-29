@@ -63,7 +63,7 @@ public class PostController {
             @ApiParam(value = "게시글 등록 DTO", required = true)
             //TODO : @RequestParam 사용해서 받아보기, 이미지 없인 값 안넘어감
             PostFileVO postFileVO,
-            @RequestParam("files") List<MultipartFile> files,
+            @RequestParam(value = "files", required = false) List<MultipartFile> files,
             HttpServletRequest request) throws Exception{
             boolean checkFiles = true;
         try {
@@ -118,7 +118,7 @@ public class PostController {
             @ApiParam(value = "게시글 수정 DTO", required = true)
             @PathVariable("pid") Long pid,
             PostFileVO postFileVO,
-            @RequestParam("files") List<MultipartFile> files,
+            @RequestParam(value = "files", required = false) List<MultipartFile> files,
             HttpServletRequest request) throws Exception {
 
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
