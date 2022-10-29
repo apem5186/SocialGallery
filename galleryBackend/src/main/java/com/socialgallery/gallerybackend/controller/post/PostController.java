@@ -63,10 +63,11 @@ public class PostController {
             @ApiParam(value = "게시글 등록 DTO", required = true)
             //TODO : @RequestParam 사용해서 받아보기, 이미지 없인 값 안넘어감
             PostFileVO postFileVO,
+            @RequestParam("files") List<MultipartFile> files,
             HttpServletRequest request) throws Exception{
             boolean checkFiles = true;
         try {
-            for (MultipartFile image : postFileVO.getFiles()) {
+            for (MultipartFile image : files) {
                 if (image.isEmpty()) checkFiles = false;
             }
 
@@ -84,7 +85,7 @@ public class PostController {
 
             if (checkFiles) {
                 log.info("POSTFILEVO : " + postFileVO);
-                List<String> imgPathUrl = postService.upload(postFileVO.getFiles(), postRequestDTO, request);
+                List<String> imgPathUrl = postService.upload(files, postRequestDTO, request);
                 log.info("imgPathUrl List : " + imgPathUrl);
 
                 ResponseEntity.ok().body(imgPathUrl);
@@ -95,6 +96,7 @@ public class PostController {
                 log.info("실행은 됨");
                 Post post = postRequestDTO.toEntity();
                 postRepository.save(post);
+                log.info("FILES : " + files.get(0).isEmpty());
                 log.info("여기도 됨");
                 log.info("RESULT : " + result);
                 ResponseEntity.ok().body(postRequestDTO);
@@ -116,6 +118,7 @@ public class PostController {
             @ApiParam(value = "게시글 수정 DTO", required = true)
             @PathVariable("pid") Long pid,
             PostFileVO postFileVO,
+            @RequestParam("files") List<MultipartFile> files,
             HttpServletRequest request) throws Exception {
 
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
@@ -126,7 +129,7 @@ public class PostController {
         // DB에 저장되어 있는 파일 불러오기
         // List<Image> dbImageList = imageRepository.findAllByPostPid(pid);
         // 전달되어온 파일들
-        List<MultipartFile> multipartList = postFileVO.getFiles();
+        List<MultipartFile> multipartList = files;
 
         // 새롭게 전달되어온 파일들의 목록을 저장할 list 선언
 //        List<MultipartFile> addFileList = new ArrayList<>();

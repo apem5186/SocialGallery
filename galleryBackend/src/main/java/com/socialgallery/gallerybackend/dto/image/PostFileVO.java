@@ -17,5 +17,5 @@ public class PostFileVO {
     private String title;
     private String content;
     private Category category;
-    private List<MultipartFile> files = null;
+    // private List<MultipartFile> files;
 }
