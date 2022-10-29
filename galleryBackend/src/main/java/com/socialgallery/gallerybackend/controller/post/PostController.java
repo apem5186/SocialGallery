@@ -101,7 +101,6 @@ public class PostController {
                 log.info("실행은 됨");
                 Post post = postRequestDTO.toEntity();
                 postRepository.save(post);
-                log.info("FILES : " + files.get(0).isEmpty());
                 log.info("여기도 됨");
                 log.info("RESULT : " + result);
                 ResponseEntity.ok().body(postRequestDTO);
