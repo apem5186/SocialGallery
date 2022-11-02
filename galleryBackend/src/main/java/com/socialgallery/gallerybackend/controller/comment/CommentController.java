@@ -55,12 +55,14 @@ public class CommentController {
     }
 
     @ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제합니다.")
-    @DeleteMapping("/{pid}/delete={cid}")
+    @DeleteMapping("/{pid}/delete/{cid}")
     public SingleResult<Long> delete(
             @ApiParam(value = "게시글pk", required = true)
             @PathVariable("pid") String pid, @PathVariable("cid") String cid,
             HttpServletRequest request) throws Exception {
-
+        log.info("===============================================");
+        log.info("PID : " + pid + " CID : " + cid);
+        log.info("===============================================");
         return responseService.getSingleResult(commentService.delete(Long.valueOf(pid), Long.valueOf(cid), request));
     }
 

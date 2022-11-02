@@ -11,4 +11,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @EntityGraph(attributePaths = {"post"}, type = EntityGraph.EntityGraphType.FETCH)
     List<Comment> findByPost(Post post);
+
+    void deleteByCid(Long cid);
 }

@@ -86,8 +86,9 @@ public class CommentService {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
         Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
+        log.info("COMMENT : " + comment.getComment());
         if (checkToken(comment.getUsers().getId(), request)) {
-            commentRepository.delete(comment);
+            commentRepository.deleteByCid(cid);
         }
         return cid;
     }
