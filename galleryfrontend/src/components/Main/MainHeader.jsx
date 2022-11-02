@@ -7,7 +7,9 @@ function MainHeader(){
             <header className="header">
                 <nav className="header__content">
                     <div className="header__buttons">
-                        <Link to ='/'><p>Social Gallery</p></Link>
+                        <Link to ='/'><p onClick={()=>{
+                            window.location.replace ('/')
+                        }}>Social Gallery</p></Link>
                     </div>
 
                     <div className="header__buttons header__buttons--desktop">

@@ -137,6 +137,10 @@
     color: var(--text-dark);
     text-decoration: none;
 }
+.photoinfo_category{
+    font-size: 14px;
+    padding-left: 20px;
+}
 
 
 .photoinfo_contents{

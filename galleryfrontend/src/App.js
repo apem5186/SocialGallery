@@ -6,10 +6,10 @@ import './components/Login/login.css'
 import './components/Main/main.css'
 import { Routes, Route } from 'react-router-dom'
 import UpLoad from './components/PostReg/upload';
-// import Movie from "./components/SideMenu/Movie";
-// import Broadcast from "./components/SideMenu/Broadcast";
-// import Life from "./components/SideMenu/Life";
-// import Travel from "./components/SideMenu/Travel";
+import Movie from "./components/SideMenu/Movie";
+import Broadcast from "./components/SideMenu/Broadcast";
+import Life from "./components/SideMenu/Life";
+import Travel from "./components/SideMenu/Travel";
 
 
 function App() {
@@ -27,11 +27,11 @@ function App() {
                 <Route path="/login/" element={<Login></Login>}></Route>
                 <Route path="/login/:location" element={<Login></Login>}></Route>
 
-                {/* SideMenu */}
-                {/*    <Route path="/movie" element={<Movie></Movie>}></Route>*/}
-                {/*    <Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>*/}
-                {/*    <Route path="/life" element={<Life></Life>}></Route>*/}
-                {/*    <Route path="/travel" element={<Travel></Travel>}></Route>*/}
+                 SideMenu
+                    <Route path="/movie" element={<Movie></Movie>}></Route>
+                    <Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>
+                    <Route path="/life" element={<Life></Life>}></Route>
+                    <Route path="/travel" element={<Travel></Travel>}></Route>
             </Routes>
         </div>
     );

@@ -1,16 +1,20 @@
 import axios from "axios"
 import { useSelector, useDispatch } from 'react-redux';
-import { setPostContent, setPostTitle } from "../../store/commentSlice";
-import {useState} from "react";
-
+import { setPostContent, setPostTitle } from "../../store/Store";
+import { useState } from "react";
 
 function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
 
     const title = useSelector((state)=>state.postTitle.postTitleList)
     const content = useSelector((state)=>state.postContent.postContentList)
+    const imgs1 = useSelector((state)=>state.mainImg.mainList)
     const dispatch = useDispatch()
-    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
     const [category, setCategory] = useState('')
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
+
+
+
 
 // 미리보기
     const insertImg = (e) => {
@@ -28,7 +32,7 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
                 setPreviewImg([...previewImg, previewImgUrl])
             }
         }
-        
+
     }
 
 // 제목,글 Data Server 전송
@@ -38,23 +42,16 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
     const onHandlePostComments = (e) =>{
         dispatch(setPostContent(e.currentTarget.value))
     }
-    const onHandleCategory = (e)=>{
-        setCategory(e.target.value)
-    }
+
     const postSubmit = (e) => {
-        
+
         e.preventDefault();
         const headers = {
             'Content-type': 'multipart/form-data',
-            'Authorization': "Bearer " + localStorage.getItem("token"),
+            'Authorization': "Bearer " + localStorage.getItem("token")
         }
         const formData = new FormData()
-        if (imgs.length === 0) {
-            formData.append('files', "")
-        } else {
-            formData.append('files', imgs)
-        }
-
+        formData.append('files', imgs)
         formData.append('usersId', localStorage.getItem('uid'))
         formData.append('title', title)
         formData.append('content', content)
@@ -64,9 +61,12 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
         axios.post(dev_url + '/api/post/upload',formData, {headers})
             .then(()=>{
                 window.location.reload()
-            }).catch(()=> {
-                console.log(imgs)
-        })
+            })
+    }
+
+    // 카테고리
+    const onHandleCategory = (e)=>{
+        setCategory(e.target.value)
     }
 
     return (
@@ -108,12 +108,13 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
                                         <img src="/assets/Main/user.png" alt="User Picture" />
                                         <span>user1</span>
                                     </div>
-                                    <div onChange={onHandleCategory}>
-                                        <input type='radio' name='category' value='BROADCAST'/>영화/드라마<br></br>
-                                        <input type='radio' name='category' value='LIFE' />연예/방송<br></br>
-                                        <input type='radio' name='category' value='MOVIE'/>취미/생활<br></br>
-                                        <input type='radio' name='category' value='TRAVEL' />여행/음식<br></br>
+                                    <div className="photoinfo_category" onChange={onHandleCategory}>
+                                        <input  type='radio' name='category' value='BROADCAST'/>&nbsp;영화/드라마<br></br>
+                                        <input className="category_radio" type='radio' name='category' value='LIFE' />&nbsp;연예/방송<br></br>
+                                        <input className="category_radio" type='radio' name='category' value='MOVIE'/>&nbsp;취미/생활<br></br>
+                                        <input className="category_radio" type='radio' name='category' value='TRAVEL' />&nbsp;여행/음식<br></br>
                                     </div>
+
                                     <div className="photoinfo_contents">
                                         <div className="title">
                                             <span className="material-icons">drive_file_rename_outline</span>
@@ -127,7 +128,7 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
                                             <span>Contents</span>
                                         </div>
                                         <input type="text" id="cont_story" placeholder="내용을 입력해주세요." onChange={onHandlePostComments} />
-                                    
+
                                     </div>
                                 </div>
                             </div>

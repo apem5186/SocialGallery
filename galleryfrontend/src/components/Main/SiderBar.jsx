@@ -4,9 +4,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearchImg } from '../../store/commentSlice';
+import { setSearchImg } from '../../store/Store';
+import { setMainImg } from '../../store/Store';
 
-function Sidebar({setMainImg}){
+function Sidebar(){
 
     const searchTitle = useSelector((state)=>state.searchImg.searchList)
     const searchImg = useSelector((state)=>state.mainImg.mainList)
@@ -15,11 +16,11 @@ function Sidebar({setMainImg}){
 
     const navigate = useNavigate()
 
-    // Uid 
+    // Uid
     let [uid, setUid] = useState('')
 
     const getUid = () => {
-            uid = localStorage.getItem('uid')
+        uid = localStorage.getItem('uid')
         setUid(uid)
         return uid
     }
@@ -27,7 +28,7 @@ function Sidebar({setMainImg}){
     // Logout
     const onLogout = () =>{
         getUid()
-        axios.get(dev_url + `/v1/logout?uid=`+uid)
+        axios.get(dev_url+ `/v1/logout?uid=`+uid)
             .then(res=>{
                 if(res.status === 200){
                     localStorage.removeItem('token')
@@ -43,11 +44,24 @@ function Sidebar({setMainImg}){
     const base_URL = "http://localhost:8080"
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
-    const searchList = () => {
+    const params = new URLSearchParams(window.location.search);
+
+    let category = params.get("category")
+
+    const search1 = (e) => {
         axios.get(dev_url + '/api/post?keyword=' + searchTitle)
             .then(res => {
-                setSearchImg([...res.data.list])
+                dispatch(setMainImg([...res.data.list]))
+                console.log()
             })
+        return search1
+    }
+    const search2 = (e) => {
+        axios.get(dev_url + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
+            .then(res => {
+                dispatch(setMainImg([...res.data.list]))
+            })
+        return search2
     }
 
     return (
@@ -75,12 +89,12 @@ function Sidebar({setMainImg}){
                     <div className="menu">
                         <li className="search-box">
                             <i className="bx bx-search icon"
-                            onClick={searchList}></i>
+                               onClick = { category === null ? search1 : search2}></i>
                             <input
                                 type="text"
                                 placeholder="Search..."
-                                onChange={e=> { 
-                                    // dispatch(setSearchImg(e.target.value))
+                                onChange={e=> {
+                                    dispatch(setSearchImg(e.target.value))
                                 }}
                             />
                         </li>
@@ -99,11 +113,11 @@ function Sidebar({setMainImg}){
                             </li>
                             <li className="nav-link">
                                 <Link to ="#">
-                                    <i className='bx bx-bell icon'></i>                 
+                                    <i className='bx bx-bell icon'></i>
                                     <span className="text nav-text">Notifications</span>
                                 </Link>
                             </li>
-                            
+
                             <li className="nav-link">
                                 <Link to = "#" >
                                     <i className='bx bx-news icon'></i>

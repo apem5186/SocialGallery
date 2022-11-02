@@ -20,7 +20,7 @@ function CommentDel({i}){
             crossDomain: true,
             credentials: "include"})
             .then(res=>{
-                //window.location.reload()
+                window.location.reload()
                 console.log('성공')
             })
     }

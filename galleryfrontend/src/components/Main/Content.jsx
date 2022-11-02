@@ -4,7 +4,7 @@ import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
-import { fetchMainImg, fetchReply } from '../../store/commentSlice';
+import { fetchMainImg, fetchReply } from '../../store/Store';
 import Edit from "../PostReg/edit";
 import CommentDel from "./CommentDel";
 

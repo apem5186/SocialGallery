@@ -5,7 +5,7 @@ import SideMenu from './SideMenu';
 import MainHeader from './MainHeader';
 import Content from './Content';
 import { useSelector,useDispatch } from "react-redux";
-import { fetchMainImg } from '../../store/commentSlice';
+import { fetchMainImg } from '../../store/Store';
 import { useEffect } from 'react';
 
 function Main({rgName,setRgName}){
