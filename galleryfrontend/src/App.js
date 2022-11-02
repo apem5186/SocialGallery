@@ -28,10 +28,10 @@ function App() {
                 <Route path="/login/:location" element={<Login></Login>}></Route>
 
                  {/*SideMenu*/}
-                    <Route path="/MOVIE" element={<Movie></Movie>}></Route>
-                    <Route path="/BROADCAST" element={<Broadcast></Broadcast>}></Route>
-                <Route path="/LIFE" element={<Life></Life>}></Route>
-                <Route path="/TRAVEL" element={<Travel></Travel>}></Route>
+                    <Route path="/movie" element={<Movie></Movie>}></Route>
+                    <Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>
+                <Route path="/life" element={<Life></Life>}></Route>
+                <Route path="/travel" element={<Travel></Travel>}></Route>
             </Routes>
         </div>
     );

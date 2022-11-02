@@ -46,7 +46,7 @@ function Sidebar(){
 
     const params = new URLSearchParams(window.location.search);
 
-    let category = params.get("category")
+    let category = params.get("category").toUpperCase()
 
     const search1 = (e) => {
         axios.get(dev_url + '/api/post?keyword=' + searchTitle)
