@@ -50,22 +50,12 @@ public class Post extends BaseEntity {
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "post",
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-    @ToString.Exclude
     private List<Image> images = new ArrayList<>();
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "post",
     cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-    @ToString.Exclude
     private List<Comment> comments = new ArrayList<>();
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
 
     @Builder
     public Post(Long pid, Users users, String title, String content, int hits, int reviewCnt, int likeCnt,

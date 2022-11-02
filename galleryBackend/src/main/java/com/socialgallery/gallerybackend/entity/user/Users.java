@@ -49,12 +49,10 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @ToString.Exclude
     private List<Post> post = new ArrayList<>();
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
-    @ToString.Exclude
     private List<Comment> comments = new ArrayList<>();
 
     @NotNull
@@ -70,14 +68,6 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<String> roles = new ArrayList<>();
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public void setPost(List<Post> post) {
-        this.post = post;
-    }
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Override
