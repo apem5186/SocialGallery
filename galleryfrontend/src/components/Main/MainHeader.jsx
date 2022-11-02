@@ -22,7 +22,7 @@ function MainHeader(){
                         </Link>
                         <button className="profile-button" id ="ts">
                             <div className="profile-button img">
-                                <Link to = "/login"><img src="/assets/main/user.png" alt="User Picture" /></Link>
+                                <Link to = "/login"><img src="/assets/Main/user.png" alt="User Picture" /></Link>
                             </div>
                         </button>
                     </div>
