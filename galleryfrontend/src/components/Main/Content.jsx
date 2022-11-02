@@ -6,7 +6,7 @@ import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
 import { fetchMainImg, fetchReply } from '../../store/commentSlice';
 import Edit from "../PostReg/edit";
-// import CommentDel from "./CommentDel";
+import CommentDel from "./CommentDel";
 
 function Content({i}){
      // Img 미리보기
@@ -84,7 +84,7 @@ function Content({i}){
                 <section className="content-container">
                     <div className="content">
                         <div className="posts"> {/*4줄까지 */}
-                            <article className="post">        
+                            <article className="post">
                                 <div className="post__header">
                                     <div className="post__profile">
                                         <Link to="#" className="post__avatar">
@@ -92,7 +92,7 @@ function Content({i}){
                                         </Link>
                                         <span>{mainImg[0].username}</span>
                                         {/* Upload*/}
-                                        <UpLoad 
+                                        <UpLoad
                                             imgs={imgs}
                                             setImgs={setImgs}
                                             previewImg={previewImg}
@@ -112,7 +112,7 @@ function Content({i}){
                                 </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
-                                        <img src={`${mainImg[i].filePath}`} alt="" />
+                                        <img src={`assets/Img/${mainImg[i].filePath}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="post__footer">
@@ -142,18 +142,18 @@ function Content({i}){
                                             <div className="comment_list">
                                                 {
                                                     reply
-														.filter((value)=>value.pid === mainImg[i].pid)
-														.map((a,i)=>{
-                                                        return(
-                                                            <div key={a.cid}>
-                                                                <em>{a.username}</em>
-                                                                &nbsp;&nbsp;:
-                                                                <span>{a.comment}</span>
-                                                                {/*<CommentDel i={i}></CommentDel>*/}
-                                                            </div>)
-                                                    })																							
+                                                        .filter((value)=>value.pid === mainImg[i].pid)
+                                                        .map((a,i)=>{
+                                                            return(
+                                                                <div key={a.cid}>
+                                                                    <em>{a.username}</em>
+                                                                    &nbsp;&nbsp;:
+                                                                    <span>{a.comment}</span>
+                                                                    <CommentDel i={i}></CommentDel>
+                                                                </div>)
+                                                        })
                                                 }
-                                                
+
                                             </div>
                                         </div>
 
@@ -169,9 +169,9 @@ function Content({i}){
                                                 />
                                                 <button
                                                     className="post_comment_btn"
-																										onClick={()=>{
-																										window.location.reload('/')
-																									}}
+                                                    onClick={()=>{
+                                                        window.location.reload('/')
+                                                    }}
                                                 >
                                                     <i className='bx bx-send' ></i>
                                                 </button>

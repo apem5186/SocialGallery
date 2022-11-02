@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 통합 테스트">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="댓글 삭제 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/CommentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/CommentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,14 +321,7 @@
       <workItem from="1666959159870" duration="5115000" />
       <workItem from="1666967293811" duration="15861000" />
       <workItem from="1667042337187" duration="12218000" />
-      <workItem from="1667373685607" duration="4954000" />
-    </task>
-    <task id="LOCAL-00181" summary="이미지 배포 수정 테스트">
-      <created>1666691227939</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1666691227939</updated>
+      <workItem from="1667373685607" duration="5456000" />
     </task>
     <task id="LOCAL-00182" summary="이미지 배포 수정 테스트">
       <created>1666695532593</created>
@@ -668,7 +659,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667055409247</updated>
     </task>
-    <option name="localTasksCounter" value="230" />
+    <task id="LOCAL-00230" summary="댓글 삭제 테스트">
+      <created>1667378904193</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1667378904193</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -711,7 +709,8 @@
     <MESSAGE value="이미지 삭제 배포 테스트" />
     <MESSAGE value="이미지 배포 수정 테스트" />
     <MESSAGE value="프론트 통합 테스트" />
-    <option name="LAST_COMMIT_MESSAGE" value="프론트 통합 테스트" />
+    <MESSAGE value="댓글 삭제 테스트" />
+    <option name="LAST_COMMIT_MESSAGE" value="댓글 삭제 테스트" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
