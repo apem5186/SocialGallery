@@ -11,6 +11,7 @@ function Life(){
             <Sidebar></Sidebar>
             <Footer></Footer>
         </>
+        //s
     )
 }
 export default Life

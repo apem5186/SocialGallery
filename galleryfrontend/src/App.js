@@ -29,9 +29,9 @@ function App() {
 
                  {/*SideMenu*/}
                     <Route path="/MOVIE" element={<Movie></Movie>}></Route>
-                {/*    <Route path="/BROADCAST" element={<Broadcast></Broadcast>}></Route>*/}
-                {/*<Route path="/LIFE" element={<Life></Life>}></Route>*/}
-                {/*<Route path="/TRAVEL" element={<Travel></Travel>}></Route>*/}
+                    <Route path="/BROADCAST" element={<Broadcast></Broadcast>}></Route>
+                <Route path="/LIFE" element={<Life></Life>}></Route>
+                <Route path="/TRAVEL" element={<Travel></Travel>}></Route>
             </Routes>
         </div>
     );
