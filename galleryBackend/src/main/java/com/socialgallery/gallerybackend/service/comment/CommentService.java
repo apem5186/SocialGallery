@@ -88,7 +88,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
 
         if (checkToken(comment.getUsers().getId(), request)) {
-            commentRepository.delete(comment);
+            commentRepository.deleteByCid(cid);
         }
         return cid;
     }

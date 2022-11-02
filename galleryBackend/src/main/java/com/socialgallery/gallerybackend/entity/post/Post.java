@@ -52,7 +52,8 @@ public class Post extends BaseEntity {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<Image> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER,
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "post",
     cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
