@@ -27,11 +27,11 @@ function App() {
                 <Route path="/login/" element={<Login></Login>}></Route>
                 <Route path="/login/:location" element={<Login></Login>}></Route>
 
-                 SideMenu
-                    <Route path="/movie" element={<Movie></Movie>}></Route>
-                    <Route path="/broadcast" element={<Broadcast></Broadcast>}></Route>
-                    <Route path="/life" element={<Life></Life>}></Route>
-                    <Route path="/travel" element={<Travel></Travel>}></Route>
+                 {/*SideMenu*/}
+                    <Route path="/Movie" element={<Movie></Movie>}></Route>
+                    <Route path="/Broadcast" element={<Broadcast></Broadcast>}></Route>
+                    <Route path="/Life" element={<Life></Life>}></Route>
+                    <Route path="/Travel" element={<Travel></Travel>}></Route>
             </Routes>
         </div>
     );
