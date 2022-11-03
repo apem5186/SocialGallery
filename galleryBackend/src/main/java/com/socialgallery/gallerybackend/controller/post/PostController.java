@@ -175,7 +175,7 @@ public class PostController {
     // 개별 조회
     @ApiOperation(value = "단일 검색", notes = "게시글 하나를 검색합니다.")
     @GetMapping(value = {"/post/{pid}", "/post/category/{pid}"})
-    public SingleResult<PostResponseDTO> searchById(
+    public ListResult<PostResponseDTO> searchById(
             @ApiParam(value = "게시글 번호", required = true)
             @PathVariable("pid") Long pid) {
             // 게시글 id로 해당 게시글 첨부파일 전체 조회
@@ -186,9 +186,10 @@ public class PostController {
             // 각 첨부파일 id 추가
             for(ImageResponseDTO imageResponseDTO : imageResponseDTOList)
                 imageId.add(imageResponseDTO.getFileId());
-
+            List<PostResponseDTO> postList = new ArrayList<>();
+            postList.add(postService.searchById(pid, imageId));
             // 게시글 id와 첨부파일 id 목록 전달받아 결과 반환
-            return responseService.getSingleResult(postService.searchById(pid, imageId));
+            return responseService.getListResult(postList);
         }
 
     @ApiOperation(value = "카테고리 조회", notes = "카테고리로 게시글을 검색합니다.")

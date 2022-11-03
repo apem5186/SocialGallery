@@ -59,6 +59,7 @@ function Sidebar(){
         axios.get(dev_url + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
             .then(res => {
                 dispatch(setMainImg([...res.data.list]))
+                console.log(category)
             })
         return search2
     }

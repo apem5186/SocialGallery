@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="댓글 삭제 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/post/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -323,13 +324,7 @@
       <workItem from="1666967293811" duration="15861000" />
       <workItem from="1667042337187" duration="12218000" />
       <workItem from="1667373685607" duration="17790000" />
-    </task>
-    <task id="LOCAL-00199" summary="프론트 통합 테스트">
-      <created>1666866975651</created>
-      <option name="number" value="00199" />
-      <option name="presentableId" value="LOCAL-00199" />
-      <option name="project" value="LOCAL" />
-      <updated>1666866975651</updated>
+      <workItem from="1667441722468" duration="7451000" />
     </task>
     <task id="LOCAL-00200" summary="프론트 통합 테스트">
       <created>1666961269622</created>
@@ -667,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667389957973</updated>
     </task>
-    <option name="localTasksCounter" value="248" />
+    <task id="LOCAL-00248" summary="댓글 삭제 테스트">
+      <created>1667441929077</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1667441929077</updated>
+    </task>
+    <option name="localTasksCounter" value="249" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

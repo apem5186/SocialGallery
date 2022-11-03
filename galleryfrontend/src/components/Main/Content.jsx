@@ -4,7 +4,7 @@ import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
-import { fetchMainImg, fetchReply } from '../../store/Store';
+import {fetchMainImg, fetchReply, setMainImg} from '../../store/Store';
 import Edit from "../PostReg/edit";
 import CommentDel from "./CommentDel";
 
@@ -68,13 +68,32 @@ function Content({i}){
                 setUsers(res.data.data)
             })
     },[])
-
     useEffect(() => {
-        axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
-            res => {
-                setPost(res.data.data)
-            })
+        const params = new URLSearchParams(window.location.search);
+        let category = params.get("category")
+        console.log(category)
+
+        if (category === null) {
+            axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
+                res => {
+                    //setPost(res.data.data)
+                    dispatch(setMainImg(res.data.list))
+                })
+        } else if (category) {
+            axios.get(dev_url + "/api/post/category/" + mainImg[i].pid).then(
+                res => {
+                    dispatch(setMainImg(res.data.list))
+                }
+            )
+        }
+
     }, [])
+    // useEffect(() => {
+    //     axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
+    //         res => {
+    //             setPost(res.data.data)
+    //         })
+    // }, [])
 
 
     return (
