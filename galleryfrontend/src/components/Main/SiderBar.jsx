@@ -43,11 +43,10 @@ function Sidebar(){
     // 검색
     const base_URL = "http://localhost:8080"
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
-
+    // TODO: 카테고리 검색, 그냥 검색, 카테고리 포스트 불러오기 등 해결해야함 프론트 url 건드려줘야할듯
     const params = new URLSearchParams(window.location.search);
 
-    let category = params.get("category").toUpperCase()
-
+    let category = params.get("category")
     const search1 = (e) => {
         axios.get(dev_url + '/api/post?keyword=' + searchTitle)
             .then(res => {
