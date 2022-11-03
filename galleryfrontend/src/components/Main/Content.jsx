@@ -4,7 +4,7 @@ import UpLoad from '../PostReg/upload';
 import {Link} from "react-router-dom";
 import Delete from "../PostReg/delete";
 import { useSelector,useDispatch } from "react-redux";
-import {fetchMainImg, fetchReply, setMainImg} from '../../store/Store';
+import {fetchReply, setMainImg} from '../../store/Store';
 import Edit from "../PostReg/edit";
 import CommentDel from "./CommentDel";
 
@@ -30,7 +30,6 @@ function Content({i}){
 
     // MainImg, Reply dispatch
     useEffect(()=>{
-        dispatch(fetchMainImg())
         dispatch(fetchReply())
     },[dispatch])
     
@@ -49,7 +48,8 @@ function Content({i}){
         }
         axios.post(dev_url + `/api/comment/register`,{
             users: users,
-            post : post,
+            //TODO: 댓글이 하나밖에 안올라감
+            post : mainImg[i],
             comment : comment,
 
         } ,{headers},)
@@ -74,15 +74,15 @@ function Content({i}){
         console.log(category)
 
         if (category === null) {
-            axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
+            axios.get(dev_url + "/api/post").then(
                 res => {
                     //setPost(res.data.data)
-                    dispatch(setMainImg(res.data.list))
+                    dispatch(setMainImg([...res.data.list]))
                 })
         } else if (category) {
-            axios.get(dev_url + "/api/post/category/" + mainImg[i].pid).then(
+            axios.get(dev_url + "/api/post/category?category=" + category).then(
                 res => {
-                    dispatch(setMainImg(res.data.list))
+                    dispatch(setMainImg([...res.data.list]))
                 }
             )
         }
@@ -189,7 +189,7 @@ function Content({i}){
                                                 <button
                                                     className="post_comment_btn"
                                                     onClick={()=>{
-                                                        window.location.reload('/')
+                                                        //window.location.reload('/')
                                                     }}
                                                 >
                                                     <i className='bx bx-send' ></i>

@@ -42,17 +42,17 @@ let mainImg  = createSlice({
 })
 
 //mainImg payload
-export const fetchMainImg = () => {
-  return async(dispatch)=>{
-      axios.get(dev_url + '/api/post')
-      .then((res) => {
-        dispatch(setMainImg([...res.data.list]));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-};
+// export const fetchMainImg = () => {
+//   return async(dispatch)=>{
+//       axios.get(dev_url + '/api/post')
+//       .then((res) => {
+//         dispatch(setMainImg([...res.data.list]));
+//       })
+//       .catch((err) => {
+//         console.log(err);
+//       });
+//   }
+// };
 export const {setMainImg} = mainImg.actions;
 
 
