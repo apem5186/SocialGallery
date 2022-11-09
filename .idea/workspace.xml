@@ -6,35 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="댓글 삭제 테스트">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/comment/CommentRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/comment/CommentRequestDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostListResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/post/PostListResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/Data/footerData.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/data/FooterData.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Login/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Login/toggle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/Toggle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/CommentDel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/CommentDel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Footer.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/MainHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/MainHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/SiderBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/SiderBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/Main/sideToggle.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideToggle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/delete.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Delete.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Edit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/editForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/EditForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upLoadForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/UpLoadForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upload.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/upload.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/PostReg/upload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Upload.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/broadcast.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Broadcast.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/life.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Life.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/movie.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Movie.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/SideMenu/travel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Travel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/store/Store.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/store/Store.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,14 +323,7 @@
       <workItem from="1667042337187" duration="12218000" />
       <workItem from="1667373685607" duration="17790000" />
       <workItem from="1667441722468" duration="12320000" />
-      <workItem from="1667979586865" duration="10585000" />
-    </task>
-    <task id="LOCAL-00202" summary="프론트 통합 테스트">
-      <created>1666968135389</created>
-      <option name="number" value="00202" />
-      <option name="presentableId" value="LOCAL-00202" />
-      <option name="project" value="LOCAL" />
-      <updated>1666968135389</updated>
+      <workItem from="1667979586865" duration="10980000" />
     </task>
     <task id="LOCAL-00203" summary="프론트 통합 테스트">
       <created>1666968618822</created>
@@ -696,7 +661,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667454236574</updated>
     </task>
-    <option name="localTasksCounter" value="251" />
+    <task id="LOCAL-00251" summary="댓글 삭제 테스트">
+      <created>1667996011115</created>
+      <option name="number" value="00251" />
+      <option name="presentableId" value="LOCAL-00251" />
+      <option name="project" value="LOCAL" />
+      <updated>1667996011115</updated>
+    </task>
+    <option name="localTasksCounter" value="252" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

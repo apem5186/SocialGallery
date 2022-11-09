@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
  */
 
 @Getter
-@NoArgsConstructor
 public class PostListResponseDTO {
 
     private Long pid;
