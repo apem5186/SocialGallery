@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useSelector } from 'react-redux';
 
-function CommentDel({i}){
+function CommentDel({a}){
 
     const reply = useSelector((state)=> state.reply.replyList)
     const postAll = useSelector((state)=>state.postAll.postAllList)
@@ -27,7 +27,7 @@ function CommentDel({i}){
 
     return (
         <>
-            <button onClick={()=>{deleteComment(reply[i].cid)}}>X</button>
+            <button onClick={()=>{deleteComment(a.cid)}}>X</button>
         </>
     )
 }

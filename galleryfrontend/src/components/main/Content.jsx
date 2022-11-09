@@ -171,7 +171,7 @@ function Content({i}){
                                                                     <em>{a.username}</em>
                                                                     &nbsp;&nbsp;:
                                                                     <span>{a.comment}</span>
-                                                                    <CommentDel i={i}></CommentDel>
+                                                                    <CommentDel a={a}></CommentDel>
                                                                 </div>)
                                                         })
                                                 }
@@ -192,7 +192,7 @@ function Content({i}){
                                                 <button
                                                     className="post_comment_btn"
                                                     onClick={()=>{
-                                                        //window.location.reload('/')
+                                                        window.location.reload('/')
                                                     }}
                                                 >
                                                     <i className='bx bx-send' ></i>
