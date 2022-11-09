@@ -1,4 +1,4 @@
-import EditForm from './editForm';
+import EditForm from './EditForm';
 
 function Edit({imgs,setImgs,previewImg,setPreviewImg,i}){
 

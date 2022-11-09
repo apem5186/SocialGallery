@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 function CommentDel({i}){
 
     const reply = useSelector((state)=> state.reply.replyList)
-    const mainImg = useSelector((state)=>state.mainImg.mainList)
+    const postAll = useSelector((state)=>state.postAll.postAllList)
 
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
@@ -15,7 +15,7 @@ function CommentDel({i}){
     }
 
     const deleteComment = (cid)=>{
-        axios.delete(dev_url + `/api/comment/${mainImg[i].pid}/delete/${cid}`,{headers,
+        axios.delete(dev_url + `/api/comment/delete/${cid}`,{headers,
             withCredentials: true,
             crossDomain: true,
             credentials: "include"})

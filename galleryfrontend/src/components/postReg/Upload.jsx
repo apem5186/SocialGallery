@@ -1,6 +1,6 @@
-import UpLoadForm from './upLoadForm';
+import UpLoadForm from './UpLoadForm';
 
-function UpLoad({imgs,setImgs,previewImg,setPreviewImg}){
+function Upload({imgs,setImgs,previewImg,setPreviewImg}){
 
     return (
         <>
@@ -29,4 +29,4 @@ function openPop() {
 }
 
 
-export default UpLoad
+export default Upload

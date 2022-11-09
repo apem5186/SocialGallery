@@ -1,7 +1,7 @@
-import MainHeader from "../Main/MainHeader"
-import SideMenu from "../Main/SideMenu"
-import Sidebar from "../Main/SiderBar"
-import Footer from "../Main/Footer"
+import MainHeader from "../main/MainHeader"
+import SideMenu from "../main/SideMenu"
+import Sidebar from "../main/SiderBar"
+import Footer from "../main/Footer"
 
 function Broadcast(){
     return ( 
@@ -12,7 +12,7 @@ function Broadcast(){
             <Sidebar></Sidebar>
             <Footer></Footer>
         </>
-        //fds
+
     )
 }
 export default Broadcast

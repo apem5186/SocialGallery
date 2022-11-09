@@ -1,16 +1,15 @@
-import sideToggle from './sideToggle';
+import sideToggle from './SideToggle';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchImg } from '../../store/Store';
-import { setMainImg } from '../../store/Store';
+import { setPostAll } from '../../store/Store';
 
 function Sidebar(){
 
     const searchTitle = useSelector((state)=>state.searchImg.searchList)
-    const searchImg = useSelector((state)=>state.mainImg.mainList)
     const dispatch = useDispatch()
 
 
@@ -50,7 +49,7 @@ function Sidebar(){
     const search1 = (e) => {
         axios.get(dev_url + '/api/post?keyword=' + searchTitle)
             .then(res => {
-                dispatch(setMainImg([...res.data.list]))
+                dispatch(setPostAll([...res.data.list]))
                 console.log()
             })
         return search1
@@ -58,7 +57,7 @@ function Sidebar(){
     const search2 = (e) => {
         axios.get(dev_url + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
             .then(res => {
-                dispatch(setMainImg([...res.data.list]))
+                dispatch(setPostAll([...res.data.list]))
                 console.log(category)
             })
         return search2

@@ -1,4 +1,4 @@
-import footerData from "../../Data/footerData"
+import footerData from "../../data/FooterData"
 import { useState } from "react"
 import { useSelector } from 'react-redux';
 

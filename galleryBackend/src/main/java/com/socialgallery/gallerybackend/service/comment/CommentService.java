@@ -53,13 +53,11 @@ public class CommentService {
     public Long commentSave(Long pid, CommentRequestDTO commentRequestDTO, HttpServletRequest request) {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
-        Users users = userRepository.findById(commentRequestDTO.getUsers().getId()).orElseThrow(UserNotFoundCException::new);
         // 유저정보와 토큰이 정상적이면 / access 토큰 만료시 재발급
         if (checkToken(commentRequestDTO.getUsers().getId(), request)) {
             // 유저 정보 post 이용해서 받아오기
-            commentRequestDTO.setUsers(users);
-            commentRequestDTO.setPost(post);
             Comment entity = commentRequestDTO.toEntity();
+            entity.setPost(post);
             // 저장
             commentRepository.save(entity);
             return entity.getCid();
@@ -82,9 +80,8 @@ public class CommentService {
 
     // 댓글 삭제
     @Transactional
-    public Long delete(Long pid, Long cid, HttpServletRequest request) {
+    public Long delete(Long cid, HttpServletRequest request) {
         // 게시물 정보 파라미터값으로 받아오기
-        Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
         Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
 
         if (checkToken(comment.getUsers().getId(), request)) {

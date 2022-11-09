@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
-import UpLoad from '../PostReg/upload';
+import Upload from '../postReg/Upload';
 import {Link} from "react-router-dom";
-import Delete from "../PostReg/delete";
+import Delete from "../postReg/Delete";
 import { useSelector,useDispatch } from "react-redux";
-import {fetchReply, setMainImg} from '../../store/Store';
-import Edit from "../PostReg/edit";
+import {fetchReply, setPostAll} from '../../store/Store';
+import Edit from "../postReg/Edit";
 import CommentDel from "./CommentDel";
+import {setReply} from "../../store/Store";
 
 function Content({i}){
      // Img 미리보기
@@ -23,15 +24,11 @@ function Content({i}){
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
     // mainImg useSelector
-    let mainImg = useSelector((state)=>state.mainImg.mainList)    
+    let postAll = useSelector((state)=>state.postAll.postAllList)
     // 댓글 useSelector
     let reply = useSelector((state)=>state.reply.replyList)
     let dispatch = useDispatch()
 
-    // MainImg, Reply dispatch
-    useEffect(()=>{
-        dispatch(fetchReply())
-    },[dispatch])
     
     // 댓글
     const [comment, setComments] = useState([])
@@ -49,12 +46,14 @@ function Content({i}){
         axios.post(dev_url + `/api/comment/register`,{
             users: users,
             //TODO: 댓글이 하나밖에 안올라감
-            post : mainImg[i],
+            pid : postAll[i].pid,
             comment : comment,
 
         } ,{headers},)
             .then(res=>{
-            })
+            }).catch(res=> {
+                console.log(res)
+        })
     }
 
     const onHandleComment = e =>{
@@ -77,24 +76,28 @@ function Content({i}){
             axios.get(dev_url + "/api/post").then(
                 res => {
                     //setPost(res.data.data)
-                    dispatch(setMainImg([...res.data.list]))
+                    dispatch(setPostAll([...res.data.list]))
                 })
         } else if (category) {
             axios.get(dev_url + "/api/post/category?category=" + category).then(
                 res => {
-                    dispatch(setMainImg([...res.data.list]))
+                    dispatch(setPostAll([...res.data.list]))
                 }
             )
         }
 
     }, [])
-    // useEffect(() => {
-    //     axios.get(dev_url + "/api/post/" + mainImg[i].pid).then(
-    //         res => {
-    //             setPost(res.data.data)
-    //         })
-    // }, [])
 
+    // 댓글
+    useEffect(()=>{
+        axios.get(dev_url +'/api/comment/all')
+            .then((res) => {
+                dispatch(setReply([...res.data.list]));
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    },[])
 
     return (
         <>
@@ -109,14 +112,14 @@ function Content({i}){
                                         <Link to="#" className="post__avatar">
                                             <img src="/assets/Main/user.png" alt="User Picture" />
                                         </Link>
-                                        <span>{mainImg[0].username}</span>
+                                        <span>{postAll[0].username}</span>
                                         {/* Upload*/}
-                                        <UpLoad
+                                        <Upload
                                             imgs={imgs}
                                             setImgs={setImgs}
                                             previewImg={previewImg}
                                             setPreviewImg={setPreviewImg}
-                                        ></UpLoad>
+                                        ></Upload>
                                         {/* Edit */}
                                         <Edit
                                             i={i}
@@ -131,7 +134,7 @@ function Content({i}){
                                 </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
-                                        <img src={`${mainImg[i].filePath}`} alt="" />
+                                        <img src={`${postAll[i].filePath}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="post__footer">
@@ -148,10 +151,10 @@ function Content({i}){
                                     </div>
                                     <div className="post__infos"   >
                                         <div className="post__title">
-                                            <span>{mainImg[i].title}</span>
+                                            <span>{postAll[i].title}</span>
                                         </div>
                                         <div className="post__description">
-                                            <span>{mainImg[i].content}</span>
+                                            <span>{postAll[i].content}</span>
                                         </div>
                                         <div className="post__border">
                                         </div>
@@ -161,7 +164,7 @@ function Content({i}){
                                             <div className="comment_list">
                                                 {
                                                     reply
-                                                        .filter((value)=>value.pid === mainImg[i].pid)
+                                                        .filter((value)=>value.pid ===postAll[i].pid)
                                                         .map((a,i)=>{
                                                             return(
                                                                 <div key={a.cid}>

@@ -17,19 +17,19 @@ public class CommentRequestDTO {
 
     private Users users;
 
-    private Post post;
+    private String pid;
+
 
     @Builder
-    public CommentRequestDTO(String comment, Users users, Post post) {
+    public CommentRequestDTO(String comment, Users users, String pid) {
         this.comment = comment;
         this.users = users;
-        this.post = post;
+        this.pid = pid;
     }
 
     public Comment toEntity() {
         return Comment.builder()
                 .users(users)
-                .post(post)
                 .comment(comment)
                 .build();
     }

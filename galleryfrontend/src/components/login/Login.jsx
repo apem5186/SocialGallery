@@ -1,5 +1,5 @@
 import {useState} from "react";
-import Toggle from "./toggle";
+import Toggle from "./Toggle";
 import {Link, useLocation, useParams} from 'react-router-dom'
 import axios from "axios";
 import {useNavigate} from 'react-router-dom'

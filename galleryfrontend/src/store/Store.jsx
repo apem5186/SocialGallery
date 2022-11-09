@@ -14,46 +14,21 @@ let reply  = createSlice({
 })
 const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
-// Reply payload
-export const fetchReply = () => {
-    return async(dispatch)=>{
-        axios.get(dev_url + "/api/comment/all")
-        .then((res) => {
-          dispatch(setReply([...res.data.list]));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  };
 
 export const {setReply} = reply.actions;
 
-// mainImg Slice
-let mainImg  = createSlice({
-  name : 'mainImg',
-  initialState : {mainList:[]},
-  reducers:{
-      setMainImg:(state,action)=>{
-          state.mainList = action.payload
-      }
-  },
-
+// postAll Slice
+let postAll  = createSlice({
+    name : 'postAll',
+    initialState : {postAllList:[]},
+    reducers:{
+        setPostAll:(state,action)=>{
+            state.postAllList = action.payload
+        }
+    },
 })
 
-//mainImg payload
-// export const fetchMainImg = () => {
-//   return async(dispatch)=>{
-//       axios.get(dev_url + '/api/post')
-//       .then((res) => {
-//         dispatch(setMainImg([...res.data.list]));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
-// };
-export const {setMainImg} = mainImg.actions;
+export const {setPostAll} = postAll.actions;
 
 
 // Upload Post Title Slice
@@ -99,21 +74,7 @@ let searchImg  = createSlice({
 
 export const {setSearchImg} = searchImg.actions;
 
-// // Search filter payload
-// export const fetchSearchImg = () => {
-  
-//   return async(dispatch)=>{
-//       axios.get('localhost:8080/api/post?keyword=' + {searchTitle})
-//       .then((res) => {
-//         dispatch(setMainImg([...res.data.list]));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
-// };
-// export const {setSearchImg} = searchImg.actions;
-  
+
 
 
 
@@ -121,12 +82,11 @@ export const {setSearchImg} = searchImg.actions;
 export default configureStore({
     reducer: {
         reply : reply.reducer,
-        mainImg : mainImg.reducer,
+        postAll : postAll.reducer,
         postTitle : postTitle.reducer,
         postContent : postContent.reducer,
         searchImg : searchImg.reducer,
     },
-    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   })
 
   

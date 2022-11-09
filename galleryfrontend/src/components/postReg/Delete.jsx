@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 function Delete({i}){
 
-    let mainImg = useSelector((state)=>state.mainImg.mainList)
+    let postAll = useSelector((state)=>state.postAll.postAllList)
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
     const headers = {
         'Content-type': 'application/json',
@@ -22,7 +22,7 @@ function Delete({i}){
     return (
         <>
             <div>
-            <span className="material-icons outlined" onClick={()=>{onHandelDelete(mainImg[i].pid)}}>
+            <span className="material-icons outlined" onClick={()=>{onHandelDelete(postAll[i].pid)}}>
                 delete
             </span>
             </div>

@@ -7,7 +7,6 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
 
     const title = useSelector((state)=>state.postTitle.postTitleList)
     const content = useSelector((state)=>state.postContent.postContentList)
-    const imgs1 = useSelector((state)=>state.mainImg.mainList)
     const dispatch = useDispatch()
     const [category, setCategory] = useState('')
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"

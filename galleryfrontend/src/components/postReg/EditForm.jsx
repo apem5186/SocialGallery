@@ -6,7 +6,7 @@ import { useState } from 'react';
 function EditForm({imgs,setImgs,previewImg,setPreviewImg,i}){
 
     const [updateCategory, setUpdateCategory] = useState('')
-    let mainImg = useSelector((state)=>state.mainImg.mainList)
+    let postAll = useSelector((state)=>state.postAll.postAllList)
     const title = useSelector((state)=>state.postTitle.postTitleList)
     const content = useSelector((state)=>state.postContent.postContentList)
     const dispatch = useDispatch()
@@ -76,7 +76,7 @@ function EditForm({imgs,setImgs,previewImg,setPreviewImg,i}){
                             <button
                                 className="share"
                                 type="submit"
-                                onClick={()=>{putSubmit(mainImg[i].pid)}}
+                                onClick={()=>{putSubmit(postAll[i].pid)}}
                             >
                                 수정하기
                             </button>
