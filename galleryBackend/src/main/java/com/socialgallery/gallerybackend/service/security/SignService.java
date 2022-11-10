@@ -74,6 +74,8 @@ public class SignService {
         // 회원 정보 존재하는지 확인
         Users users = userRepository.findByEmail(userLoginRequestDTO.getEmail())
                 .orElseThrow(EmailLoginFailedCException::new);
+        users.updateIsLogin(true);
+        userRepository.save(users);
 
         // 회원 패스워드 일치 여부 확인
         if (!passwordEncoder.matches(userLoginRequestDTO.getPassword(), users.getPassword()))
@@ -147,6 +149,8 @@ public class SignService {
         Users users = userRepository.findById(id)
                 .orElseThrow(UserNotFoundCException::new);
         log.info("SEARCH USERS : " + users);
+        users.updateIsLogin(false);
+        userRepository.save(users);
 
         // 회원 정보로 refresh token 찾기
         RefreshToken refreshToken = refreshTokenJpaRepo.findByKey(users.getId())

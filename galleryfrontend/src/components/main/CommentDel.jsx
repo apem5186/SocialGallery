@@ -27,7 +27,12 @@ function CommentDel({a}){
 
     return (
         <>
-            <button onClick={()=>{deleteComment(a.cid)}}>X</button>
+            <button onClick={()=>{
+                if (window.confirm("정말 삭제합니까?")) {
+                    deleteComment(a.cid)
+                } else {
+                    alert('취소 됐습니다.')
+                }}}>X</button>
         </>
     )
 }

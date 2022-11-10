@@ -48,6 +48,8 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
 
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
 
+    private boolean isLogin;
+
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Post> post = new ArrayList<>();
 
@@ -124,6 +126,10 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
         this.picture = picture;
 
         return this;
+    }
+
+    public void updateIsLogin(Boolean isLogin) {
+        this.isLogin = isLogin;
     }
 
     @Override

@@ -61,7 +61,6 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     public ListResult<String> post(
             @ApiParam(value = "게시글 등록 DTO", required = true)
-            //TODO : @RequestParam 사용해서 받아보기, 이미지 없인 값 안넘어감
             PostFileVO postFileVO,
             @RequestParam(value = "files", required = false) List<MultipartFile> files,
             HttpServletRequest request) throws Exception{

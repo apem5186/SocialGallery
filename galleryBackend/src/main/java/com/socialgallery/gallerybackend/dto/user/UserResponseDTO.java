@@ -14,6 +14,7 @@ public class UserResponseDTO {
     private final String username;
     private final String phone;
     private final String picture;
+    private final Boolean isLogin;
 
     public UserResponseDTO(Users users) {
         this.id = users.getId();
@@ -21,5 +22,6 @@ public class UserResponseDTO {
         this.username = users.getUsername();
         this.phone = users.getPhone();
         this.picture = users.getPicture();
+        this.isLogin = users.isLogin();
     }
 }
