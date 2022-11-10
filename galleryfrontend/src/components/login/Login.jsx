@@ -93,7 +93,7 @@ function Login() {
 
   const signUp = (e) =>{
     e.preventDefault()
-    axios.post(base_url + '/v1/signUp',{
+    axios.post(dev_url + '/v1/signUp',{
       usersId : getUser(email),
       email: rgEmail,
       password: rgPw,

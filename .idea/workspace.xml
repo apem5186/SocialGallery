@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="댓글 삭제 테스트">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 연동">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/CommentDel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/CommentDel.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideMenu.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,14 +324,8 @@
       <workItem from="1667042337187" duration="12218000" />
       <workItem from="1667373685607" duration="17790000" />
       <workItem from="1667441722468" duration="12320000" />
-      <workItem from="1667979586865" duration="11512000" />
-    </task>
-    <task id="LOCAL-00204" summary="프론트 통합 테스트">
-      <created>1666969100049</created>
-      <option name="number" value="00204" />
-      <option name="presentableId" value="LOCAL-00204" />
-      <option name="project" value="LOCAL" />
-      <updated>1666969100049</updated>
+      <workItem from="1667979586865" duration="12231000" />
+      <workItem from="1668046386902" duration="628000" />
     </task>
     <task id="LOCAL-00205" summary="프론트 통합 테스트">
       <created>1666969317078</created>
@@ -670,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667996334225</updated>
     </task>
-    <option name="localTasksCounter" value="253" />
+    <task id="LOCAL-00253" summary="프론트 연동">
+      <created>1667996901151</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1667996901152</updated>
+    </task>
+    <option name="localTasksCounter" value="254" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -714,7 +714,8 @@
     <MESSAGE value="이미지 배포 수정 테스트" />
     <MESSAGE value="프론트 통합 테스트" />
     <MESSAGE value="댓글 삭제 테스트" />
-    <option name="LAST_COMMIT_MESSAGE" value="댓글 삭제 테스트" />
+    <MESSAGE value="프론트 연동" />
+    <option name="LAST_COMMIT_MESSAGE" value="프론트 연동" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -45,7 +45,6 @@ function Content({i}){
         }
         axios.post(dev_url + `/api/comment/register`,{
             users: users,
-            //TODO: 댓글이 하나밖에 안올라감
             pid : postAll[i].pid,
             comment : comment,
 
