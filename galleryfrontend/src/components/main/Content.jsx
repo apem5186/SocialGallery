@@ -111,7 +111,7 @@ function Content({i}){
                                         <Link to="#" className="post__avatar">
                                             <img src="/assets/Main/user.png" alt="User Picture" />
                                         </Link>
-                                        <span>{postAll[0].username}</span>
+                                        <span>{postAll[i].username}</span>
                                         {/* Upload*/}
                                         <Upload
                                             imgs={imgs}

@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 연동">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -325,14 +324,7 @@
       <workItem from="1667373685607" duration="17790000" />
       <workItem from="1667441722468" duration="12320000" />
       <workItem from="1667979586865" duration="12231000" />
-      <workItem from="1668046386902" duration="628000" />
-    </task>
-    <task id="LOCAL-00205" summary="프론트 통합 테스트">
-      <created>1666969317078</created>
-      <option name="number" value="00205" />
-      <option name="presentableId" value="LOCAL-00205" />
-      <option name="project" value="LOCAL" />
-      <updated>1666969317078</updated>
+      <workItem from="1668046386902" duration="1112000" />
     </task>
     <task id="LOCAL-00206" summary="프론트 통합 테스트">
       <created>1666969474406</created>
@@ -670,7 +662,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667996901152</updated>
     </task>
-    <option name="localTasksCounter" value="254" />
+    <task id="LOCAL-00254" summary="프론트 연동">
+      <created>1668049176510</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1668049176510</updated>
+    </task>
+    <option name="localTasksCounter" value="255" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
