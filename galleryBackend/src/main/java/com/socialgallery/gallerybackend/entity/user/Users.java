@@ -128,8 +128,9 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
         return this;
     }
 
-    public void updateIsLogin(Boolean isLogin) {
+    public Users updateIsLogin(Boolean isLogin) {
         this.isLogin = isLogin;
+        return this;
     }
 
     @Override
