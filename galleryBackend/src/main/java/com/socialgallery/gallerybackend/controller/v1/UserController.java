@@ -42,6 +42,11 @@ public class UserController {
 
     private final ResponseService responseService;
 
+    @GetMapping("/expireRToken")
+    public String redirectToLogin() {
+        return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
+    }
+
 
     @GetMapping("/indexes")
     public String index() {

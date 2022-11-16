@@ -65,9 +65,10 @@ public class CommentService {
             // 저장
             commentRepository.save(entity);
             return String.valueOf(entity.getCid());
-        } else {
-            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
-        }
+        } throw new IllegalArgumentException("로그인이 필요합니다.");
+//        else {
+//            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
+//        }
 
     }
 
@@ -79,10 +80,11 @@ public class CommentService {
             // 댓글 정보 받아오기
             Optional<Comment> result = commentRepository.findById(cid);
             result.ifPresent(comment -> comment.update(commentRequestDTO.getComment()));
-            return String.valueOf(cid);
-        } else {
-            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
         }
+        return String.valueOf(cid);
+//        else {
+//            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
+//        }
     }
 
     // 댓글 삭제
@@ -93,10 +95,11 @@ public class CommentService {
 
         if (checkToken(comment.getUsers().getId(), request, response)) {
             commentRepository.deleteByCid(cid);
-            return String.valueOf(cid);
-        } else {
-            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
         }
+            return String.valueOf(cid);
+//        else {
+//            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
+//        }
     }
 
     // 댓글 가져오기
@@ -117,7 +120,8 @@ public class CommentService {
 
         return result.stream().map(CommentResponseDTO::new).collect(Collectors.toList());
     }
-
+    // TODO : 리프레시토큰 삭제, isLogin 변경까진 되나 로컬스토리지와 alert창, 로그인페이지 이동이 안됨
+    // TODO : response.sendRedirect하면 네트워크 호출이 됨 컨트롤러 하나 만들어서 로그인페이지로 이동하는 코드 짜봐야할듯
     @Transactional
     public boolean checkToken(Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
@@ -131,6 +135,7 @@ public class CommentService {
             log.info("VALIDATIONTOKEN TEST REFRESHTOKEN");
             request.setAttribute("Authorization", "");
             signService.logout(id);
+            response.sendRedirect("/expireRToken");
 //            PrintWriter out = response.getWriter();
 //            response.setContentType("text/html; charset=UTF-8");
 //            out.println("<script>alert('로그인이 필요합니다.'); " +
