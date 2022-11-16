@@ -31,43 +31,40 @@ public class CommentController {
 
     @ApiOperation(value = "등록", notes = "댓글을 등록합니다.")
     @PostMapping("/register")
-    public SingleResult<Long> register(
+    public String register(
             @ApiParam(value = "댓글 등록 DTO", required = true)
             @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request,
             HttpServletResponse response) throws IOException {
-        Long cid = commentService.commentSave(Long.valueOf(commentRequestDTO.getPid()), commentRequestDTO, request, response);
+        String result = commentService.commentSave(Long.valueOf(commentRequestDTO.getPid()), commentRequestDTO, request, response);
         log.info("=================================================================================");
         log.info("COMMENTREQUESTDTO'POST : " + commentRequestDTO.getPid());
         log.info("=================================================================================");
         log.info("COMMENTREQUESTDTO'USER : " + commentRequestDTO.getUsers());
         log.info("=================================================================================");
-        return responseService.getSingleResult(cid);
+        return result;
     }
 
     @ApiOperation(value = "댓글 수정", notes = "댓글을 수정합니다.")
     @PutMapping("/update={cid}")
-    public SingleResult<Long> update(
+    public String update(
             @ApiParam(value = "게시글 pk", required = true)
             @PathVariable("cid") String cid,
             @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request,
             HttpServletResponse response) throws Exception {
 
-        return responseService.getSingleResult(
-                commentService.update(Long.valueOf(cid), commentRequestDTO, request, response)
-        );
-
+        return commentService.update(Long.valueOf(cid), commentRequestDTO, request, response);
     }
 
     @ApiOperation(value = "댓글 삭제", notes = "댓글을 삭제합니다.")
     @DeleteMapping("/delete/{cid}")
-    public SingleResult<Long> delete(
+    public String delete(
             @ApiParam(value = "게시글pk", required = true)
             @PathVariable("cid") String cid,
             HttpServletRequest request, HttpServletResponse response) throws Exception {
         log.info("===============================================");
         log.info("CID : " + cid);
         log.info("===============================================");
-        return responseService.getSingleResult(commentService.delete(Long.valueOf(cid), request, response));
+        return commentService.delete(Long.valueOf(cid), request, response);
     }
 
 

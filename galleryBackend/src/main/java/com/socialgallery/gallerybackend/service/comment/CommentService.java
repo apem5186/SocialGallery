@@ -53,7 +53,7 @@ public class CommentService {
     
     // 댓글 생성 기능
     @Transactional
-    public Long commentSave(Long pid, CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+    public String commentSave(Long pid, CommentRequestDTO commentRequestDTO, HttpServletRequest request,
                             HttpServletResponse response) throws IOException {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
@@ -64,33 +64,39 @@ public class CommentService {
             entity.setPost(post);
             // 저장
             commentRepository.save(entity);
-            return entity.getCid();
-        } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
+            return String.valueOf(entity.getCid());
+        } else {
+            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
+        }
 
     }
 
     // 댓글 수정
     @Transactional
-    public Long update(Long cid, CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+    public String update(Long cid, CommentRequestDTO commentRequestDTO, HttpServletRequest request,
                        HttpServletResponse response) throws IOException {
         if (checkToken(commentRequestDTO.getUsers().getId(), request, response)) {
             // 댓글 정보 받아오기
             Optional<Comment> result = commentRepository.findById(cid);
             result.ifPresent(comment -> comment.update(commentRequestDTO.getComment()));
+            return String.valueOf(cid);
+        } else {
+            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
         }
-        return cid;
     }
 
     // 댓글 삭제
     @Transactional
-    public Long delete(Long cid, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String delete(Long cid, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 게시물 정보 파라미터값으로 받아오기
         Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
 
         if (checkToken(comment.getUsers().getId(), request, response)) {
             commentRepository.deleteByCid(cid);
+            return String.valueOf(cid);
+        } else {
+            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
         }
-        return cid;
     }
 
     // 댓글 가져오기
