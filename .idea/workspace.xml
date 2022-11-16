@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="프론트 연동">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="token redirect test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/comment/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/comment/CommentResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/dto/comment/CommentResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,14 +325,7 @@
       <workItem from="1667441722468" duration="12320000" />
       <workItem from="1667979586865" duration="12231000" />
       <workItem from="1668046386902" duration="7816000" />
-      <workItem from="1668586295180" duration="7974000" />
-    </task>
-    <task id="LOCAL-00211" summary="프론트 통합 테스트">
-      <created>1666973963547</created>
-      <option name="number" value="00211" />
-      <option name="presentableId" value="LOCAL-00211" />
-      <option name="project" value="LOCAL" />
-      <updated>1666973963547</updated>
+      <workItem from="1668586295180" duration="8925000" />
     </task>
     <task id="LOCAL-00212" summary="프론트 통합 테스트">
       <created>1666974711144</created>
@@ -673,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668589145729</updated>
     </task>
-    <option name="localTasksCounter" value="260" />
+    <task id="LOCAL-00260" summary="token redirect test">
+      <created>1668596439902</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1668596439902</updated>
+    </task>
+    <option name="localTasksCounter" value="261" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -718,7 +715,8 @@
     <MESSAGE value="프론트 통합 테스트" />
     <MESSAGE value="댓글 삭제 테스트" />
     <MESSAGE value="프론트 연동" />
-    <option name="LAST_COMMIT_MESSAGE" value="프론트 연동" />
+    <MESSAGE value="token redirect test" />
+    <option name="LAST_COMMIT_MESSAGE" value="token redirect test" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

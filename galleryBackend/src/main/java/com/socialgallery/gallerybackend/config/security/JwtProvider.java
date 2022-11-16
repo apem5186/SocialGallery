@@ -37,9 +37,10 @@ public class JwtProvider {
     @Value("spring.jwt.secret")
     private String secretKey;
     private String ROLES = "roles";
-
-    private final Long accessTokenValidMillisecond = 60 * 60 * 1000L;   // 1hour
-    private final Long refreshTokenValidMillisecond = 14 * 24 * 60 * 60 * 1000L;    // 14days
+    // 60 * 60 * 1000L // 1hour
+    // 14 * 24 * 60 * 60 * 1000L // 14days
+    private final Long accessTokenValidMillisecond = 5 * 1000L;   // 1hour
+    private final Long refreshTokenValidMillisecond = 10 * 1000L;    // 14days
 
     private final CustomUserDetailService userDetailService;
 
