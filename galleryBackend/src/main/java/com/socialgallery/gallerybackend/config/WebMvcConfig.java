@@ -1,9 +1,7 @@
 package com.socialgallery.gallerybackend.config;
 
-import com.socialgallery.gallerybackend.config.security.JwtProvider;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableWebMvc
