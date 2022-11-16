@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @Api(tags = {"5. comment"})
@@ -31,8 +33,9 @@ public class CommentController {
     @PostMapping("/register")
     public SingleResult<Long> register(
             @ApiParam(value = "댓글 등록 DTO", required = true)
-            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request) {
-        Long cid = commentService.commentSave(Long.valueOf(commentRequestDTO.getPid()), commentRequestDTO, request);
+            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+            HttpServletResponse response) throws IOException {
+        Long cid = commentService.commentSave(Long.valueOf(commentRequestDTO.getPid()), commentRequestDTO, request, response);
         log.info("=================================================================================");
         log.info("COMMENTREQUESTDTO'POST : " + commentRequestDTO.getPid());
         log.info("=================================================================================");
@@ -42,14 +45,15 @@ public class CommentController {
     }
 
     @ApiOperation(value = "댓글 수정", notes = "댓글을 수정합니다.")
-    @PutMapping("/{pid}/update={cid}")
+    @PutMapping("/update={cid}")
     public SingleResult<Long> update(
             @ApiParam(value = "게시글 pk", required = true)
-            @PathVariable("pid") String pid, @PathVariable("cid") String cid,
-            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request) throws Exception {
+            @PathVariable("cid") String cid,
+            @RequestBody CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+            HttpServletResponse response) throws Exception {
 
         return responseService.getSingleResult(
-                commentService.update(Long.valueOf(pid), Long.valueOf(cid), commentRequestDTO, request)
+                commentService.update(Long.valueOf(cid), commentRequestDTO, request, response)
         );
 
     }
@@ -59,11 +63,11 @@ public class CommentController {
     public SingleResult<Long> delete(
             @ApiParam(value = "게시글pk", required = true)
             @PathVariable("cid") String cid,
-            HttpServletRequest request) throws Exception {
+            HttpServletRequest request, HttpServletResponse response) throws Exception {
         log.info("===============================================");
         log.info("CID : " + cid);
         log.info("===============================================");
-        return responseService.getSingleResult(commentService.delete(Long.valueOf(cid), request));
+        return responseService.getSingleResult(commentService.delete(Long.valueOf(cid), request, response));
     }
 
 

@@ -14,11 +14,14 @@ public class CommentResponseDTO {
 
     private final Long pid;
 
+    private final Long uid;
+
     public CommentResponseDTO(Comment comment) {
         this.cid = comment.getCid();
         this.comment = comment.getComment();
         this.username = comment.getUsers().getUsername();
         this.pid = comment.getPost().getPid();
+        this.uid = comment.getUsers().getId();
 
     }
 }

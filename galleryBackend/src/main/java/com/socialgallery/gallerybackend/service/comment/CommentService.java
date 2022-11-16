@@ -25,6 +25,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,11 +53,12 @@ public class CommentService {
     
     // 댓글 생성 기능
     @Transactional
-    public Long commentSave(Long pid, CommentRequestDTO commentRequestDTO, HttpServletRequest request) {
+    public Long commentSave(Long pid, CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+                            HttpServletResponse response) throws IOException {
         // 게시물 정보 파라미터값으로 받아오기
         Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
         // 유저정보와 토큰이 정상적이면 / access 토큰 만료시 재발급
-        if (checkToken(commentRequestDTO.getUsers().getId(), request)) {
+        if (checkToken(commentRequestDTO.getUsers().getId(), request, response)) {
             // 유저 정보 post 이용해서 받아오기
             Comment entity = commentRequestDTO.toEntity();
             entity.setPost(post);
@@ -67,10 +71,9 @@ public class CommentService {
 
     // 댓글 수정
     @Transactional
-    public Long update(Long pid, Long cid, CommentRequestDTO commentRequestDTO, HttpServletRequest request) {
-        // 게시물 정보 파라미터값으로 받아오기
-        Post post = postRepository.findById(pid).orElseThrow(PostNotFoundCException::new);
-        if (checkToken(commentRequestDTO.getUsers().getId(), request)) {
+    public Long update(Long cid, CommentRequestDTO commentRequestDTO, HttpServletRequest request,
+                       HttpServletResponse response) throws IOException {
+        if (checkToken(commentRequestDTO.getUsers().getId(), request, response)) {
             // 댓글 정보 받아오기
             Optional<Comment> result = commentRepository.findById(cid);
             result.ifPresent(comment -> comment.update(commentRequestDTO.getComment()));
@@ -80,11 +83,11 @@ public class CommentService {
 
     // 댓글 삭제
     @Transactional
-    public Long delete(Long cid, HttpServletRequest request) {
+    public Long delete(Long cid, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 게시물 정보 파라미터값으로 받아오기
         Comment comment = commentRepository.findById(cid).orElseThrow(CommentNotFoundCException::new);
 
-        if (checkToken(comment.getUsers().getId(), request)) {
+        if (checkToken(comment.getUsers().getId(), request, response)) {
             commentRepository.deleteByCid(cid);
         }
         return cid;
@@ -110,7 +113,7 @@ public class CommentService {
     }
 
     @Transactional
-    public boolean checkToken(Long id, HttpServletRequest request) {
+    public boolean checkToken(Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
         UserResponseDTO userPk = usersService.findByUsername(users.getUsername());
         Optional<RefreshToken> refreshToken = refreshTokenJpaRepo.findByKey(userPk.getId());
@@ -121,6 +124,10 @@ public class CommentService {
         if (!jwtProvider.validationToken(rtoken)) {
             request.setAttribute("Authorization", "");
             signService.logout(id);
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('로그인이 필요합니다.'); </script>");
+            response.sendRedirect("/login");
+            out.flush();
             throw new RefreshTokenCException();
         }
         if (!jwtProvider.validationToken(accessToken)) {

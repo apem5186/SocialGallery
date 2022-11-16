@@ -66,10 +66,10 @@ function Content({i}){
                 setUsers(res.data.data)
             })
     },[])
+
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         let category = params.get("category")
-        console.log(category)
 
         if (category === null) {
             axios.get(dev_url + "/api/post").then(
