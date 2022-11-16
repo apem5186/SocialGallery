@@ -122,6 +122,7 @@ public class CommentService {
         String rtoken = refreshToken.orElseThrow().getToken();
         log.info("REFRESHTOKEN : " + rtoken);
         if (!jwtProvider.validationToken(rtoken)) {
+            log.info("VALIDATIONTOKEN TEST REFRESHTOKEN");
             request.setAttribute("Authorization", "");
             signService.logout(id);
             PrintWriter out = response.getWriter();

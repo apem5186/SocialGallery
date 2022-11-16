@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="token redirect test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/comment/CommentService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -325,14 +325,7 @@
       <workItem from="1667441722468" duration="12320000" />
       <workItem from="1667979586865" duration="12231000" />
       <workItem from="1668046386902" duration="7816000" />
-      <workItem from="1668586295180" duration="8925000" />
-    </task>
-    <task id="LOCAL-00212" summary="프론트 통합 테스트">
-      <created>1666974711144</created>
-      <option name="number" value="00212" />
-      <option name="presentableId" value="LOCAL-00212" />
-      <option name="project" value="LOCAL" />
-      <updated>1666974711144</updated>
+      <workItem from="1668586295180" duration="9639000" />
     </task>
     <task id="LOCAL-00213" summary="프론트 통합 테스트">
       <created>1666975349808</created>
@@ -670,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668596439902</updated>
     </task>
-    <option name="localTasksCounter" value="261" />
+    <task id="LOCAL-00261" summary="token redirect test">
+      <created>1668596782068</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1668596782068</updated>
+    </task>
+    <option name="localTasksCounter" value="262" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
