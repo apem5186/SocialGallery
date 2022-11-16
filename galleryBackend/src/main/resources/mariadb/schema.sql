@@ -64,6 +64,7 @@ create table users (
                        email varchar(100) not null,
                        from_social boolean not null,
                        password varchar(100) not null,
+                       is_login boolean not null,
                        phone varchar(255),
                        picture varchar(255),
                        provider_id varchar(255),

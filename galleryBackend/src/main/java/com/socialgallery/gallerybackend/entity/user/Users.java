@@ -47,7 +47,6 @@ public class Users extends BaseEntity implements UserDetails, OAuth2User {
     private String phone;
 
     private boolean fromSocial; // 직접 회원가입 했는지, 구글이나 네이버 등으로 회원가입 했는지
-    @Column(name = "islogin")
     private boolean isLogin;
 
     @OneToMany(mappedBy = "users", cascade = CascadeType.MERGE, orphanRemoval = true)
