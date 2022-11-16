@@ -126,13 +126,14 @@ public class CommentService {
             request.setAttribute("Authorization", "");
             signService.logout(id);
             PrintWriter out = response.getWriter();
+            response.setContentType("text/html; charset=UTF-8");
             out.println("<script>alert('로그인이 필요합니다.'); " +
                     "window.localStorage.removeItem('token');\n" +
                     "window.localStorage.removeItem('user');\n" +
-                    "window.localStorage.removeItem('uid');</script>");
-            response.sendRedirect(request.getContextPath() + "/login");
+                    "window.localStorage.removeItem('uid');\n" +
+                    "location.href='http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login';</script>");
             out.flush();
-            throw new RefreshTokenCException();
+            return false;
         }
         if (!jwtProvider.validationToken(accessToken)) {
             TokenRequestDTO tokenRequestDTO = TokenRequestDTO.builder()
