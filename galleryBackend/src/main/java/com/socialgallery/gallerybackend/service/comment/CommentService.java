@@ -126,8 +126,11 @@ public class CommentService {
             request.setAttribute("Authorization", "");
             signService.logout(id);
             PrintWriter out = response.getWriter();
-            out.println("<script>alert('로그인이 필요합니다.'); </script>");
-            response.sendRedirect("/login");
+            out.println("<script>alert('로그인이 필요합니다.'); " +
+                    "window.localStorage.removeItem('token');\n" +
+                    "window.localStorage.removeItem('user');\n" +
+                    "window.localStorage.removeItem('uid');</script>");
+            response.sendRedirect(request.getContextPath() + "/login");
             out.flush();
             throw new RefreshTokenCException();
         }

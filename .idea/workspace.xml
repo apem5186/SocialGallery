@@ -325,14 +325,7 @@
       <workItem from="1667441722468" duration="12320000" />
       <workItem from="1667979586865" duration="12231000" />
       <workItem from="1668046386902" duration="7816000" />
-      <workItem from="1668586295180" duration="9639000" />
-    </task>
-    <task id="LOCAL-00213" summary="프론트 통합 테스트">
-      <created>1666975349808</created>
-      <option name="number" value="00213" />
-      <option name="presentableId" value="LOCAL-00213" />
-      <option name="project" value="LOCAL" />
-      <updated>1666975349808</updated>
+      <workItem from="1668586295180" duration="10941000" />
     </task>
     <task id="LOCAL-00214" summary="프론트 통합 테스트">
       <created>1666975843945</created>
@@ -670,7 +663,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668596782068</updated>
     </task>
-    <option name="localTasksCounter" value="262" />
+    <task id="LOCAL-00262" summary="token redirect test">
+      <created>1668597516999</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1668597517000</updated>
+    </task>
+    <option name="localTasksCounter" value="263" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
