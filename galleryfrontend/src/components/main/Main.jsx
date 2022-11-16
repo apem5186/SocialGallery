@@ -4,9 +4,10 @@ import Sidebar from './SiderBar';
 import SideMenu from './SideMenu';
 import MainHeader from './MainHeader';
 import Content from './Content';
-import { useSelector,useDispatch } from "react-redux";
-import { useEffect } from 'react';
-import { setPostAll } from '../../store/Store';
+import { useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import {useEffect, useState} from 'react';
+import {setPostAll} from "../../store/Store";
 import axios from 'axios';
 
 function Main({rgName,setRgName}){
@@ -16,10 +17,10 @@ function Main({rgName,setRgName}){
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
 
-
     useEffect(()=>{
         axios.get(dev_url+'/api/post')
             .then((res) => {
+                //TODO :: 뭐가 에런지 모름
                 dispatch(setPostAll([...res.data.list]));
             })
             .catch((err) => {
