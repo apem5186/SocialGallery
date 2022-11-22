@@ -65,7 +65,8 @@ public class CommentService {
             // 저장
             commentRepository.save(entity);
             return String.valueOf(entity.getCid());
-        } throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
+        return "댓글 생성 실패";
 //        else {
 //            return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
 //        }

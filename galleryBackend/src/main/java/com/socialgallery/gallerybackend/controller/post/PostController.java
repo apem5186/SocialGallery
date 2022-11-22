@@ -89,8 +89,7 @@ public class PostController {
             } else {
                 List<String > result = new ArrayList<>();
                 result.add("성공");
-                Post post = postRequestDTO.toEntity();
-                postRepository.save(post);
+                postService.uploadNotFile(postRequestDTO, request);
                 ResponseEntity.ok().body(postRequestDTO);
                 return responseService.getListResult(result);
             }

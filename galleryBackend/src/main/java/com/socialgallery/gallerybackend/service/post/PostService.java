@@ -80,6 +80,14 @@ public class PostService {
     private final AmazonS3 amazonS3;
 
     @Transactional
+    public void uploadNotFile(PostRequestDTO postRequestDTO, HttpServletRequest request) {
+        Post entity = postRequestDTO.toEntity();
+        if (checkToken(postRequestDTO.getUsers().getId(), request)) {
+            postRepository.save(entity);
+        }
+    }
+
+    @Transactional
     public List<String > upload(List<MultipartFile> files, PostRequestDTO postRequestDTO,
                                 HttpServletRequest request) {
         List<String > imgUrlList = new ArrayList<>();
@@ -157,7 +165,8 @@ public class PostService {
                 }
             }
             return imgUrlList;
-        } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
+        }
+        return imgUrlList;
     }
 
     // s3 게시글 수정
@@ -404,7 +413,8 @@ public class PostService {
             post.update(postRequestDTO.getTitle(), postRequestDTO.getContent());
             // 오류 방지용
             return pid;
-        } throw new IllegalArgumentException("다시 로그인을 해야합니다.");
+        }
+        return pid;
     }
 
 
