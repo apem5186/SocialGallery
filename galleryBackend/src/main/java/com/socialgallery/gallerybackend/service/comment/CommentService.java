@@ -122,6 +122,7 @@ public class CommentService {
     }
     // TODO : 리프레시토큰 삭제, isLogin 변경까진 되나 로컬스토리지와 alert창, 로그인페이지 이동이 안됨
     // TODO : response.sendRedirect하면 네트워크 호출이 됨 컨트롤러 하나 만들어서 로그인페이지로 이동하는 코드 짜봐야할듯
+    // TODO : api 호출하면 DELETE매핑으로 찍히는데 방법 찾아야함
     @Transactional
     public boolean checkToken(Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
