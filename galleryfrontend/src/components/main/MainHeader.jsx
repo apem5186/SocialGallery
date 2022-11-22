@@ -42,7 +42,7 @@ function MainHeader(){
                                 {
                                     isLogin === false
                                         ? <Link to = "/login"><div>로그인해주세요</div></Link>
-                                        :<img src="/assets/main/user.png" alt="User Picture" />
+                                        :<img src="/assets/Main/user.png" alt="User Picture" />
                                 }
                             </div>
                         </button>
