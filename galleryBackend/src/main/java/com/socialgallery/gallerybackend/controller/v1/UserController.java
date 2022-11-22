@@ -42,18 +42,6 @@ public class UserController {
 
     private final ResponseService responseService;
 
-    @RequestMapping(value = "/expireRToken", method = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT,
-    RequestMethod.POST})
-    public String redirectToLogin() {
-        log.info("===================================================");
-        log.info("===================================================");
-        log.info("실행됐음");
-        log.info("===================================================");
-        log.info("===================================================");
-        return "redirect:http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login";
-    }
-
-
     @GetMapping("/indexes")
     public String index() {
         return "Hello!";

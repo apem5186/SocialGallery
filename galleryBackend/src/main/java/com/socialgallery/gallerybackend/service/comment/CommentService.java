@@ -136,15 +136,6 @@ public class CommentService {
             log.info("VALIDATIONTOKEN TEST REFRESHTOKEN");
             request.setAttribute("Authorization", "");
             signService.logout(id);
-            response.sendRedirect("/expireRToken");
-//            PrintWriter out = response.getWriter();
-//            response.setContentType("text/html; charset=UTF-8");
-//            out.println("<script>alert('로그인이 필요합니다.'); " +
-//                    "window.localStorage.removeItem('token');\n" +
-//                    "window.localStorage.removeItem('user');\n" +
-//                    "window.localStorage.removeItem('uid');\n" +
-//                    "location.href='http://elasticbeanstalk-ap-northeast-2-506714295105.s3-website.ap-northeast-2.amazonaws.com/login';</script>");
-//            out.flush();
             return false;
         }
         if (!jwtProvider.validationToken(accessToken)) {

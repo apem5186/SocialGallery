@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
 import Upload from '../postReg/Upload';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Delete from "../postReg/Delete";
 import { useSelector,useDispatch } from "react-redux";
 import {fetchReply, setPostAll} from '../../store/Store';
@@ -17,6 +17,7 @@ function Content({i}){
     const [commentArray, setCommentArray] = useState([])
     let [users, setUsers] = useState([]);
     let [post, setPost] = useState([]);
+    const navigate = useNavigate();
 
 
     // base_URL
@@ -64,6 +65,15 @@ function Content({i}){
         axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
             .then(res=>{
                 setUsers(res.data.data)
+                if (res.data.data.isLogin === false) {
+                    if (localStorage.getItem("token").length > 0) {
+                        alert("토큰이 만료되었습니다. 다시 로그인 해주세요.")
+                        console.log(res.data.data.isLogin)
+                        localStorage.clear()
+                        console.log("localstorage cleared")
+                        navigate("/login")
+                    }
+                }
             })
     },[])
 

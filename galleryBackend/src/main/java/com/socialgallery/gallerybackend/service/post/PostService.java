@@ -264,7 +264,7 @@ public class PostService {
         if (!jwtProvider.validationToken(rtoken)) {
             request.setAttribute("Authorization", "");
             signService.logout(id);
-            throw new RefreshTokenCException();
+            return false;
         }
         if (!jwtProvider.validationToken(accessToken)) {
             TokenRequestDTO tokenRequestDTO = TokenRequestDTO.builder()
