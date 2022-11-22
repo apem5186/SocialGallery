@@ -1,23 +1,44 @@
 import UpLoadForm from './UpLoadForm';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { setIsLogin } from '../../store/Store';
+import { useDispatch } from 'react-redux';
 
-function Upload({imgs,setImgs,previewImg,setPreviewImg}){
+function UpLoad({imgs,setImgs,previewImg,setPreviewImg}){
+
+    const isLogin = useSelector((state)=>state.isLogin.isLoginList)
+    const dispatch = useDispatch()
+
+    const base_URL = 'http://localhost:8080'
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
+
+
 
     return (
         <>
             {/*Open 팝업*/}
-            <div onClick={openPop}>
-                    <button className="popup_start">
+            <div onClick={()=>{
+                axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
+                    .then((res)=>{
+                        dispatch(setIsLogin(res.data.data.isLogin))
+                    })
+                isLogin === false
+                    ? alert('로그인 후 사용해주세요.')
+                    : openPop()
+            }}>
+                <button className="popup_start">
                         <span className="material-icons uploadtext">
                             add_circle_outline
                         </span>
-                    </button>
+                </button>
             </div>
             {/* 팝업 컨텐츠 영역*/}
             <UpLoadForm
-            imgs={imgs}
-            setImgs={setImgs}
-            previewImg={previewImg}
-            setPreviewImg={setPreviewImg}
+                imgs={imgs}
+                setImgs={setImgs}
+                previewImg={previewImg}
+                setPreviewImg={setPreviewImg}
             ></UpLoadForm>
 
         </>
@@ -29,4 +50,4 @@ function openPop() {
 }
 
 
-export default Upload
+export default UpLoad

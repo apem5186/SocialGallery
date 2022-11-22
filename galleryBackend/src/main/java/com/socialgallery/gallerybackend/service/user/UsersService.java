@@ -3,18 +3,26 @@ package com.socialgallery.gallerybackend.service.user;
 import com.socialgallery.gallerybackend.advice.exception.EmailLoginFailedCException;
 import com.socialgallery.gallerybackend.advice.exception.EmailSignUpFailedCException;
 import com.socialgallery.gallerybackend.advice.exception.UserNotFoundCException;
+import com.socialgallery.gallerybackend.config.security.JwtProvider;
+import com.socialgallery.gallerybackend.dto.jwt.TokenRequestDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserLoginResponseDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
+import com.socialgallery.gallerybackend.entity.security.RefreshToken;
+import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.entity.user.Users;
 import com.socialgallery.gallerybackend.repository.UserRepository;
+import com.socialgallery.gallerybackend.service.security.SignService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /*
@@ -24,11 +32,18 @@ import java.util.stream.Collectors;
  */
 
 @Service
+@Slf4j
 @AllArgsConstructor
 public class UsersService {
     private UserRepository userRepository;
 
     private PasswordEncoder passwordEncoder;
+
+    private RefreshTokenJpaRepo refreshTokenJpaRepo;
+
+    private JwtProvider jwtProvider;
+
+    private SignService signService;
 
     @Transactional(readOnly = true)
     public UserLoginResponseDTO login(String email, String password) {
@@ -75,15 +90,48 @@ public class UsersService {
     }
 
     @Transactional
-    public Long update(Long id, UserRequestDTO userRequestDTO) {
-        Users modifiedUser = userRepository
-                .findById(id).orElseThrow(UserNotFoundCException::new);
-        modifiedUser.updateUsername(userRequestDTO.getUsername());
+    public Long update(Long id, UserRequestDTO userRequestDTO, HttpServletRequest request) {
+        if (checkToken(id, request)) {
+            Users modifiedUser = userRepository
+                    .findById(id).orElseThrow(UserNotFoundCException::new);
+            modifiedUser.updateUsername(userRequestDTO.getUsername());
+        }
+
         return id;
     }
 
     @Transactional
-    public void delete(Long id) {
-        userRepository.deleteById(id);
+    public void delete(Long id, HttpServletRequest request) {
+        if (checkToken(id, request)) {
+            userRepository.deleteById(id);
+            log.info("유저 삭제 완료");
+        }
+
+    }
+
+    @Transactional
+    public boolean checkToken(Long id, HttpServletRequest request) {
+
+        Users users = userRepository.findById(id).orElseThrow(UserNotFoundCException::new);
+        UserResponseDTO userPk = findByUsername(users.getUsername());
+        Optional<RefreshToken> refreshToken = refreshTokenJpaRepo.findByKey(userPk.getId());
+        String accessToken = jwtProvider.resolveToken(request);
+        log.info("ACCESSTOKEN : " + accessToken);
+        String rtoken = refreshToken.orElseThrow().getToken();
+        log.info("REFRESHTOKEN : " + rtoken);
+        if (!jwtProvider.validationToken(rtoken)) {
+            request.setAttribute("Authorization", "");
+            signService.logout(id);
+            return false;
+        }
+        if (!jwtProvider.validationToken(accessToken)) {
+            TokenRequestDTO tokenRequestDTO = TokenRequestDTO.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(rtoken)
+                    .build();
+            signService.reissue(tokenRequestDTO);
+            return true;
+        }
+        return true;
     }
 }

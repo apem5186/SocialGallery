@@ -10,6 +10,7 @@ import Movie from "./components/sideMenu/Movie";
 import Life from "./components/sideMenu/Life";
 import Travel from "./components/sideMenu/Travel";
 import Broadcast from "./components/sideMenu/Broadcast";
+import PrivacyPolicy from "./components/login/PrivacyPolicy";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                 {/* Login */}
                 <Route path="/login/" element={<Login></Login>}></Route>
                 <Route path="/login/:location" element={<Login></Login>}></Route>
+                <Route path="/login/privacy" element={<PrivacyPolicy></PrivacyPolicy>}></Route>
 
                  {/*SideMenu*/}
                     <Route path="/movie" element={<Movie></Movie>}></Route>

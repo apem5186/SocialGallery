@@ -1,23 +1,22 @@
 import {useEffect, useState} from "react"
 import axios from "axios"
-import Upload from '../postReg/Upload';
+import UpLoad from '../postReg/Upload';
 import {Link, useNavigate} from "react-router-dom";
 import Delete from "../postReg/Delete";
 import { useSelector,useDispatch } from "react-redux";
-import {fetchReply, setPostAll} from '../../store/Store';
+import { setPostAll, setReply, setUserData } from '../../store/Store';
 import Edit from "../postReg/Edit";
 import CommentDel from "./CommentDel";
-import {setReply} from "../../store/Store";
+import { fetchIsLogin } from '../../store/Store';
+
 
 function Content({i}){
-     // Img 미리보기
+    // Img 미리보기
     const [ imgs, setImgs ] = useState('')
     const [ previewImg, setPreviewImg ] = useState('')
-    // 빈 댓글 
+    // 빈 댓글
     const [commentArray, setCommentArray] = useState([])
-    let [users, setUsers] = useState([]);
-    let [post, setPost] = useState([]);
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
 
     // base_URL
@@ -25,20 +24,24 @@ function Content({i}){
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
 
     // mainImg useSelector
-    let postAll = useSelector((state)=>state.postAll.postAllList)
+    let postAll= useSelector((state)=>state.postAll.postAllList)
     // 댓글 useSelector
     let reply = useSelector((state)=>state.reply.replyList)
+    // isLogin useSelector
+    let isLogin = useSelector((state)=>state.isLogin.isLoginList)
+    // userData useSelector
+    let users = useSelector((state)=>state.userData.userDataList)
+
     let dispatch = useDispatch()
 
-    
+
     // 댓글
     const [comment, setComments] = useState([])
-    
+
     const postCommentSubmit = (e) => {
         e.preventDefault()
         setCommentArray(a=>[comment])
         setComments('')
-
 
         const headers = {
             'Content-type': 'application/json',
@@ -51,20 +54,19 @@ function Content({i}){
 
         } ,{headers},)
             .then(res=>{
-            }).catch(res=> {
-                console.log(res)
-        })
+            })
     }
 
     const onHandleComment = e =>{
-			e.preventDefault()
+        e.preventDefault()
         setComments(e.currentTarget.value)
     }
 
+    // User Data
     useEffect(()=>{
         axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
             .then(res=>{
-                setUsers(res.data.data)
+                dispatch(setUserData(res.data.data))
                 if (res.data.data.isLogin === false) {
                     if (localStorage.getItem("token").length > 0) {
                         alert("토큰이 만료되었습니다. 다시 로그인 해주세요.")
@@ -77,36 +79,50 @@ function Content({i}){
             })
     },[])
 
+    const userDataAll = async ()=>{
+        await axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
+            .then(res=>{
+                dispatch(setUserData(res.data.data))
+            })
+    }
+
+
+
+    // 카테고리별 페이지
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
         let category = params.get("category")
 
         if (category === null) {
-            axios.get(dev_url + "/api/post").then(
+            axios.get(dev_url+ `/api/post`).then(
                 res => {
-                    //setPost(res.data.data)
-                    dispatch(setPostAll([...res.data.list]))
                 })
         } else if (category) {
-            axios.get(dev_url + "/api/post/category?category=" + category).then(
-                res => {
-                    dispatch(setPostAll([...res.data.list]))
-                }
-            )
+            axios.get(dev_url + `/api/post/category?category=` + category)
+                .then(res => {
+                        dispatch(setPostAll([...res.data.list]))
+                    }
+                )
         }
-
     }, [])
+
 
     // 댓글
     useEffect(()=>{
-        axios.get(dev_url +'/api/comment/all')
+        axios.get(dev_url + '/api/comment/all')
             .then((res) => {
                 dispatch(setReply([...res.data.list]));
             })
-            .catch((err) => {
-                console.log(err);
-            })
     },[])
+
+
+
+    //isLogin
+    useEffect(()=>{
+        fetchIsLogin()
+    },[dispatch])
+
+
 
     return (
         <>
@@ -123,12 +139,12 @@ function Content({i}){
                                         </Link>
                                         <span>{postAll[i].username}</span>
                                         {/* Upload*/}
-                                        <Upload
+                                        <UpLoad
                                             imgs={imgs}
                                             setImgs={setImgs}
                                             previewImg={previewImg}
                                             setPreviewImg={setPreviewImg}
-                                        ></Upload>
+                                        ></UpLoad>
                                         {/* Edit */}
                                         <Edit
                                             i={i}
@@ -143,7 +159,7 @@ function Content({i}){
                                 </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
-                                        <img src={`${postAll[i].filePath}`} alt="" />
+                                        <img src={`assets/Img/${postAll[i].filePath}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="post__footer">
@@ -173,14 +189,15 @@ function Content({i}){
                                             <div className="comment_list">
                                                 {
                                                     reply
-                                                        .filter((value)=>value.pid ===postAll[i].pid)
+                                                        .filter((value)=>value.pid === postAll[i].pid)
                                                         .map((a,i)=>{
                                                             return(
                                                                 <div key={a.cid}>
                                                                     <em>{a.username}</em>
                                                                     &nbsp;&nbsp;:
                                                                     <span>{a.comment}</span>
-                                                                    <CommentDel a={a}></CommentDel>
+
+                                                                    <CommentDel a={a} i={i}></CommentDel>
                                                                 </div>)
                                                         })
                                                 }
@@ -197,11 +214,14 @@ function Content({i}){
                                                     placeholder="댓글 달기..."
                                                     value={comment}
                                                     onChange={onHandleComment}
+                                                    onClick={userDataAll}
                                                 />
                                                 <button
                                                     className="post_comment_btn"
                                                     onClick={()=>{
-                                                        window.location.reload('/')
+                                                        isLogin === false
+                                                            ? alert('로그인을 해주세요.')
+                                                            : window.location.reload('/')
                                                     }}
                                                 >
                                                     <i className='bx bx-send' ></i>

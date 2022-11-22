@@ -1,5 +1,5 @@
-import sideToggle from './SideToggle';
 import { useNavigate } from 'react-router-dom';
+import SideToggle from "./SideToggle";
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
@@ -10,7 +10,12 @@ import { setPostAll } from '../../store/Store';
 function Sidebar(){
 
     const searchTitle = useSelector((state)=>state.searchImg.searchList)
+    const userData = useSelector((state)=>state.userData.userDataList)
+    const isLogin = useSelector((state)=>state.isLogin.isLoginList)
     const dispatch = useDispatch()
+
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
 
 
     const navigate = useNavigate()
@@ -27,7 +32,7 @@ function Sidebar(){
     // Logout
     const onLogout = () =>{
         getUid()
-        axios.get(dev_url+ `/v1/logout?uid=`+uid)
+        axios.get(dev_url + `/v1/logout?uid=`+uid)
             .then(res=>{
                 if(res.status === 200){
                     localStorage.removeItem('token')
@@ -35,16 +40,17 @@ function Sidebar(){
                     localStorage.removeItem('uid')
                     navigate('/')
                     alert('로그아웃 됐습니다.')
+                    window.location.reload()
                 }
             })
     }
 
     // 검색
     const base_URL = "http://localhost:8080"
-    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
     const params = new URLSearchParams(window.location.search);
 
     let category = params.get("category")
+
     const search1 = (e) => {
         axios.get(dev_url + '/api/post?keyword=' + searchTitle)
             .then(res => {
@@ -57,7 +63,6 @@ function Sidebar(){
         axios.get(dev_url + '/api/post/category?category=' + category + "&keyword=" + searchTitle)
             .then(res => {
                 dispatch(setPostAll([...res.data.list]))
-                console.log(category)
             })
         return search2
     }
@@ -72,13 +77,21 @@ function Sidebar(){
 				</span>
                         <div className="text logo-text">
                             {/* username */}
-                            {/* <span className="name">어서오세요</span> */}
-                            <span className="profession">Welcome</span>
+                            <span className="name">
+                                {
+                                    isLogin === false
+                                        ? <div>로그인을 해주세요.</div>
+                                        :<>
+                                            <span>{userData.username}님</span>
+                                            <span className="profession">Welcome</span>
+                                        </>
+
+                                }
+                            </span>
                         </div>
                     </div>
                     <i className="bx bx-chevron-right toggle" id="close" onClick={(e)=>{
-                        // userProfile(e)
-                        sideToggle(e)
+                        SideToggle(e)
                     }}></i>
                 </header>
 

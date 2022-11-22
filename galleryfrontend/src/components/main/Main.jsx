@@ -1,6 +1,6 @@
 
 import Footer from './Footer';
-import Sidebar from './SiderBar';
+import SideBar from "./SideBar";
 import SideMenu from './SideMenu';
 import MainHeader from './MainHeader';
 import Content from './Content';
@@ -20,7 +20,6 @@ function Main({rgName,setRgName}){
     useEffect(()=>{
         axios.get(dev_url+'/api/post')
             .then((res) => {
-                //TODO :: 뭐가 에런지 모름
                 dispatch(setPostAll([...res.data.list]));
             })
             .catch((err) => {
@@ -47,7 +46,7 @@ function Main({rgName,setRgName}){
             }
 
             {/* Sidebar --> */}
-            <Sidebar rgName={rgName} setRgName={setRgName}></Sidebar>
+            <SideBar rgName={rgName} setRgName={setRgName}></SideBar>
 
             {/* Footer */}
             <Footer></Footer>

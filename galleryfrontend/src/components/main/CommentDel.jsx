@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
-function CommentDel({a}){
 
-    const reply = useSelector((state)=> state.reply.replyList)
-    const postAll = useSelector((state)=>state.postAll.postAllList)
-
+function CommentDel({a,i}){
     const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
+    // 댓글 useSelector
+    let reply = useSelector((state)=>state.reply.replyList)
+    // userData useSelector
+    let users = useSelector((state)=>state.userData.userDataList)
 
 
     const headers = {
@@ -21,18 +23,27 @@ function CommentDel({a}){
             credentials: "include"})
             .then(res=>{
                 window.location.reload()
-                console.log('성공')
+            })
+            .catch(()=>{
+                console.log('실패',cid)
             })
     }
 
     return (
         <>
-            <button onClick={()=>{
-                if (window.confirm("정말 삭제합니까?")) {
-                    deleteComment(a.cid)
-                } else {
-                    alert('취소 됐습니다.')
-                }}}>X</button>
+
+            {
+                users.id !== a.uid
+                    ? <button> </button>
+                    : <button onClick={ ()=>{
+                        if(window.confirm("정말 삭제합니까?")){
+                            deleteComment(a.cid)
+                        }else{
+                            alert('취소 됐습니다.')
+                        }
+                    }
+                    }>X</button>
+            }
         </>
     )
 }

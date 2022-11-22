@@ -1,15 +1,34 @@
 import { Link } from "react-router-dom";
+import { setIsLogin } from '../../store/Store';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 function SideMenu(){
+
+    const isLogin = useSelector((state)=>state.isLogin.isLoginList)
+    const dispatch = useDispatch()
+
+    const base_URL = 'http://localhost:8080'
+    const dev_url = "http://socialgallery-env-1.eba-mbftgxd4.ap-northeast-2.elasticbeanstalk.com"
+
 
     return(
         <>
             <section className="side-menu">
                 <div className="side-menu__title">
                     <div className="side-menu__title_info">
-                    <Link to="#" className="myButton" onClick={openPop}>
-                        새 게시글
-                    </Link>
+                        <Link to="#" className="myButton" onClick={()=>{
+                            axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
+                                .then((res)=>{
+                                    dispatch(setIsLogin(res.data.data.isLogin))
+                                })
+                            isLogin === false
+                                ? alert('로그인 후 사용해주세요.')
+                                : openPop()
+                        }}>
+                            새 게시글
+                        </Link>
                     </div>
                 </div>
                 {/* Side text */}

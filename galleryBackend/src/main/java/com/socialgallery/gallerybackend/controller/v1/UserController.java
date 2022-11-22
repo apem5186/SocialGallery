@@ -19,6 +19,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /*
  * @Reference https://ws-pace.tistory.com/68?category=964036
  * 요청을 받을때는 UserResponseDTO
@@ -68,10 +70,11 @@ public class UserController {
     @ApiOperation(value = "회원 수정", notes = "회원 정보를 수정합니다.")
     @PutMapping("/api/users/userUpdate")
     public SingleResult<Long> update(@ApiParam(value = "회원 ID", readOnly = true) @RequestParam Long id,
-                                      @ApiParam(value = "회원 이메일", required = true) @RequestParam String email,
-                                      @ApiParam(value = "회원 이름", required = true) @RequestParam String username,
-                                      @ApiParam(value = "회원 비밀번호", required = true) @RequestParam String password,
-                                      @ApiParam(value = "회원 핸드폰번호") @RequestParam String phone) {
+                                     @ApiParam(value = "회원 이메일", required = true) @RequestParam String email,
+                                     @ApiParam(value = "회원 이름", required = true) @RequestParam String username,
+                                     @ApiParam(value = "회원 비밀번호", required = true) @RequestParam String password,
+                                     @ApiParam(value = "회원 핸드폰번호") @RequestParam String phone,
+                                     HttpServletRequest request) {
         UserRequestDTO userRequestDTO = UserRequestDTO.builder()
                 .email(email)
                 .username(username)
@@ -79,7 +82,7 @@ public class UserController {
                 .phone(phone)
                 .build();
 
-        return responseService.getSingleResult(usersService.update(id, userRequestDTO));
+        return responseService.getSingleResult(usersService.update(id, userRequestDTO, request));
     }
 
     @ApiImplicitParams({
@@ -90,8 +93,9 @@ public class UserController {
     })
     @ApiOperation(value = "회원 삭제", notes = "회원 정보를 삭제합니다.")
     @DeleteMapping("/api/users/userDelete/{id}")
-    public CommonResult delete(@ApiParam(value = "회원 아이디", required = true)@PathVariable Long id) {
-        usersService.delete(id);
+    public CommonResult delete(@ApiParam(value = "회원 아이디", required = true)@PathVariable Long id,
+                               HttpServletRequest request) {
+        usersService.delete(id, request);
         return responseService.getSuccessResult();
     }
 
