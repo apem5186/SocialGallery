@@ -67,15 +67,15 @@ function Content({i}){
         axios.get(dev_url + "/findUserByEmail/" + localStorage.getItem("user"))
             .then(res=>{
                 dispatch(setUserData(res.data.data))
-                if (res.data.data.isLogin === false) {
-                    if (localStorage.getItem("token").length > 0) {
-                        alert("토큰이 만료되었습니다. 다시 로그인 해주세요.")
-                        console.log(res.data.data.isLogin)
-                        localStorage.clear()
-                        console.log("localstorage cleared")
-                        navigate("/login")
-                    }
-                }
+                // if (res.data.data.isLogin === false) {
+                //     if (localStorage.getItem("token").length > 0) {
+                //         alert("토큰이 만료되었습니다. 다시 로그인 해주세요.")
+                //         console.log(res.data.data.isLogin)
+                //         localStorage.clear()
+                //         console.log("localstorage cleared")
+                //         navigate("/login")
+                //     }
+                // }
             })
     },[])
 

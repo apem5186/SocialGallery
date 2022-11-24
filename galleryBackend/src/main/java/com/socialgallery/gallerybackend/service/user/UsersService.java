@@ -99,13 +99,16 @@ public class UsersService {
 
         return id;
     }
-
+    
+    // TODO : 삭제가 안됨 foreign key 때문에 안되는건지 checkToken을 써서 안되는건지는 확인을 해봐야 함
     @Transactional
     public void delete(Long id, HttpServletRequest request) {
-        if (checkToken(id, request)) {
-            userRepository.deleteById(id);
-            log.info("유저 삭제 완료");
-        }
+        userRepository.deleteById(id);
+        log.info("유저 삭제 완료");
+//        if (checkToken(id, request)) {
+//            userRepository.deleteById(id);
+//            log.info("유저 삭제 완료");
+//        }
 
     }
 

@@ -35,7 +35,7 @@ function MainHeader(){
     const deleteUser= ()=>{
         axios.delete(dev_url + '/api/users/userDelete/' + users.id ,{headers})
             .then(()=>{
-                window.location.reload('')
+                console.log(users.id)
             })
     }
     return(
@@ -69,7 +69,7 @@ function MainHeader(){
                                         : <>
                                             <div onLoad={UserInfo}>
                                                 <div id="layer_button" >
-                                                    <img src="/assets/main/user.png" alt="User Picture"/>
+                                                    <img src="/assets/Main/user.png" alt="User Picture"/>
                                                 </div>
 
                                                 <div className="popup-wrap" id="layer">

@@ -38,9 +38,9 @@ public class JwtProvider {
     private String secretKey;
     private String ROLES = "roles";
     // 60 * 60 * 1000L // 1hour
-    // 14 * 24 * 60 * 60 * 1000L // 14days
-    private final Long accessTokenValidMillisecond = 3 * 1000L;   // 1hour
-    private final Long refreshTokenValidMillisecond = 5 * 1000L;    // 14days
+    // 7 * 24 * 60 * 60 * 1000L // 7days
+    private final Long accessTokenValidMillisecond = 60 * 60 * 1000L;   // 1hour
+    private final Long refreshTokenValidMillisecond = 7 * 24 * 60 * 60 * 1000L;    // 7days
 
     private final CustomUserDetailService userDetailService;
 

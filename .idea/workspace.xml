@@ -5,30 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="token redirect test">
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/PrivacyPolicy.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/UserInfo.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/config/security/JwtProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/controller/v1/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/user/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/user/UsersService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/login/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/login/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/CommentDel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/CommentDel.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/Main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/MainHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/MainHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideMenu.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideMenu.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/SiderBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/SideBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Delete.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Delete.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Edit.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Edit.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Upload.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/postReg/Upload.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Broadcast.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Broadcast.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Life.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Life.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Movie.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Movie.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Travel.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/sideMenu/Travel.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/store/Store.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/store/Store.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -348,14 +329,8 @@
       <workItem from="1667979586865" duration="12231000" />
       <workItem from="1668046386902" duration="7816000" />
       <workItem from="1668586295180" duration="16018000" />
-      <workItem from="1669106670496" duration="13479000" />
-    </task>
-    <task id="LOCAL-00224" summary="프론트 통합 테스트">
-      <created>1667052519127</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1667052519127</updated>
+      <workItem from="1669106670496" duration="15386000" />
+      <workItem from="1669257062078" duration="154000" />
     </task>
     <task id="LOCAL-00225" summary="프론트 통합 테스트">
       <created>1667053212308</created>
@@ -693,7 +668,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669112433996</updated>
     </task>
-    <option name="localTasksCounter" value="273" />
+    <task id="LOCAL-00273" summary="token redirect test">
+      <created>1669124042823</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1669124042823</updated>
+    </task>
+    <option name="localTasksCounter" value="274" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
