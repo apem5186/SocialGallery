@@ -159,7 +159,7 @@ function Content({i}){
                                 </div>
                                 <div className="post__content">
                                     <div className="post__medias" >
-                                        <img src={`assets/Img/${postAll[i].filePath}`} alt="" />
+                                        <img src={`${postAll[i].filePath}`} alt="" />
                                     </div>
                                 </div>
                                 <div className="post__footer">

@@ -11,6 +11,9 @@ build/
 ### oauth ###
 /src/main/resources/application-oauth.yml
 
+### schema.sql ###
+/src/main/resources/mariadb/schema.sql
+
 ### STS ###
 .apt_generated
 .classpath
