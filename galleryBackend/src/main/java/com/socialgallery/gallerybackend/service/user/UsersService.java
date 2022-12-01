@@ -12,6 +12,7 @@ import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
 import com.socialgallery.gallerybackend.entity.security.RefreshToken;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.entity.user.Users;
+import com.socialgallery.gallerybackend.repository.CommentRepository;
 import com.socialgallery.gallerybackend.repository.PostRepository;
 import com.socialgallery.gallerybackend.repository.UserRepository;
 import com.socialgallery.gallerybackend.service.security.SignService;
@@ -47,6 +48,8 @@ public class UsersService {
     private SignService signService;
 
     private PostRepository postRepository;
+
+    private CommentRepository commentRepository;
 
     @Transactional(readOnly = true)
     public UserLoginResponseDTO login(String email, String password) {
@@ -109,8 +112,8 @@ public class UsersService {
         //userRepository.deleteById(id);
         //log.info("유저 삭제 완료");
         if (checkToken(id, request)) {
-            Users users = userRepository.findById(id).orElseThrow();
-            postRepository.deleteByUsers(users);
+            commentRepository.deleteById(id);
+            postRepository.deleteById(id);
             userRepository.deleteById(id);
             log.info("유저 삭제 완료");
         }
