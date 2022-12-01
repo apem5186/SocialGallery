@@ -2,9 +2,10 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { setPostContent, setPostTitle } from "../../store/Store";
 import { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 
 function EditForm({imgs,setImgs,previewImg,setPreviewImg,i}){
-
+    const navigate = useNavigate()
     const [updateCategory, setUpdateCategory] = useState('')
     let postAll = useSelector((state)=>state.postAll.postAllList)
     const title = useSelector((state)=>state.postTitle.postTitleList)
@@ -104,12 +105,11 @@ function EditForm({imgs,setImgs,previewImg,setPreviewImg,i}){
                             <div className="popup_photoinfo">
                                 <div className="photoinfo_name">
                                     <img src="/assets/Main/user.png" alt="User Picture" />
-                                    <span>user1</span>
                                 </div>
                                 <div className="photoinfo_category" onChange={onHandleUpdateCategory}>
-                                    <input  type='radio' name='category' value='BROADCAST'/>&nbsp;영화/드라마<br></br>
-                                    <input className="category_radio" type='radio' name='category' value='LIFE' />&nbsp;연예/방송<br></br>
-                                    <input className="category_radio" type='radio' name='category' value='MOVIE'/>&nbsp;취미/생활<br></br>
+                                    <input  type='radio' name='category' value='MOVIE'/>&nbsp;영화/드라마<br></br>
+                                    <input className="category_radio" type='radio' name='category' value='BROADCAST' />&nbsp;연예/방송<br></br>
+                                    <input className="category_radio" type='radio' name='category' value='LIFE'/>&nbsp;취미/생활<br></br>
                                     <input className="category_radio" type='radio' name='category' value='TRAVEL' />&nbsp;여행/음식<br></br>
                                 </div>
                                 <div className="photoinfo_contents">

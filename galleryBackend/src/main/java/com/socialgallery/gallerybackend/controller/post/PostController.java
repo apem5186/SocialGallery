@@ -109,6 +109,7 @@ public class PostController {
         PostRequestDTO postRequestDTO = PostRequestDTO.builder()
                 .title(postFileVO.getTitle())
                 .content(postFileVO.getContent())
+                .category(postFileVO.getCategory())
                 .build();
         List<MultipartFile> multipartList = new ArrayList<>();
         // DB에 저장되어 있는 파일 불러오기

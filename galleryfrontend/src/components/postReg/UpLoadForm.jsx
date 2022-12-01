@@ -105,12 +105,11 @@ function UpLoadForm({imgs,setImgs,previewImg,setPreviewImg}) {
                                 <div className="popup_photoinfo">
                                     <div className="photoinfo_name">
                                         <img src="/assets/Main/user.png" alt="User Picture" />
-                                        <span>user1</span>
                                     </div>
                                     <div className="photoinfo_category" onChange={onHandleCategory}>
-                                        <input  type='radio' name='category' value='BROADCAST'/>&nbsp;영화/드라마<br></br>
-                                        <input className="category_radio" type='radio' name='category' value='LIFE' />&nbsp;연예/방송<br></br>
-                                        <input className="category_radio" type='radio' name='category' value='MOVIE'/>&nbsp;취미/생활<br></br>
+                                        <input  type='radio' name='category' value='MOVIE'/>&nbsp;영화/드라마<br></br>
+                                        <input className="category_radio" type='radio' name='category' value='BROADCAST' />&nbsp;연예/방송<br></br>
+                                        <input className="category_radio" type='radio' name='category' value='LIFE'/>&nbsp;취미/생활<br></br>
                                         <input className="category_radio" type='radio' name='category' value='TRAVEL' />&nbsp;여행/음식<br></br>
                                     </div>
 
