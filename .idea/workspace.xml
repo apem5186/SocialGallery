@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="회원 삭제 테스트">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryBackend/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/galleryfrontend/src/components/main/Content.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/user/UsersService.java" beforeDir="false" afterPath="$PROJECT_DIR$/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/user/UsersService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -336,13 +335,6 @@
       <workItem from="1668586295180" duration="16018000" />
       <workItem from="1669106670496" duration="15386000" />
       <workItem from="1669257062078" duration="154000" />
-    </task>
-    <task id="LOCAL-00226" summary="프론트 통합 테스트">
-      <created>1667053902161</created>
-      <option name="number" value="00226" />
-      <option name="presentableId" value="LOCAL-00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1667053902161</updated>
     </task>
     <task id="LOCAL-00227" summary="프론트 통합 테스트">
       <created>1667054226685</created>
@@ -680,7 +672,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669866141048</updated>
     </task>
-    <option name="localTasksCounter" value="275" />
+    <task id="LOCAL-00275" summary="회원 삭제 테스트">
+      <created>1669871296902</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1669871296903</updated>
+    </task>
+    <option name="localTasksCounter" value="276" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
