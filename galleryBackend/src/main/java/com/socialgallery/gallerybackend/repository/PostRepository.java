@@ -29,7 +29,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Transactional
     @Modifying
     @Query("DELETE FROM Post WHERE 'users_id' =:id")
-    void deleteById(@Param("id") Long id);
+    void deleteById(@Param("id") String id);
 
 
     @Query("SELECT po FROM Post po where po.title like %:keyword% and po.category = :category")

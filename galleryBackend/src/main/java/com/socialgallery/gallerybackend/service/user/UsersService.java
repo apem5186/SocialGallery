@@ -112,8 +112,8 @@ public class UsersService {
         //userRepository.deleteById(id);
         //log.info("유저 삭제 완료");
         if (checkToken(id, request)) {
-            commentRepository.deleteById(id);
-            postRepository.deleteById(id);
+            commentRepository.deleteById(String.valueOf(id));
+            postRepository.deleteById(String.valueOf(id));
             userRepository.deleteById(id);
             log.info("유저 삭제 완료");
         }
