@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="게시글 수정부분 에러 수정">
+    <list default="true" id="60d87692-5eed-44ee-a692-557f665aa7f8" name="Changes" comment="회원 삭제 에러 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -337,14 +337,8 @@
       <workItem from="1669257062078" duration="154000" />
       <workItem from="1669895415923" duration="2503000" />
       <workItem from="1670402435665" duration="168000" />
-      <workItem from="1670402832727" duration="1290000" />
-    </task>
-    <task id="LOCAL-00232" summary="댓글 삭제 테스트">
-      <created>1667379878387</created>
-      <option name="number" value="00232" />
-      <option name="presentableId" value="LOCAL-00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1667379878387</updated>
+      <workItem from="1670402832727" duration="2121000" />
+      <workItem from="1670408978606" duration="400000" />
     </task>
     <task id="LOCAL-00233" summary="댓글 삭제 테스트">
       <created>1667380655248</created>
@@ -682,7 +676,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669899423658</updated>
     </task>
-    <option name="localTasksCounter" value="281" />
+    <task id="LOCAL-00281" summary="회원 삭제 에러 수정">
+      <created>1670406859522</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1670406859522</updated>
+    </task>
+    <option name="localTasksCounter" value="282" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -703,7 +704,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/SocialGallery" />
     </ignored-roots>
-    <MESSAGE value="jwt Token test(코드 수정 예정)" />
     <MESSAGE value="Backend AccessToken, RefreshToken 구현 완료" />
     <MESSAGE value="logout기능 구현" />
     <MESSAGE value="post기능 구현" />
@@ -728,7 +728,8 @@
     <MESSAGE value="token redirect test" />
     <MESSAGE value="회원 삭제 테스트" />
     <MESSAGE value="게시글 수정부분 에러 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="게시글 수정부분 에러 수정" />
+    <MESSAGE value="회원 삭제 에러 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="회원 삭제 에러 수정" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

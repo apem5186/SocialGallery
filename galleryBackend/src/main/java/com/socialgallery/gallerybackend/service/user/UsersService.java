@@ -9,6 +9,7 @@ import com.socialgallery.gallerybackend.dto.sign.UserLoginResponseDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
+import com.socialgallery.gallerybackend.entity.comment.Comment;
 import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.security.RefreshToken;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
@@ -49,6 +50,8 @@ public class UsersService {
     private SignService signService;
 
     private PostRepository postRepository;
+
+    private CommentRepository commentRepository;
 
     @Transactional(readOnly = true)
     public UserLoginResponseDTO login(String email, String password) {
@@ -112,6 +115,9 @@ public class UsersService {
         if (checkToken(id, request)) {
             List<Post> postList = postRepository.findAllByUid(id);
             log.info("POSTLIST : " + postList);
+            List<Comment> commentList = commentRepository.findAllByUid(id);
+            log.info("COMMENTLIST : " + commentList);
+            commentRepository.deleteAll(commentList);
             postRepository.deleteAll(postList);
             userRepository.deleteById(id);
             RefreshToken rToken = refreshTokenJpaRepo.findByKey(id).orElseThrow();
