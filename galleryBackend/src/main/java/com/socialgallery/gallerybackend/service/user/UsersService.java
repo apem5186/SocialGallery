@@ -9,6 +9,7 @@ import com.socialgallery.gallerybackend.dto.sign.UserLoginResponseDTO;
 import com.socialgallery.gallerybackend.dto.sign.UserSignUpRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserRequestDTO;
 import com.socialgallery.gallerybackend.dto.user.UserResponseDTO;
+import com.socialgallery.gallerybackend.entity.post.Post;
 import com.socialgallery.gallerybackend.entity.security.RefreshToken;
 import com.socialgallery.gallerybackend.entity.security.RefreshTokenJpaRepo;
 import com.socialgallery.gallerybackend.entity.user.Users;
@@ -48,8 +49,6 @@ public class UsersService {
     private SignService signService;
 
     private PostRepository postRepository;
-
-    private CommentRepository commentRepository;
 
     @Transactional(readOnly = true)
     public UserLoginResponseDTO login(String email, String password) {
@@ -109,12 +108,14 @@ public class UsersService {
     // TODO : 삭제가 안됨 foreign key 때문에 안되는건지 checkToken을 써서 안되는건지는 확인을 해봐야 함
     @Transactional
     public void delete(Long id, HttpServletRequest request) {
-        //userRepository.deleteById(id);
-        //log.info("유저 삭제 완료");
+
         if (checkToken(id, request)) {
-            commentRepository.deleteById(String.valueOf(id));
-            postRepository.deleteById(String.valueOf(id));
+            List<Post> postList = postRepository.findAllByUid(id);
+            log.info("POSTLIST : " + postList);
+            postRepository.deleteAll(postList);
             userRepository.deleteById(id);
+            RefreshToken rToken = refreshTokenJpaRepo.findByKey(id).orElseThrow();
+            refreshTokenJpaRepo.delete(rToken);
             log.info("유저 삭제 완료");
         }
 

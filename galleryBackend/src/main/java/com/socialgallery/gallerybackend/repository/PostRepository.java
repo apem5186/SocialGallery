@@ -31,6 +31,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("DELETE FROM Post WHERE 'users_id' =:id")
     void deleteById(@Param("id") String id);
 
+    @Query("SELECT po FROM Post po WHERE po.users.id = :id")
+    List<Post> findAllByUid(@Param(value = "id") Long uid);
+
 
     @Query("SELECT po FROM Post po where po.title like %:keyword% and po.category = :category")
     Page<Post> findByTitleAndCategory(Pageable pageable, @Param(value = "keyword") String keyword,
