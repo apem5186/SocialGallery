@@ -25,6 +25,9 @@ web 소셜 커뮤니티
 #### Deployment
 - github action, s3 bucket, Elastic Beanstalk
 
+#### Frontend
+- react, redux
+
 ## 내용
 
 <details>
