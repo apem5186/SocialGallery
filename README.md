@@ -40,7 +40,7 @@ web 소셜 커뮤니티
 </details>
 
 <details>
-  <sumamry><h4>메인 페이지</h4></sumamry>
+  <summary><h4>메인 페이지</h4></summary>
 
   > <image src="https://github.com/apem5186/SocialGallery/assets/81023500/c148f4e7-2bae-467c-9258-3611b34680d6"/>
 </details>
