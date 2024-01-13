@@ -40,6 +40,7 @@ web 소셜 커뮤니티
   <summary><h4>로그인</h4></summary>
 
   > <image src="https://github.com/apem5186/SocialGallery/assets/81023500/41d50244-74fb-4e20-b79e-539757df5b2b"/>
+  #### [관련 코드 바로가기](https://github.com/apem5186/SocialGallery/blob/9cf405ebb42f8f824bc50d82e7b992f724a858b8/galleryBackend/src/main/java/com/socialgallery/gallerybackend/service/user/UsersService.java#L56C36-L56C36)
 </details>
 
 <details>
