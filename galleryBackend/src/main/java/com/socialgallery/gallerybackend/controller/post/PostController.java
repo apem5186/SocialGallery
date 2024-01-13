@@ -221,7 +221,6 @@ public class PostController {
         return responseService.getListResult(responseDTOList);
     }
 
-        // fild_Id가 썸네일 용 하나만 나옴 여러개 나올 수 있도록 변경 필요
     // 전체 조회
     @ApiOperation(value = "전체 조회", notes = "게시글 전체를 검색합니다.")
     @GetMapping("/post")
